@@ -63,4 +63,4 @@ Use Starlette + Uvicorn for the small HTTP layer, retaining the existing JSON Sc
 
 ## Step 4–5 implementation status
 
-Authenticated service, LiteLLM/Agentgateway adapters and both Copilot command profiles are implemented. Gateway and CLI host tests pass with synthetic controlled evaluators/downstream effects. VS Code Local's isolated test had no working signed-in Copilot session and did not execute the synthetic agent, so its actual runtime gate remains open. See [integration report](integration-report.md). No new paid API calls, public visibility change or deployment occurred.
+Authenticated service, LiteLLM/Agentgateway adapters and both Copilot command profiles are implemented. Gateway, CLI and VS Code Local host tests pass with synthetic controlled evaluators/downstream effects. After completing Copilot sign-in, Local prompt stop and pre-tool denial were observed with working allow controls. Both Copilot runtimes can bypass checks on host timeouts or disabled hooks. See [integration report](integration-report.md). No new paid API calls, public visibility change or deployment occurred.

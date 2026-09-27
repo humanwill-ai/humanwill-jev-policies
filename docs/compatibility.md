@@ -1,13 +1,13 @@
 # Compatibility and reuse review
 
-Reviewed 2026-09-27. **Service/gateway/CLI runtime checks are implemented.** Support is bounded to the configurations in the [connector guide](service-and-connectors.md) and the [integration evidence](integration-report.md). Local real-runtime validation remains pending.
+Reviewed 2026-09-27. **Service/gateway/CLI/Local runtime checks pass.** Support is bounded to the configurations in the [connector guide](service-and-connectors.md) and the [integration evidence](integration-report.md). Local evidence uses macOS x86_64 and a signed-in isolated profile.
 
 | Surface | Version / environment | Status |
 | --- | --- | --- |
 | Offline Python package | Python 3.11–3.14, Linux/macOS | CI targets Python 3.11 and 3.14 on Ubuntu 24.04/macOS 15; local checks recorded in the implementation report |
 | LiteLLM | [v1.102.1](https://github.com/BerriAI/litellm/releases/tag/v1.102.1) | Real macOS x86_64 and Ubuntu 24.04 host tests pass for text request/non-streaming response profile |
 | Agentgateway | [v1.5.0](https://github.com/agentgateway/agentgateway/releases/tag/v1.5.0) | Real Linux amd64 host tests pass for text request/non-streaming response profile |
-| VS Code Local | [1.139.1](https://github.com/microsoft/vscode/releases/tag/1.139.1) | Adapter implemented; bundled Copilot Chat 0.67.0 inspected, real Local gate pending |
+| VS Code Local | [1.139.1](https://github.com/microsoft/vscode/releases/tag/1.139.1) | Bundled Copilot Chat 0.67.0; real macOS x86_64 Local prompt/tool checks pass; host-timeout and disabled-hook bypass observed |
 | Copilot CLI | [v1.0.88](https://github.com/github/copilot-cli/releases/tag/v1.0.88) | Real macOS x86_64 and Ubuntu 24.04 host tests pass for prompt assessment/tool deny; timeout/disabled-hook bypass observed |
 | OpenRouter / direct TypeSafe | Models and paths in release design | Both adapters have synthetic HTTP tests; [OpenRouter live smoke passed](smoke-2026-09-27.md), direct TypeSafe live smoke optional for v0.1 |
 | Windows | No declared version | Not supported by the POSIX loader in this first foundation |

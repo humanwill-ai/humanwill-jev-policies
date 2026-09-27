@@ -2,7 +2,7 @@
 
 Implementation plan · updated 2026-09-27
 
-The owner requires company/user-authored Markdown policies with stable policy IDs, LiteLLM, Agentgateway, and a Copilot hook connector in the first release, plus direct TypeSafe and OpenRouter access to Jev. Development and testing will use OpenRouter. The offline foundation is implemented; the [contract reference](contracts.md) defines its exact behavior and the [foundation report](foundation-report.md) records checks. The evaluation core and both provider adapters are now implemented with synthetic contract tests; OpenRouter live smoke passed; service/gateway/CLI integrations now have runtime evidence; Local runtime validation remains pending. Direct TypeSafe live smoke is optional for v0.1. See the [core reference](evaluation-core.md).
+The owner requires company/user-authored Markdown policies with stable policy IDs, LiteLLM, Agentgateway, and a Copilot hook connector in the first release, plus direct TypeSafe and OpenRouter access to Jev. Development and testing will use OpenRouter. The offline foundation is implemented; the [contract reference](contracts.md) defines its exact behavior and the [foundation report](foundation-report.md) records checks. The evaluation core and both provider adapters are now implemented with synthetic contract tests; OpenRouter live smoke passed; service/gateway/CLI/Local integrations now have runtime evidence. Direct TypeSafe live smoke is optional for v0.1. See the [core reference](evaluation-core.md).
 
 The [public-release roadmap](public-release-plan.md) now defines delivery order and publication gates for a proposed `v0.1.0a1` public preview. This document defines technical scope; private validation remains a step toward publication, not the final release objective.
 
@@ -116,7 +116,7 @@ All three connector families are release requirements. Build sequentially agains
 | --- | --- | --- |
 | LiteLLM | Generic Guardrail API; text pre-call and non-streaming post-call on pinned `/v1/chat/completions` configuration; block requests before model calls or responses before delivery | No claim of every LiteLLM endpoint; tool definitions are not tool execution; streaming-output and images deferred |
 | Agentgateway | Request and non-streaming response webhooks with supplied text/role provenance; map block to host rejection | Do not copy the example's newest-message-only extraction blindly; report supplied/omitted context; MCP execution enforcement deferred |
-| Copilot hooks | Two required profiles: VS Code Local `UserPromptSubmit` and `PreToolUse`; CLI `userPromptSubmitted` assessment and `preToolUse` denial | CLI prompt output cannot block; CLI hook timeouts can bypass our result; Local hooks are configurable/trust-dependent; cloud, Agent Host, inline completions and other IDEs excluded initially |
+| Copilot hooks | Two required profiles: VS Code Local `UserPromptSubmit` and `PreToolUse`; CLI `userPromptSubmitted` assessment and `preToolUse` denial | CLI prompt output cannot block; CLI and Local host hook timeouts can bypass our result; Local hooks are configurable/trust-dependent; cloud, Agent Host, inline completions and other IDEs excluded initially |
 
 The owner confirmed **both Local and CLI**, with separate fixtures and compatibility entries. Do not merge their schemas. These restrictions follow the [Local reference](https://code.visualstudio.com/docs/agents/reference/hooks-reference) and [GitHub hook reference](https://docs.github.com/en/copilot/reference/hooks-reference); validate pinned versions before release.
 

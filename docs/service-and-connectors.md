@@ -60,7 +60,7 @@ Metadata is independently controlled by `metadata.enabled` and source mappings i
 
 Use exactly one runtime profile per installation. Copy the corresponding [Local](../examples/connectors/vscode-local.json) or [CLI](../examples/connectors/copilot-cli.json) template into `.github/hooks/humanwill.json`; replace the executable path and endpoint, and supply its token in the host's environment. Quote an executable path containing spaces. Do not put both templates in one hooks directory and assume equivalent event contracts. Back up existing configuration and merge intentionally; don't overwrite other hooks.
 
-Local uses `UserPromptSubmit`/`PreToolUse`, `command`, and `timeout`; enable `chat.useHooks` in a trusted workspace and select the **Local** agent runtime. Local prompt block emits `continue: false`; tool block emits `hookSpecificOutput.permissionDecision: deny`. Agent Host is excluded. See [Local reference](https://code.visualstudio.com/docs/agents/reference/hooks-reference) and [configuration/trust requirements](https://code.visualstudio.com/docs/agent-customization/hooks).
+Local uses `UserPromptSubmit`/`PreToolUse`, `command`, and `timeout`; enable `chat.useHooks` in a trusted workspace and select the **Local** agent runtime. Local prompt block emits `continue: false`; tool block emits `hookSpecificOutput.permissionDecision: deny`. On tested Local 1.139.1, a host hook timeout permits continuation at either stage; service-side timeouts instead return deny within the host deadline. Empty hook configuration also permits continuation. Agent Host is excluded. See [Local reference](https://code.visualstudio.com/docs/agents/reference/hooks-reference) and [configuration/trust requirements](https://code.visualstudio.com/docs/agent-customization/hooks).
 
 CLI uses `userPromptSubmitted`/`preToolUse`, `bash`, and `timeoutSec`. Prompt output cannot block; tool denial is a top-level `permissionDecision: deny`. CLI 1.0.88 loaded project hooks in the test only after folder trust was configured. Command-hook crashes/nonzero exits deny pre-tool actions in current documentation, but **timeouts fail open**. Disabled project hooks do not enforce anything. Administrators can use protected policy hooks, but the documented timeout bypass remains. See [GitHub hook reference](https://docs.github.com/en/copilot/reference/hooks-reference).
 
@@ -83,3 +83,13 @@ python tests/hosts/copilot_cli.py --binary /path/to/copilot
 ```
 
 Use a dedicated local test account/workspace. CLI tests set `COPILOT_OFFLINE=true` and an isolated `COPILOT_HOME`, enable trust only for their temporary synthetic workspace, and allow the controlled synthetic tool. Reports go to ignored `artifacts/hosts/`. The Agentgateway CI job downloads the pinned Linux executable and checks its SHA-256 before execution.
+
+VS Code Local additionally requires an interactive Copilot sign-in in a dedicated test profile:
+
+```sh
+python tests/hosts/vscode_local.py \
+  --binary "/Applications/Visual Studio Code.app/Contents/MacOS/Code" \
+  --copilot-extension "/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/copilot"
+```
+
+Complete sign-in in the isolated window and press Enter in the terminal. The harness runs 14 synthetic scenarios, restores its hook configuration, and closes its editor process. It records sanitized outcomes in `artifacts/hosts/vscode-local/acceptance.json`. Only the test profile enables automatic tool approval and disables Workspace Trust prompts. Never point `--state-dir` at a personal profile or project: this fixture overwrites its settings and hook file. The profile can contain account/session data; keep it ignored and private. No paid evaluator/model calls are made, although Copilot authentication uses GitHub. This is a manual runtime acceptance test, not an unattended CI job or a Jev accuracy test.

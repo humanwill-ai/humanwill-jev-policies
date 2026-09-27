@@ -1,0 +1,40 @@
+{
+  "name": "humanwill-host-fixture",
+  "publisher": "humanwill-test",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.139.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "languageModelChatProviders": [
+      {
+        "vendor": "humanwill-fixture",
+        "displayName": "Synthetic HumanWill test"
+      }
+    ],
+    "languageModelTools": [
+      {
+        "name": "humanwill_test_marker",
+        "displayName": "Synthetic marker",
+        "modelDescription": "Creates the controlled synthetic test marker",
+        "canBeReferencedInPrompt": true,
+        "toolReferenceName": "humanwill_marker",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "value"
+          ]
+        }
+      }
+    ]
+  }
+}

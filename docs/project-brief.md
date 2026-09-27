@@ -1,6 +1,6 @@
 # Project brief
 
-Updated 2026-09-27 · service/connectors implemented; Local runtime and policy-quality validation pending
+Updated 2026-09-27 · service/connectors implemented; runtime checks pass; policy-quality validation pending
 
 ## Product and target user
 
@@ -24,7 +24,7 @@ The commercial hypothesis is that portable, testable company rules solve a recur
 
 Build a small Python package with an offline policy validator/compiler, shared evaluation and decision core, authenticated HTTP service, and hook executable. Use Markdown plus minimal front matter, explicit recursive include lists, one policy per file, and immutable policy/bundle hashes. Keep transport and host translation separate from decision logic.
 
-Gateway scope includes text requests before model invocation and non-streaming generated responses before delivery. Copilot scope includes submitted-text assessment and pre-tool control; provide separate VS Code Local and CLI profiles as required by the owner. Local can stop submitted prompts; CLI configured prompt-hook output cannot block, and CLI timeouts can fail open. Neither is universal Copilot interception. See [current evidence](research.md).
+Gateway scope includes text requests before model invocation and non-streaming generated responses before delivery. Copilot scope includes submitted-text assessment and pre-tool control; provide separate VS Code Local and CLI profiles as required by the owner. Local can stop submitted prompts; CLI configured prompt-hook output cannot block, and both runtimes can fail open on host hook timeouts. Neither is universal Copilot interception. See [current evidence](research.md).
 
 The [optional metadata design](optional-metadata.md) keeps content-only deployments simple, with metadata recommended off by default and independently configurable sources when enabled. Metadata absence does not prevent ordinary content checks. A policy that requires unavailable evidence is indeterminate, not satisfied; known-disabled dependencies must be resolved explicitly before enabling enforcement. Connector authentication remains separate.
 
@@ -45,7 +45,7 @@ The [first-release plan](release-plan.md) specifies the folder contract, example
 1. Implemented: offline loader, validation, policy IDs, snapshots, and preview; see [foundation evidence](foundation-report.md).
 2. Implemented: mock evaluation, deterministic decisions, and both Jev adapters; OpenRouter live smoke passed, direct TypeSafe contract-tested; its separate live smoke is optional.
 3. Implemented: LiteLLM/Agentgateway service and real runtime enforcement evidence.
-4. Implemented: both Copilot adapters; CLI runtime checks pass, Local runtime acceptance remains pending. See [evidence](integration-report.md).
+4. Implemented: both Copilot adapters; CLI and Local runtime checks pass with documented bypasses. See [evidence](integration-report.md).
 5. Private candidate validation, packaging, and comparative evaluation report, followed by a public preview when release gates pass.
 
 Measure false blocks and missed violations separately, with errors, missing coverage, bypasses, latency distributions, and total cost. Test direct/indirect injection and legitimate near-neighbors. One synthetic [OpenRouter transport smoke](smoke-2026-09-27.md) passed; semantic-quality evaluation has not been run. See [evaluation plan](evaluation-plan.md).

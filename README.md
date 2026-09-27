@@ -2,7 +2,7 @@
 
 Company-authored Markdown policies for AI gateways and coding agents. A companion to [HumanWill Benchmark](https://github.com/humanwill-ai/humanwill-benchmark), which studies harmful refusals and usefulness. This project aims to help companies apply their own rules; an adapter allow cannot force a downstream model to answer.
 
-**Implemented: service and connectors, `0.1.0.dev2`.** Markdown policy bundles, deterministic/semantic evaluation, direct/OpenRouter Jev adapters, an authenticated HTTP service, LiteLLM/Agentgateway adapters, and separate Copilot Local/CLI hooks. Real gateway and CLI enforcement tests pass. **VS Code Local's real-runtime validation remains pending**; see [integration evidence](docs/integration-report.md). OpenRouter live smoke passed; direct TypeSafe live smoke is optional for v0.1. The repository remains private, with public preview `v0.1.0a1` awaiting the [release gates](docs/public-release-plan.md).
+**Implemented: service and connectors, `0.1.0.dev2`.** Markdown policy bundles, deterministic/semantic evaluation, direct/OpenRouter Jev adapters, an authenticated HTTP service, LiteLLM/Agentgateway adapters, and separate Copilot Local/CLI hooks. Real gateway, Copilot CLI and VS Code Local enforcement tests pass on the pinned versions; see [integration evidence](docs/integration-report.md). OpenRouter live smoke passed; direct TypeSafe live smoke is optional for v0.1. The repository remains private, with public preview `v0.1.0a1` awaiting the [release gates](docs/public-release-plan.md).
 
 ## Try it locally
 
@@ -34,7 +34,7 @@ humanwill-policies schema request
 Implemented profiles and remaining evidence:
 
 - LiteLLM and Agentgateway: text request and non-streaming response checks.
-- Copilot VS Code Local: submitted-prompt and pre-tool adapter; actual runtime validation pending.
+- Copilot VS Code Local: submitted-prompt and pre-tool controls verified on the pinned runtime; host timeouts and disabled hooks bypass checks.
 - Copilot CLI: prompt assessment and pre-tool checks; no prompt-blocking claim.
 - Jev through OpenRouter for development/testing and direct TypeSafe: adapters implemented; OpenRouter live smoke passed; direct TypeSafe has contract tests, with live smoke optional.
 
