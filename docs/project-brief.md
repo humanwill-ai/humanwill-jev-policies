@@ -46,10 +46,12 @@ The [first-release plan](release-plan.md) specifies the folder contract, example
 2. Mock/OpenRouter evaluation and deterministic decisions.
 3. LiteLLM, Agentgateway, and direct TypeSafe transport.
 4. Copilot runtime profiles and observed enforcement tests.
-5. Private alpha packaging and comparative evaluation report.
+5. Private candidate validation, packaging, and comparative evaluation report, followed by a public preview when release gates pass.
 
 Measure false blocks and missed violations separately, with errors, missing coverage, bypasses, latency distributions, and total cost. Test direct/indirect injection and legitimate near-neighbors. No live evaluation has been run. See [evaluation plan](evaluation-plan.md).
 
+The [public-release roadmap](public-release-plan.md) defines the proposed `v0.1.0a1` evidence gates, licensing/public-content review, installable artifacts, and publication sequence. Target a usable public preview with bounded claims; production suitability for a customer's policies requires further validation.
+
 ## Remaining decisions
 
-Provide three initial policy intentions/examples and select a live development budget. Corporate data-egress/retention constraints and acceptance thresholds are needed before a customer pilot. These do not block the offline foundation.
+Provide three initial policy intentions/examples, select a live development budget, and choose the project license before publication. Agree per-policy acceptance targets before held-out evaluation; corporate data-egress/retention constraints are needed before a customer pilot. These do not block the offline foundation.

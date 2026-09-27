@@ -4,8 +4,11 @@ Company-authored Markdown policy bundles for AI gateways and coding agents, with
 
 **Status:** first-release planning; no runtime service or validated enforcement yet. V0.1 requires LiteLLM, Agentgateway, and Copilot hook connectors. Customer demand remains unvalidated.
 
+Target publication: a tested public `v0.1.0a1` preview. This repository remains private while implementation and release checks are pending.
+
 - [Project brief](docs/project-brief.md): problem, alternatives, proposed MVP, and decisions.
 - [First-release plan](docs/release-plan.md): folder format, architecture, connector scope, and implementation milestones.
+- [Public-release roadmap](docs/public-release-plan.md): work packages, acceptance evidence, packaging, and publication checklist.
 - [Optional metadata](docs/optional-metadata.md): feature switches, trusted facts, missing evidence, and stage-specific checks.
 - [Draft policy examples](examples/policies/policies.md): an entry point, nested collection, and stable policy IDs.
 - [Research notes](docs/research.md): verified documentation/source findings, limitations, and open questions.

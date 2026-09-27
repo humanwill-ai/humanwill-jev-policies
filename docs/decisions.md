@@ -23,7 +23,9 @@ Updated 2026-09-27. Owner requirements and proposed implementation choices are s
 | Customer demand | Unvalidated | Enterprise platform/security teams are the target, not validated paying customers |
 | Hosted customer data | Open | Confirm policy-text/content egress, destinations, retention, and geographic constraints |
 | Live budget / quality targets | Open | Agree before paid runs / customer enforcement respectively |
-| Public release / license | Open | Private alpha plan; no public release or project license selected |
+| Public release objective | Decided by owner | Plan a first release suitable for public GitHub publication; visibility remains private during preparation |
+| Release label / artifacts | Proposed | `v0.1.0a1` public preview, source/wheel/checksums and evidence; see public-release roadmap |
+| Project license | Awaiting owner choice | Proposed Apache-2.0 for original code/docs/examples; preserve licenses of reused material |
 
 ## Requirement update: 2026-09-27
 
@@ -31,9 +33,11 @@ The owner expanded the initial two-integration suggestion to three mandatory con
 
 Follow-up: metadata must be optional and switchable, including user/group information. Metadata-dependent policies still need authoritative evidence; turning the feature off cannot establish authorization. The owner also requires checks at the stages governed by a policy. The proposed release now includes non-streaming gateway response checks, superseding the earlier response deferral; unavailable stages remain explicit limitations. See [metadata and stage design](optional-metadata.md).
 
+Publication planning: the owner requested steps toward a confident public first release. The [public-release roadmap](public-release-plan.md) adds real-runtime evidence, semantic evaluation, packaging, licensing, and a public-content review. Private alpha validation becomes preparation for the proposed public preview. Publication itself awaits a completed, reviewable candidate and owner go-ahead.
+
 ## Next concrete work
 
-Implement M1 from the [release plan](release-plan.md): offline policy validation, includes, stable IDs/digests, and preview. It requires no API key or live calls. Collect concrete policy intentions alongside that work. The present change is a plan and authoring examples, not a working runtime.
+Implement Steps 0–1 from the [public-release roadmap](public-release-plan.md), including M1 from the [release design](release-plan.md): freeze the small contracts, establish CI, and build offline policy validation, includes, stable IDs/digests, and preview. It requires no API key or live calls. Collect concrete policy intentions alongside that work. Current artifacts are plans and authoring examples, not a working runtime.
 
 ## Additional requirements and ideas
 

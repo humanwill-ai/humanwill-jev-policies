@@ -4,6 +4,8 @@ Draft implementation plan · 2026-09-27
 
 The owner requires company/user-authored Markdown policies with stable policy IDs, LiteLLM, Agentgateway, and a Copilot hook connector in the first release, plus direct TypeSafe and OpenRouter access to Jev. Development and testing will use OpenRouter. The design choices below are recommendations, ready to turn into implementation tasks; no runtime exists yet.
 
+The [public-release roadmap](public-release-plan.md) now defines delivery order and publication gates for a proposed `v0.1.0a1` public preview. This document defines technical scope; private validation remains a step toward publication, not the final release objective.
+
 ## Product promise and boundary
 
 **Bring your own policies, test them against your work, and apply them consistently at supported gateway and agent control points.** The initial customer is an enterprise AI platform/security team managing gateways and coding agents. The useful first product is a deployable service and hook executable with policy provenance and evidence of what was inspected and enforced.
@@ -145,13 +147,13 @@ Development uses synthetic policies and examples through OpenRouter. Production 
 | M2 — first vertical slice | Mock evaluator, OpenRouter transport, deterministic decision engine, optional metadata switch/predicates, `evaluate` | Content-only operation needs no metadata; disabled mode performs no enrichment; missing/spoofed facts are not permissions; malformed answers/uncertainty/timeouts handled; opt-in budgeted synthetic OpenRouter smoke run |
 | M3 — gateway connections | Authenticated service, LiteLLM and Agentgateway request/response adapters, direct Jev transport | Each gateway prevents a mock downstream invocation on request deny and withholds response content on response deny; metadata toggles leave connector authentication intact; allow/error/unsupported fixtures; direct transport contract and live smoke when credentials are available |
 | M4 — Copilot connections | Hook executable and separate selected runtime profiles | Local deny/stop and CLI assessment/deny verified on pinned versions; controlled tool not executed on denial; timeout and disabled-hook behavior documented |
-| M5 — v0.1 private alpha | Installation/configuration examples, container recipe, compatibility matrix, evaluation report | Three connector families, both transports, privacy defaults, rollback instructions, and no untested enforcement claim |
+| M5 — public-preview candidate | Installation/configuration examples, container recipe, compatibility matrix, evaluation report | Three connector families, both transports, privacy defaults, rollback instructions, and no untested enforcement claim; then complete public-release roadmap gates |
 
 Start M1 immediately after this planning step; it does not depend on live API access or customer interviews. During M1, cap the reuse review at one focused comparison of the benchmark policy snapshot helpers and `jev-edge` adapter fixtures. Prefer narrowly reusable pieces with appropriate licensing; the gateway-oriented `jev-edge` runtime is not the default foundation for this Markdown/API/hook product. Reconsider if the comparison demonstrates substantial reuse.
 
 Test three narrow policies on legitimate work, violations, exceptions, missing evidence, and direct/indirect injection. Compare Jev with deterministic checks and one suitable alternative judge. Keep held-out cases separate from policy examples. Report false blocks, missed violations, errors, coverage gaps, host bypasses, p50/p95/p99 added latency, and total cost; see [evaluation plan](evaluation-plan.md). The benchmark's FR/usefulness metrics and labels do not automatically measure harmful compliance or this service's enforcement.
 
-V0.1 is a private alpha for controlled trials, not a claim of enterprise readiness. No governance console, SSO/RBAC administration, multi-tenant SaaS, general policy language, signed bundle distribution, universal agent coverage, or approval workflow in this release.
+The proposed first public version is an alpha preview, validated privately before publication, not a claim of enterprise readiness. No governance console, SSO/RBAC administration, multi-tenant SaaS, general policy language, signed bundle distribution, universal agent coverage, or approval workflow in this release.
 
 ## Remaining owner decisions
 

@@ -1,7 +1,7 @@
 # Project working instructions
 
 - Begin with research and planning. Do not treat a suggested architecture, schema, integration order, or commercial hypothesis as approved.
-- Read `docs/project-brief.md`, `docs/decisions.md`, and `docs/release-plan.md` before substantial work. Keep them editable as the owner adds requirements.
+- Read `docs/project-brief.md`, `docs/decisions.md`, `docs/release-plan.md`, and `docs/public-release-plan.md` before substantial work. Keep them editable as the owner adds requirements.
 - Owner requirements: Markdown policy folders with recursive references and stable policy IDs; LiteLLM, Agentgateway, and Copilot hook connectors for both VS Code Local and Copilot CLI in v0.1; direct Jev and OpenRouter transports, with OpenRouter for development/testing. Keep Copilot runtime contracts explicit.
 - Verify changing integration claims against current primary documentation and source. Record review dates and source revisions. Distinguish documented behavior, source inspection, runtime tests, assumptions, and unresolved questions.
 - Keep the policy core independent of gateways and the Jev backend. Separate model judgments from deterministic facts and policy decisions, and assessment from actual enforcement.

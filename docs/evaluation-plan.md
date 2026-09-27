@@ -2,6 +2,8 @@
 
 Proposed, not yet run · 2026-09-27
 
+The [public-release roadmap](public-release-plan.md) specifies the initial held-out sample proposal and report/publication gates. Freeze acceptance targets before evaluating the holdout; none has been approved yet.
+
 ## Begin with policies and labels
 
 Select three rules with a prospective user. Illustrative candidates, not adopted company policies:
