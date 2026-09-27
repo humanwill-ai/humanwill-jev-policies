@@ -53,7 +53,8 @@ def load_configuration(bundle: Bundle, document: dict) -> Configuration:
     validate_contract("config", document, "configuration")
     # Copy into JSON primitives; never mutate the caller's document.
     effective = json.loads(canonical(document))
-    v2 = effective["format"] == "humanwill.config/2"
+    v2 = effective["format"] in ("humanwill.config/2", "humanwill.config/3")
+    v3 = effective["format"] == "humanwill.config/3"
     if v2:
         from .runtime import EvaluationLimits
 
@@ -100,7 +101,23 @@ def load_configuration(bundle: Bundle, document: dict) -> Configuration:
                 raise PolicyError(
                     "invalid_strategy", "When is only for deterministic predicates", policy.id
                 )
-            if (strategy == "scoped_predicates") != ("scope" in binding):
+            if v3:
+                binding.setdefault("predicate_short_circuit", False)
+                scopes = int("scope" in binding) + int("scope_by_stage" in binding)
+                if scopes > 1 or (
+                    "scope_by_stage" in binding
+                    and set(binding["scope_by_stage"]) != set(policy.stages)
+                ):
+                    raise PolicyError(
+                        "invalid_strategy", "Provide one scope for every policy stage", policy.id
+                    )
+                if binding["predicate_short_circuit"] and strategy != "scoped_predicates":
+                    raise PolicyError(
+                        "invalid_strategy", "Short circuit is only for scoped predicates", policy.id
+                    )
+            else:
+                scopes = int("scope" in binding)
+            if (strategy == "scoped_predicates") != bool(scopes):
                 raise PolicyError(
                     "invalid_strategy", "Only scoped predicates require scope", policy.id
                 )

@@ -65,7 +65,7 @@ async def assess(payload, runtime, name, url, token, timeout_ms, *, transport=No
                     raise PolicyError("payload_limit", "Service verdict too large")
     result = decode_json(bytes(data))
     validate_contract("result", result)
-    if result["format"] != "humanwill.result/2":
+    if result["format"] not in ("humanwill.result/2", "humanwill.result/3"):
         raise PolicyError("service_response", "Unsupported verdict version")
     normalized["request_id"] = result["request_id"]
     if (

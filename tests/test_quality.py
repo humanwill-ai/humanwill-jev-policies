@@ -147,3 +147,80 @@ class QualityTests(unittest.TestCase):
         self.assertFalse(seen[0]["provider"]["allow_fallbacks"])
         self.assertEqual(json.loads(seen[0]["messages"][1]["content"]), payload["state"])
         self.assertNotIn("rationale", json.dumps(seen))
+
+
+class CalibrationTests(unittest.TestCase):
+    def test_models_are_screened_on_errors_and_unknown_allows_not_confidence_alone(self):
+        from evals.step6.calibrate import candidate
+
+        def result(false_blocks=0, misses=0, errors=0, unknown_allows=0):
+            return {
+                "false_blocks_if_fail_closed": {"rate": false_blocks},
+                "missed_violations_if_fail_closed": {"count": misses, "rate": misses},
+                "specified_case_errors": {"rate": errors},
+                "unknown_incorrectly_allowed": unknown_allows,
+            }
+
+        self.assertIsNone(candidate({"0.8": result(misses=1), "0.9": result(errors=0.1)}))
+        self.assertIsNone(candidate({"0.8": result(unknown_allows=1)}))
+        self.assertEqual(
+            candidate({"0.6": result(), "0.8": result(), "0.9": result(false_blocks=0.2)}), 0.8
+        )
+
+    def test_adversarial_cases_keep_matched_controls_and_local_execution_semantics(self):
+        cases = load_cases(ROOT / "adversarial-development.json")
+        self.assertEqual(len(cases), 36)
+        families = {}
+        for case in cases:
+            families.setdefault(case["family"], []).append(case)
+        self.assertEqual(len(families), 12)
+        for rows in families.values():
+            self.assertEqual(sorted(r["expected"] for r in rows), ["allow", "block", "block"])
+            self.assertEqual(len({json.dumps(r["trusted_facts"], sort_keys=True) for r in rows}), 1)
+        # A printed command with hostile comments remains a literal argument to printf.
+        import shlex
+
+        for case in cases:
+            if case["policy_id"] == "EVAL-PROD-001" and case["expected"] == "allow":
+                argv = shlex.split(case["request"]["content"][0]["arguments"]["command"])
+                self.assertEqual(argv[:2], ["printf", "%s\\n"])
+                self.assertEqual(len(argv), 3)
+
+    def test_calibration_rejects_mixed_models_changed_labels_and_incomplete_runs(self):
+        import hashlib
+
+        from evals.step6.calibrate import load_recordings
+        from humanwill_policies.serialization import digest
+
+        bundle = load_bundle(ROOT / "policies")
+        config = yaml.safe_load((ROOT / "config-v3.yaml").read_text())
+        case = load_cases(ROOT / "development.json")[0]
+        base = {
+            "backend": "jev",
+            "configuration": config,
+            "config_sha256": digest(config),
+            "bundle_sha256": bundle.sha256,
+            "policy_path": str(ROOT / "policies"),
+            "dataset_path": str(ROOT / "development.json"),
+            "case_count": 1,
+            "dataset_sha256": hashlib.sha256((ROOT / "development.json").read_bytes()).hexdigest(),
+        }
+        row = {k: case[k] for k in ("id", "policy_id", "expected", "expected_scope", "family")}
+        row["repeat"] = 0
+        with tempfile.TemporaryDirectory() as temp:
+            first, second = Path(temp) / "first", Path(temp) / "second"
+            first.mkdir()
+            second.mkdir()
+            for directory in [first, second]:
+                (directory / "manifest.json").write_text(json.dumps(base))
+                (directory / "results.jsonl").write_text(json.dumps(row) + "\n")
+            self.assertEqual(len(load_recordings([first])[3]), 1)
+            (second / "manifest.json").write_text(json.dumps({**base, "backend": "chat"}))
+            with self.assertRaisesRegex(ValueError, "mix models"):
+                load_recordings([first, second])
+            (first / "results.jsonl").write_text(json.dumps({**row, "expected": "block"}) + "\n")
+            with self.assertRaisesRegex(ValueError, "labels"):
+                load_recordings([first])
+            (first / "results.jsonl").write_text("")
+            with self.assertRaisesRegex(ValueError, "incomplete"):
+                load_recordings([first])

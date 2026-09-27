@@ -93,3 +93,5 @@ python tests/hosts/vscode_local.py \
 ```
 
 Complete sign-in in the isolated window and press Enter in the terminal. The harness runs 14 synthetic scenarios, restores its hook configuration, and closes its editor process. It records sanitized outcomes in `artifacts/hosts/vscode-local/acceptance.json`. Only the test profile enables automatic tool approval and disables Workspace Trust prompts. Never point `--state-dir` at a personal profile or project: this fixture overwrites its settings and hook file. The profile can contain account/session data; keep it ignored and private. No paid evaluator/model calls are made, although Copilot authentication uses GitHub. This is a manual runtime acceptance test, not an unattended CI job or a Jev accuracy test.
+
+Config/3 deployments return result/3 on native/hook endpoints. Upgrade hook clients to `0.1.0.dev3` with the service; they accept both result/2 and result/3. Host-specific gateway and Copilot output shapes are unchanged. See [decision semantics and rollback](decision-v3.md). Config/2 remains available to reproduce the existing pinned-host runtime evidence.

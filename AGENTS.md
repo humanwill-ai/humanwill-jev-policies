@@ -19,3 +19,5 @@
 - Steps 4–5 status: service/gateway/CLI runtime tests implemented, version 0.1.0.dev2. Direct TypeSafe live smoke is optional for v0.1 by owner decision. VS Code Local real-runtime acceptance now passes, including observed host-timeout and disabled-hook bypasses; see docs/integration-report.md and docs/service-and-connectors.md. No paid API calls were made for these integration tests.
 
 - Step 6 initial development comparison is complete; the release quality gate remains open. Policies/dataset/runner are under evals/step6. Approved targets and policy exceptions are in docs/decisions.md; 60 draft labels await human review in docs/step6-label-review.md. No holdout or calibrated enforcement profile exists. Preserve the baseline report and version any future tuning.
+
+- `0.1.0.dev3` adds opt-in config/3 and result/3 with trusted-predicate short circuiting and per-stage scopes; config/2 behavior is retained. See docs/decision-v3.md. New development runs must use the existing spending ledger. The first report is a config/2 baseline; do not treat it as config/3 evidence.

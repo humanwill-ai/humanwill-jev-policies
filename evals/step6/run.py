@@ -104,7 +104,7 @@ async def run(args):
     if args.limit:
         cases = cases[: args.limit]
     bundle = load_bundle(ROOT / "policies")
-    config = yaml.safe_load((ROOT / "config.yaml").read_text())
+    config = yaml.safe_load(args.config.read_text())
     if args.backend == "keyword":
         backend = KeywordBackend()
         ledger = None
@@ -123,6 +123,9 @@ async def run(args):
         "dataset_sha256": hashlib.sha256(args.dataset.read_bytes()).hexdigest(),
         "bundle_sha256": bundle.sha256,
         "config_sha256": digest(config),
+        "configuration": config,
+        "dataset_path": str(args.dataset.resolve()),
+        "policy_path": str((ROOT / "policies").resolve()),
         "source_sha256": {
             p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in ROOT.glob("*.py")
         },
@@ -135,7 +138,10 @@ async def run(args):
         "concurrency": 1,
         "retries": 0,
         "decision_cache": False,
-        "threshold": 0.8,
+        "thresholds": {
+            key: binding.get("monitor_min_confidence")
+            for key, binding in config["policies"].items()
+        },
         "threshold_status": "uncalibrated pre-existing development default",
         "targets": {
             "false_block_upper95": 0.05,
@@ -234,6 +240,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--backend", choices=["keyword", "jev", "chat"], required=True)
     parser.add_argument("--dataset", type=Path, default=ROOT / "development.json")
+    parser.add_argument("--config", type=Path, default=ROOT / "config.yaml")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--allow-external", action="store_true")
     parser.add_argument("--ledger", type=Path, default=Path("artifacts/quality/spending.json"))

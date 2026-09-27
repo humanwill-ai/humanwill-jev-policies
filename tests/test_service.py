@@ -306,6 +306,34 @@ class ServiceTests(Workspace):
                     )
                 )
 
+    def test_v3_service_verdicts_are_accepted_by_both_hook_clients(self):
+        for runtime, event_name, body in [
+            (
+                "copilot_local",
+                "UserPromptSubmit",
+                {"hook_event_name": "UserPromptSubmit", "prompt": "test"},
+            ),
+            ("copilot_cli", "preToolUse", {"toolName": "shell", "toolArgs": {"command": "test"}}),
+        ]:
+            config = self.enforcing()
+            config["format"] = "humanwill.config/3"
+            app = self.app(
+                runtime, config=config, backend=ScriptedBackend({"RULE": answer("violation")})
+            )
+            result = asyncio.run(
+                assess(
+                    body,
+                    runtime,
+                    event_name,
+                    "http://localhost",
+                    TOKEN,
+                    6000,
+                    transport=httpx.ASGITransport(app),
+                )
+            )
+            self.assertEqual(result["format"], "humanwill.result/3")
+            self.assertEqual(result["enforcement"]["requested"], "block")
+
     def test_hook_failures_never_echo_content_and_preserve_default_permissions(self):
         for runtime, name in [
             ("copilot_local", "UserPromptSubmit"),

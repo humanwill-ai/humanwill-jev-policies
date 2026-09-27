@@ -84,3 +84,7 @@ Every batch is planned before sending; oversized events/rules and excessive batc
 Any established violation makes the aggregate assessment `block`; otherwise any error makes it `evaluation_error`; otherwise it is `allow`. Monitoring policies participate in assessment but do not request enforcement. For enforcing policies, violations request block; errors use explicit `on_error` (default block). Explicit fail-open requests allow while retaining an error assessment. A violation in one rule cannot erase an error in another.
 
 Mock results are always `simulated: true` and request no enforcement. Real-backend results request only a host action; `enforcement.actual` is `unconfirmed` until a connector can establish what happened. Deterministic-only evaluation needs no hosted call, but mock mode still marks the entire run simulated. No executable/tool side effect happens inside this core.
+
+## Config/3 development extension
+
+Version `0.1.0.dev3` adds opt-in trusted-predicate short circuiting and per-stage scope questions while preserving config/2 behavior. See [config/3 semantics and migration](decision-v3.md). This produces result/3; upgrade hook clients together with the service.

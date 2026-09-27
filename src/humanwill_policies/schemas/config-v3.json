@@ -1,0 +1,579 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:humanwill:config:3",
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": "humanwill.config/3"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "sources": {
+          "type": "object",
+          "properties": {
+            "identity": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "source": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+                }
+              },
+              "required": [
+                "enabled",
+                "source"
+              ],
+              "additionalProperties": false
+            },
+            "documents": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "source": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+                }
+              },
+              "required": [
+                "enabled",
+                "source"
+              ],
+              "additionalProperties": false
+            },
+            "destination": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "source": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+                }
+              },
+              "required": [
+                "enabled",
+                "source"
+              ],
+              "additionalProperties": false
+            },
+            "environment": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "source": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+                }
+              },
+              "required": [
+                "enabled",
+                "source"
+              ],
+              "additionalProperties": false
+            },
+            "authorization": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "source": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+                }
+              },
+              "required": [
+                "enabled",
+                "source"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "enabled"
+      ],
+      "additionalProperties": false
+    },
+    "policies": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "mode": {
+            "enum": [
+              "monitor",
+              "enforce"
+            ]
+          },
+          "on_error": {
+            "enum": [
+              "block",
+              "allow"
+            ]
+          },
+          "requires_metadata": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(identity|documents|destination|environment|authorization)\\.[a-z][a-z0-9_]{0,63}$"
+            },
+            "minItems": 0,
+            "maxItems": 64,
+            "uniqueItems": true
+          },
+          "predicates": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "pattern": "^(identity|documents|destination|environment|authorization)\\.[a-z][a-z0-9_]{0,63}$"
+                    },
+                    "op": {
+                      "const": "exists"
+                    }
+                  },
+                  "required": [
+                    "field",
+                    "op"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "pattern": "^(identity|documents|destination|environment|authorization)\\.[a-z][a-z0-9_]{0,63}$"
+                    },
+                    "op": {
+                      "enum": [
+                        "equals",
+                        "contains"
+                      ]
+                    },
+                    "value": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "field",
+                    "op",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "pattern": "^(identity|documents|destination|environment|authorization)\\.[a-z][a-z0-9_]{0,63}$"
+                    },
+                    "op": {
+                      "const": "in"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "type": [
+                          "string",
+                          "number",
+                          "boolean",
+                          "null"
+                        ]
+                      },
+                      "minItems": 1,
+                      "maxItems": 100,
+                      "uniqueItems": true
+                    }
+                  },
+                  "required": [
+                    "field",
+                    "op",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "minItems": 0,
+            "maxItems": 64
+          },
+          "evaluation_profile": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+              },
+              "model": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512,
+                "pattern": "\\S"
+              },
+              "dataset_sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "min_confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "required": [
+              "id",
+              "model",
+              "dataset_sha256",
+              "min_confidence"
+            ],
+            "additionalProperties": false
+          },
+          "strategy": {
+            "enum": [
+              "semantic",
+              "predicates",
+              "scoped_predicates"
+            ]
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096,
+            "pattern": "\\S"
+          },
+          "monitor_min_confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "require_complete_coverage": {
+            "type": "boolean"
+          },
+          "when": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "pattern": "^(identity|documents|destination|environment|authorization)\\.[a-z][a-z0-9_]{0,63}$"
+                    },
+                    "op": {
+                      "const": "exists"
+                    }
+                  },
+                  "required": [
+                    "field",
+                    "op"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "pattern": "^(identity|documents|destination|environment|authorization)\\.[a-z][a-z0-9_]{0,63}$"
+                    },
+                    "op": {
+                      "enum": [
+                        "equals",
+                        "contains"
+                      ]
+                    },
+                    "value": {
+                      "type": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "field",
+                    "op",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "field": {
+                      "type": "string",
+                      "pattern": "^(identity|documents|destination|environment|authorization)\\.[a-z][a-z0-9_]{0,63}$"
+                    },
+                    "op": {
+                      "const": "in"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "type": [
+                          "string",
+                          "number",
+                          "boolean",
+                          "null"
+                        ]
+                      },
+                      "minItems": 1,
+                      "maxItems": 100,
+                      "uniqueItems": true
+                    }
+                  },
+                  "required": [
+                    "field",
+                    "op",
+                    "value"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            },
+            "minItems": 0,
+            "maxItems": 64
+          },
+          "scope_by_stage": {
+            "type": "object",
+            "properties": {
+              "prompt": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16384,
+                "pattern": "\\S"
+              },
+              "model_request": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16384,
+                "pattern": "\\S"
+              },
+              "response": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16384,
+                "pattern": "\\S"
+              },
+              "tool_action": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 16384,
+                "pattern": "\\S"
+              }
+            },
+            "minProperties": 1,
+            "additionalProperties": false
+          },
+          "predicate_short_circuit": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "enabled",
+          "strategy"
+        ],
+        "additionalProperties": false
+      },
+      "minProperties": 1,
+      "maxProperties": 500
+    },
+    "connectors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "enum": [
+              "litellm",
+              "agentgateway",
+              "copilot_local",
+              "copilot_cli"
+            ]
+          },
+          "stages": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "prompt",
+                "model_request",
+                "response",
+                "tool_action"
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 4,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "name",
+          "stages"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 4
+    },
+    "provider": {
+      "type": "object",
+      "properties": {
+        "transport": {
+          "enum": [
+            "openrouter",
+            "typesafe"
+          ]
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "\\S"
+        },
+        "api_key_env": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]{0,127}$"
+        },
+        "accepted_models": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "transport",
+        "model",
+        "api_key_env",
+        "accepted_models"
+      ],
+      "additionalProperties": false
+    },
+    "limits": {
+      "type": "object",
+      "properties": {
+        "file_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1048576
+        },
+        "bundle_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8388608
+        },
+        "files": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 512
+        },
+        "policies": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 500
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        },
+        "includes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 512
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "evaluation": {
+      "type": "object",
+      "properties": {
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 60000
+        },
+        "max_batch_bytes": {
+          "type": "integer",
+          "minimum": 512,
+          "maximum": 262144
+        },
+        "max_response_bytes": {
+          "type": "integer",
+          "minimum": 512,
+          "maximum": 1048576
+        },
+        "questions_per_batch": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64
+        },
+        "max_batches": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64
+        },
+        "max_in_flight": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32
+        },
+        "metadata_max_age_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 86400
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "format",
+    "metadata",
+    "policies"
+  ],
+  "additionalProperties": false,
+  "title": "HumanWill configuration v3"
+}

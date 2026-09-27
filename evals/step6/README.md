@@ -105,3 +105,12 @@ few templates into hundreds of rows.
   workload/host latency measurements are required before an enforcement claim.
 
 The [initial report](../../docs/evaluation-development-report.md) records the live runs and remaining gate. Replay recorded Jev answers without network calls using `python -m evals.step6.replay artifacts/quality/jev-v1`; these diagnostics do not change the configured threshold.
+
+## Revised development configuration
+
+Use `--config evals/step6/config-v3.yaml` for opt-in trusted-predicate shortcuts
+and stage-specific questions. Add `--dataset evals/step6/adversarial-development.json`
+for the matched 36-case attack/control suite. Keep fresh output directories and
+the same spending ledger. Baseline config.yaml and development.json are unchanged.
+See [the decision reference](../../docs/decision-v3.md) for per-model offline
+threshold analysis, compatibility and limits on calibration claims.

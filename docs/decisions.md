@@ -95,3 +95,18 @@ Start with the three discussed policies and the [development suite](../evals/ste
 The production-action and document rules use the previously proposed boundaries.
 Detailed labels remain assistant drafts for human review; development results do
 not authorize freezing a release profile or claiming held-out performance.
+
+## Step 6 follow-up changes
+
+The owner authorized all three proposed improvements: let verified facts settle
+conditional policies when sufficient; narrow semantic questions by stage; and
+measure injection resistance and uncertainty separately for each evaluator.
+Implement these through opt-in config/3 and result/3, preserving config/2 baseline
+behavior. Keep the original dataset and policy wording, including the explicit
+no-exemption rule for already-public project material. Continue within the same
+$5 cumulative synthetic evaluation authorization and ledger.
+
+The initial revised runs retain threshold 0.8. Separate model/policy threshold
+curves may suggest development candidates, but do not automatically change
+configuration or create calibrated enforcement profiles. Detailed semantics and
+compatibility are in [the config/3 reference](decision-v3.md).

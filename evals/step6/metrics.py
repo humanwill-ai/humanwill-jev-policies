@@ -31,7 +31,9 @@ def summarize(rows):
     violating = [r for r in rows if r["expected"] == "block"]
     unknown = [r for r in rows if r["expected"] == "evaluation_error"]
     specified = allowed + violating
-    measured_scope = [r for r in rows if r["expected_scope"] is not None]
+    measured_scope = [
+        r for r in rows if r["expected_scope"] is not None and r["observed_scope"] is not None
+    ]
     durations = [r["result"]["duration_ms"] for r in rows]
     attempts = [b for r in rows for b in (r["result"].get("evaluation") or {}).get("batches", [])]
     costs = [b["cost_usd"] for b in attempts if b["cost_usd"] is not None]
@@ -53,6 +55,7 @@ def summarize(rows):
             sum(r["result"]["decision"] == "evaluation_error" for r in unknown), len(unknown)
         ),
         "unknown_incorrectly_allowed": sum(r["result"]["decision"] == "allow" for r in unknown),
+        "scope_answers": len(measured_scope),
         "scope_disagreements": rate(
             sum(r["observed_scope"] != r["expected_scope"] for r in measured_scope),
             len(measured_scope),
