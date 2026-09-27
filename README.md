@@ -2,7 +2,7 @@
 
 Company-authored Markdown policies for AI gateways and coding agents. A companion to [HumanWill Benchmark](https://github.com/humanwill-ai/humanwill-benchmark), which studies harmful refusals and usefulness. This project aims to help companies apply their own rules; an adapter allow cannot force a downstream model to answer.
 
-**Implemented: evaluation core, `0.1.0.dev1`.** Load/validate Markdown policy bundles, preview effective rules, and assess events with deterministic predicates, scripted mocks, or Jev transport adapters. Provider adapters have synthetic HTTP contract tests; live smoke tests and semantic quality measurements remain pending. No HTTP service or runtime connectors exist yet. The repository remains private; the planned public preview is `v0.1.0a1` after the [release gates](docs/public-release-plan.md) pass.
+**Implemented: evaluation core, `0.1.0.dev1`.** Load/validate Markdown policy bundles, preview effective rules, and assess events with deterministic predicates, scripted mocks, or Jev transport adapters. Both adapters have synthetic HTTP tests, and the [OpenRouter live smoke passed](docs/smoke-2026-09-27.md). Direct TypeSafe smoke and semantic quality measurements remain pending. No HTTP service or runtime connectors exist yet. The repository remains private; the planned public preview is `v0.1.0a1` after the [release gates](docs/public-release-plan.md) pass.
 
 ## Try it locally
 
@@ -36,7 +36,7 @@ Required host integrations remain pending:
 - LiteLLM and Agentgateway: text request and non-streaming response checks.
 - Copilot VS Code Local: submitted-prompt and pre-tool checks.
 - Copilot CLI: prompt assessment and pre-tool checks; no prompt-blocking claim.
-- Jev through OpenRouter for development/testing and direct TypeSafe: adapters implemented; live validation pending.
+- Jev through OpenRouter for development/testing and direct TypeSafe: adapters implemented; OpenRouter live smoke passed, direct TypeSafe pending.
 
 Optional metadata combines separately verified facts with deterministic predicates and semantic scope. The core checks source mappings, event binding, completeness, and freshness; the embedding application must authenticate those facts. Wire-request metadata and user assertions never establish authorization. Metadata is off in the default demo.
 
@@ -61,4 +61,4 @@ CI tests Python 3.11/3.14 on Ubuntu/macOS, builds the source distribution and wh
 - [Technical release design](docs/release-plan.md) and [optional metadata](docs/optional-metadata.md).
 - [Research](docs/research.md) and [evaluation plan](docs/evaluation-plan.md).
 
-No live provider call has been made during implementation. To opt in later, see the [synthetic smoke procedure](docs/provider-smoke.md). Project licensing is still an owner decision before public publication.
+One authorized synthetic OpenRouter call passed using the existing Keychain credential; see the [smoke evidence](docs/smoke-2026-09-27.md) and [procedure](docs/provider-smoke.md). Project licensing is still an owner decision before public publication.

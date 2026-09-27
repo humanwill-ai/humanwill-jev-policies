@@ -13,3 +13,5 @@
 - Minimize retained content. Hosted Jev is an external data recipient even if this service is self-hosted.
 - Private GitHub creation and the initial push are authorized by the owner. Do not publish publicly, deploy, contact others, or send private datasets/content to other services without authorization.
 - Do not commit credentials, raw customer content, or local evaluation artifacts. Distinguish planned features and authoring examples from implemented, tested behavior.
+
+- Local OpenRouter development credential is already stored in macOS Keychain: service `org.humanwill.evals.openrouter`, account `api-key`. See `docs/smoke-2026-09-27.md`. Check that reference before concluding credentials are absent from environment/.env alone; never print or commit the secret. The approved synthetic smoke budget is $5 total; account for the recorded $0.000024696 spend before further calls.

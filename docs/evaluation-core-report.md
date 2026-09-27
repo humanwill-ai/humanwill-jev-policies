@@ -2,7 +2,7 @@
 
 2026-09-27 · `0.1.0.dev1` · private development milestone
 
-**Software implemented; live-provider acceptance gate pending.** No OpenRouter or TypeSafe call was made. The owner authorized a **$5 total** synthetic smoke budget. Neither provider key was set in the environment and no repository .env existed; credentials are still needed. Limit the planned smoke to one small request per route, with no automatic retries. The [smoke procedure](provider-smoke.md) makes the remaining gate reproducible without publishing or deploying anything.
+**Software implemented; OpenRouter live smoke passed.** One authorized synthetic request used the existing macOS Keychain credential and reported a cost of **$0.000024696** against the **$5 total** cap. The earlier environment/.env-only check missed that credential. See the [live smoke evidence](smoke-2026-09-27.md). Direct TypeSafe remains pending its separate credential; no direct-provider call has been made. The [smoke procedure](provider-smoke.md) makes the remaining gate reproducible without publishing or deploying anything.
 
 Delivered:
 
@@ -16,4 +16,4 @@ Local evidence: **88 tests pass on Python 3.11.5 and 3.14.0**. Tests include mis
 
 Ruff formatting/lint, dependency consistency, runtime advisory audit, source/wheel build, and fresh wheel demo/evaluation checks are part of validation. The advisory audit reports no known runtime dependency vulnerabilities on the review date. Hosted CI repeats the deterministic tests and built-wheel example across Ubuntu/macOS and Python 3.11/3.14; consult [commit-specific Actions results](https://github.com/humanwill-ai/humanwill-jev-policies/actions/workflows/ci.yml) rather than treating workflow presence as a passing result.
 
-The repository remains private. No service, gateway/Copilot connector, actual host enforcement, live semantic evaluation, license choice, public release, or deployment is included. Finish the budgeted smoke gate for both actual provider routes; then proceed to step 4's authenticated service and real gateway tests. The live gate remains outstanding even if step 4 implementation proceeds alongside it.
+The repository remains private. No service, gateway/Copilot connector, actual host enforcement, semantic-quality benchmark, license choice, public release, or deployment is included. Finish the remaining direct TypeSafe smoke gate; then proceed to step 4's authenticated service and real gateway tests. The live gate remains outstanding even if step 4 implementation proceeds alongside it.

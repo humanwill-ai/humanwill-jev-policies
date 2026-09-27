@@ -9,7 +9,7 @@ Reviewed 2026-09-27. **The offline foundation and evaluation core are implemente
 | Agentgateway | [v1.5.0](https://github.com/agentgateway/agentgateway/releases/tag/v1.5.0) | Candidate target; request/response webhooks; adapter not implemented |
 | VS Code Local | [1.139.1](https://github.com/microsoft/vscode/releases/tag/1.139.1) | Candidate editor target; capture exact Copilot extension build at integration time; hooks not implemented |
 | Copilot CLI | [v1.0.88](https://github.com/github/copilot-cli/releases/tag/v1.0.88) | Candidate target; prompt assessment/pre-tool control; hooks not implemented |
-| OpenRouter / direct TypeSafe | Models and paths in release design | Both transport adapters have synthetic HTTP tests; live smoke pending |
+| OpenRouter / direct TypeSafe | Models and paths in release design | Both adapters have synthetic HTTP tests; [OpenRouter live smoke passed](smoke-2026-09-27.md), direct TypeSafe pending |
 | Windows | No declared version | Not supported by the POSIX loader in this first foundation |
 
 The host targets come from official release metadata on the review date. Previously inspected gateway source commits may contain behavior not in these releases. Before implementing connectors, verify each target contains the required contract and adjust/pin the target based on evidence. Do not present development-branch findings as release-tested support.

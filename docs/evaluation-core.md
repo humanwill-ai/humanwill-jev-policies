@@ -1,6 +1,6 @@
 # Evaluation core — step 3
 
-Implemented in `0.1.0.dev1`. The reusable Python core and CLI assess normalized events using deterministic predicates, scripted mocks, or an explicit Jev route. It does not install hooks, serve HTTP, or execute/block a host operation. Transport contract tests pass against synthetic HTTP fixtures; real provider smoke tests remain pending credentials (owner approved a $5 total synthetic smoke cap). No semantic accuracy or enterprise-readiness claim follows from these tests.
+Implemented in `0.1.0.dev1`. The reusable Python core and CLI assess normalized events using deterministic predicates, scripted mocks, or an explicit Jev route. It does not install hooks, serve HTTP, or execute/block a host operation. Transport contract tests pass against synthetic HTTP fixtures; the [OpenRouter live smoke passed](smoke-2026-09-27.md) using the existing Keychain credential. Direct TypeSafe still needs a credential. The owner approved a $5 total synthetic smoke cap. No semantic accuracy or enterprise-readiness claim follows from these tests.
 
 ## Run the offline example
 
@@ -57,7 +57,7 @@ For local, operator-controlled testing, `--backend configured --allow-external` 
 | OpenRouter | `https://openrouter.ai/api/alpha/decisions` | `typesafe/jev-1.13` / `typesafe/jev-1.13-20260917` |
 | Direct TypeSafe | `https://api.typesafe.ai/v1/systemone` | `jev-1.13.0` / `jev-1.13.0` |
 
-These example identities come from the current official [OpenRouter reference](https://openrouter.ai/docs/api/api-reference/alphadecisions/submit-a-decisions-request) and [TypeSafe reference](https://docs.typesafe.ai/api), reviewed 2026-09-27. Their live availability/returned identity remains untested here. OpenRouter's route is alpha. Requests use typed `state`/`questions`, not chat completions. Different routes may produce different judgments.
+These example identities come from the current official [OpenRouter reference](https://openrouter.ai/docs/api/api-reference/alphadecisions/submit-a-decisions-request) and [TypeSafe reference](https://docs.typesafe.ai/api), reviewed 2026-09-27. The OpenRouter identity was confirmed by the recorded smoke call; the direct TypeSafe identity remains untested here. OpenRouter's route is alpha. Requests use typed `state`/`questions`, not chat completions. Different routes may produce different judgments.
 
 Configure `provider.transport`, `model`, `accepted_models` (exact allowlist), and `api_key_env`. Never broadly match returned models by prefix or silently accept a provider alias change. Choose/update accepted versions deliberately and re-evaluate calibration; existing profile fields alone do not prove calibration. Each batch records the returned model and available token/cost fields. Missing usage fields and failed calls have unknown values, **not zero cost**. The configured model is also recorded when a call fails.
 
