@@ -1,6 +1,6 @@
 # Project brief
 
-Updated 2026-09-27 · evaluation core implemented; host integrations and quality validation pending
+Updated 2026-09-27 · service/connectors implemented; Local runtime and policy-quality validation pending
 
 ## Product and target user
 
@@ -44,8 +44,8 @@ The [first-release plan](release-plan.md) specifies the folder contract, example
 
 1. Implemented: offline loader, validation, policy IDs, snapshots, and preview; see [foundation evidence](foundation-report.md).
 2. Implemented: mock evaluation, deterministic decisions, and both Jev adapters; OpenRouter live smoke passed, direct TypeSafe contract-tested; its separate live smoke is optional.
-3. LiteLLM/Agentgateway service and runtime enforcement evidence.
-4. Copilot runtime profiles and observed enforcement tests.
+3. Implemented: LiteLLM/Agentgateway service and real runtime enforcement evidence.
+4. Implemented: both Copilot adapters; CLI runtime checks pass, Local runtime acceptance remains pending. See [evidence](integration-report.md).
 5. Private candidate validation, packaging, and comparative evaluation report, followed by a public preview when release gates pass.
 
 Measure false blocks and missed violations separately, with errors, missing coverage, bypasses, latency distributions, and total cost. Test direct/indirect injection and legitimate near-neighbors. One synthetic [OpenRouter transport smoke](smoke-2026-09-27.md) passed; semantic-quality evaluation has not been run. See [evaluation plan](evaluation-plan.md).

@@ -2,7 +2,7 @@
 
 Company-authored Markdown policies for AI gateways and coding agents. A companion to [HumanWill Benchmark](https://github.com/humanwill-ai/humanwill-benchmark), which studies harmful refusals and usefulness. This project aims to help companies apply their own rules; an adapter allow cannot force a downstream model to answer.
 
-**Implemented: evaluation core, `0.1.0.dev1`.** Load/validate Markdown policy bundles, preview effective rules, and assess events with deterministic predicates, scripted mocks, or Jev transport adapters. Both adapters have synthetic HTTP tests, and the [OpenRouter live smoke passed](docs/smoke-2026-09-27.md). Direct TypeSafe smoke and semantic quality measurements remain pending. No HTTP service or runtime connectors exist yet. The repository remains private; the planned public preview is `v0.1.0a1` after the [release gates](docs/public-release-plan.md) pass.
+**Implemented: service and connectors, `0.1.0.dev2`.** Markdown policy bundles, deterministic/semantic evaluation, direct/OpenRouter Jev adapters, an authenticated HTTP service, LiteLLM/Agentgateway adapters, and separate Copilot Local/CLI hooks. Real gateway and CLI enforcement tests pass. **VS Code Local's real-runtime validation remains pending**; see [integration evidence](docs/integration-report.md). OpenRouter live smoke passed; direct TypeSafe live smoke is optional for v0.1. The repository remains private, with public preview `v0.1.0a1` awaiting the [release gates](docs/public-release-plan.md).
 
 ## Try it locally
 
@@ -31,16 +31,18 @@ humanwill-policies schema request
 
 ## Planned first release
 
-Required host integrations remain pending:
+Implemented profiles and remaining evidence:
 
 - LiteLLM and Agentgateway: text request and non-streaming response checks.
-- Copilot VS Code Local: submitted-prompt and pre-tool checks.
+- Copilot VS Code Local: submitted-prompt and pre-tool adapter; actual runtime validation pending.
 - Copilot CLI: prompt assessment and pre-tool checks; no prompt-blocking claim.
-- Jev through OpenRouter for development/testing and direct TypeSafe: adapters implemented; OpenRouter live smoke passed, direct TypeSafe pending.
+- Jev through OpenRouter for development/testing and direct TypeSafe: adapters implemented; OpenRouter live smoke passed; direct TypeSafe has contract tests, with live smoke optional.
 
 Optional metadata combines separately verified facts with deterministic predicates and semantic scope. The core checks source mappings, event binding, completeness, and freshness; the embedding application must authenticate those facts. Wire-request metadata and user assertions never establish authorization. Metadata is off in the default demo.
 
-Hosted evaluation can send active rule/scope text and event content outside your environment. It requires explicit disclosure authorization; self-hosting the future service will not make Jev local. Measure false blocks, missed violations, host bypasses, latency, and cost before making enforcement claims. Customer demand and enterprise suitability remain unvalidated.
+Hosted evaluation can send active rule/scope text and event content outside your environment. It requires explicit disclosure authorization; self-hosting the service will not make Jev local. Measure false blocks, missed violations, host bypasses, latency, and cost before making enforcement claims. Customer demand and enterprise suitability remain unvalidated.
+
+See [service setup, gateway configurations and hook installation/removal](docs/service-and-connectors.md). Example policies default to monitoring; hosted evaluation requires explicit disclosure opt-in.
 
 ## Develop
 

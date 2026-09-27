@@ -60,3 +60,7 @@ Append dated requirements here and update the plan when they change scope.
 The owner explicitly waived direct TypeSafe's separate live smoke as a first-release requirement and authorized service/gateway and both Copilot-profile implementation. Retain direct TypeSafe transport and contract tests; OpenRouter remains the live development route. This does not authorize public publication.
 
 Use Starlette + Uvicorn for the small HTTP layer, retaining the existing JSON Schema contracts instead of adding a second model/schema layer. The core stays independent. Optional metadata enrichment is a trusted in-process resolver; default service deployments do not promote client metadata to facts.
+
+## Step 4–5 implementation status
+
+Authenticated service, LiteLLM/Agentgateway adapters and both Copilot command profiles are implemented. Gateway and CLI host tests pass with synthetic controlled evaluators/downstream effects. VS Code Local's isolated test had no working signed-in Copilot session and did not execute the synthetic agent, so its actual runtime gate remains open. See [integration report](integration-report.md). No new paid API calls, public visibility change or deployment occurred.

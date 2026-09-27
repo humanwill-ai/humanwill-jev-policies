@@ -2,7 +2,7 @@
 
 Implementation plan · updated 2026-09-27
 
-The owner requires company/user-authored Markdown policies with stable policy IDs, LiteLLM, Agentgateway, and a Copilot hook connector in the first release, plus direct TypeSafe and OpenRouter access to Jev. Development and testing will use OpenRouter. The offline foundation is implemented; the [contract reference](contracts.md) defines its exact behavior and the [foundation report](foundation-report.md) records checks. The evaluation core and both provider adapters are now implemented with synthetic contract tests; OpenRouter live smoke passed; service/connectors and direct TypeSafe live validation remain pending. See the [core reference](evaluation-core.md).
+The owner requires company/user-authored Markdown policies with stable policy IDs, LiteLLM, Agentgateway, and a Copilot hook connector in the first release, plus direct TypeSafe and OpenRouter access to Jev. Development and testing will use OpenRouter. The offline foundation is implemented; the [contract reference](contracts.md) defines its exact behavior and the [foundation report](foundation-report.md) records checks. The evaluation core and both provider adapters are now implemented with synthetic contract tests; OpenRouter live smoke passed; service/gateway/CLI integrations now have runtime evidence; Local runtime validation remains pending. Direct TypeSafe live smoke is optional for v0.1. See the [core reference](evaluation-core.md).
 
 The [public-release roadmap](public-release-plan.md) now defines delivery order and publication gates for a proposed `v0.1.0a1` public preview. This document defines technical scope; private validation remains a step toward publication, not the final release objective.
 
@@ -66,7 +66,7 @@ A company controls the installed bundle and deployment settings. Runtime callers
 
 ## 2. Small shared core
 
-Recommended stack: **Python 3.11+, one package, FastAPI HTTP endpoints, a small CLI, and HTTPX provider transports**. This aligns with the benchmark's Python ecosystem and LiteLLM without coupling runtime enforcement to benchmark execution. Pin and lock dependency versions during implementation. Do not add a database, queue, or UI initially.
+Recommended stack: **Python 3.11+, one package, Starlette/Uvicorn HTTP endpoints, a small CLI, and HTTPX provider transports**. This aligns with the benchmark's Python ecosystem and LiteLLM without coupling runtime enforcement to benchmark execution. Pin and lock dependency versions during implementation. Do not add a database, queue, or UI initially.
 
 ```mermaid
 flowchart LR
@@ -82,7 +82,7 @@ flowchart LR
 
 Separate modules: `policies`, `evaluation`, `decision`, `providers`, `connectors`, `api`, and `cli`. The hook executable calls the service; it keeps no Jev credentials and emits only the required host JSON on stdout, with diagnostics on stderr.
 
-Proposed operations: `validate`, `preview`, `evaluate` (offline/mock by default), `serve`, and `hook --runtime ... --event ...`. The implemented commands are `validate`, `preview`, `init-demo`, and `schema`; candidate wire schemas have offline fixtures. `evaluate` is now implemented; `serve` and `hook` remain future work. Do not install hooks automatically into user projects.
+Proposed operations: `validate`, `preview`, `evaluate` (offline/mock by default), `serve`, and `hook --runtime ... --event ...`. The implemented commands are `validate`, `preview`, `init-demo`, and `schema`; candidate wire schemas have offline fixtures. `evaluate` is now implemented; `serve` and `hook` are implemented; see [service/connector reference](service-and-connectors.md). Do not install hooks automatically into user projects.
 
 For each policy, start with a fixed, versioned Choice rubric: `compliant`, `violation`, or `insufficient_evidence`. Preserve probability distributions and use thresholds from labeled examples. Do not ask another model to silently rewrite policies. Policy text is trusted evaluator configuration; request content is untrusted evidence. This separation does not eliminate Jev's documented injection susceptibility.
 
@@ -137,7 +137,7 @@ The [OpenRouter Jev guide](https://openrouter.ai/blog/tutorials/how-to-use-jev/)
 
 Batch applicable questions when within measured context/deadline budgets. If splitting is needed, aggregate every required result before allowing; a missing batch cannot become pass. Do not implement semantic policy retrieval or a decision cache initially, since missed policies and stale/context-insensitive decisions would complicate correctness.
 
-Development uses synthetic policies and examples through OpenRouter. Production data flow is host → our service → OpenRouter → TypeSafe, or directly to TypeSafe. **Both company rule text and evaluated content can leave the environment.** Check evaluator-destination authorization in code before making that call; blocking transmission to the main model is too late to protect content already sent to Jev. A customer that cannot send the relevant data to either hosted route is outside this first release's supported deployment. Retention, geographic routing, and enterprise terms must be checked before a private customer pilot. Keep secrets out of source; use environment credential references. Logs default to IDs, digests, outcomes, coverage, and timings rather than raw content. A $5 total synthetic smoke cap is approved and the OpenRouter Keychain credential was used successfully. Direct TypeSafe credentials and broader evaluation budgets remain outstanding.
+Development uses synthetic policies and examples through OpenRouter. Production data flow is host → our service → OpenRouter → TypeSafe, or directly to TypeSafe. **Both company rule text and evaluated content can leave the environment.** Check evaluator-destination authorization in code before making that call; blocking transmission to the main model is too late to protect content already sent to Jev. A customer that cannot send the relevant data to either hosted route is outside this first release's supported deployment. Retention, geographic routing, and enterprise terms must be checked before a private customer pilot. Keep secrets out of source; use environment credential references. Logs default to IDs, digests, outcomes, coverage, and timings rather than raw content. A $5 total synthetic smoke cap is approved and the OpenRouter Keychain credential was used successfully. Direct TypeSafe live smoke is optional for v0.1. Broader semantic-evaluation budgets remain outstanding.
 
 ## 6. Build order and acceptance
 
@@ -149,7 +149,7 @@ Development uses synthetic policies and examples through OpenRouter. Production 
 | M4 — Copilot connections | Hook executable and separate selected runtime profiles | Local deny/stop and CLI assessment/deny verified on pinned versions; controlled tool not executed on denial; timeout and disabled-hook behavior documented |
 | M5 — public-preview candidate | Installation/configuration examples, container recipe, compatibility matrix, evaluation report | Three connector families, both transports, privacy defaults, rollback instructions, and no untested enforcement claim; then complete public-release roadmap gates |
 
-M1 is implemented with offline tests and package checks; see the [foundation report](foundation-report.md). The bounded [reuse review](compatibility.md) found that an original compiler avoids importing benchmark scoring contracts or `jev-edge` fail-open runtime behavior. M2 software is implemented, including both transports (direct TypeSafe moved forward from M3). Its OpenRouter live smoke passed; direct TypeSafe remains pending; see [step 3 evidence](evaluation-core-report.md).
+M1 is implemented with offline tests and package checks; see the [foundation report](foundation-report.md). The bounded [reuse review](compatibility.md) found that an original compiler avoids importing benchmark scoring contracts or `jev-edge` fail-open runtime behavior. M2 software is implemented, including both transports (direct TypeSafe moved forward from M3). Its OpenRouter live smoke passed; direct TypeSafe live smoke is optional; see [step 3 evidence](evaluation-core-report.md).
 
 Test three narrow policies on legitimate work, violations, exceptions, missing evidence, and direct/indirect injection. Compare Jev with deterministic checks and one suitable alternative judge. Keep held-out cases separate from policy examples. Report false blocks, missed violations, errors, coverage gaps, host bypasses, p50/p95/p99 added latency, and total cost; see [evaluation plan](evaluation-plan.md). The benchmark's FR/usefulness metrics and labels do not automatically measure harmful compliance or this service's enforcement.
 
