@@ -57,3 +57,13 @@ No direct documentation/source contradiction was found in the inspected gateway 
 ## Reuse spike before implementation
 
 Time-box an experiment using synthetic cases: configure one semantic rule and one trusted-metadata rule through `jev-edge`; attempt explicit failure handling and record policy/model versions. Compare extraction and failure fixtures with LiteLLM Generic Guardrail and Agentgateway formats. Check whether the desired independent decision core can be reused without importing an unnecessary proxy runtime. Record maintenance, licensing, deployment, and change-size tradeoffs. Choose contribution, extension, or a small new service from that evidence.
+
+## Follow-up: OpenRouter and the benchmark companion
+
+Reviewed 2026-09-27 after the owner specified Markdown bundles, all three connector families, and OpenRouter development/testing.
+
+[OpenRouter's Jev tutorial](https://openrouter.ai/blog/tutorials/how-to-use-jev/) documents `POST https://openrouter.ai/api/alpha/decisions` with `typesafe/jev-1.13`, typed questions, and OpenRouter credentials. The [SDK access guide](https://openrouter.ai/blog/insights/what-is-jev/) also describes a TypeSafe-compatible route. The implementation plan chooses the explicit Decisions transport and keeps direct TypeSafe separate. This confirms a documented access path, not tested account access or transport equivalence. The generic chat/router listings should not be mistaken for the evaluation contract.
+
+At benchmark commit `5be1e12c2865b47ebdc099a68ab7732fbae466ce`, the [package configuration](https://github.com/humanwill-ai/humanwill-benchmark/blob/5be1e12c2865b47ebdc099a68ab7732fbae466ce/pyproject.toml) uses Python 3.11+; its [policy guide](https://github.com/humanwill-ai/humanwill-benchmark/blob/5be1e12c2865b47ebdc099a68ab7732fbae466ce/docs/POLICY_OVERRIDES.md) describes versioned TOML judge-policy bundles, resolution provenance, and immutable snapshots. Those are useful reuse candidates, but the false-refusal/usefulness scoring contract is not arbitrary runtime company-policy enforcement. Do not change benchmark label eligibility or treat its existing dataset as a sufficient violation benchmark.
+
+The [release plan](release-plan.md) supersedes the earlier sequencing recommendation: a small independent core with a bounded reuse review during the offline milestone, followed by all required connectors. No live evaluation, benchmark run, or customer-data transmission was performed in this follow-up.

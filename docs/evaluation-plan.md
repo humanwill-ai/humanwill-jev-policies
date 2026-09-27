@@ -34,11 +34,11 @@ Attempt direct evaluator manipulation and indirect injection in retrieved text, 
 
 For each pinned host version/configuration, test allow/block, malformed answers, missing question IDs, unknown policies, missing trusted metadata, unsupported review, oversize payloads, unavailable service, slow evaluator, rate limiting, cancellation, disabled hooks, and direct bypass routes. Verify whether the backend model was called or tool actually executed using a controlled mock downstream and host logs. Do not infer enforcement solely from our service's returned decision.
 
-Initially use offline fixtures and synthetic content. Do not submit private examples to hosted evaluators without authorization. Hosted flow would be: host → connector → our service → TypeSafe (selected content and questions) → our service → host. Document every logging/telemetry recipient too. Default logs should contain IDs, versions, coverage, timings, and outcomes rather than raw prompts or secrets.
+Initially use offline fixtures and synthetic content. OpenRouter is the selected development/test route; direct TypeSafe is also a release requirement. Do not submit private customer examples without authorization. Hosted flow is host → connector → our service → OpenRouter → TypeSafe → our service → host, or directly to TypeSafe. Both rule text and evaluated content may be transmitted. Check evaluator-destination authorization before sending content: a hosted evaluator cannot prevent the disclosure that occurs in its own request. Document every logging/telemetry recipient too. Default logs should contain IDs, versions, coverage, timings, and outcomes rather than raw prompts or secrets.
 
 ## Gates
 
-1. **Discovery:** a user identifies concrete recurring pain and commits to validating examples; select build/extend based on the reuse spike.
+1. **Discovery alongside engineering:** identify concrete recurring pain and users willing to validate examples; perform a bounded reuse review during the offline foundation. This need not block M1 in the release plan.
 2. **Offline quality:** agree per-policy error/latency/cost tolerances in advance; held-out results, including uncertainty and attacks, must support the intended action.
 3. **Connector conformance:** demonstrate coverage, identity provenance, actual enforcement, and the host's failure behavior on pinned versions. Reject unsupported policy/connector combinations explicitly.
 4. **Monitoring pilot:** with authorized data flow, measure representative traffic without blocking; keep assessment and actual outcome distinct.

@@ -1,10 +1,12 @@
 # Humanwill Jev Policies
 
-Research and planning for a reusable company-policy evaluation service across AI gateways and coding agents, with TypeSafe AI's Jev as the first candidate evaluation backend.
+Company-authored Markdown policy bundles for AI gateways and coding agents, with Jev evaluation through OpenRouter or direct TypeSafe. A companion to [HumanWill Benchmark](https://github.com/humanwill-ai/humanwill-benchmark).
 
-**Status:** discovery; no runtime service, validated enforcement, or established customer demand. Architecture and integration order remain provisional.
+**Status:** first-release planning; no runtime service or validated enforcement yet. V0.1 requires LiteLLM, Agentgateway, and Copilot hook connectors. Customer demand remains unvalidated.
 
 - [Project brief](docs/project-brief.md): problem, alternatives, proposed MVP, and decisions.
+- [First-release plan](docs/release-plan.md): folder format, architecture, connector scope, and implementation milestones.
+- [Draft policy examples](examples/policies/policies.md): an entry point, nested collection, and stable policy IDs.
 - [Research notes](docs/research.md): verified documentation/source findings, limitations, and open questions.
 - [Evaluation plan](docs/evaluation-plan.md): labeled examples, comparative measurements, and enforcement gates.
 - [Decision log](docs/decisions.md): working recommendations and space for new requirements.
