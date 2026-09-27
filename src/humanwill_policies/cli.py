@@ -44,6 +44,26 @@ def _parser() -> argparse.ArgumentParser:
         help="Authorize disclosing this event and policy bundle to the hosted evaluator",
     )
     evaluate.add_argument("--json", action="store_true")
+    serve = commands.add_parser("serve", help="Run the authenticated policy service")
+    serve.add_argument("root", type=Path)
+    serve.add_argument("--entrypoint", default="policies.md")
+    serve.add_argument("--config", required=True, type=Path)
+    serve.add_argument("--service-config", required=True, type=Path)
+    serve.add_argument("--host", default="127.0.0.1")
+    serve.add_argument("--port", type=int, default=8088)
+    hook = commands.add_parser("hook", help="Read a Copilot hook event from stdin")
+    hook.add_argument("--runtime", required=True, choices=("copilot_local", "copilot_cli"))
+    hook.add_argument(
+        "--event",
+        required=True,
+        choices=("UserPromptSubmit", "PreToolUse", "userPromptSubmitted", "preToolUse"),
+    )
+    hook.add_argument("--url", default="http://127.0.0.1:8088")
+    hook.add_argument("--token-env", default="HUMANWILL_HOOK_TOKEN")
+    hook.add_argument(
+        "--timeout-ms", type=int, choices=range(100, 60001), default=6000, metavar="100..60000"
+    )
+    hook.add_argument("--on-error", choices=("block", "allow_monitor"), default="block")
     return parser
 
 
@@ -126,6 +146,37 @@ def _init_demo(destination: Path) -> None:
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        if args.command == "hook":
+            from .hooks import run
+
+            return run(args)
+        if args.command == "serve":
+            import logging
+
+            import uvicorn
+
+            from .evaluation import Evaluator
+            from .providers import JevBackend
+            from .service import create_app, read_settings
+
+            bundle, configuration = load_project(args.root, args.config, args.entrypoint)
+            provider = configuration.to_dict().get("provider")
+            if not provider:
+                raise PolicyError("missing_provider", "Configure an evaluator provider")
+            app = create_app(
+                Evaluator(bundle, configuration, JevBackend(provider)),
+                read_settings(args.service_config),
+            )
+            logging.basicConfig(level=logging.INFO, format="%(message)s")
+            uvicorn.run(
+                app,
+                host=args.host,
+                port=args.port,
+                access_log=False,
+                server_header=False,
+                proxy_headers=False,
+            )
+            return 0
         if args.command == "schema":
             print(json.dumps(schema(args.name), indent=2))
             return 0
