@@ -1,8 +1,8 @@
 # First-release plan: company-owned policy enforcement
 
-Draft implementation plan · 2026-09-27
+Implementation plan · updated 2026-09-27
 
-The owner requires company/user-authored Markdown policies with stable policy IDs, LiteLLM, Agentgateway, and a Copilot hook connector in the first release, plus direct TypeSafe and OpenRouter access to Jev. Development and testing will use OpenRouter. The design choices below are recommendations, ready to turn into implementation tasks; no runtime exists yet.
+The owner requires company/user-authored Markdown policies with stable policy IDs, LiteLLM, Agentgateway, and a Copilot hook connector in the first release, plus direct TypeSafe and OpenRouter access to Jev. Development and testing will use OpenRouter. The offline foundation is implemented; the [contract reference](contracts.md) defines its exact behavior and the [foundation report](foundation-report.md) records checks. Evaluation, service, and connectors remain proposed work.
 
 The [public-release roadmap](public-release-plan.md) now defines delivery order and publication gates for a proposed `v0.1.0a1` public preview. This document defines technical scope; private validation remains a step toward publication, not the final release objective.
 
@@ -28,7 +28,7 @@ policies/
     production-changes.md
 ```
 
-Use Markdown bodies for human-authored rules and a small YAML front matter for machine-readable identity and scope. See [draft examples](../examples/policies/policies.md). One policy per file keeps IDs, tests, and audit references unambiguous. A collection can include policy files or nested collections; all remain under one configured root.
+Use Markdown bodies for human-authored rules and a small YAML front matter for machine-readable identity and scope. See [authoring examples](../examples/policies/policies.md). One policy per file keeps IDs, tests, and audit references unambiguous. A collection can include policy files or nested collections; all remain under one configured root.
 
 ```yaml
 ---
@@ -56,7 +56,7 @@ The body defines the rule, exceptions, and examples. `prompt` means submitted te
 Loader rules:
 
 - Only explicit `includes` activate files. Resolve each path relative to the declaring file. Ordinary Markdown links are documentation, not implicit includes; collection prose is descriptive, not an extra unnamed rule. No globbing or remote fetching in v0.1.
-- Parse front matter with a safe, non-executing parser. Reject unknown control fields, missing/duplicate IDs, empty rules, missing files, cycles, non-Markdown includes, absolute paths, and resolved paths outside the root, including symlink escapes. Repeat references to the same canonical file are deduplicated; two different policies sharing an ID are errors.
+- Parse front matter with a safe, non-executing parser. Reject unknown control fields, missing/duplicate IDs, empty rules, missing files, cycles, non-Markdown includes, absolute paths, and resolved paths outside the root, including symlink escapes. The implemented loader rejects all symlinks beneath the root, even internal aliases. Repeat references to the same canonical file are deduplicated; two different policies sharing an ID are errors.
 - Traversal order must not change policy precedence. Every applicable policy is evaluated; a compliant result does not override another policy's violation. Exceptions belong in the owning policy. No inheritance/override language yet. Warn that structural validation cannot detect every prose contradiction.
 - Produce a deterministic immutable bundle: source paths, exact content hashes, declared versions, stable IDs, compiler version, and bundle digest. Content changes alter the digest even if the author forgets to increment a version. Explain and preview the effective bundle offline.
 - Bound file size, total bundle size, nesting, policy count, and evaluation payload. Limits become explicit configuration with tested defaults in the loader task; never silently truncate policies or content to fit Jev.
@@ -82,7 +82,7 @@ flowchart LR
 
 Separate modules: `policies`, `evaluation`, `decision`, `providers`, `connectors`, `api`, and `cli`. The hook executable calls the service; it keeps no Jev credentials and emits only the required host JSON on stdout, with diagnostics on stderr.
 
-Proposed operations: `validate`, `preview`, `evaluate` (offline/mock by default), `serve`, and `hook --runtime ... --event ...`. Names and wire schemas will be frozen with fixtures before connector implementation. Do not install hooks automatically into user projects.
+Proposed operations: `validate`, `preview`, `evaluate` (offline/mock by default), `serve`, and `hook --runtime ... --event ...`. The implemented commands are `validate`, `preview`, `init-demo`, and `schema`; candidate wire schemas have offline fixtures. `evaluate`, `serve`, and `hook` remain future work. Do not install hooks automatically into user projects.
 
 For each policy, start with a fixed, versioned Choice rubric: `compliant`, `violation`, or `insufficient_evidence`. Preserve probability distributions and use thresholds from labeled examples. Do not ask another model to silently rewrite policies. Policy text is trusted evaluator configuration; request content is untrusted evidence. This separation does not eliminate Jev's documented injection susceptibility.
 
@@ -149,7 +149,7 @@ Development uses synthetic policies and examples through OpenRouter. Production 
 | M4 — Copilot connections | Hook executable and separate selected runtime profiles | Local deny/stop and CLI assessment/deny verified on pinned versions; controlled tool not executed on denial; timeout and disabled-hook behavior documented |
 | M5 — public-preview candidate | Installation/configuration examples, container recipe, compatibility matrix, evaluation report | Three connector families, both transports, privacy defaults, rollback instructions, and no untested enforcement claim; then complete public-release roadmap gates |
 
-Start M1 immediately after this planning step; it does not depend on live API access or customer interviews. During M1, cap the reuse review at one focused comparison of the benchmark policy snapshot helpers and `jev-edge` adapter fixtures. Prefer narrowly reusable pieces with appropriate licensing; the gateway-oriented `jev-edge` runtime is not the default foundation for this Markdown/API/hook product. Reconsider if the comparison demonstrates substantial reuse.
+M1 is implemented with offline tests and package checks; see the [foundation report](foundation-report.md). The bounded [reuse review](compatibility.md) found that an original compiler avoids importing benchmark scoring contracts or `jev-edge` fail-open runtime behavior. Next is M2, starting with mocks and deterministic decisions before any live calls.
 
 Test three narrow policies on legitimate work, violations, exceptions, missing evidence, and direct/indirect injection. Compare Jev with deterministic checks and one suitable alternative judge. Keep held-out cases separate from policy examples. Report false blocks, missed violations, errors, coverage gaps, host bypasses, p50/p95/p99 added latency, and total cost; see [evaluation plan](evaluation-plan.md). The benchmark's FR/usefulness metrics and labels do not automatically measure harmful compliance or this service's enforcement.
 

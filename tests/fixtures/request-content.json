@@ -1,0 +1,22 @@
+{
+  "format": "humanwill.request/1",
+  "request_id": "fixture-content",
+  "stage": "prompt",
+  "content": [
+    {
+      "id": "message-1",
+      "kind": "text",
+      "role": "user",
+      "text": "Explain a billing error factually."
+    }
+  ],
+  "coverage": {
+    "inspected": [
+      "message-1"
+    ],
+    "omitted": [
+      "attachments_not_available"
+    ],
+    "complete": false
+  }
+}

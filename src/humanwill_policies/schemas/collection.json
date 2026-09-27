@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:humanwill:collection:1",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "const": "collection"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "\\S"
+    },
+    "includes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512,
+        "pattern": "\\S"
+      },
+      "minItems": 1,
+      "maxItems": 512
+    }
+  },
+  "required": [
+    "kind",
+    "id",
+    "version",
+    "includes"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,33 @@
+{
+  "format": "humanwill.result/1",
+  "request_id": "fixture-content",
+  "decision": "allow",
+  "bundle_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "configuration_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "policies": [
+    {
+      "policy_id": "DEMO-CONTENT",
+      "policy_version": "1",
+      "judgment": "compliant",
+      "reasons": [
+        "Synthetic schema fixture, not a model evaluation."
+      ]
+    }
+  ],
+  "coverage": {
+    "inspected": [
+      "message-1"
+    ],
+    "omitted": [
+      "attachments_not_available"
+    ],
+    "complete": false
+  },
+  "evaluation": null,
+  "duration_ms": 0,
+  "enforcement": {
+    "requested": "none",
+    "actual": "not_requested"
+  },
+  "errors": []
+}

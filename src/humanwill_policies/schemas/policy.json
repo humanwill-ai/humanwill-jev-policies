@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:humanwill:policy:1",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "const": "policy"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "\\S"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "\\S"
+    },
+    "stages": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "prompt",
+          "model_request",
+          "response",
+          "tool_action"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 4,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "kind",
+    "id",
+    "version",
+    "title",
+    "stages"
+  ],
+  "additionalProperties": false
+}

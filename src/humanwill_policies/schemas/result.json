@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:humanwill:result:1",
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": "humanwill.result/1"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+    },
+    "decision": {
+      "enum": [
+        "allow",
+        "block",
+        "evaluation_error"
+      ]
+    },
+    "bundle_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "configuration_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "policies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "policy_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+          },
+          "policy_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "\\S"
+          },
+          "judgment": {
+            "enum": [
+              "compliant",
+              "violation",
+              "insufficient_evidence",
+              "not_evaluated"
+            ]
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512,
+              "pattern": "\\S"
+            },
+            "minItems": 1,
+            "maxItems": 32
+          }
+        },
+        "required": [
+          "policy_id",
+          "policy_version",
+          "judgment",
+          "reasons"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 500
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "inspected": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+          },
+          "minItems": 0,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "omitted": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "\\S"
+          },
+          "minItems": 0,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "complete": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "inspected",
+        "omitted",
+        "complete"
+      ],
+      "additionalProperties": false
+    },
+    "evaluation": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "transport": {
+              "enum": [
+                "openrouter",
+                "typesafe",
+                "mock"
+              ]
+            },
+            "requested_model": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512,
+              "pattern": "\\S"
+            },
+            "returned_model": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512,
+              "pattern": "\\S"
+            }
+          },
+          "required": [
+            "transport",
+            "requested_model",
+            "returned_model"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "duration_ms": {
+      "type": "number",
+      "minimum": 0
+    },
+    "enforcement": {
+      "type": "object",
+      "properties": {
+        "requested": {
+          "enum": [
+            "allow",
+            "block",
+            "none"
+          ]
+        },
+        "actual": {
+          "enum": [
+            "unconfirmed",
+            "not_requested"
+          ]
+        }
+      },
+      "required": [
+        "requested",
+        "actual"
+      ],
+      "additionalProperties": false
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 128
+    }
+  },
+  "required": [
+    "format",
+    "request_id",
+    "decision",
+    "bundle_sha256",
+    "configuration_sha256",
+    "policies",
+    "coverage",
+    "evaluation",
+    "duration_ms",
+    "enforcement",
+    "errors"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,35 @@
+{
+  "format": "humanwill.request/1",
+  "request_id": "fixture-documents",
+  "stage": "model_request",
+  "content": [
+    {
+      "id": "doc-1",
+      "kind": "text",
+      "text": "Synthetic confidential document, version 1."
+    }
+  ],
+  "coverage": {
+    "inspected": [
+      "doc-1"
+    ],
+    "omitted": [],
+    "complete": true
+  },
+  "metadata": [
+    {
+      "field": "documents.classification",
+      "source": "test-classifier",
+      "subject_ref": "doc-1:version-1",
+      "observed_at": "2026-09-27T10:00:00Z",
+      "value": "confidential"
+    },
+    {
+      "field": "destination.provider",
+      "source": "test-router",
+      "subject_ref": "fixture-documents",
+      "observed_at": "2026-09-27T10:00:00Z",
+      "value": "unapproved-example"
+    }
+  ]
+}

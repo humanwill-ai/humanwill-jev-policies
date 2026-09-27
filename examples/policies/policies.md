@@ -10,8 +10,9 @@ includes:
 
 # Example company policies
 
-Draft authoring example for the proposed v0.1 format. These are synthetic rules,
-not approved HumanWill or customer policies. No loader is implemented yet.
+Authoring example for the implemented v1 folder format. These are synthetic rules,
+not approved HumanWill or customer policies. The offline loader validates their
+structure; semantic evaluation and enforcement are not implemented.
 Only the explicit `includes` list activates policies; prose here is descriptive.
 
 `EXAMPLE-CONTENT-001` works without metadata. The other examples require trusted

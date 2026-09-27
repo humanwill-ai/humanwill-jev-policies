@@ -1,10 +1,10 @@
 # Roadmap to the first public release
 
-Planned 2026-09-27 · all delivery gates pending
+Updated 2026-09-27 · contracts and offline foundation implemented; runtime/release gates pending
 
 **Target: `v0.1.0a1`, a public preview on GitHub.** Publish a usable, tested implementation with all requested connectors and a clear support boundary. Public availability does not establish production suitability or semantic accuracy for arbitrary company policies.
 
-Current inventory: policy/design documentation and synthetic Markdown examples; no runtime, automated tests, CI workflows, project license, packages, or GitHub releases. The repository is private. This planning task does not change its visibility.
+Current inventory: installable offline package/CLI, policy/configuration schemas, synthetic fixtures, automated tests and CI, plus policy/design documentation. See the [foundation report](foundation-report.md). No evaluator, HTTP service, runtime connector, project license, or GitHub release exists. The repository remains private. Steps 1–2 below are the authorized first implementation increment.
 
 This is the delivery and publication checklist. [Release design](release-plan.md), [optional metadata](optional-metadata.md), and [evaluation plan](evaluation-plan.md) remain the technical references. M1–M4 below implement the existing milestones; M5 expands into evaluation, packaging, and publication gates.
 
@@ -26,17 +26,17 @@ Each row should become a small series of reviewable changes. A checkbox means ev
 
 | Step | Work | Exit gate and evidence |
 | --- | --- | --- |
-| 0. Freeze the implementable contract | Set package/CLI names, policy schema, request/result schema, feature switches, supported OS/Python/host versions, and limits. Complete the bounded benchmark/`jev-edge` reuse/license review. | Offline fixtures cover three representative policies; a compatibility table names exact versions and intended stages. Record adopted decisions and unresolved pilot questions. |
-| 1. Build the offline foundation — M1 | Package skeleton, CLI, folder resolution, IDs/hashes, policy preview, configuration validation. Establish CI now. | Clean checkout installs; validation/preview need no credentials or network. Tests cover cycles, missing/duplicate IDs, symlink/path escapes, parser limits, snapshots, disabled rules, and unsupported configuration. |
-| 2. Build the evaluation core — M2 | Mock backend, OpenRouter/direct transports, answer validation, decision aggregation, optional metadata predicates, deadlines and bounded resource usage. | Unit/contract tests prove every decision/error branch; metadata-off makes no enrichment calls or metadata disclosures; a missing answer/batch cannot allow. Budgeted synthetic smoke calls succeed through both actual provider routes. |
-| 3. Deliver the service and gateways — M3 | Authenticated HTTP service; pinned LiteLLM and Agentgateway configurations; request and response adapters; minimal logs and health/readiness endpoints. | Real host processes call a controlled mock downstream. Denied inputs never invoke it; denied outputs never reach the client. Fault injection verifies timeout/error/unsupported behavior. Authentication and policy selection cannot be weakened by request data. |
-| 4. Deliver both Copilot profiles — M4 | Hook executable, runtime-specific payload/output handling, installation/removal instructions, explicit compatibility checks. | On both actual pinned runtimes, approved actions run and denied actions have no controlled side effects. Verify Local prompt stop, CLI prompt assessment, and timeout/disabled-hook behavior. Mock hook fixtures alone are insufficient. |
-| 5. Measure policy quality | Freeze three narrow policies, labels, development/held-out split, rubric versions, and acceptance targets. Compare Jev with deterministic checks and one alternative judge. | Versioned report with separate false-block/missed-violation rates, uncertainty, errors, attacks, coverage/bypasses, latency, and cost. Only profiles meeting their predeclared targets are described as suitable for enforcement; all shipped examples default to monitoring. |
-| 6. Make installation and operation reproducible — M5 | Wheel/source distribution, local container recipe, quickstart, policy-author guide, connector guides, troubleshooting, compatibility matrix, release notes and rollback. | A clean environment installs from the exact built artifacts and completes offline demo plus documented connector scenarios. No dependency on the developer checkout, temporary files, or unpublished private repositories. |
-| 7. Prepare the public repository | Choose license, preserve third-party notices, review history and exposure, configure CI/security/contribution practices, build draft release assets. | Reviewed release-candidate commit, checksums, test/report links, third-party inventory and public-content review. No unresolved release-blocking findings. |
-| 8. Publish and verify | Obtain owner go-ahead for the concrete candidate, then change visibility and publish the GitHub prerelease. | Public repository and release resolve without authentication; clean-clone install works; tag, commit, assets, checksums and documentation agree. |
+| 1. Freeze the implementable contract | Set package/CLI names, policy schema, request/result schema, feature switches, supported OS/Python/host versions, and limits. Complete the bounded benchmark/`jev-edge` reuse/license review. | Offline fixtures cover three representative policies; a compatibility table names exact versions and intended stages. Record adopted decisions and unresolved pilot questions. |
+| 2. Build the offline foundation — M1 | Package skeleton, CLI, folder resolution, IDs/hashes, policy preview, configuration validation. Establish CI now. | Clean checkout installs; validation/preview need no credentials or network. Tests cover cycles, missing/duplicate IDs, symlink/path escapes, parser limits, snapshots, disabled rules, and unsupported configuration. |
+| 3. Build the evaluation core — M2 | Mock backend, OpenRouter/direct transports, answer validation, decision aggregation, optional metadata predicates, deadlines and bounded resource usage. | Unit/contract tests prove every decision/error branch; metadata-off makes no enrichment calls or metadata disclosures; a missing answer/batch cannot allow. Budgeted synthetic smoke calls succeed through both actual provider routes. |
+| 4. Deliver the service and gateways — M3 | Authenticated HTTP service; pinned LiteLLM and Agentgateway configurations; request and response adapters; minimal logs and health/readiness endpoints. | Real host processes call a controlled mock downstream. Denied inputs never invoke it; denied outputs never reach the client. Fault injection verifies timeout/error/unsupported behavior. Authentication and policy selection cannot be weakened by request data. |
+| 5. Deliver both Copilot profiles — M4 | Hook executable, runtime-specific payload/output handling, installation/removal instructions, explicit compatibility checks. | On both actual pinned runtimes, approved actions run and denied actions have no controlled side effects. Verify Local prompt stop, CLI prompt assessment, and timeout/disabled-hook behavior. Mock hook fixtures alone are insufficient. |
+| 6. Measure policy quality | Freeze three narrow policies, labels, development/held-out split, rubric versions, and acceptance targets. Compare Jev with deterministic checks and one alternative judge. | Versioned report with separate false-block/missed-violation rates, uncertainty, errors, attacks, coverage/bypasses, latency, and cost. Only profiles meeting their predeclared targets are described as suitable for enforcement; all shipped examples default to monitoring. |
+| 7. Make installation and operation reproducible — M5 | Wheel/source distribution, local container recipe, quickstart, policy-author guide, connector guides, troubleshooting, compatibility matrix, release notes and rollback. | A clean environment installs from the exact built artifacts and completes offline demo plus documented connector scenarios. No dependency on the developer checkout, temporary files, or unpublished private repositories. |
+| 8. Prepare the public repository | Choose license, preserve third-party notices, review history and exposure, configure CI/security/contribution practices, build draft release assets. | Reviewed release-candidate commit, checksums, test/report links, third-party inventory and public-content review. No unresolved release-blocking findings. |
+| 9. Publish and verify | Obtain owner go-ahead for the concrete candidate, then change visibility and publish the GitHub prerelease. | Public repository and release resolve without authentication; clean-clone install works; tag, commit, assets, checksums and documentation agree. |
 
-**Dependencies:** 0 → 1 → 2 → 3/4 → 5/6 → 7 → 8. Establish the dataset and documentation alongside implementation; finish the report against the candidate. Direct-provider credentials and Copilot access may delay their evidence gates but do not block the offline loader or mock tests. Do not drop a required connector to meet a date without an explicit scope change.
+**Dependencies:** 1 → 2 → 3 → 4/5 → 6/7 → 8 → 9. Establish the dataset and documentation alongside implementation; finish the report against the candidate. Direct-provider credentials and Copilot access may delay their evidence gates but do not block the offline loader or mock tests. Do not drop a required connector to meet a date without an explicit scope change.
 
 ## What confidence must mean
 
@@ -63,7 +63,7 @@ Passing transport tests does not require identical judgments across providers. I
 
 ## CI and supported-environment plan
 
-Start with the minimum supported Python version plus one current version validated during Step 0; record the exact versions rather than promising all future releases. Test the portable package on Linux/macOS and test hook scripts on each OS actually listed as supported. Additional OS coverage is explicit work, not inferred from Python portability.
+Start with the minimum supported Python version plus one current version validated during Step 1; record the exact versions rather than promising all future releases. Test the portable package on Linux/macOS and test hook scripts on each OS actually listed as supported. Additional OS coverage is explicit work, not inferred from Python portability.
 
 PR CI: formatting/lint, type checks where useful, meaningful unit/contract tests, package build/install smoke, offline demo, and deterministic integration fixtures. Use a scheduled/manual real-host integration job where feasible; preserve human-run evidence for interactive Copilot checks. Live provider runs are explicitly budgeted and use synthetic inputs, kept separate from untrusted PR jobs. No keys or privileged tokens go to forked PR code.
 
@@ -71,7 +71,7 @@ Add dependency and secret checks, minimal workflow permissions, pinned action re
 
 ## Public repository and release package
 
-Create these as working artifacts during Steps 6–7, not empty placeholders now:
+Create these as working artifacts during Steps 7–8, not empty placeholders now:
 
 - `LICENSE` and any required `NOTICE`/third-party attribution; `CONTRIBUTING.md`, `SECURITY.md` with a real reporting channel, and `CHANGELOG.md`.
 - README with a short product promise, offline quickstart, the three connector families, stage limits, optional metadata, data-flow disclosure, measured results, and the HumanWill Benchmark relationship.
@@ -89,7 +89,7 @@ Prepare a reviewable draft containing the exact candidate commit, proposed tag `
 - [ ] All required features and real-runtime evidence above are complete.
 - [ ] Publication/privacy/license review is complete; public assets contain no private customer content.
 - [ ] Fresh-environment installation and offline demo pass from the actual release artifacts.
-- [ ] Owner has authorized publishing this concrete candidate; the current request authorizes planning, not changing visibility now.
+- [ ] Owner has authorized publishing this concrete candidate; the current request authorizes foundation implementation, not changing visibility now.
 - [ ] Make `humanwill-ai/humanwill-jev-policies` public and publish the prepared prerelease at the reviewed commit.
 - [ ] Verify anonymous access, asset downloads, checksums, clean installation, and released configuration examples; verify org repository settings after visibility changes.
 
@@ -97,6 +97,6 @@ If a post-publication defect appears, mark the affected release/feature clearly 
 
 ## Immediate next work and owner inputs
 
-**Start with Steps 0–1:** resolve the small contract details, build the offline loader/CLI and CI, and demonstrate the three policy classes without live calls. That is the first useful implementation increment. Re-estimate remaining effort after the first real gateway and hook smoke tests; elapsed time cannot substitute for release evidence.
+**Steps 1–2 are implemented:** the contracts, offline loader/CLI, CI, and three synthetic policy classes are documented in the [foundation report](foundation-report.md). The next implementation increment is Step 3: a mock evaluator and deterministic decisions, followed by provider transports under an agreed live-call budget. Re-estimate remaining effort after the first real gateway and hook smoke tests; elapsed time cannot substitute for release evidence.
 
 Owner inputs needed before later gates: license choice; three policy intentions and label reviewer; OpenRouter/alternative-judge spending cap; direct TypeSafe credentials for its smoke test; access to the two target Copilot runtimes; and acceptance budgets before held-out evaluation. None requires placing secrets in the repository or in chat. Set a maintainer/security reporting destination before public release.

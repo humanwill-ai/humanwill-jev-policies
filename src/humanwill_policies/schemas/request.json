@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:humanwill:request:1",
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": "humanwill.request/1"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+    },
+    "stage": {
+      "enum": [
+        "prompt",
+        "model_request",
+        "response",
+        "tool_action"
+      ]
+    },
+    "content": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+              },
+              "kind": {
+                "const": "text"
+              },
+              "role": {
+                "enum": [
+                  "system",
+                  "developer",
+                  "user",
+                  "assistant",
+                  "tool",
+                  "unknown"
+                ]
+              },
+              "text": {
+                "type": "string",
+                "maxLength": 262144
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "text"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+              },
+              "kind": {
+                "const": "tool_action"
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512,
+                "pattern": "\\S"
+              },
+              "arguments": {
+                "type": "object"
+              }
+            },
+            "required": [
+              "id",
+              "kind",
+              "name",
+              "arguments"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 256
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "inspected": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+          },
+          "minItems": 0,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "omitted": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "\\S"
+          },
+          "minItems": 0,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "complete": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "inspected",
+        "omitted",
+        "complete"
+      ],
+      "additionalProperties": false
+    },
+    "metadata": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "pattern": "^(identity|documents|destination|environment|authorization)\\.[a-z][a-z0-9_]{0,63}$"
+          },
+          "source": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+          },
+          "subject_ref": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "\\S"
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "value": {}
+        },
+        "required": [
+          "field",
+          "source",
+          "subject_ref",
+          "observed_at",
+          "value"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 128
+    }
+  },
+  "required": [
+    "format",
+    "request_id",
+    "stage",
+    "content",
+    "coverage"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,33 @@
+{
+  "format": "humanwill.request/1",
+  "request_id": "fixture-finance",
+  "stage": "tool_action",
+  "content": [
+    {
+      "id": "action-1",
+      "kind": "tool_action",
+      "name": "approve_payment",
+      "arguments": {
+        "payment_id": "synthetic-1"
+      }
+    }
+  ],
+  "coverage": {
+    "inspected": [
+      "action-1"
+    ],
+    "omitted": [],
+    "complete": true
+  },
+  "metadata": [
+    {
+      "field": "identity.groups",
+      "source": "test-identity",
+      "subject_ref": "synthetic-user",
+      "observed_at": "2026-09-27T10:00:00Z",
+      "value": [
+        "finance"
+      ]
+    }
+  ]
+}

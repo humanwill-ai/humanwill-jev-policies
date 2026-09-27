@@ -1,12 +1,14 @@
 # Optional metadata and stage-specific checks
 
-Design update · 2026-09-27 · owner requirement; configuration below is proposed
+Design update · 2026-09-27 · configuration validation implemented; runtime behavior below remains planned
 
 **The service must work with content alone.** Identity, groups, document classifications, destination information, and other contextual facts are optional inputs. Metadata support is an independently configurable feature, recommended off by default. Enabling it adds evidence to selected policies; it does not make every request require a user identity.
 
+Offline validation checks bindings and source switches; it does not evaluate predicates, authenticate facts, or make enrichment/model calls. See the [implemented contract](contracts.md).
+
 ## Configuration and behavior
 
-Proposed deployment switch:
+Deployment switch (configuration fragment):
 
 ```yaml
 metadata:
@@ -17,9 +19,10 @@ When off, perform no metadata enrichment or identity/directory lookups. Do not u
 
 When on, use only configured sources and only the fields needed by the applicable policies. Identity, document, and destination sources can be enabled separately; a deployment may use trusted document classifications without collecting user identity. Normalized request metadata remains optional, even with the feature enabled. Do not fill absent values with invented users, groups, or classifications.
 
-Use explicit policy bindings to keep the content-only setup useful. For the draft examples:
+Use explicit policy bindings to keep the content-only setup useful. For the authoring examples, this is a complete content-only configuration:
 
 ```yaml
+format: humanwill.config/1
 metadata:
   enabled: false
 policies:

@@ -12,11 +12,11 @@ Updated 2026-09-27. Owner requirements and proposed implementation choices are s
 | Jev access | Decided by owner | Direct TypeSafe and OpenRouter; OpenRouter for development/testing |
 | Copilot runtime(s) | Decided by owner | Both VS Code Local and Copilot CLI, with distinct contracts |
 | Contextual metadata | Decided by owner | Optional; easy enable/disable; combine trusted facts with semantic judgments, never accept claimed authorization as proof |
-| Metadata defaults | Proposed | Off by default; independent source configuration; content-only policies still work; explicit treatment of dependent rules |
+| Metadata defaults | Adopted for foundation | Off by default; independent source configuration; content-only policies still work; explicit treatment of dependent rules |
 | Stage coverage | Decided by owner | Generated-answer and action policies require checks at those stages |
-| Folder schema | Proposed | Front matter, explicit includes, one policy per file, immutable hashes; see release plan/examples |
-| Runtime stack | Proposed | Python 3.11+, HTTP service and CLI, one package with provider/connector boundaries |
-| Build versus extend | Proposed | Small independent core; focused benchmark/`jev-edge` reuse review during M1 |
+| Folder schema | Implemented v1 | Front matter, explicit includes, one policy per file, immutable hashes; see release plan/examples |
+| Runtime stack | Foundation implemented; service proposed | Python 3.11–3.14 offline package/CLI on Linux/macOS; HTTP/provider/connector modules remain pending |
+| Build versus extend | Adopted after bounded review | Original independent core; no upstream code/text copied; see compatibility/reuse review |
 | Initial enforcement | Proposed | Text gateway requests and non-streaming responses, plus supported pre-tool/prompt hooks; monitoring first |
 | Uncertainty/failure | Proposed | Explicit error/indeterminate result; configurable failure action, default block in enforce mode |
 | Human review | Proposed exclusion | Reject unsupported review configuration; no approval workflow in v0.1 |
@@ -37,7 +37,11 @@ Publication planning: the owner requested steps toward a confident public first 
 
 ## Next concrete work
 
-Implement Steps 0–1 from the [public-release roadmap](public-release-plan.md), including M1 from the [release design](release-plan.md): freeze the small contracts, establish CI, and build offline policy validation, includes, stable IDs/digests, and preview. It requires no API key or live calls. Collect concrete policy intentions alongside that work. Current artifacts are plans and authoring examples, not a working runtime.
+Steps 1–2 of the [public-release roadmap](public-release-plan.md) are implemented: authoring/configuration contracts, package/CLI, loader, IDs/digests, preview, tests, and CI. See the [foundation report](foundation-report.md). The roadmap now uses one-based numbering to match the requested steps; these were previously rows 0–1. No model calls, service, or connectors were implemented in this increment.
+
+Next: Step 3 / M2, beginning with mock evaluation and deterministic decisions. Establish how semantic applicability and metadata predicates combine before enabling the provider transports; do not interpret a valid evaluation-profile configuration as measured accuracy.
+
+Foundation decisions: package/CLI `humanwill-policies`, import `humanwill_policies`, version `0.1.0.dev0`; explicit include lists and one policy per file; reject all symlinks under the root; bounded restricted YAML; exact source and normalized configuration hashes; monitoring defaults and required explicit policy bindings. Freeze authoring format v1 and candidate request/result fixtures with versioned changes. Candidate host versions are recorded but untested; final VS Code Copilot extension build remains an integration-stage choice.
 
 ## Additional requirements and ideas
 

@@ -1,6 +1,6 @@
 # Project brief
 
-Updated 2026-09-27 · requirements recorded; implementation design remains provisional
+Updated 2026-09-27 · offline foundation implemented; runtime design remains provisional
 
 ## Product and target user
 
@@ -36,13 +36,13 @@ Exclude a governance console, billing, multi-tenant SaaS, SSO administration, au
 
 `jev-edge`, LiteLLM's policy integrations, Bifrost Enterprise, and deterministic gateway controls cover parts of this need. The potential distinction is company-owned policy bundles with reproducible tests and consistent interpretation across gateways and agents—not Jev connectivity by itself. [Research and links](research.md) document the alternatives.
 
-Recommendation: build a small independent core for the new Markdown/service/hook requirements, with a bounded reuse review during the first milestone. Reuse applicable benchmark snapshot utilities or connector fixtures only where contracts and licensing fit. Avoid turning preliminary research into a long blocker or assuming the benchmark's scoring contract is a runtime enforcement contract.
+The bounded reuse review supports a small independent core for the new Markdown/service/hook requirements. The offline implementation is original; no upstream code or policy text was copied. See [compatibility/reuse findings](compatibility.md). Revisit connector fixtures only where contracts and licensing fit. Avoid turning preliminary research into a long blocker or assuming the benchmark's scoring contract is a runtime enforcement contract.
 
 ## Implementation sequence and validation
 
 The [first-release plan](release-plan.md) specifies the folder contract, example files, architecture, connector boundaries, transports, and completion criteria:
 
-1. Offline loader, validation, policy IDs, snapshots, and preview.
+1. Implemented: offline loader, validation, policy IDs, snapshots, and preview; see [foundation evidence](foundation-report.md).
 2. Mock/OpenRouter evaluation and deterministic decisions.
 3. LiteLLM, Agentgateway, and direct TypeSafe transport.
 4. Copilot runtime profiles and observed enforcement tests.

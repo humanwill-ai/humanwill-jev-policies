@@ -1,0 +1,13 @@
+format: humanwill.config/1
+metadata:
+  enabled: false
+policies:
+  DEMO-CONTENT:
+    enabled: true
+    mode: monitor
+  DEMO-FINANCE:
+    enabled: false
+    requires_metadata: [identity.subject, identity.groups]
+  DEMO-DOCUMENTS:
+    enabled: false
+    requires_metadata: [documents.classification, destination.provider, destination.approved]

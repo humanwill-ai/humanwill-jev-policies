@@ -1,0 +1,8 @@
+# Runtime lock: Python 3.11 and 3.14, refreshed 2026-09-27.
+PyYAML==6.0.3
+jsonschema==4.26.0
+attrs==26.1.0
+jsonschema-specifications==2025.9.1
+referencing==0.37.0
+rpds-py==2026.6.3
+typing-extensions==4.16.0; python_version < "3.13"
