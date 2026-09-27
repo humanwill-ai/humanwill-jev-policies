@@ -9,7 +9,16 @@ from jsonschema import Draft202012Validator
 from .errors import PolicyError
 from .serialization import canonical, json_value
 
-SCHEMAS = ("policy", "collection", "config", "config-v2", "request", "result", "result-v2")
+SCHEMAS = (
+    "policy",
+    "collection",
+    "config",
+    "config-v2",
+    "request",
+    "result",
+    "result-v2",
+    "service",
+)
 STAGES = ("prompt", "model_request", "response", "tool_action")
 MAX_REQUEST_BYTES = 262_144
 

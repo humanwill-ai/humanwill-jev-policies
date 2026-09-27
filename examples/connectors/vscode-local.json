@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [{
+      "type": "command",
+      "command": "/ABSOLUTE/PATH/bin/humanwill-policies hook --runtime copilot_local --event UserPromptSubmit --url http://127.0.0.1:8088 --token-env HUMANWILL_LOCAL_TOKEN --timeout-ms 6000",
+      "timeout": 15
+    }],
+    "PreToolUse": [{
+      "type": "command",
+      "command": "/ABSOLUTE/PATH/bin/humanwill-policies hook --runtime copilot_local --event PreToolUse --url http://127.0.0.1:8088 --token-env HUMANWILL_LOCAL_TOKEN --timeout-ms 6000",
+      "timeout": 15
+    }]
+  }
+}

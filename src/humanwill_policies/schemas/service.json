@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:humanwill:service:1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "principals"
+  ],
+  "properties": {
+    "format": {
+      "const": "humanwill.service/1"
+    },
+    "allow_external_evaluation": {
+      "type": "boolean",
+      "default": false
+    },
+    "request_timeout_ms": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 65000
+    },
+    "max_in_flight": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 64
+    },
+    "principals": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 64,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "token_env",
+          "connector",
+          "stages",
+          "on_protocol_error"
+        ],
+        "properties": {
+          "token_env": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]{0,127}$"
+          },
+          "connector": {
+            "enum": [
+              "native",
+              "litellm",
+              "agentgateway",
+              "copilot_local",
+              "copilot_cli"
+            ]
+          },
+          "stages": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "prompt",
+                "tool_action",
+                "model_request",
+                "response"
+              ]
+            }
+          },
+          "on_protocol_error": {
+            "enum": [
+              "block",
+              "allow_monitor"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

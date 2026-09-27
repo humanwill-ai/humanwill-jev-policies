@@ -1,0 +1,27 @@
+format: humanwill.service/1
+# Authorizes sending active rule text + covered content to configured hosted Jev.
+# Enable only after approving that data flow; false produces explicit evaluation errors.
+allow_external_evaluation: false
+request_timeout_ms: 7000
+max_in_flight: 8
+principals:
+  litellm:
+    token_env: HUMANWILL_LITELLM_TOKEN
+    connector: litellm
+    stages: [model_request, response]
+    on_protocol_error: block
+  agentgateway:
+    token_env: HUMANWILL_AGENTGATEWAY_TOKEN
+    connector: agentgateway
+    stages: [model_request, response]
+    on_protocol_error: block
+  local:
+    token_env: HUMANWILL_LOCAL_TOKEN
+    connector: copilot_local
+    stages: [prompt, tool_action]
+    on_protocol_error: block
+  cli:
+    token_env: HUMANWILL_CLI_TOKEN
+    connector: copilot_cli
+    stages: [prompt, tool_action]
+    on_protocol_error: block

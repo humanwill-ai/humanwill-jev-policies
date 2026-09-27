@@ -63,8 +63,6 @@ def config(host, hostport, policyport, modelport):
         "headers": {
             "authorization": '"Bearer ' + TOKEN + '"',
             "x-humanwill-text-profile": PROFILE_EXPRESSION,
-            "x-fixture-debug": "string(llmRequest)",
-            "x-fixture-path": "request.path",
         },
         "failureMode": "failClosed",
     }
@@ -89,7 +87,19 @@ def config(host, hostport, policyport, modelport):
                                     "ai": {
                                         "promptGuard": {
                                             "request": [{"webhook": webhook}],
-                                            "response": [{"webhook": webhook}],
+                                            "response": [
+                                                {
+                                                    "webhook": {
+                                                        **webhook,
+                                                        "headers": {
+                                                            "authorization": '"Bearer '
+                                                            + TOKEN
+                                                            + '"',
+                                                            "x-humanwill-text-profile": "'v1'",
+                                                        },
+                                                    }
+                                                }
+                                            ],
                                         }
                                     }
                                 },

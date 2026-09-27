@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "hooks": {
+    "userPromptSubmitted": [{
+      "type": "command",
+      "bash": "/ABSOLUTE/PATH/bin/humanwill-policies hook --runtime copilot_cli --event userPromptSubmitted --url http://127.0.0.1:8088 --token-env HUMANWILL_CLI_TOKEN --timeout-ms 6000",
+      "timeoutSec": 15
+    }],
+    "preToolUse": [{
+      "type": "command",
+      "bash": "/ABSOLUTE/PATH/bin/humanwill-policies hook --runtime copilot_cli --event preToolUse --url http://127.0.0.1:8088 --token-env HUMANWILL_CLI_TOKEN --timeout-ms 6000",
+      "timeoutSec": 15
+    }]
+  }
+}

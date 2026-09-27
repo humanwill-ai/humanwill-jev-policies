@@ -5,7 +5,7 @@ import hmac
 import json
 import logging
 import os
-from pathlib import Path
+import stat
 
 from jsonschema import Draft202012Validator
 from starlette.applications import Starlette
@@ -14,52 +14,22 @@ from starlette.responses import JSONResponse
 from starlette.routing import Route
 
 from .connectors import events
-from .contracts import MAX_REQUEST_BYTES, validate_contract
+from .contracts import MAX_REQUEST_BYTES, schema, validate_contract
 from .errors import PolicyError
 from .providers import decode_json
 from .runtime import EgressPermit
 from .serialization import digest, parse_yaml
 
 LOG = logging.getLogger("humanwill.audit")
-CONNECTORS = ["native", "litellm", "agentgateway", "copilot_local", "copilot_cli"]
-SERVICE_SCHEMA = {
-    "type": "object",
-    "additionalProperties": False,
-    "required": ["format", "principals"],
-    "properties": {
-        "format": {"const": "humanwill.service/1"},
-        "allow_external_evaluation": {"type": "boolean", "default": False},
-        "request_timeout_ms": {"type": "integer", "minimum": 100, "maximum": 65000},
-        "max_in_flight": {"type": "integer", "minimum": 1, "maximum": 64},
-        "principals": {
-            "type": "object",
-            "minProperties": 1,
-            "maxProperties": 64,
-            "propertyNames": {"pattern": "^[a-z][a-z0-9_-]{0,63}$"},
-            "additionalProperties": {
-                "type": "object",
-                "additionalProperties": False,
-                "required": ["token_env", "connector", "stages", "on_protocol_error"],
-                "properties": {
-                    "token_env": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]{0,127}$"},
-                    "connector": {"enum": CONNECTORS},
-                    "stages": {
-                        "type": "array",
-                        "minItems": 1,
-                        "uniqueItems": True,
-                        "items": {"enum": ["prompt", "tool_action", "model_request", "response"]},
-                    },
-                    "on_protocol_error": {"enum": ["block", "allow_monitor"]},
-                },
-            },
-        },
-    },
-}
+SERVICE_SCHEMA = schema("service")
 
 
 def read_settings(path):
     try:
-        with Path(path).open("rb") as stream:
+        fd = os.open(path, os.O_RDONLY | os.O_NONBLOCK)
+        with os.fdopen(fd, "rb") as stream:
+            if not stat.S_ISREG(os.fstat(stream.fileno()).st_mode):
+                raise ValueError
             data = stream.read(65537)
         if len(data) > 65536:
             raise ValueError
@@ -84,6 +54,7 @@ def create_app(evaluator, settings, *, evidence_resolver=None):
     if timeout * 1000 <= evaluator.limits.timeout_ms:
         raise PolicyError("invalid_deadline", "Service deadline must exceed evaluation deadline")
     slots = asyncio.Semaphore(settings.get("max_in_flight", 8))
+    settings_sha256 = digest(settings)
     credentials = []
     for name, principal in settings["principals"].items():
         token = os.environ.get(principal["token_env"], "")
@@ -117,7 +88,9 @@ def create_app(evaluator, settings, *, evidence_resolver=None):
         credentials.append((token, name, principal))
 
     def audit(**fields):
-        LOG.info(json.dumps(fields, sort_keys=True))
+        LOG.info(
+            json.dumps({"service_configuration_sha256": settings_sha256, **fields}, sort_keys=True)
+        )
 
     def reply(connector, block, result=None, error=None):
         headers = {"Cache-Control": "no-store"}
@@ -231,6 +204,17 @@ def create_app(evaluator, settings, *, evidence_resolver=None):
                     decision=result["decision"],
                     enforcement=result["enforcement"],
                     duration_ms=result["duration_ms"],
+                    coverage=result["coverage"],
+                    policies=[
+                        {
+                            "id": p["policy_id"],
+                            "version": p["policy_version"],
+                            "judgment": p["judgment"],
+                            "mode": p["mode"],
+                            "reasons": p["reasons"],
+                        }
+                        for p in result["policies"]
+                    ],
                     errors=[e["code"] for e in result["errors"]],
                 )
                 return reply(connector, result["enforcement"]["requested"] == "block", result)

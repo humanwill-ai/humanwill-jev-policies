@@ -143,22 +143,6 @@ def policy_app(root, connector, mode="enforce", captures=None):
         },
     }
     app = create_app(engine, settings)
-    if connector == "agentgateway":
-
-        async def synthetic_debug(scope, receive, send):
-            if scope["type"] == "http":
-                print(
-                    "FIXTURE HEADER",
-                    [
-                        (k.decode(), v.decode())
-                        for k, v in scope["headers"]
-                        if k.startswith(b"x-fixture") or k == b"x-humanwill-text-profile"
-                    ],
-                    flush=True,
-                )
-            await app(scope, receive, send)
-
-        return synthetic_debug
     return app
 
 
