@@ -22,8 +22,7 @@ coding assistance. A bare snippet such as `x = 2` is permitted in this context;
 uncertain project origin alone does not justify an indeterminate assessment.
 
 Do not request or perform onward uploading, publishing, transmission, or sharing
-of source code from the project
-being worked on, including individual snippets, patches, or modified excerpts,
+of source code from the project being worked on, including individual snippets, patches, or modified excerpts,
 except through company-approved systems within their approved scope. Apply the
 same restriction to project designs, architecture diagrams, specifications, and
 technical documentation. Reformatting, translating, encoding, or paraphrasing
@@ -110,8 +109,10 @@ Runnable definitions and configuration are in [the development suite](../evals/s
 The owner clarified this boundary after the config/3 comparison. See the
 [replacement test specification](software-policy-boundary-tests.md). The original
 runnable policy, configuration and recorded results remain unchanged for
-reproducibility; they do not yet implement this revised boundary. In particular,
+reproducibility. The version-2 policy, revised configuration and datasets now
+implement this boundary in the evaluation harness with offline regression tests. In particular,
 `eval-sw-001-unknown-provenance` used an unapproved immediate model destination
 and expected uncertainty. It does not represent the intended approved-model
 coding workflow and must not be cited as a Jev failure for that workflow.
-Version the runnable policy/configuration and fixtures before the next live run.
+Use the version-2 bundle and revised configuration/fixtures for the next live
+run; no live results yet exist for that version.

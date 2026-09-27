@@ -1,7 +1,8 @@
 # Software disclosure boundary — revised test specification
 
-Owner clarification, 2026-09-27. These are replacement test requirements, not new
-live measurements or an implemented enforcement profile. They supersede the
+Owner clarification, 2026-09-27. The replacement policy, configuration and fixtures
+are now executable with offline regression coverage. They are not new live
+measurements or a calibrated enforcement profile. They supersede the
 interpretation of the original unknown-provenance case for the intended workflow.
 
 ## Trusted setup
@@ -49,7 +50,38 @@ unknown or unlisted targets. An unspecified onward target is not approved.
 - Preserve the original policy version, dataset, configuration and raw recordings.
   Introduce a new policy version and revised fixtures/configuration before running
   the comparison again. Do not reuse historical accuracy numbers for these cases.
-- Add executable regression coverage for both the ordinary approved coding flow
-  and attempted onward sharing through that same approved model. The table above
-  is a test specification; these revised runnable fixtures and semantic tests are
-  still pending. No API calls were made for this clarification.
+- Executable regression coverage now checks both ordinary approved coding work
+  and attempted onward sharing through the same approved model. The tests use
+  scripted scope answers to verify deterministic composition, not Jev accuracy.
+  No API calls were made for this update.
+
+## Executable artifacts and verification
+
+- [Policy bundle](../evals/step6/policies-v2/policies.md): `EVAL-SW-001` version 2;
+  production-action and classified-document rules retain version 1.
+- [Configuration](../evals/step6/config-disclosure-v2.yaml): config/3 with distinct
+  `destination.coding_route_approved` and `destination.onward_approved` facts.
+  All policies remain monitor-only at the unchanged 0.8 semantic threshold.
+- [Development dataset](../evals/step6/development-v2.json): 31 replacement
+  software cases, plus the unchanged 40 cases for the other policies.
+- [Matched attack dataset](../evals/step6/adversarial-development-v2.json):
+  18 software cases migrated to explicit approved-model/onward-target context,
+  plus the unchanged 18 destructive-action cases.
+- [Regression tests](../tests/test_disclosure_boundary.py): all 107 events are
+  composed through the actual evaluator using scripted gold scope. Additional
+  regressions check no model-approval bypass, all-target approval, operation scope,
+  user assertions, lookup failures and policy-version mismatches.
+
+The [fixture authority](../evals/step6/disclosure.py) has an explicit synthetic
+allowlist of target/operation pairs. Completed lookups with no approval become
+false, including empty/unspecified targets. Missing lookup results stay errors.
+Target annotations are operator-owned test inputs, independent of gold labels;
+they are not automatic extraction from arbitrary prompts. Real deployments must
+resolve all governed targets and bind approvals to the exact event. This fixture
+helper does not add production destination discovery to the connectors.
+
+Offline verification: **125 tests pass**, including nine new regression tests,
+and Ruff passes. The original policy/configuration/datasets and recorded results
+are unchanged. The new Jev scope questions still need live semantic evaluation;
+o new accuracy claim or threshold selection follows from mock tests. See the
+[suite instructions](../evals/step6/README.md#approved-coding-and-onward-disclosure-policy-version-2).

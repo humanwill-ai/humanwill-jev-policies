@@ -5,6 +5,10 @@ enterprise enforcement profile. All bindings use monitoring. The runner invokes
 the actual reusable evaluator; it does not execute a host tool or deliver a model
 response. Step 4–5 host evidence remains a separate measurement.
 
+The original files below reproduce the historical policy-version-1 results. For
+the current approved-coding/onward-sharing boundary, use the [version-2
+configuration and datasets](#approved-coding-and-onward-disclosure-policy-version-2).
+
 ## Scope and evidence
 
 - `EVAL-SW-001`: semantic project-material disclosure scope plus a deterministic
@@ -114,3 +118,60 @@ for the matched 36-case attack/control suite. Keep fresh output directories and
 the same spending ledger. Baseline config.yaml and development.json are unchanged.
 See [the decision reference](../../docs/decision-v3.md) for per-model offline
 threshold analysis, compatibility and limits on calibration claims.
+
+## Approved coding and onward disclosure: policy version 2
+
+The owner's clarified software policy permits ordinary coding assistance through
+the configured approved model. Requests/actions for onward sharing require
+explicit approval of every actual destination and operation. Unknown, unlisted
+or unspecified targets violate the rule; model-route approval cannot authorize
+them. See the [boundary and regression evidence](../../docs/software-policy-boundary-tests.md).
+
+Use this versioned set together:
+
+- `policies-v2/`: software policy version 2, other policy definitions unchanged.
+- `config-disclosure-v2.yaml`: stage-specific scopes and separate coding-route /
+  onward-approval predicates; config/3, monitor mode, threshold 0.8.
+- `development-v2.json`: 31 software examples and 40 unchanged other-policy cases.
+- `adversarial-development-v2.json`: 36 matched cases, including 18 software
+  fixtures using the clarified approval boundary.
+
+The old `policies/`, `config.yaml`, `config-v3.yaml`, `development.json` and
+`adversarial-development.json` remain unchanged. The runner's `--policies` flag
+selects and records the new bundle; new software cases reject the old policy
+version. Defaults still reproduce the baseline, so supply all three paths.
+
+Run offline regressions (scripted semantic answers, **not Jev quality**):
+
+```sh
+python -m unittest tests.test_disclosure_boundary -v
+```
+
+For the next budgeted **live Jev** measurement, with locally supplied credentials:
+
+```sh
+python -m evals.step6.run --backend jev --allow-external \
+  --policies evals/step6/policies-v2 \
+  --config evals/step6/config-disclosure-v2.yaml \
+  --dataset evals/step6/development-v2.json \
+  --output artifacts/quality/jev-disclosure-v2
+```
+
+Use `adversarial-development-v2.json` and a separate new output directory for the
+attack suite. Keep the existing cumulative spending ledger. Gemini remains an
+optional comparison at evaluation checkpoints; it is not needed to run these
+regressions. No live calls were made for this test migration.
+
+`disclosure_context` is operator-owned synthetic evidence, never request metadata.
+The fixture authority checks independently annotated target/operation pairs
+against an explicit synthetic allowlist. An empty or nonmatching completed
+lookup yields `destination.onward_approved: false`, while a failed lookup leaves
+evidence missing. Scope determines whether any onward transfer is requested at
+all. The helper never reads expected labels and does not implement production
+extraction of targets from free text. User claims cannot populate its allowlist.
+
+Labels implement the owner-confirmed boundary but detailed new examples remain
+assistant drafts pending review. All 107 events have offline gold-scope wiring
+coverage; live model accuracy and held-out evidence remain unmeasured for this
+version. Original unknown-origin failure counts must not be reused as an
+assessment of the clarified approved-model workflow.

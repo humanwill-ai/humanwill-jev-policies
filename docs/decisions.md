@@ -135,6 +135,8 @@ This corrects the interpretation of the earlier unknown-provenance case. Preserv
 its original input and result as historical evidence, and version the executable
 policy/configuration and dataset for the clarified intent. The revised boundary
 and [test specification](software-policy-boundary-tests.md) are recorded; the
-runtime/harness migration and new semantic evaluation are still pending.
+evaluation-harness migration is now implemented with policy version 2 and
+offline regressions. New live semantic evaluation is still pending; production
+connectors must supply trusted approval for each actual onward target.
 Operational lookup failures remain visible as errors and must prevent sharing
 in enforcement; successful lookup with no approval is a negative policy fact.

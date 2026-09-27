@@ -26,6 +26,7 @@ from humanwill_policies.runtime import EgressPermit, EvidenceContext
 from humanwill_policies.serialization import digest
 
 from .backends import CHAT_MODEL, ChatBackend, KeywordBackend, Ledger, MeteredBackend
+from .disclosure import disclosure_facts
 from .metrics import summarize
 
 ROOT = Path(__file__).parent
@@ -62,8 +63,15 @@ def load_cases(path):
         request = copy.deepcopy(case["request"])
         request.pop("request_id")
         fingerprint = digest(
-            {"policy": case["policy_id"], "request": request, "facts": case["trusted_facts"]}
+            {
+                "policy": case["policy_id"],
+                "request": request,
+                "facts": case["trusted_facts"],
+                "disclosure_context": case.get("disclosure_context"),
+            }
         )
+        if "disclosure_context" in case:
+            disclosure_facts(case["disclosure_context"])
         if fingerprint in exact and exact[fingerprint] != case["expected"]:
             raise ValueError("Identical evidence has conflicting labels")
         exact[fingerprint] = case["expected"]
@@ -73,6 +81,10 @@ def load_cases(path):
 def evidence_for(case):
     # These are operator-authored synthetic fixtures, never assertions from host input.
     values = dict(case["trusted_facts"])
+    if "disclosure_context" in case:
+        # Route/target approvals come only from the synthetic operator lookup.
+        values = {k: v for k, v in values.items() if not k.startswith("destination.")}
+        values.update(disclosure_facts(case["disclosure_context"]))
     environment, approval = values.get("environment.kind"), values.get("authorization.approved")
     values.pop("authorization.destructive_permitted", None)
     if environment == "disposable_sandbox":
@@ -97,13 +109,26 @@ def write_json(path, data):
     path.write_text(json.dumps(data, indent=2) + "\n")
 
 
+def load_case_bundle(cases, policy_path):
+    bundle = load_bundle(policy_path)
+    versions = {p.id: p.version for p in bundle.policies}
+    for case in cases:
+        if case["policy_id"] not in versions:
+            raise ValueError("Unknown policy in dataset")
+        if case.get("policy_version") is not None:
+            if versions[case["policy_id"]] != case["policy_version"]:
+                raise ValueError("Dataset requires a different policy version")
+    return bundle
+
+
 async def run(args):
     output = args.output
     output.mkdir(parents=True, exist_ok=False)
     cases = load_cases(args.dataset)
     if args.limit:
         cases = cases[: args.limit]
-    bundle = load_bundle(ROOT / "policies")
+    policy_path = args.policies
+    bundle = load_case_bundle(cases, policy_path)
     config = yaml.safe_load(args.config.read_text())
     if args.backend == "keyword":
         backend = KeywordBackend()
@@ -125,7 +150,7 @@ async def run(args):
         "config_sha256": digest(config),
         "configuration": config,
         "dataset_path": str(args.dataset.resolve()),
-        "policy_path": str((ROOT / "policies").resolve()),
+        "policy_path": str(policy_path.resolve()),
         "source_sha256": {
             p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in ROOT.glob("*.py")
         },
@@ -241,6 +266,7 @@ def main():
     parser.add_argument("--backend", choices=["keyword", "jev", "chat"], required=True)
     parser.add_argument("--dataset", type=Path, default=ROOT / "development.json")
     parser.add_argument("--config", type=Path, default=ROOT / "config.yaml")
+    parser.add_argument("--policies", type=Path, default=ROOT / "policies")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--allow-external", action="store_true")
     parser.add_argument("--ledger", type=Path, default=Path("artifacts/quality/spending.json"))
