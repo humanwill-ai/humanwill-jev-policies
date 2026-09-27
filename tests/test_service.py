@@ -78,7 +78,10 @@ class ServiceTests(Workspace):
                 transport=httpx.ASGITransport(app), base_url="http://test"
             ) as c:
                 return await c.post(
-                    path, json=body, headers={"Authorization": "Bearer " + token}, **kw
+                    path,
+                    json=body,
+                    headers={"Authorization": "Bearer " + token, "x-humanwill-text-profile": "v1"},
+                    **kw,
                 )
 
         return asyncio.run(call())

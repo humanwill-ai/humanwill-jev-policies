@@ -197,6 +197,8 @@ def create_app(evaluator, settings, *, evidence_resolver=None):
                 elif connector == "litellm":
                     normalized = events.litellm(payload)
                 elif connector == "agentgateway":
+                    if request.headers.getlist("x-humanwill-text-profile") != ["v1"]:
+                        events.unsupported()
                     normalized = events.agentgateway(
                         payload, "model_request" if path == "/request" else "response"
                     )

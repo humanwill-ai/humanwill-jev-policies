@@ -15,6 +15,17 @@ import httpx
 from support import TOKEN, downstream, dump_yaml, policy_app, port, server, wait_http
 
 
+PROFILE_EXPRESSION = (
+    "request.path == '/v1/chat/completions' && "
+    "(!has(llmRequest.stream) || llmRequest.stream == false) && "
+    "!has(llmRequest.tools) && !has(llmRequest.functions) && !has(llmRequest.audio) && "
+    "!has(llmRequest.modalities) && has(llmRequest.messages) && "
+    "llmRequest.messages.all(m, has(m.content) && type(m.content) == string && "
+    "!has(m.tool_calls) && !has(m.function_call) && !has(m.audio)) "
+    "? 'v1' : 'unsupported'"
+)
+
+
 def config(host, hostport, policyport, modelport):
     if host == "litellm":
         return {
@@ -50,7 +61,10 @@ def config(host, hostport, policyport, modelport):
         }
     webhook = {
         "target": {"host": f"127.0.0.1:{policyport}"},
-        "headers": {"authorization": '"Bearer ' + TOKEN + '"'},
+        "headers": {
+            "authorization": '"Bearer ' + TOKEN + '"',
+            "x-humanwill-text-profile": PROFILE_EXPRESSION,
+        },
         "failureMode": "failClosed",
     }
     return {
@@ -180,6 +194,95 @@ def main():
                                     "passed": True,
                                 }
                             )
+                        if mode == "enforce":
+                            for label, patch in [
+                                ("stream_unsupported", {"stream": True}),
+                                (
+                                    "image_unsupported",
+                                    {
+                                        "messages": [
+                                            {
+                                                "role": "user",
+                                                "content": [
+                                                    {
+                                                        "type": "image_url",
+                                                        "image_url": {
+                                                            "url": "https://example.invalid/image.png"
+                                                        },
+                                                    }
+                                                ],
+                                            }
+                                        ]
+                                    },
+                                ),
+                                (
+                                    "tool_definition_unsupported",
+                                    {
+                                        "tools": [
+                                            {
+                                                "type": "function",
+                                                "function": {
+                                                    "name": "synthetic",
+                                                    "parameters": {"type": "object"},
+                                                },
+                                            }
+                                        ]
+                                    },
+                                ),
+                                (
+                                    "client_guardrail_bypass",
+                                    {
+                                        "guardrails": [],
+                                        "metadata": {
+                                            "disable_global_guardrails": True,
+                                            "user_api_key_metadata": {
+                                                "disable_global_guardrails": True
+                                            },
+                                        },
+                                    },
+                                ),
+                                (
+                                    "history_coverage",
+                                    {
+                                        "messages": [
+                                            {
+                                                "role": "user",
+                                                "content": "HW_DENY in earlier message",
+                                            },
+                                            {"role": "assistant", "content": "earlier response"},
+                                            {"role": "user", "content": "hello"},
+                                        ]
+                                    },
+                                ),
+                            ]:
+                                before = len(calls)
+                                body = {
+                                    "model": "synthetic",
+                                    "messages": [{"role": "user", "content": "HW_DENY"}],
+                                    **patch,
+                                }
+                                response = httpx.post(
+                                    f"http://127.0.0.1:{hostport}/v1/chat/completions",
+                                    headers={
+                                        "Authorization": "Bearer sk-synthetic-host-client",
+                                        "x-humanwill-text-profile": "v1",
+                                    },
+                                    json=body,
+                                    timeout=20,
+                                    trust_env=False,
+                                )
+                                assert response.status_code != 200, (label, response.text[:1000])
+                                assert len(calls) == before, (label, "downstream invoked")
+                                cases.append(
+                                    {
+                                        "host": args.host,
+                                        "mode": mode,
+                                        "case": label,
+                                        "status": response.status_code,
+                                        "downstream_calls": 0,
+                                        "passed": True,
+                                    }
+                                )
                     finally:
                         process.terminate()
                         try:
