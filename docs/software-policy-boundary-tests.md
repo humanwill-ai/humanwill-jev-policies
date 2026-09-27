@@ -80,8 +80,11 @@ they are not automatic extraction from arbitrary prompts. Real deployments must
 resolve all governed targets and bind approvals to the exact event. This fixture
 helper does not add production destination discovery to the connectors.
 
-Offline verification: **125 tests pass**, including nine new regression tests,
-and Ruff passes. The original policy/configuration/datasets and recorded results
-are unchanged. The new Jev scope questions still need live semantic evaluation;
-o new accuracy claim or threshold selection follows from mock tests. See the
+Offline verification at fixture migration: **125 tests passed**, including nine
+new regression tests, with Ruff passing. The original policy/configuration,
+datasets and recorded results remain unchanged. The subsequent
+[live comparison](integrity-live-report.md) matches all 49 revised software
+cases with Jev using the target policy alone. Adding instruction integrity
+introduces regressions. These are development observations, not held-out
+accuracy or a calibrated enforcement profile. See the
 [suite instructions](../evals/step6/README.md#approved-coding-and-onward-disclosure-policy-version-2).
