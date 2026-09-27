@@ -4,6 +4,8 @@ Company-authored Markdown policies for AI gateways and coding agents. A companio
 
 **Implemented: service and connectors, `0.1.0.dev2`.** Markdown policy bundles, deterministic/semantic evaluation, direct/OpenRouter Jev adapters, an authenticated HTTP service, LiteLLM/Agentgateway adapters, and separate Copilot Local/CLI hooks. Real gateway, Copilot CLI and VS Code Local enforcement tests pass on the pinned versions; see [integration evidence](docs/integration-report.md). OpenRouter live smoke passed; direct TypeSafe live smoke is optional for v0.1. The repository remains private, with public preview `v0.1.0a1` awaiting the [release gates](docs/public-release-plan.md).
 
+Step 6’s [initial quality comparison](docs/evaluation-development-report.md) found false blocks and injection-related misses with the current semantic configurations. The 60-case development set uses draft labels; no calibrated enforcement profile or held-out accuracy claim is available.
+
 ## Try it locally
 
 Use Python 3.11–3.14 on Linux or macOS, from this checkout:

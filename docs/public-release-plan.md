@@ -4,7 +4,7 @@ Updated 2026-09-27 · service/gateway and hook software implemented; runtime che
 
 **Target: `v0.1.0a1`, a public preview on GitHub.** Publish a usable, tested implementation with all requested connectors and a clear support boundary. Public availability does not establish production suitability or semantic accuracy for arbitrary company policies.
 
-Current inventory: installable offline package/CLI, policy/configuration schemas, synthetic fixtures, automated tests and CI, plus policy/design documentation. See the [foundation report](foundation-report.md). The evaluation core and both provider adapters now have offline tests; OpenRouter live smoke passed; direct TypeSafe has synthetic contract coverage; its separate live smoke is optional. The HTTP service and all requested connector adapters are implemented; real gateway/CLI/Local tests pass on the pinned versions. No project license or GitHub release exists. See [steps 4–5 evidence](integration-report.md). See [step 3 evidence](evaluation-core-report.md). The repository remains private. The owner authorized steps 1–5; this does not authorize publication.
+Current inventory: installable offline package/CLI, policy/configuration schemas, synthetic fixtures, automated tests and CI, plus policy/design documentation. See the [foundation report](foundation-report.md). The evaluation core and both provider adapters now have offline tests; OpenRouter live smoke passed; direct TypeSafe has synthetic contract coverage; its separate live smoke is optional. The HTTP service and all requested connector adapters are implemented; real gateway/CLI/Local tests pass on the pinned versions. No project license or GitHub release exists. See [steps 4–5 evidence](integration-report.md). See [step 3 evidence](evaluation-core-report.md). The repository remains private. The owner authorized steps 1–6, including budgeted synthetic development evaluation; this does not authorize publication.
 
 This is the delivery and publication checklist. [Release design](release-plan.md), [optional metadata](optional-metadata.md), and [evaluation plan](evaluation-plan.md) remain the technical references. M1–M4 below implement the existing milestones; M5 expands into evaluation, packaging, and publication gates.
 
@@ -51,11 +51,11 @@ Each row should become a small series of reviewable changes. A checkbox means ev
 
 ### Semantic evidence gate
 
-Use the three policy classes already discussed: content-only semantics, group-restricted action, and classified-document/provider restrictions. Owner-supplied rules should replace synthetic examples when available. Label authorization/classification evidence independently of the text.
+Finalize the [test policies under review](test-policies.md): the owner selected project-code/design/documentation protection with approved-system exceptions; destructive production actions and classified-document restrictions remain candidates. This replaces the earlier illustrative policy-class list. Retain metadata-off conformance tests separately. Label authorization/classification evidence independently of the text.
 
 Proposed starting held-out set: **100 legitimate and 100 violating examples per policy**, plus at least 20 missing/unknown-evidence and 20 adversarial cases per policy: 720 cases across three policies. This is an initial evidence budget, not sufficient evidence for every enterprise error target. Keep authoring examples and threshold-tuning data outside the held-out set; group near-duplicates in the same split. Have a second human review labels and resolve disagreements.
 
-Before running the holdout, record per-policy maximum false-block and missed-violation rates, maximum indeterminate/error rate, added-latency budget, and cost budget. Report sample counts and confidence intervals; expand the sample if it cannot substantiate the target. A model's confidence value is not evidence of achieved accuracy. Repeat a subset to assess variability; do not tune on the holdout and then report it as unseen.
+The owner approved initial per-policy targets: 95% interval upper bounds ≤5% for false blocks and missed violations, ≤5% errors on fully specified cases, p95 added latency ≤2 seconds, and evaluator API cost ≤$1 per 1,000 cases. Before running the holdout, adjudicate labels and freeze rubric/configuration versions. Report sample counts and confidence intervals; expand the sample if it cannot substantiate the target. A model's confidence value is not evidence of achieved accuracy. Repeat a subset to assess variability; do not tune on the holdout and then report it as unseen.
 
 Publish results for each policy, route, and relevant stage, including failed cases that can be shared safely. Include a representative concurrency/failure exercise, p50/p95/p99 added latency, retries, billed usage, and service overhead. Compare alternatives under the same evidence and fixed budgets. Do not claim superiority from advertised price or one aggregate score.
 
@@ -89,7 +89,7 @@ Prepare a reviewable draft containing the exact candidate commit, proposed tag `
 - [ ] All required features and real-runtime evidence above are complete.
 - [ ] Publication/privacy/license review is complete; public assets contain no private customer content.
 - [ ] Fresh-environment installation and offline demo pass from the actual release artifacts.
-- [ ] Owner has authorized publishing this concrete candidate; the current request authorizes steps 4–5 implementation, not changing visibility now.
+- [ ] Owner has authorized publishing this concrete candidate; steps 1–6 authorization does not change visibility.
 - [ ] Make `humanwill-ai/humanwill-jev-policies` public and publish the prepared prerelease at the reviewed commit.
 - [ ] Verify anonymous access, asset downloads, checksums, clean installation, and released configuration examples; verify org repository settings after visibility changes.
 
@@ -97,6 +97,6 @@ If a post-publication defect appears, mark the affected release/feature clearly 
 
 ## Immediate next work and owner inputs
 
-**Steps 1–2 are implemented:** the contracts, offline loader/CLI, CI, and three synthetic policy classes are documented in the [foundation report](foundation-report.md). Step 3 software is implemented; its OpenRouter smoke passed and direct TypeSafe live smoke is optional for v0.1. Step 4 service/gateway implementation and real-host checks now pass. Step 5 adapters and both CLI/Local runtime tests pass, including documented host bypasses. See [integration evidence](integration-report.md). Re-estimate remaining effort for policy-quality evaluation and release packaging; elapsed time cannot substitute for release evidence.
+**Steps 1–2 are implemented:** the contracts, offline loader/CLI, CI, and three synthetic policy classes are documented in the [foundation report](foundation-report.md). Step 3 software is implemented; its OpenRouter smoke passed and direct TypeSafe live smoke is optional for v0.1. Step 4 service/gateway implementation and real-host checks now pass. Step 5 adapters and both CLI/Local runtime tests pass, including documented host bypasses. See [integration evidence](integration-report.md). Step 6’s [initial development comparison](evaluation-development-report.md) is complete, with quality failures and draft labels still to resolve; its release gate remains open. Re-estimate remaining effort for policy-quality evaluation and release packaging; elapsed time cannot substitute for release evidence.
 
-Owner inputs needed before later gates: license choice; three policy intentions and label reviewer; OpenRouter/alternative-judge spending cap; acceptance budgets before held-out evaluation. None requires placing secrets in the repository or in chat. Set a maintainer/security reporting destination before public release.
+Owner inputs needed before later gates: license choice and human label review. Policy intentions, initial acceptance targets and remaining-$5 synthetic evaluation budget are now recorded in [decisions](decisions.md). None requires placing secrets in the repository or in chat. Set a maintainer/security reporting destination before public release.

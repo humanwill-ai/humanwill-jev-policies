@@ -64,3 +64,34 @@ Use Starlette + Uvicorn for the small HTTP layer, retaining the existing JSON Sc
 ## Step 4–5 implementation status
 
 Authenticated service, LiteLLM/Agentgateway adapters and both Copilot command profiles are implemented. Gateway, CLI and VS Code Local host tests pass with synthetic controlled evaluators/downstream effects. After completing Copilot sign-in, Local prompt stop and pre-tool denial were observed with working allow controls. Both Copilot runtimes can bypass checks on host timeouts or disabled hooks. See [integration report](integration-report.md). No new paid API calls, public visibility change or deployment occurred.
+
+## Test-policy review before step 6
+
+The owner requested joint policy review before proceeding with step 6 and replaced
+the customer-communication candidate with protection of project source code,
+snippets, designs and related documentation. The owner confirmed that approved
+systems are permitted. Record the draft as `EVAL-SW-001` in
+[test policies](test-policies.md); destination approval comes from trusted
+configuration/evidence, never a user assertion. This rule is no longer a purely
+content-only candidate. Other policies, boundary cases, labels and acceptance
+targets remain under review. No evaluation calls are authorized by this decision.
+
+The owner subsequently confirmed that already-public project code and
+documentation are not exempt from `EVAL-SW-001`. Sharing still requires a
+company-approved system within its permitted scope; public availability alone
+does not establish permission. Add paired review examples for approved and
+unapproved destinations using the same publicly available project material.
+
+## Step 6 authorization and acceptance targets
+
+The owner authorized step 6 and confirmed using the remaining $4.999975304 of
+the original $5 total budget for synthetic Jev and alternative-judge evaluations
+through OpenRouter. Initial per-policy targets: 95% confidence upper bounds at
+most 5% for false blocks and missed violations; at most 5% indeterminate/errors
+on fully specified cases; p95 added latency at most two seconds; evaluator API
+cost at most $1 per 1,000 cases. These were agreed before live measurements.
+
+Start with the three discussed policies and the [development suite](../evals/step6/README.md).
+The production-action and document rules use the previously proposed boundaries.
+Detailed labels remain assistant drafts for human review; development results do
+not authorize freezing a release profile or claiming held-out performance.

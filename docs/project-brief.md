@@ -54,4 +54,6 @@ The [public-release roadmap](public-release-plan.md) defines the proposed `v0.1.
 
 ## Remaining decisions
 
-Provide three initial policy intentions/examples, select a live development budget, and choose the project license before publication. Agree per-policy acceptance targets before held-out evaluation; corporate data-egress/retention constraints are needed before a customer pilot. These do not block the offline foundation.
+The three initial policy intentions, remaining-$5 synthetic evaluation budget and initial acceptance targets are recorded. Review proposed labels and choose the project license before publication; corporate data-egress/retention constraints are needed before a customer pilot. These do not block the offline foundation.
+
+Step 6’s [initial synthetic development comparison](evaluation-development-report.md) identifies false blocks and injection-related misses. It does not substantiate enforcement readiness; human label review, development improvements and independent held-out evaluation remain.

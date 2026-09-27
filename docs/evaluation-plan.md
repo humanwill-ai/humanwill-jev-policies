@@ -1,18 +1,18 @@
 # Evaluation plan
 
-Proposed, not yet run · 2026-09-27
+Initial development comparison complete; release evaluation open · 2026-09-27
 
-The [public-release roadmap](public-release-plan.md) specifies the initial held-out sample proposal and report/publication gates. Freeze acceptance targets before evaluating the holdout; none has been approved yet.
+The [public-release roadmap](public-release-plan.md) specifies the initial held-out sample proposal and report/publication gates. The owner approved the initial per-policy targets before live development measurements: 95% interval upper bounds ≤5% for false blocks and missed violations, ≤5% errors on fully specified cases, p95 added latency ≤2 seconds, and evaluator API cost ≤$1 per 1,000 cases. Held-out evaluation still requires reviewed labels and independent scenario families.
 
 ## Begin with policies and labels
 
-Select three rules with a prospective user. Illustrative candidates, not adopted company policies:
+Review the [test policy definitions](test-policies.md) with the owner before building the dataset. The owner selected project-code/design/documentation protection to replace the customer-communication candidate and confirmed that approved systems are permitted. The other two candidates use the proposed boundaries for the initial development run; detailed labels remain subject to review:
 
 | Candidate | Legitimate near-neighbor | Violation / evidence needed |
 | --- | --- | --- |
+| Protect project source code and technical material (`EVAL-SW-001`) | Share a patch through an explicitly approved private repository or AI route | Project snippets, designs or documentation disclosed to an unapproved destination; trusted destination approval required |
 | Restrict confidential exports to approved destinations | Explain export procedures using synthetic data | Classified content sent externally; destination and classification from trusted systems |
 | Restrict destructive production actions | Read-only investigation or deletion in an authorized disposable sandbox | Destructive command against production; environment and authorization verified independently |
-| Restrict abusive operational assistance | Defensive analysis, quoted malicious text, and authorized research | Concrete assistance violating the company's defined rule; intent judgments separated from authorization facts |
 
 For each policy, define scope, exceptions, required evidence, unknown handling, and intended host action. Do not replace company rules with broad provider moderation defaults. If trusted evidence is absent, label the case unknown/insufficient evidence rather than guessing from the user's claim.
 
@@ -50,4 +50,8 @@ Initially use offline fixtures and synthetic content. OpenRouter is the selected
 4. **Monitoring pilot:** with authorized data flow, measure representative traffic without blocking; keep assessment and actual outcome distinct.
 5. **Limited enforcement:** only for policies meeting agreed gates, with rollback and monitoring. A bypassable/fail-open host cannot be presented as a mandatory security boundary.
 
-No numerical launch thresholds, pilot permission, paid API budget, or production rollout is approved yet.
+The owner authorized synthetic step 6 OpenRouter evaluations within the remaining original $5 total budget and the initial targets above. No customer pilot, production rollout or public publication is authorized. See [the development suite](../evals/step6/README.md) and [label review](step6-label-review.md).
+
+## Initial development evidence
+
+See the [dated report](evaluation-development-report.md) for the first 60-case comparison, threshold replay and repeat checks. Neither semantic configuration supports an enforcement claim. Review [draft labels](step6-label-review.md) before tuning and freezing the held-out protocol.
