@@ -136,8 +136,9 @@ its original input and result as historical evidence, and version the executable
 policy/configuration and dataset for the clarified intent. The revised boundary
 and [test specification](software-policy-boundary-tests.md) are recorded; the
 evaluation-harness migration is now implemented with policy version 2 and
-offline regressions. New live semantic evaluation is still pending; production
-connectors must supply trusted approval for each actual onward target.
+offline regressions. The subsequent live evaluation is recorded in
+[integrity-live-report](integrity-live-report.md); production connectors must
+supply trusted approval for each actual onward target.
 Operational lookup failures remain visible as errors and must prevent sharing
 in enforcement; successful lookup with no approval is a negative policy fact.
 
@@ -154,3 +155,18 @@ See [semantics, tests and limitations](instruction-integrity-policy.md). This
 addition does not establish that Jev's judgments remain unchanged or that Gemini
 now resists the earlier attacks. No live calls were made; compare model behavior
 and false blocks with and without the rule before claiming a benefit.
+
+## Live comparison of clarified coding and instruction integrity
+
+The owner authorized testing the assumptions with real API calls under the
+existing cumulative $5 cap. The [fixed protocol](integrity-live-protocol.md)
+and [results](integrity-live-report.md) record 550 synthetic event assessments
+and 675 calls, including preselected repeats. Jev matches all 49 software cases
+with the revised disclosure rule alone. The additional integrity rule raises
+false blocks for both models and does not resolve Gemini's two remaining upload
+bypasses. No policy, threshold, or enforcement mode was tuned during the run.
+
+Retain the results and failed cases; do not claim the new rule hardens Gemini or
+leaves Jev service behavior unchanged. No enforcement profile is approved. The
+next recommended design work is to distinguish operative bypass attempts from
+passive exposure and combine permission-dependent decisions with trusted facts.

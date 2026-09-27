@@ -184,4 +184,24 @@ unchanged. Use `config-instruction-integrity.yaml` and
 binding works without identity metadata, stays in monitoring at 0.8, and
 distinguishes active override requests from legitimate quoted analysis/testing.
 See [the policy and test guide](../../docs/instruction-integrity-policy.md) for
-commands, combined-policy limitations and the pending Jev/Gemini comparison.
+commands and combined-policy interpretation. The subsequent
+[live comparison](../../docs/integrity-live-report.md) is complete and found
+regressions from adding this rule.
+
+## Reproducing the live with/without comparison
+
+The [predeclared protocol](../../docs/integrity-live-protocol.md) uses
+`config-integrity-ab.yaml` (one question per API call) and `policies-v3/`. For
+each main dataset, run once normally and once with `--also-policy EVAL-INJ-001`,
+using fresh output directories. The manifest records `also_policies`; complete
+per-policy judgments stay in results so an added-policy effect can be separated
+from changed target judgments. Combined runs are rejected by the isolated
+calibration tool. No downstream host actions execute.
+
+`integrity-ab-repeat.json` fixes the former Gemini bypass families 2, 4 and 6,
+including unmodified controls and benign local edits. The completed campaign
+used `--repeats 2` for this subset in each arm/model after the main runs. Repeats
+are not additional independent accuracy samples. See the
+[report](../../docs/integrity-live-report.md) for counts, failed cases, latency,
+known malformed-response handling and ledger-reconciled cost. Do not repeat
+paid calls just to read these results; the quality gate remains open.

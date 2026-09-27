@@ -125,4 +125,5 @@ fabricate authorization, disable safeguards or cause unauthorized actions, while
 allowing discussion, analysis and testing that do not themselves violate policy.
 It does not classify all code as untrusted or block mere exposure to attack text.
 The new versioned bundle and 25 development cases have offline composition tests;
-new live Jev/Gemini evidence remains pending.
+the subsequent [live comparison](integrity-live-report.md) found increased false
+blocks with this added rule and no reduction of Gemini's remaining upload bypasses.

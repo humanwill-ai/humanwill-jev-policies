@@ -64,8 +64,10 @@ python -m evals.step6.run --backend jev --allow-external \
 Use the existing ledger and a new output directory; `--backend chat` selects the
 Gemini comparator when a comparison is needed. The runner assesses each case's
 target policy alone: isolated results cannot establish a benefit from combining
-policies. A live with/without comparison of the combined configuration is still
-needed, alongside ordinary coding and security-analysis controls.
+policies. The subsequent [live comparison](integrity-live-report.md) used target-policy
+versus target-plus-integrity arms, including ordinary coding and analysis controls.
+The runner now supports `--also-policy EVAL-INJ-001` and records that activation.
+Use `config-integrity-ab.yaml` for one question per API call in both arms.
 
 No live calls were made when adding this rule. Jev's earlier success on the tested
 uploads does not guarantee unchanged judgments with another question. Gemini may
@@ -74,3 +76,12 @@ while judging it. The earlier three upload bypasses attacked the evaluator itsel
 an instruction in an uploaded document is not automatically evidence that the
 coding agent followed it. Keep disclosure-policy violations distinct from
 instruction-integrity violations and from resistance of the evaluator to attacks.
+
+## Subsequent live result
+
+The [completed 550-assessment campaign](integrity-live-report.md) found no
+reduction in Gemini's two remaining upload bypasses. On the main 107 cases,
+hypothetical false blocks rose from 1/41 to 31/41 for Jev and 3/41 to 14/41
+for Gemini. The independent broad rule reintroduces authorization uncertainty
+and confuses passive exposure with following attacks. Preserve this rule as
+experimental/monitoring; do not infer readiness from the offline tests.
