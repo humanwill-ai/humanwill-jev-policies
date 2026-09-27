@@ -52,3 +52,13 @@ python -m unittest discover -s tests -p test_release_quality_gates.py -v
 5. Apply the predeclared targets to qualifying evidence. Publish failed cases honestly. Only a profile meeting the targets can be described as suitable for enforcement; otherwise improve using development data and reserve a new holdout, or agree an explicitly narrower assessment-only release. Keep shipped examples in monitor mode.
 
 A zero-error sample needs at least 73 independent observations per class just to put the two-sided Wilson 95% upper bound below 5%; with 100 per class, even one observed error puts that upper bound above 5% (about 5.45%). The 36-case packet cannot prove the approved rate targets even if every case is correct. A credible independent sampling and review plan is the next decision; more Gemini calls do not resolve them.
+
+## Live performance follow-up
+
+The [live latency report](release-latency-report.md) now records a passing
+<=2-second p95 result for the declared LiteLLM and hook-executable workload,
+including concurrency four. Whole-IDE/CLI scheduling, Agentgateway live latency
+and customer production traffic remain outside that measured scope. Spend is now
+$0.065024282 cumulatively. The [new 100-case targeted tranche](holdout-v1-label-review.md)
+is frozen and ready for label review; no live holdout measurement has occurred.
+The prior 36-case owner review remains complete.

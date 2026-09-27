@@ -76,3 +76,63 @@ class LiveReleaseSupportTests(unittest.TestCase):
             asyncio.run(run())
             self.assertIsNone(ledger.data["calls"][0]["cost_usd"])
             self.assertEqual(len(ledger.data["calls"]), 1)
+
+
+class FrozenTrancheTests(unittest.TestCase):
+    def test_pending_review_is_not_implicitly_approved_by_old_packet(self):
+        import json
+        from unittest.mock import patch
+
+        from evals.step6.release_holdout import PROTOCOL, validate_protocol
+
+        data = json.loads(PROTOCOL.read_text())
+        data["status"] = "pending_human_labels"
+        data.pop("review_record", None)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "protocol.json"
+            path.write_text(json.dumps(data))
+            with patch("evals.step6.release_holdout.PROTOCOL", path):
+                with self.assertRaisesRegex(ValueError, "await owner review"):
+                    validate_protocol()
+
+    def test_frozen_cases_validate_and_labels_compose_without_model_measurement(self):
+        from evals.step6.backends import choice_answer
+        from evals.step6.release_holdout import validate_protocol
+        from evals.step6.run import evidence_for, select_configuration
+        from humanwill_policies import load_configuration
+        from humanwill_policies.evaluation import Evaluator
+        from humanwill_policies.providers import MockBackend
+
+        _, cases, bundle, config = validate_protocol(require_review=False)
+        self.assertEqual(len(cases), 100)
+        for case in cases:
+            with self.subTest(case=case["id"]):
+                backend = MockBackend(
+                    {
+                        case["policy_id"]: choice_answer(
+                            case["expected_scope"] or "insufficient_evidence",
+                            ["applicable", "not_applicable", "insufficient_evidence"],
+                        )
+                    }
+                )
+                evaluator = Evaluator(
+                    bundle,
+                    load_configuration(bundle, select_configuration(config, case["policy_id"])),
+                    backend,
+                )
+                result = asyncio.run(
+                    evaluator.evaluate(case["request"], evidence=evidence_for(case))
+                )
+                self.assertEqual(result["decision"], case["expected"])
+
+    def test_changed_frozen_dataset_is_rejected(self):
+        from unittest.mock import patch
+
+        from evals.step6.release_holdout import DATASET, validate_protocol
+
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "dataset.json"
+            path.write_text(DATASET.read_text().replace("git fetch origin", "git fetch upstream"))
+            with patch("evals.step6.release_holdout.DATASET", path):
+                with self.assertRaisesRegex(ValueError, "Frozen data"):
+                    validate_protocol(require_review=False)

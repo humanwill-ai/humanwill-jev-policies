@@ -213,3 +213,14 @@ Preserve the immutable pre-review dataset/snapshot; the dated review record
 identifies the exact accepted dataset hash. This does not make calibration or
 regression cases independent held-out evidence, approve future labels, or close
 the remaining accuracy and end-to-end latency gates.
+
+## Fresh-case and live performance work — 2026-09-27
+
+The owner authorized proceeding with independent evaluation and representative
+end-to-end latency. Policies/model/thresholds stay unchanged; Jev alone is used.
+The live performance workload and measured limits are recorded in
+[the protocol](release-latency-protocol.md) and [report](release-latency-report.md).
+A new 100-case targeted command/fact tranche is frozen before measurement; its
+labels await owner review. It is an initial generalization check, not enough
+independent observations to establish the approved 5% upper error bounds. Do not
+confuse preparation, completed performance measurement, and semantic gate closure.
