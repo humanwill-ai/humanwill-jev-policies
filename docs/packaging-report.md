@@ -26,8 +26,30 @@ These hashes identify the development artifact snapshot tested before this evide
 
 ## Container and actual-host boundary
 
-A local container recipe now installs an explicitly selected wheel plus the locked dependencies, uses UID/GID 65532, and allowlists build context inputs. The default base tag is for development; an approved immutable base digest and recorded image identity are needed for release reproducibility. Docker/Podman is not available on this Mac, so no local image-build result is claimed. The Ubuntu CI job is configured to build it and run the offline demo without network access; its result must be observed before marking that gate complete.
+A local container recipe now installs an explicitly selected wheel plus the locked dependencies, uses UID/GID 65532, and allowlists build context inputs. The default base tag is for development; an approved immutable base digest and recorded image identity are needed for release reproducibility. Docker/Podman is not available on this Mac, so no local image-build result is claimed. The Ubuntu CI job built it and ran the offline demo without network access successfully; see the integrated evidence below.
 
-Artifact contract tests are not fresh executions of the actual LiteLLM, Agentgateway, Copilot CLI or interactive VS Code hosts. The updated unattended host CI now installs built wheels into the service and LiteLLM environments and runs copied harnesses outside the checkout; this candidate’s CI outcome is recorded separately after execution. Existing [pinned-host evidence](integration-report.md) remains separately scoped; the [connector guide](service-and-connectors.md) gives the real-host procedures. This packaging increment does not widen host support, establish a calibrated enforcement profile or change any policy threshold. Direct TypeSafe live smoke remains optional by owner decision.
+Artifact contract tests are not fresh executions of the actual LiteLLM, Agentgateway, Copilot CLI or interactive VS Code hosts. The updated unattended host CI now installs built wheels into the service and LiteLLM environments and runs copied harnesses outside the checkout; the integrated evidence below records the passing candidate run. Existing [pinned-host evidence](integration-report.md) remains separately scoped; the [connector guide](service-and-connectors.md) gives the real-host procedures. This packaging increment does not widen host support, establish a calibrated enforcement profile or change any policy threshold. Direct TypeSafe live smoke remains optional by owner decision.
 
 [Quickstart](quickstart.md), [policy authoring](policy-authoring.md), [operations/rollback/troubleshooting](operations.md), and [release notes](../CHANGELOG.md) form the operating guide. See the separate service operations report for concurrency/fault tests. Licensing, public-content review, final candidate artifacts and owner publication authorization remain later release gates.
+
+## Integrated candidate evidence
+
+Commit `b6fbeb977e472d5a9c335fa8236200a5b0653f35` passed all seven jobs:
+
+- [Policy core CI](https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/36334410881): Ubuntu 24.04 and macOS 15, each on Python 3.11 and 3.14; 138 offline tests, exact wheel/source installations outside checkout, installed service startup/rollback, local service load/failure exercise, and dependency audit.
+- [Pinned host CI](https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/36334410894): LiteLLM 1.102.1, Agentgateway 1.5.0 and Copilot CLI 1.0.88 passed using installed wheels and copied harnesses outside the checkout. The LiteLLM environment also installed that job's exact wheel. Config/2 synthetic provider answers were used; no paid provider calls occurred.
+- Ubuntu/Python 3.14 built the container and completed its offline demo with networking disabled. The selected immutable base was `python@sha256:a36c24f9cbdf4fd0f52d67f0823eeac19c2028c637cecc392d97f980d4fec56b`; the local CI image ID was `sha256:778111c929f8343378732b9448ac174c475e5c04b5747985358fcc1218525634`. No image was pushed to a registry.
+
+The final local integrated wheel/source verification also passed on Python 3.14,
+recorded in ignored `artifacts/packaging/integrated-verification.json`. Its hashes
+were wheel `3a645d075970ed4163c12b0f1b56b2809fb9731e8c0aa0cd18ef9f218c2f809a`
+and source `5f92402554a3da3f8c0f502fbc010c6fbca54899289e627e488e9e4005355d70`.
+Later documentation updates do not make those the final public release assets;
+step 8 must build and verify the actual reviewed release candidate.
+
+Step 7's implementation and unattended installation/operation evidence are
+complete for this development candidate. Interactive VS Code Local retains its
+previous pinned runtime evidence; it was not rerun during this packaging work.
+Step 6's human-reviewed independent quality and representative host/provider
+latency gates remain open. This is a private development candidate, not a public
+release or a claim of production readiness.
