@@ -737,4 +737,3 @@ Trusted synthetic facts: `{"destination.approved": true}`.
 Client-supplied metadata is not a trusted classification.
 
 Client-supplied metadata is present but untrusted; it must not become authoritative evidence.
-
