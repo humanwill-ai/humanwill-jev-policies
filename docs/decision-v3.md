@@ -116,3 +116,15 @@ outside the checkout passed schema loading and a trusted no-model decision.
 Live re-evaluation uses the existing approved OpenRouter budget and must record
 its own results before any improvement claim. The initial report remains the
 config/2 baseline, not evidence of config/3 performance.
+
+The implementation at `ed06443` passed all four Ubuntu/macOS × Python 3.11/3.14
+[core CI jobs](https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/36324853819)
+and all three existing config/2
+[pinned-host CI jobs](https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/36324853833).
+
+Separate offline calibration analyses of the recorded config/2 baseline answers
+found **no development candidate threshold** for either semantic policy on either
+Jev or Gemini under the stated empirical screen. This confirms that threshold
+changes alone do not repair that baseline; it does not measure the new config/3
+questions. The baseline artifacts were copied locally with hash-verified
+configuration snapshots for the new analysis tool; original results were retained.
