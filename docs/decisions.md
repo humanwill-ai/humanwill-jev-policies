@@ -4,7 +4,7 @@ Updated 2026-09-27. Recommendations below remain proposals unless explicitly mar
 
 | Topic | State | Current direction |
 | --- | --- | --- |
-| Repository | Owner requested | Initialize here and push to a private GitHub repository named `humanwill-jev-policies` |
+| Repository | Decided by owner | Private `humanwill-ai/humanwill-jev-policies`, alongside `humanwill-ai/humanwill-evals`; transferred from the personal account on 2026-09-27 |
 | Current phase | Decided by owner | Research and planning before product implementation |
 | Evaluation backend | Owner's initial candidate | Jev first; preserve comparison/replacement options |
 | Product demand | Unvalidated | Identify users, actual rules, and adoption constraints |
