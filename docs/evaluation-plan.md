@@ -2,7 +2,7 @@
 
 Development comparisons complete; release evaluation open · 2026-09-27
 
-The current [release-gate audit](step6-release-gates.md) recomputes the clarified-policy Jev results against approved targets and provides a [36-case editable label-review packet](step6-review-candidates-v1.md). The packet is a pre-review calibration tranche, not an independent holdout. Packaging and offline operational checks can proceed in parallel; labels, independent sampling and live end-to-end latency remain open.
+The current [release-gate audit](step6-release-gates.md) recomputes the clarified-policy Jev results against approved targets and provides a [36-case editable label-review packet](step6-review-candidates-v1.md). The owner marked human label review of this 36-case calibration tranche complete on 2026-09-27. Its frozen pre-review snapshot is preserved; it is not an independent holdout. Independent sampling/evaluation and representative live end-to-end latency remain open.
 
 The [public-release roadmap](public-release-plan.md) specifies the initial held-out sample proposal and report/publication gates. The owner approved the initial per-policy targets before live development measurements: 95% interval upper bounds ≤5% for false blocks and missed violations, ≤5% errors on fully specified cases, p95 added latency ≤2 seconds, and evaluator API cost ≤$1 per 1,000 cases. Held-out evaluation still requires reviewed labels and independent scenario families.
 

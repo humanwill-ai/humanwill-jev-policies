@@ -29,7 +29,7 @@ class ReleaseQualityGateTests(unittest.TestCase):
     def test_candidate_snapshot_validates_without_claiming_review(self):
         result = audit_candidate()
         self.assertEqual(result["cases"], 36)
-        self.assertIn("pending", result["human_review"])
+        self.assertIn("not assessed by snapshot checker", result["human_review"])
         self.assertIn("not_assessable", result["release_gate"])
         self.assertEqual(result["api_calls"], 0)
 

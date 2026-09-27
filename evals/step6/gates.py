@@ -98,8 +98,8 @@ def audit_candidate(candidate=CANDIDATE, snapshot=SNAPSHOT, config_path=CONFIG, 
         },
         "exact_duplicate_and_family_name_check": "passed",
         "independent_scenario_review": "pending; semantic overlap is not checked automatically",
-        "human_review": "pending; no human approval is asserted",
-        "release_gate": "not_assessable; draft labels and insufficient independent sample",
+        "human_review": "not assessed by snapshot checker; see docs/step6-review-candidates-v1.md",
+        "release_gate": "not_assessable; no independent held-out sample",
         "api_calls": 0,
     }
 

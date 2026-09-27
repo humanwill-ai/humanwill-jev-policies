@@ -203,3 +203,13 @@ no additional Gemini tuning is needed to prepare packaging. A review packet or
 a passing scripted evaluator test cannot establish human-reviewed independent
 accuracy. Known failure mechanisms belong in regression evidence, even when a
 new case uses different wording.
+
+## Owner label-review completion — 2026-09-27
+
+The owner instructed: “mark human label review as done.” Record all 36 labels in
+[the current packet](step6-review-candidates-v1.md) as accepted unchanged and the
+packet’s human-review task as complete. No additional human reviewer is claimed.
+Preserve the immutable pre-review dataset/snapshot; the dated review record
+identifies the exact accepted dataset hash. This does not make calibration or
+regression cases independent held-out evidence, approve future labels, or close
+the remaining accuracy and end-to-end latency gates.
