@@ -1,5 +1,7 @@
 # Step 6 — revised development results
 
+> **Subsequent owner clarification:** the approved coding model may receive code for coding assistance; onward sharing needs explicit approval, and unknown destination approval is a violation. The original fixtures/results below are historical and have not been relabeled. In particular, the unknown-provenance case does not represent the intended approved-model workflow. See the [revised boundary tests](software-policy-boundary-tests.md).
+
 2026-09-27 · **The three follow-up changes are implemented; the release quality gate remains open.**
 
 The [config/3 changes](decision-v3.md) removed the false blocks observed on the original development set in this run. Additional attacks still bypassed Gemini, and Jev incorrectly allowed one case with uncertain project origin. Neither evaluator has a suitable source-code-policy threshold under the development screen. All bindings remain in monitor mode at 0.8; no release enforcement profile was selected.

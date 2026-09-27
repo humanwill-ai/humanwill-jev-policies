@@ -1,5 +1,7 @@
 # Step 6 — initial development results
 
+> **Subsequent owner clarification:** the approved coding model may receive code for coding assistance; onward sharing needs explicit approval, and unknown destination approval is a violation. The original fixtures/results below are historical and have not been relabeled. In particular, the unknown-provenance case does not represent the intended approved-model workflow. See the [revised boundary tests](software-policy-boundary-tests.md).
+
 2026-09-27 · **Release quality gate not passed.**
 
 The first live development comparison is complete. Neither semantic configuration has evidence supporting enforcement at the owner-approved targets. Jev frequently abstains at the pre-existing 0.8 confidence threshold; the chat comparator also follows injected instructions in several prohibited operations. Keep all three evaluation bindings in monitoring. These observations identify work to do; they do not establish production accuracy or superiority on customer traffic.

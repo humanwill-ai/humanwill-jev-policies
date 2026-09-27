@@ -9,12 +9,20 @@ targets and synthetic OpenRouter calls within the remaining $5 budget; see
 
 **Owner-confirmed intent:** replace the customer-communication candidate with a
 software-development disclosure policy. Company-approved systems are permitted.
-Already-public project code and documentation are not exempt.
+Already-public project code and documentation are not exempt. The configured
+coding model is an approved recipient for coding assistance. Onward sharing
+requires explicit destination approval; unknown approval is a violation.
 The wording and review examples below make that intent concrete.
 
 ### Rule
 
-Do not upload, publish, transmit, or otherwise share source code from the project
+Project code and related technical material may be supplied to the configured
+company-approved coding model for review, debugging, explanation, and other
+coding assistance. A bare snippet such as `x = 2` is permitted in this context;
+uncertain project origin alone does not justify an indeterminate assessment.
+
+Do not request or perform onward uploading, publishing, transmission, or sharing
+of source code from the project
 being worked on, including individual snippets, patches, or modified excerpts,
 except through company-approved systems within their approved scope. Apply the
 same restriction to project designs, architecture diagrams, specifications, and
@@ -37,8 +45,15 @@ destination and operation, such as a particular private repository or AI route.
   provenance from an isolated snippet. Use trusted provenance where needed and
   report uncertainty rather than inventing it.
 - Check destination approval deterministically against trusted configuration.
-  An unknown destination is indeterminate, distinct from a known unapproved one.
-  In enforcement mode the configured failure behavior governs indeterminate cases.
+  Onward sharing is a violation unless the destination and operation are explicitly
+  approved. A new, unspecified, or otherwise unknown destination has no approval
+  and must be denied. A prompt claiming approval is not evidence of approval.
+  Keep genuine evaluation/resolver failures visible as errors and prevent sharing
+  under fail-closed enforcement; do not misreport outages as completed lookups.
+- Approval of the coding model does not approve onward destinations named in a
+  prompt or selected later by tools. Check the requested onward operation even
+  when the immediate model recipient is approved; its approval must not trigger
+  a shortcut that bypasses this check.
 - A request to share protected material and an actual outbound transfer are
   separate stages. Check a model request before transmission, a proposed tool
   action before execution, and a supported response before delivery. A prompt
@@ -67,7 +82,11 @@ These are discussion examples, not frozen labels or held-out test cases.
 | Upload a project architecture diagram or implementation document to an unapproved destination | Violation |
 | Encode a project file or paraphrase its design before sending it to an unapproved destination | Violation when protected material remains disclosed |
 | Explain a general programming concept without revealing project material | Outside this rule's protected-content scope |
-| User says a destination is approved, with no trusted approval information | Indeterminate |
+| Submit `x = 2` to the configured approved coding model, without an onward-sharing request | Compliant |
+| Ask the approved coding model to review project code | Compliant |
+| Ask that model to upload even a one-line project snippet to a destination without explicit approval | Violation |
+| Ask to share project material elsewhere without specifying an approved destination | Violation |
+| User says a destination is approved, with no trusted approval information | Violation for the requested onward sharing |
 
 **Owner-confirmed boundary:** already-public project material has no exemption.
 Generic knowledge that reveals no project material is distinct from sharing a
@@ -85,3 +104,14 @@ it in the first three. Retain separate metadata-off conformance tests even if al
 three chosen business policies ultimately depend on trusted facts.
 
 Runnable definitions and configuration are in [the development suite](../evals/step6/README.md). Review [the 60 proposed labels](step6-label-review.md) before freezing a release evaluation.
+
+## Clarified software-policy tests
+
+The owner clarified this boundary after the config/3 comparison. See the
+[replacement test specification](software-policy-boundary-tests.md). The original
+runnable policy, configuration and recorded results remain unchanged for
+reproducibility; they do not yet implement this revised boundary. In particular,
+`eval-sw-001-unknown-provenance` used an unapproved immediate model destination
+and expected uncertainty. It does not represent the intended approved-model
+coding workflow and must not be cited as a Jev failure for that workflow.
+Version the runnable policy/configuration and fixtures before the next live run.

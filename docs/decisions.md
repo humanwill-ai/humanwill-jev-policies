@@ -117,3 +117,24 @@ for Gemini, but these are reused-data development candidates, not approved
 threshold changes. Neither model has a qualifying software-policy candidate.
 Keep all configurations in monitoring at 0.8 pending label review and further
 validation; do not remove the already-public-material restriction to fit results.
+
+## Approved coding model versus onward sharing
+
+The owner clarified that the coding model receiving the evaluated prompt is
+company-approved by deployment configuration. Code, including `x = 2`, may be
+supplied for review or other coding assistance. Do not require project-origin
+evidence merely to allow that approved workflow.
+
+Requests or actions that share project material onward require explicit approval
+for the actual destination and operation. Unknown or unspecified destination
+approval is a **policy violation**, not an indeterminate business decision.
+Approval of the coding model must never authorize onward transfers. User claims
+cannot establish approval. Already-public project material remains protected.
+
+This corrects the interpretation of the earlier unknown-provenance case. Preserve
+its original input and result as historical evidence, and version the executable
+policy/configuration and dataset for the clarified intent. The revised boundary
+and [test specification](software-policy-boundary-tests.md) are recorded; the
+runtime/harness migration and new semantic evaluation are still pending.
+Operational lookup failures remain visible as errors and must prevent sharing
+in enforcement; successful lookup with no approval is a negative policy fact.
