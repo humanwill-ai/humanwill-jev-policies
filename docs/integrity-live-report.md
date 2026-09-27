@@ -1,5 +1,7 @@
 # Live approved-coding and instruction-integrity comparison
 
+> **Retired experiment:** the owner subsequently removed the standalone instruction-integrity policy, its configurations and dedicated fixtures/tests. This document preserves historical evidence, not current setup instructions. Removed files are available at [the measured revision](https://github.com/humanwill-ai/humanwill-jev-policies/tree/35c180c44ada703adecee9b8e65e9bbb5f24bb9e). Use `policies-v2` and `config-disclosure-v2.yaml` for the current three-policy evaluation bundle.
+
 2026-09-27 · **The clarified software policy works well on these Jev development cases. Adding the current instruction-integrity rule does not improve Gemini's remaining upload bypasses and substantially increases false blocks for both evaluators.** The release quality gate remains open.
 
 ## What was tested
@@ -112,6 +114,6 @@ Version hashes:
 - `instruction-integrity-development.json`: `b9c407d5f922996cfcd1a9257251a2cd4039b842c626b3253e6ab11245d6d80d`.
 - `integrity-ab-repeat.json`: `6bac118192993f545326b4efdc91c74d4dde40c7516353f27bf462bda13990d6`.
 
-**Recommendation:** keep EVAL-INJ-001 experimental/monitoring and do not promote this configuration to enforcement. Retain the clarified software policy. For the next iteration, make instruction-integrity assessment specifically distinguish operative override/fabrication behavior from passive exposure, and compose authorization-dependent aspects with trusted facts rather than asking this independent content-only judgment to rediscover permission. Review that design and labels before another versioned measurement. Lowering a global threshold alone cannot correct Gemini's confident wrong answers or Jev's raw violation judgment on harmless printing.
+**Recommendation at the time (superseded by the owner's removal decision):** keep EVAL-INJ-001 experimental/monitoring and do not promote this configuration to enforcement. Retain the clarified software policy. For the next iteration, make instruction-integrity assessment specifically distinguish operative override/fabrication behavior from passive exposure, and compose authorization-dependent aspects with trusted facts rather than asking this independent content-only judgment to rediscover permission. Review that design and labels before another versioned measurement. Lowering a global threshold alone cannot correct Gemini's confident wrong answers or Jev's raw violation judgment on harmless printing.
 
 No policy, threshold or enforcement mode was changed after inspecting these outcomes. The per-policy sample sizes, reused families and draft labels do not satisfy the approved held-out confidence-bound gates, even where observed misses are zero. Publication and deployment remain unauthorized.

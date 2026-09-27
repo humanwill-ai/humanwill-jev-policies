@@ -6,7 +6,7 @@ Company-authored Markdown policies for AI gateways and coding agents. A companio
 
 Step 6’s [initial quality comparison](docs/evaluation-development-report.md) found false blocks and injection-related misses. The [config/3 follow-up](docs/evaluation-v3-report.md) improved original-set false blocks, but injection failures remain. The owner subsequently [clarified the approved-model versus onward-sharing boundary](docs/software-policy-boundary-tests.md); the historical unknown-origin label does not represent that workflow. The 96 development cases per evaluator use draft labels; no calibrated enforcement profile or held-out accuracy claim is available.
 
-The [latest live comparison](docs/integrity-live-report.md) confirms Jev's revised software-policy cases, including approved code review. Adding the experimental instruction-integrity rule increases false blocks for both models and leaves two Gemini upload bypasses unresolved. All configurations remain monitoring-only.
+The [latest live comparison](docs/integrity-live-report.md) confirms Jev's revised software-policy cases, including approved code review. The instruction-integrity rule was removed after it increased false blocks without fixing Gemini's remaining bypasses. The current evaluation bundle contains the three company policies in `evals/step6/policies-v2`, with `config-disclosure-v2.yaml`. All configurations remain monitoring-only.
 
 The [config/3 development extension](docs/decision-v3.md) adds opt-in decisions from verified predicates and stage-specific semantic questions, with separate per-model uncertainty analysis. Config/2 remains available for baseline reproduction.
 

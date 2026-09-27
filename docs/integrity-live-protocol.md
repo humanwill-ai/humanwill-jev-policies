@@ -1,5 +1,7 @@
 # Approved coding and instruction-integrity live comparison
 
+> **Retired experiment:** the owner subsequently removed the standalone instruction-integrity policy, its configurations and dedicated fixtures/tests. This document preserves historical evidence, not current setup instructions. Removed files are available at [the measured revision](https://github.com/humanwill-ai/humanwill-jev-policies/tree/35c180c44ada703adecee9b8e65e9bbb5f24bb9e). Use `policies-v2` and `config-disclosure-v2.yaml` for the current three-policy evaluation bundle.
+
 Protocol fixed before calls, 2026-09-27. Synthetic development evidence only;
 all detailed labels remain drafts, all bindings monitor at 0.8. The owner
 requested real API tests within the existing cumulative $5 budget. Prior ledger

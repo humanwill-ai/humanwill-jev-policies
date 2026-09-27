@@ -172,36 +172,26 @@ extraction of targets from free text. User claims cannot populate its allowlist.
 
 Labels implement the owner-confirmed boundary but detailed new examples remain
 assistant drafts pending review. All 107 events have offline gold-scope wiring
-coverage; live model accuracy and held-out evidence remain unmeasured for this
-version. Original unknown-origin failure counts must not be reused as an
+coverage. The [live development comparison](../../docs/integrity-live-report.md)
+is recorded; independently held-out evidence remains outstanding. Original unknown-origin failure counts must not be reused as an
 assessment of the clarified approved-model workflow.
 
-## Instruction integrity: fourth policy
+## Retired instruction-integrity experiment
 
-`policies-v3/` adds `EVAL-INJ-001` version 1 and keeps all previous rule definitions
-unchanged. Use `config-instruction-integrity.yaml` and
-`instruction-integrity-development.json` for the 25 new cases. The semantic
-binding works without identity metadata, stays in monitoring at 0.8, and
-distinguishes active override requests from legitimate quoted analysis/testing.
-See [the policy and test guide](../../docs/instruction-integrity-policy.md) for
-commands and combined-policy interpretation. The subsequent
-[live comparison](../../docs/integrity-live-report.md) is complete and found
-regressions from adding this rule.
+The owner removed the standalone instruction-integrity rule after the
+[live comparison](../../docs/integrity-live-report.md) showed more false blocks
+and no improvement in Gemini's remaining upload bypasses. Its policy, binding
+variants and dedicated datasets/tests are no longer shipped. Use the current
+three-policy `policies-v2/` bundle and `config-disclosure-v2.yaml` above.
 
-## Reproducing the live with/without comparison
+The historical [protocol](../../docs/integrity-live-protocol.md), results and
+spending records remain for auditability. Their removed files are available in
+Git revision `35c180c44ada703adecee9b8e65e9bbb5f24bb9e`; they are not instructions
+for the current checkout. The generic `--also-policy` option remains available
+for comparisons of existing policies; manifests record the extra active IDs
+and isolated calibration rejects combined runs.
 
-The [predeclared protocol](../../docs/integrity-live-protocol.md) uses
-`config-integrity-ab.yaml` (one question per API call) and `policies-v3/`. For
-each main dataset, run once normally and once with `--also-policy EVAL-INJ-001`,
-using fresh output directories. The manifest records `also_policies`; complete
-per-policy judgments stay in results so an added-policy effect can be separated
-from changed target judgments. Combined runs are rejected by the isolated
-calibration tool. No downstream host actions execute.
-
-`integrity-ab-repeat.json` fixes the former Gemini bypass families 2, 4 and 6,
-including unmodified controls and benign local edits. The completed campaign
-used `--repeats 2` for this subset in each arm/model after the main runs. Repeats
-are not additional independent accuracy samples. See the
-[report](../../docs/integrity-live-report.md) for counts, failed cases, latency,
-known malformed-response handling and ledger-reconciled cost. Do not repeat
-paid calls just to read these results; the quality gate remains open.
+The matched injection/control cases in `adversarial-development-v2.json` remain:
+they test resistance of the disclosure/action policies to manipulation, without
+adding an injection policy. Removing the failed rule does not remove these tests
+or change the evaluator's instruction boundaries. No new live calls were made.

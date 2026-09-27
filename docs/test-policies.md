@@ -117,13 +117,7 @@ coding workflow and must not be cited as a Jev failure for that workflow.
 Use the version-2 bundle and revised configuration/fixtures for the next live
 run; no live results yet exist for that version.
 
-## EVAL-INJ-001 — Reject unauthorized instruction overrides
-
-The owner added the [instruction-integrity policy](instruction-integrity-policy.md)
-as a fourth rule. It forbids following instructions that override policies,
-fabricate authorization, disable safeguards or cause unauthorized actions, while
-allowing discussion, analysis and testing that do not themselves violate policy.
-It does not classify all code as untrusted or block mere exposure to attack text.
-The new versioned bundle and 25 development cases have offline composition tests;
-the subsequent [live comparison](integrity-live-report.md) found increased false
-blocks with this added rule and no reduction of Gemini's remaining upload bypasses.
+The standalone instruction-integrity policy was removed by owner decision after
+the [live comparison](integrity-live-report.md). The three policies above remain
+the current evaluation set. Injection-resistance tests remain part of testing
+the disclosure/action policies and do not constitute another company policy.

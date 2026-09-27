@@ -142,7 +142,7 @@ supply trusted approval for each actual onward target.
 Operational lookup failures remain visible as errors and must prevent sharing
 in enforcement; successful lookup with no approval is a negative policy fact.
 
-## Instruction-integrity policy addition
+## Instruction-integrity policy addition (historical; subsequently removed)
 
 The owner requested a separate policy against following unauthorized override
 instructions, with the agreed exception for discussion, quotation, analysis and
@@ -151,7 +151,7 @@ monitor binding and 25 synthetic development cases. Existing policy definitions,
 thresholds and evaluator rubric remain unchanged. No blanket classification of
 all code/documents as untrusted was added to company policy.
 
-See [semantics, tests and limitations](instruction-integrity-policy.md). This
+See the [historical results](integrity-live-report.md). This
 addition does not establish that Jev's judgments remain unchanged or that Gemini
 now resists the earlier attacks. No live calls were made; compare model behavior
 and false blocks with and without the rule before claiming a benefit.
@@ -170,3 +170,23 @@ Retain the results and failed cases; do not claim the new rule hardens Gemini or
 leaves Jev service behavior unchanged. No enforcement profile is approved. The
 next recommended design work is to distinguish operative bypass attempts from
 passive exposure and combine permission-dependent decisions with trusted facts.
+
+## Remove the standalone instruction-integrity policy
+
+The owner explicitly requested complete removal of EVAL-INJ-001. Delete its
+policy, configuration variants, dedicated fixtures/tests and duplicate collection
+version 3 from the current tree. Use the existing three-policy collection
+`evals/step6/policies-v2` and `config-disclosure-v2.yaml`. This supersedes the
+earlier recommendation to retain or refine this rule as experimental.
+
+Keep the historical protocol/results and spending ledger as evidence of the
+decision; reproduce the retired experiment only from its recorded Git revision.
+Preserve evaluator instruction boundaries and the disclosure/action adversarial
+cases. Generic multi-policy comparison support remains available, now tested
+using the existing software and production policies. No further API calls are
+needed for this removal, and all retained evaluation bindings remain monitor.
+
+Removal verification: 128 offline tests and Ruff pass; the remaining version-2
+bundle validates. The rebuilt source distribution contains none of the retired
+policy/configuration/fixture/test files. The remaining policy definitions,
+configuration, datasets and evaluator instruction boundaries are unchanged.
