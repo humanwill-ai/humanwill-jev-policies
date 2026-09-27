@@ -48,7 +48,7 @@ The [first-release plan](release-plan.md) specifies the folder contract, example
 4. Implemented: both Copilot adapters; CLI and Local runtime checks pass with documented bypasses. See [evidence](integration-report.md).
 5. Private candidate validation, packaging, and comparative evaluation report, followed by a public preview when release gates pass.
 
-Measure false blocks and missed violations separately, with errors, missing coverage, bypasses, latency distributions, and total cost. Test direct/indirect injection and legitimate near-neighbors. One synthetic [OpenRouter transport smoke](smoke-2026-09-27.md) passed; semantic-quality evaluation has not been run. See [evaluation plan](evaluation-plan.md).
+Measure false blocks and missed violations separately, with errors, missing coverage, bypasses, latency distributions, and total cost. Test direct/indirect injection and legitimate near-neighbors. The [OpenRouter transport smoke](smoke-2026-09-27.md) and [synthetic semantic development comparison](integrity-live-report.md) have run; independent reviewed holdout evidence is still pending. See [evaluation plan](evaluation-plan.md).
 
 The [public-release roadmap](public-release-plan.md) defines the proposed `v0.1.0a1` evidence gates, licensing/public-content review, installable artifacts, and publication sequence. Target a usable public preview with bounded claims; production suitability for a customer's policies requires further validation.
 

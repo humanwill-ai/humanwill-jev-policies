@@ -74,7 +74,7 @@ Agentgateway: start from [agentgateway.yaml](../examples/connectors/agentgateway
 
 The profile attestation header is overwritten by the authenticated Agentgateway configuration; accepting a client-provided copy without that overwrite would be unsafe. It confirms the configured text profile, not identity/classification/authorization metadata. The service will reject Agentgateway requests with a missing or incompatible attestation. Keep response checks on: the marker alone does not inspect output.
 
-To reproduce host evidence without any paid API, run the scripts under `tests/hosts` from a checkout with the package installed. They use an actual evaluator and service with an injected synthetic HTTP provider transport, plus a controlled local model endpoint. The injection exists only in test code. It measures enforcement, not Jev quality:
+To reproduce host evidence without any paid API, run the scripts under `tests/hosts` from a checkout or extracted source archive with the package installed. Harnesses do not inject a checkout into `PYTHONPATH`: install the exact wheel in the service/test environment and, for LiteLLM, in its separate host environment too. Pinned unattended CI runs copied harnesses outside the checkout. They use an actual evaluator and service with an injected synthetic HTTP provider transport, plus a controlled local model endpoint. The injection exists only in test code. It measures enforcement, not Jev quality:
 
 ```sh
 python tests/hosts/gateways.py litellm --binary /litellm-env/bin/litellm

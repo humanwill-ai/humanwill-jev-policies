@@ -4,3 +4,5 @@ recursive-include examples *.md *.yaml *.json
 include requirements*.txt
 include requirements-dev.in
 recursive-include evals *.py *.json *.md *.yaml
+include Dockerfile .dockerignore CHANGELOG.md
+recursive-include scripts *.py

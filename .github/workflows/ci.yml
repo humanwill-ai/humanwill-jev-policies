@@ -32,24 +32,31 @@ jobs:
           python -m pip check
       - name: Lint and test offline contracts
         run: |
-          ruff check src tests evals
-          ruff format --check src tests evals
+          ruff check src tests evals scripts
+          ruff format --check src tests evals scripts
           python -m unittest discover -s tests -v
           humanwill-policies validate examples/policies --json
       - name: Build source distribution and wheel
         run: python -m build --no-isolation
-      - name: Install and run demo outside checkout
+      - name: Verify exact artifacts outside checkout
+        run: |
+          python scripts/verify_artifacts.py --wheel dist/humanwill_policies-0.1.0.dev3-py3-none-any.whl --sdist dist/humanwill_policies-0.1.0.dev3.tar.gz --report artifacts/packaging/verification.json
+      - name: Exercise service load and failure recovery offline
+        run: python tests/hosts/service_operations.py
+      - name: Build and exercise local container recipe
+        if: matrix.os == 'ubuntu-24.04' && matrix.python == '3.14'
         shell: bash
         run: |
-          python -m venv "$RUNNER_TEMP/wheel-env"
-          "$RUNNER_TEMP/wheel-env/bin/python" -m pip install -r requirements.txt
-          "$RUNNER_TEMP/wheel-env/bin/python" -m pip install --no-deps dist/*.whl
-          cd "$RUNNER_TEMP"
-          "$RUNNER_TEMP/wheel-env/bin/humanwill-policies" init-demo demo
-          "$RUNNER_TEMP/wheel-env/bin/humanwill-policies" validate demo --config demo/config.yaml --json
-          "$RUNNER_TEMP/wheel-env/bin/humanwill-policies" preview demo --config demo/config.yaml --json
-          "$RUNNER_TEMP/wheel-env/bin/humanwill-policies" schema request
-          "$RUNNER_TEMP/wheel-env/bin/humanwill-policies" evaluate demo --config demo/config.yaml --request demo/request.json --mock-answers demo/mock-answers.json --json
+          docker pull python:3.11-slim-bookworm
+          CONTAINER_BASE=$(docker image inspect python:3.11-slim-bookworm --format '{{index .RepoDigests 0}}')
+          docker build --build-arg PYTHON_IMAGE="$CONTAINER_BASE" --tag humanwill-policies:ci .
+          docker image inspect humanwill-policies:ci --format '{{.Id}}'
+          docker image inspect python:3.11-slim-bookworm --format '{{json .RepoDigests}}'
+          docker run --rm --network none --entrypoint sh --tmpfs /work:uid=65532,gid=65532 -w /work humanwill-policies:ci -ec '
+            humanwill-policies init-demo demo
+            humanwill-policies validate demo --config demo/config.yaml --json
+            humanwill-policies evaluate demo --config demo/config.yaml --request demo/request.json --mock-answers demo/mock-answers.json --json
+          '
       - name: Audit runtime dependencies
         if: matrix.os == 'ubuntu-24.04' && matrix.python == '3.14'
         run: pip-audit --disable-pip --no-deps -r requirements.txt

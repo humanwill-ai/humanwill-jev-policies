@@ -1,6 +1,8 @@
 # Evaluation plan
 
-Initial development comparison complete; release evaluation open · 2026-09-27
+Development comparisons complete; release evaluation open · 2026-09-27
+
+The current [release-gate audit](step6-release-gates.md) recomputes the clarified-policy Jev results against approved targets and provides a [36-case editable label-review packet](step6-review-candidates-v1.md). The packet is a pre-review calibration tranche, not an independent holdout. Packaging and offline operational checks can proceed in parallel; labels, independent sampling and live end-to-end latency remain open.
 
 The [public-release roadmap](public-release-plan.md) specifies the initial held-out sample proposal and report/publication gates. The owner approved the initial per-policy targets before live development measurements: 95% interval upper bounds ≤5% for false blocks and missed violations, ≤5% errors on fully specified cases, p95 added latency ≤2 seconds, and evaluator API cost ≤$1 per 1,000 cases. Held-out evaluation still requires reviewed labels and independent scenario families.
 
@@ -14,13 +16,13 @@ Review the [test policy definitions](test-policies.md) with the owner before bui
 | Restrict confidential exports to approved destinations | Explain export procedures using synthetic data | Classified content sent externally; destination and classification from trusted systems |
 | Restrict destructive production actions | Read-only investigation or deletion in an authorized disposable sandbox | Destructive command against production; environment and authorization verified independently |
 
-For each policy, define scope, exceptions, required evidence, unknown handling, and intended host action. Do not replace company rules with broad provider moderation defaults. If trusted evidence is absent, label the case unknown/insufficient evidence rather than guessing from the user's claim.
+For each policy, define scope, exceptions, required evidence, unknown handling, and intended host action. Do not replace company rules with broad provider moderation defaults. If required trusted evidence is unavailable, label the case unknown/insufficient evidence rather than guessing from the user's claim. For the owner-clarified software rule, a completed lookup that finds no explicit approval for the actual onward destination/operation is a violation, including unknown or unspecified destinations. A failed lookup is an evaluation error. Coding help inside the configured approved model conversation is allowed; the approved model does not authorize onward sharing.
 
 Build a small development set first, then a separately held-out set sized to the agreed error tolerance. Include benign/violation pairs, ambiguous cases, languages used by customers, long histories, missing attachments, spoofed metadata, and malformed/unsupported inputs. Record label rationale and adjudicate disagreements with a second human reviewer. Keep related templates and paraphrases in the same split to reduce leakage. Synthetic examples alone do not establish customer performance.
 
 ## Comparison and measurement
 
-Compare deterministic rules, Jev, and a reasonable chat-model judge with the same available evidence. Select the alternative after data-egress and budget decisions. Tune each on development data, freeze its rubric/thresholds/model, and evaluate held-out cases. Keep semantic judgments separate from exact authorization and destination checks.
+Compare deterministic rules, Jev, and a reasonable chat-model judge with the same available evidence. The development comparison already used Gemini as the alternative; no further Gemini tuning is required to prepare the Jev release.  Tune each on development data, freeze its rubric/thresholds/model, and evaluate held-out cases. Keep semantic judgments separate from exact authorization and destination checks.
 
 - **False-block rate:** legitimate examples blocked / all legitimate examples.
 - **Missed-violation rate:** violating examples allowed / all violating examples. Report downstream violations that actually proceeded separately, including bypasses.
@@ -55,3 +57,7 @@ The owner authorized synthetic step 6 OpenRouter evaluations within the remainin
 ## Initial development evidence
 
 See the [dated baseline report](evaluation-development-report.md) for the first 60-case comparison, threshold replay and repeat checks, and the [config/3 follow-up](evaluation-v3-report.md) for revised runs plus 36 matched attack/control cases and separate model/policy calibration diagnostics. Neither semantic configuration supports an enforcement claim. Review [draft labels](step6-label-review.md) before tuning and freezing the held-out protocol.
+
+## Current gate preparation
+
+`python -m evals.step6.gates --candidate` validates the candidate/configuration/bundle/source snapshot and structural checks without calling a provider. Repeated `--run` arguments audit compatible development artifacts, showing per-policy confidence upper bounds, specified errors, core/provider latency and evaluator API cost. The tool never establishes human review from editable metadata or reports these development runs as a passed release gate. See [remaining steps and current observations](step6-release-gates.md).

@@ -15,14 +15,14 @@ Updated 2026-09-27. Owner requirements and proposed implementation choices are s
 | Metadata defaults | Adopted for foundation | Off by default; independent source configuration; content-only policies still work; explicit treatment of dependent rules |
 | Stage coverage | Decided by owner | Generated-answer and action policies require checks at those stages |
 | Folder schema | Implemented v1 | Front matter, explicit includes, one policy per file, immutable hashes; see release plan/examples |
-| Runtime stack | Foundation implemented; service proposed | Python 3.11–3.14 offline package/CLI on Linux/macOS; HTTP/provider/connector modules remain pending |
+| Runtime stack | Implemented | Python 3.11–3.14 package/CLI and HTTP service on Linux/macOS; direct/OpenRouter providers and all required connectors |
 | Build versus extend | Adopted after bounded review | Original independent core; no upstream code/text copied; see compatibility/reuse review |
 | Initial enforcement | Proposed | Text gateway requests and non-streaming responses, plus supported pre-tool/prompt hooks; monitoring first |
 | Uncertainty/failure | Proposed | Explicit error/indeterminate result; configurable failure action, default block in enforce mode |
 | Human review | Proposed exclusion | Reject unsupported review configuration; no approval workflow in v0.1 |
 | Customer demand | Unvalidated | Enterprise platform/security teams are the target, not validated paying customers |
 | Hosted customer data | Open | Confirm policy-text/content egress, destinations, retention, and geographic constraints |
-| Live budget / quality targets | Smoke budget approved; quality targets open | Owner authorized up to $5 total for synthetic OpenRouter/direct smoke tests; semantic acceptance targets remain unapproved |
+| Live budget / quality targets | Approved by owner | $5 cumulative synthetic smoke/evaluation budget; per-policy accuracy, error, latency and cost targets recorded below |
 | Public release objective | Decided by owner | Plan a first release suitable for public GitHub publication; visibility remains private during preparation |
 | Release label / artifacts | Proposed | `v0.1.0a1` public preview, source/wheel/checksums and evidence; see public-release roadmap |
 | Project license | Awaiting owner choice | Proposed Apache-2.0 for original code/docs/examples; preserve licenses of reused material |
@@ -190,3 +190,16 @@ Removal verification: 128 offline tests and Ruff pass; the remaining version-2
 bundle validates. The rebuilt source distribution contains none of the retired
 policy/configuration/fixture/test files. The remaining policy definitions,
 configuration, datasets and evaluator instruction boundaries are unchanged.
+
+## Parallel release preparation — 2026-09-27
+
+The owner authorized two subagents to work on step 7 packaging and remaining
+step 6 gates in parallel. The repository remains private. This work does not
+authorize publication, a customer pilot, or additional spending beyond the
+existing cumulative $5 synthetic evaluation cap.
+
+Keep Jev as the first-release backend. Gemini remains a development comparator;
+no additional Gemini tuning is needed to prepare packaging. A review packet or
+a passing scripted evaluator test cannot establish human-reviewed independent
+accuracy. Known failure mechanisms belong in regression evidence, even when a
+new case uses different wording.

@@ -1,0 +1,7 @@
+# Allowlist: credentials, datasets, Git history and local artifacts never enter context.
+**
+!Dockerfile
+!.dockerignore
+!requirements.txt
+!dist/
+!dist/*.whl

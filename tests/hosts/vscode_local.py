@@ -204,7 +204,6 @@ def main():
             env.update(
                 COPILOT_HOME=str(root / "copilot-home"),
                 HOST_FIXTURE_TOKEN=TOKEN,
-                PYTHONPATH=str(Path(__file__).resolve().parents[2] / "src"),
             )
             with (root / "code.log").open("w") as log:
                 process = subprocess.Popen(

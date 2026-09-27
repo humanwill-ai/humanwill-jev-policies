@@ -4,9 +4,18 @@ Company-authored Markdown policies for AI gateways and coding agents. A companio
 
 **Implemented: service and connectors, `0.1.0.dev3`.** Markdown policy bundles, deterministic/semantic evaluation, direct/OpenRouter Jev adapters, an authenticated HTTP service, LiteLLM/Agentgateway adapters, and separate Copilot Local/CLI hooks. Real gateway, Copilot CLI and VS Code Local enforcement tests pass on the pinned versions; see [integration evidence](docs/integration-report.md). OpenRouter live smoke passed; direct TypeSafe live smoke is optional for v0.1. The repository remains private, with public preview `v0.1.0a1` awaiting the [release gates](docs/public-release-plan.md).
 
-Step 6’s [initial quality comparison](docs/evaluation-development-report.md) found false blocks and injection-related misses. The [config/3 follow-up](docs/evaluation-v3-report.md) improved original-set false blocks, but injection failures remain. The owner subsequently [clarified the approved-model versus onward-sharing boundary](docs/software-policy-boundary-tests.md); the historical unknown-origin label does not represent that workflow. The 96 development cases per evaluator use draft labels; no calibrated enforcement profile or held-out accuracy claim is available.
+The [latest synthetic development comparison](docs/integrity-live-report.md)
+found that Jev matched all 49 revised software-policy cases. Across all 107
+three-policy cases, it had one false block from an evaluation error and no missed
+violations. These are development results with draft labels, not an independent
+accuracy or enterprise-readiness claim. Gemini was a comparison baseline; Jev
+remains the first release backend.
 
-The [latest live comparison](docs/integrity-live-report.md) confirms Jev's revised software-policy cases, including approved code review. The instruction-integrity rule was removed after it increased false blocks without fixing Gemini's remaining bypasses. The current evaluation bundle contains the three company policies in `evals/step6/policies-v2`, with `config-disclosure-v2.yaml`. All configurations remain monitoring-only.
+The current evaluation bundle contains the three company policies in
+`evals/step6/policies-v2`, configured by `config-disclosure-v2.yaml`. The standalone
+instruction-integrity rule was removed after it increased false blocks without
+fixing Gemini's remaining bypasses. All shipped configurations remain in monitor
+mode; no calibrated enforcement profile is available.
 
 The [config/3 development extension](docs/decision-v3.md) adds opt-in decisions from verified predicates and stage-specific semantic questions, with separate per-model uncertainty analysis. Config/2 remains available for baseline reproduction.
 
@@ -35,7 +44,12 @@ humanwill-policies validate examples/policies --json
 humanwill-policies schema request
 ```
 
-## Planned first release
+For installation from exact built artifacts and the local container recipe, use
+the [quickstart](docs/quickstart.md). The [policy-author guide](docs/policy-authoring.md)
+explains Markdown bundles and trusted facts; the [operations guide](docs/operations.md)
+covers upgrades, rollback and troubleshooting.
+
+## First-release support
 
 Implemented profiles and remaining evidence:
 
@@ -69,4 +83,4 @@ CI tests Python 3.11/3.14 on Ubuntu/macOS, builds the source distribution and wh
 - [Technical release design](docs/release-plan.md) and [optional metadata](docs/optional-metadata.md).
 - [Research](docs/research.md) and [evaluation plan](docs/evaluation-plan.md).
 
-One authorized synthetic OpenRouter call passed using the existing Keychain credential; see the [smoke evidence](docs/smoke-2026-09-27.md) and [procedure](docs/provider-smoke.md). Project licensing is still an owner decision before public publication.
+OpenRouter transport smoke and synthetic development evaluations are recorded in the linked reports. See the [smoke procedure](docs/provider-smoke.md) for credential-safe reproduction. Project licensing is still an owner decision before public publication.

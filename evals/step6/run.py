@@ -32,7 +32,7 @@ from .metrics import summarize
 ROOT = Path(__file__).parent
 
 
-def load_cases(path):
+def load_cases(path, *, allowed_splits=frozenset({"development"})):
     data = json.loads(path.read_text())
     if data.get("format") != "humanwill.eval-dataset/1" or data.get("synthetic") is not True:
         raise ValueError("Only the explicit synthetic dataset contract is accepted")
@@ -41,7 +41,7 @@ def load_cases(path):
         if case["id"] in ids:
             raise ValueError("Duplicate case ID")
         ids.add(case["id"])
-        if case["split"] != "development":
+        if case["split"] not in allowed_splits:
             raise ValueError("This runner cannot claim or evaluate an unreviewed holdout")
         if case["expected"] not in {"allow", "block", "evaluation_error"}:
             raise ValueError("Unknown label")

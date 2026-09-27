@@ -157,5 +157,5 @@ The proposed first public version is an alpha preview, validated privately befor
 
 ## Remaining owner decisions
 
-1. Supply the first three real policy intentions with allowed/blocked examples; synthetic examples unblock engineering now.
-2. Choose a development-call budget before live runs. Customer data/retention constraints and quality thresholds are needed before a customer pilot, not before the offline loader.
+1. Review the new [case-label packet](step6-review-candidates-v1.md), then establish the independent held-out sampling/review protocol. The three policy intentions, $5 cumulative synthetic budget and numerical targets are already recorded.
+2. Choose the project license and publication/security reporting details before step 8. Customer data/retention constraints remain necessary before a pilot.

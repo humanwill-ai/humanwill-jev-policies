@@ -161,7 +161,6 @@ def main():
                     COPILOT_PROVIDER_WIRE_API="completions",
                     COPILOT_PROVIDER_API_KEY="synthetic-unused",
                     HOST_FIXTURE_TOKEN=TOKEN,
-                    PYTHONPATH=str(Path("src").resolve()),
                     DO_NOT_TRACK="1",
                 )
                 prompt = (

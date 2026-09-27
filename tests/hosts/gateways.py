@@ -143,11 +143,11 @@ def main():
                 )
                 env = {
                     **os.environ,
-                    "PYTHONPATH": str(Path("src").resolve()),
                     "LITELLM_LOCAL_MODEL_COST_MAP": "True",
                     "DO_NOT_TRACK": "1",
                     "DEBUG": "false",
                 }
+                env.pop("PYTHONPATH", None)
                 with (out / f"{args.host}-{mode}.log").open("w") as log:
                     process = subprocess.Popen(command, stdout=log, stderr=log, env=env, cwd=root)
                     try:
