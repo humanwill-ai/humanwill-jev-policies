@@ -16,13 +16,17 @@ The commercial hypothesis is that portable, testable company rules solve a recur
 - Every policy has a stable policy ID for later reference.
 - The first release includes **LiteLLM, Agentgateway, and a Copilot hook connector**.
 - Jev is available through direct TypeSafe and OpenRouter transports. Development and testing use OpenRouter.
+- User/group and other contextual metadata are optional, with an easy deployment enable/disable switch. Where policies depend on identity, classification, or destination, combine verified facts with Jev judgments; user claims are not proof.
+- Policies about generated answers or actions must be checked at those stages; a prompt check alone is insufficient.
 - Aim at companies and large enterprises needing to apply their own policies to agents; maintain the connection to HumanWill Benchmark.
 
 ## Recommended first release
 
 Build a small Python package with an offline policy validator/compiler, shared evaluation and decision core, authenticated HTTP service, and hook executable. Use Markdown plus minimal front matter, explicit recursive include lists, one policy per file, and immutable policy/bundle hashes. Keep transport and host translation separate from decision logic.
 
-Gateway scope starts with text requests before model invocation. Copilot scope starts with submitted-text assessment and pre-tool control; provide separate VS Code Local and CLI profiles as required by the owner. Local can stop submitted prompts; CLI configured prompt-hook output cannot block, and CLI timeouts can fail open. Neither is universal Copilot interception. See [current evidence](research.md).
+Gateway scope includes text requests before model invocation and non-streaming generated responses before delivery. Copilot scope includes submitted-text assessment and pre-tool control; provide separate VS Code Local and CLI profiles as required by the owner. Local can stop submitted prompts; CLI configured prompt-hook output cannot block, and CLI timeouts can fail open. Neither is universal Copilot interception. See [current evidence](research.md).
+
+The [optional metadata design](optional-metadata.md) keeps content-only deployments simple, with metadata recommended off by default and independently configurable sources when enabled. Metadata absence does not prevent ordinary content checks. A policy that requires unavailable evidence is indeterminate, not satisfied; known-disabled dependencies must be resolved explicitly before enabling enforcement. Connector authentication remains separate.
 
 Start policies in monitor mode. Enforced policies need explicit evidence requirements, calibrated thresholds, and failure behavior. An error or unsupported action must never silently become a policy pass. Actual enforcement is reported only where host evidence supports it. No human review workflow in v0.1.
 

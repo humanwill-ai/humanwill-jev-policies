@@ -3,7 +3,7 @@ kind: policy
 id: EXAMPLE-SEC-001
 version: "1"
 title: Prevent transmission of active credentials
-stages: [prompt, model_request, tool_action]
+stages: [prompt, model_request, response, tool_action]
 ---
 
 # Prevent transmission of active credentials

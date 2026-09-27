@@ -6,6 +6,7 @@ Company-authored Markdown policy bundles for AI gateways and coding agents, with
 
 - [Project brief](docs/project-brief.md): problem, alternatives, proposed MVP, and decisions.
 - [First-release plan](docs/release-plan.md): folder format, architecture, connector scope, and implementation milestones.
+- [Optional metadata](docs/optional-metadata.md): feature switches, trusted facts, missing evidence, and stage-specific checks.
 - [Draft policy examples](examples/policies/policies.md): an entry point, nested collection, and stable policy IDs.
 - [Research notes](docs/research.md): verified documentation/source findings, limitations, and open questions.
 - [Evaluation plan](docs/evaluation-plan.md): labeled examples, comparative measurements, and enforcement gates.

@@ -49,7 +49,7 @@ stages: [prompt, model_request, tool_action]
 ---
 ```
 
-The body defines the rule, exceptions, and examples. `prompt` means submitted text only; `model_request` means the request representation supplied by the gateway, with coverage reported. Stage names describe an event, not a claim that we inspected all related material.
+The body defines the rule, exceptions, and examples. `prompt` means submitted text only; `model_request` means the request representation supplied by the gateway, with coverage reported. `response` checks generated content before delivery, and `tool_action` checks the exact proposed action before execution. A pass at one stage does not authorize another. Stage names describe an event, not a claim that we inspected all related material.
 
 Loader rules:
 
@@ -69,7 +69,7 @@ Recommended stack: **Python 3.11+, one package, FastAPI HTTP endpoints, a small 
 ```mermaid
 flowchart LR
   P[Markdown policy folder] --> L[Validate and freeze bundle]
-  A[LiteLLM / Agentgateway / Copilot hooks] --> N[Normalize content and trusted metadata]
+  A[LiteLLM / Agentgateway / Copilot hooks] --> N[Normalize content and optional verified metadata]
   L --> E[Evaluate applicable policies]
   N --> E
   E --> J[Jev via OpenRouter or TypeSafe]
@@ -84,7 +84,9 @@ Proposed operations: `validate`, `preview`, `evaluate` (offline/mock by default)
 
 For each policy, start with a fixed, versioned Choice rubric: `compliant`, `violation`, or `insufficient_evidence`. Preserve probability distributions and use thresholds from labeled examples. Do not ask another model to silently rewrite policies. Policy text is trusted evaluator configuration; request content is untrusted evidence. This separation does not eliminate Jev's documented injection susceptibility.
 
-Stage selection and exact metadata predicates run in code. Initially support a small declarative set of trusted metadata presence/equality/membership checks; unsupported predicates fail validation. Semantic authorization inferred from phrases such as “I have permission” is never a substitute. A rule cannot be enabled for enforcement until its required metadata mapping and evaluation profile exist.
+**Metadata is optional and independently switchable**, recommended off by default. Content-only policies work without identity, groups, classification, or destination fields. With metadata enabled, use only configured sources and policy-required fields; the normalized metadata object remains optional. See [optional metadata and stage checks](optional-metadata.md) for the switch, examples, dependency handling, and trust contract. This switch never disables connector authentication.
+
+Stage selection and exact metadata predicates run in code. Initially support a small declarative set of trusted metadata presence/equality/membership checks; unsupported predicates fail validation. Semantic authorization inferred from phrases such as “I have permission” is never a substitute. A metadata-dependent rule cannot be enabled for enforcement until its feature/source mapping and evaluation profile exist. Disabling metadata requires explicitly monitoring or disabling dependent rules; it must not silently convert them to passes.
 
 Deployment configuration, separate from rule prose, selects bundle, connector credentials, provider/model, modes, calibrated per-policy thresholds, deadlines, and failure actions. It also maps each policy ID to required trusted metadata and any deterministic predicates; the loader does not infer these controls from prose. Hash the effective non-secret configuration alongside the bundle for reproducibility; record credential references, never secret values. No execution of code embedded in Markdown.
 
@@ -110,11 +112,13 @@ All three connector families are release requirements. Build sequentially agains
 
 | Connector | V0.1 supported contract | Explicit exclusions/limits |
 | --- | --- | --- |
-| LiteLLM | Generic Guardrail API; text pre-call on pinned `/v1/chat/completions` configuration; block before downstream model call | No claim of every LiteLLM endpoint; tool definitions are not tool execution; streaming-output, images and response enforcement deferred |
-| Agentgateway | Request webhook with supplied text messages and role provenance; map block to host rejection | Do not copy the example's newest-message-only extraction blindly; report supplied/omitted context; response webhook and MCP execution enforcement deferred |
+| LiteLLM | Generic Guardrail API; text pre-call and non-streaming post-call on pinned `/v1/chat/completions` configuration; block requests before model calls or responses before delivery | No claim of every LiteLLM endpoint; tool definitions are not tool execution; streaming-output and images deferred |
+| Agentgateway | Request and non-streaming response webhooks with supplied text/role provenance; map block to host rejection | Do not copy the example's newest-message-only extraction blindly; report supplied/omitted context; MCP execution enforcement deferred |
 | Copilot hooks | Two required profiles: VS Code Local `UserPromptSubmit` and `PreToolUse`; CLI `userPromptSubmitted` assessment and `preToolUse` denial | CLI prompt output cannot block; CLI hook timeouts can bypass our result; Local hooks are configurable/trust-dependent; cloud, Agent Host, inline completions and other IDEs excluded initially |
 
 The owner confirmed **both Local and CLI**, with separate fixtures and compatibility entries. Do not merge their schemas. These restrictions follow the [Local reference](https://code.visualstudio.com/docs/agents/reference/hooks-reference) and [GitHub hook reference](https://docs.github.com/en/copilot/reference/hooks-reference); validate pinned versions before release.
+
+Response hooks are documented by [LiteLLM](https://docs.litellm.ai/docs/adding_provider/generic_guardrail_api) and the inspected [Agentgateway example](https://github.com/agentgateway/agentgateway/tree/7e47ceb576aa9d3300cb0d2c7c35848fb0af048f/examples/llm-guardrail-jev). The new response scope remains untested. Require evidence that no response content reaches the consumer before the verdict; reject enforcement bindings for stages a connector cannot intercept. Copilot final-answer enforcement is not established by its prompt/pre-tool hooks.
 
 Hooks govern only their invocation point and supplied payload. Even a denied tool call does not undo earlier effects. Local hooks editable or disabled by a user are not a company-wide mandatory control. Enterprise pilots need centrally managed configuration and controlled routing around the service; v0.1 documents these deployment prerequisites rather than building endpoint management.
 
@@ -138,8 +142,8 @@ Development uses synthetic policies and examples through OpenRouter. Production 
 | Milestone | Deliverable | Completion evidence |
 | --- | --- | --- |
 | M1 — offline foundation | Package/CLI, folder loader, frozen bundle, `validate`/`preview`, synthetic examples | Tests for include graph, stable IDs/hashes, traversal escapes, malformed metadata and version changes; works without credentials |
-| M2 — first vertical slice | Mock evaluator, OpenRouter transport, deterministic decision engine, `evaluate` | One request produces policy-linked results; malformed answers/uncertainty/timeouts handled; opt-in budgeted synthetic OpenRouter smoke run |
-| M3 — gateway connections | Authenticated service, LiteLLM and Agentgateway adapters, direct Jev transport | Each gateway prevents a mock downstream invocation on deny; allow/error/unsupported fixtures; direct transport contract and live smoke when credentials are available |
+| M2 — first vertical slice | Mock evaluator, OpenRouter transport, deterministic decision engine, optional metadata switch/predicates, `evaluate` | Content-only operation needs no metadata; disabled mode performs no enrichment; missing/spoofed facts are not permissions; malformed answers/uncertainty/timeouts handled; opt-in budgeted synthetic OpenRouter smoke run |
+| M3 — gateway connections | Authenticated service, LiteLLM and Agentgateway request/response adapters, direct Jev transport | Each gateway prevents a mock downstream invocation on request deny and withholds response content on response deny; metadata toggles leave connector authentication intact; allow/error/unsupported fixtures; direct transport contract and live smoke when credentials are available |
 | M4 — Copilot connections | Hook executable and separate selected runtime profiles | Local deny/stop and CLI assessment/deny verified on pinned versions; controlled tool not executed on denial; timeout and disabled-hook behavior documented |
 | M5 — v0.1 private alpha | Installation/configuration examples, container recipe, compatibility matrix, evaluation report | Three connector families, both transports, privacy defaults, rollback instructions, and no untested enforcement claim |
 

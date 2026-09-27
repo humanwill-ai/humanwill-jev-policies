@@ -7,6 +7,8 @@
 - Keep the policy core independent of gateways and the Jev backend. Separate model judgments from deterministic facts and policy decisions, and assessment from actual enforcement.
 - State inspected coverage and missing content explicitly. Never silently map unsupported review, missing metadata, or evaluation errors to allow. Failure behavior belongs to both policy and connector.
 - Authorization, identity, destinations, and classification require trusted metadata; user assertions are insufficient.
+- Metadata itself is optional and independently switchable. Content-only policies must work without it. Missing required facts must never become authorization; resolve dependent-policy configuration explicitly when disabling the feature. Connector authentication is separate.
+- Check response and action policies at their governed stages. Prompt checks do not establish response/tool compliance, and post-execution audit does not prevent earlier effects.
 - Measure false blocks and missed violations separately. Include legitimate research, authorized work, and direct and indirect prompt injection in evaluation.
 - Minimize retained content. Hosted Jev is an external data recipient even if this service is self-hosted.
 - Private GitHub creation and the initial push are authorized by the owner. Do not publish publicly, deploy, contact others, or send private datasets/content to other services without authorization.
