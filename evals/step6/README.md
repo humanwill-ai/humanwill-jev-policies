@@ -175,3 +175,13 @@ assistant drafts pending review. All 107 events have offline gold-scope wiring
 coverage; live model accuracy and held-out evidence remain unmeasured for this
 version. Original unknown-origin failure counts must not be reused as an
 assessment of the clarified approved-model workflow.
+
+## Instruction integrity: fourth policy
+
+`policies-v3/` adds `EVAL-INJ-001` version 1 and keeps all previous rule definitions
+unchanged. Use `config-instruction-integrity.yaml` and
+`instruction-integrity-development.json` for the 25 new cases. The semantic
+binding works without identity metadata, stays in monitoring at 0.8, and
+distinguishes active override requests from legitimate quoted analysis/testing.
+See [the policy and test guide](../../docs/instruction-integrity-policy.md) for
+commands, combined-policy limitations and the pending Jev/Gemini comparison.

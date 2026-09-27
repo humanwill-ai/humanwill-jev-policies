@@ -140,3 +140,17 @@ offline regressions. New live semantic evaluation is still pending; production
 connectors must supply trusted approval for each actual onward target.
 Operational lookup failures remain visible as errors and must prevent sharing
 in enforcement; successful lookup with no approval is a negative policy fact.
+
+## Instruction-integrity policy addition
+
+The owner requested a separate policy against following unauthorized override
+instructions, with the agreed exception for discussion, quotation, analysis and
+testing. Added EVAL-INJ-001 version 1 in collection version 3, plus a semantic
+monitor binding and 25 synthetic development cases. Existing policy definitions,
+thresholds and evaluator rubric remain unchanged. No blanket classification of
+all code/documents as untrusted was added to company policy.
+
+See [semantics, tests and limitations](instruction-integrity-policy.md). This
+addition does not establish that Jev's judgments remain unchanged or that Gemini
+now resists the earlier attacks. No live calls were made; compare model behavior
+and false blocks with and without the rule before claiming a benefit.
