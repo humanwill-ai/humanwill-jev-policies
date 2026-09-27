@@ -1,0 +1,23 @@
+model_list:
+- model_name: synthetic
+  litellm_params:
+    model: openai/your-approved-model
+    api_key: os.environ/MODEL_PROVIDER_API_KEY
+litellm_settings:
+  callbacks:
+  - humanwill_policies.connectors.litellm_profile.profile
+  set_verbose: false
+guardrails:
+- guardrail_name: humanwill
+  litellm_params:
+    guardrail: generic_guardrail_api
+    mode:
+    - pre_call
+    - post_call
+    api_base: http://127.0.0.1:8088
+    api_key: os.environ/HUMANWILL_LITELLM_TOKEN
+    default_on: true
+    fail_on_error: true
+    unreachable_fallback: fail_closed
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY

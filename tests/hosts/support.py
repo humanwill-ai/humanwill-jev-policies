@@ -52,7 +52,7 @@ def server(app):
         assert not thread.is_alive()
 
 
-def policy_app(root, connector, mode="enforce", captures=None):
+def policy_app(root, connector, mode="enforce", captures=None, faults=None):
     root.mkdir(parents=True, exist_ok=True)
     (root / "policies.md").write_text(
         '---\nkind: collection\nid: tests\nversion: "1"\nincludes: [rule.md]\n'
@@ -143,6 +143,17 @@ def policy_app(root, connector, mode="enforce", captures=None):
         },
     }
     app = create_app(engine, settings)
+    if faults is not None:
+
+        async def faulty_service(scope, receive, send):
+            if scope["type"] == "http" and faults.get("unavailable"):
+                await JSONResponse({"error": "synthetic_outage"}, status_code=503)(
+                    scope, receive, send
+                )
+            else:
+                await app(scope, receive, send)
+
+        return faulty_service
     return app
 
 
@@ -150,11 +161,14 @@ def downstream(calls):
     async def completion(request):
         body = await request.json()
         calls.append(body)
-        text = (
-            "HW_DENY_RESPONSE"
-            if "MAKE_BAD_OUTPUT" in json.dumps(body)
-            else "SYNTHETIC_ALLOWED_RESPONSE"
-        )
+        text = "SYNTHETIC_ALLOWED_RESPONSE"
+        for trigger, output in [
+            ("MAKE_BAD_OUTPUT", "HW_DENY_RESPONSE"),
+            ("MAKE_ERROR_OUTPUT", "HW_ERROR_RESPONSE"),
+            ("MAKE_TIMEOUT_OUTPUT", "HW_TIMEOUT_RESPONSE"),
+        ]:
+            if trigger in json.dumps(body):
+                text = output
         return JSONResponse(
             {
                 "id": "chatcmpl-synthetic",

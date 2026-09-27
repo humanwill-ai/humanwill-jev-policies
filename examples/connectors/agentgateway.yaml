@@ -1,0 +1,35 @@
+binds:
+- port: 3000
+  listeners:
+  - routes:
+    - backends:
+      - ai:
+          name: synthetic
+          provider:
+            openAI:
+              model: synthetic
+          hostOverride: 127.0.0.1:9000
+      policies:
+        ai:
+          promptGuard:
+            request:
+            - webhook:
+                target: &id001
+                  host: 127.0.0.1:8088
+                headers:
+                  authorization: '"Bearer REPLACE_WITH_PROTECTED_AGENTGATEWAY_TOKEN"'
+                  x-humanwill-text-profile: 'request.path == ''/v1/chat/completions''
+                    && (!has(llmRequest.stream) || llmRequest.stream == false) &&
+                    !has(llmRequest.tools) && !has(llmRequest.functions) && !has(llmRequest.audio)
+                    && !has(llmRequest.modalities) && has(llmRequest.messages) &&
+                    llmRequest.messages.all(m, has(m.content) && type(m.content) ==
+                    string && !has(m.tool_calls) && !has(m.function_call) && !has(m.audio))
+                    ? ''v1'' : ''unsupported'''
+                failureMode: failClosed
+            response:
+            - webhook:
+                target: *id001
+                headers:
+                  authorization: '"Bearer REPLACE_WITH_PROTECTED_AGENTGATEWAY_TOKEN"'
+                  x-humanwill-text-profile: '''v1'''
+                failureMode: failClosed

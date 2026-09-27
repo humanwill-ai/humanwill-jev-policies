@@ -1,6 +1,6 @@
-"""Offline policy contracts. No model calls or enforcement are implemented here."""
+"""Company policy bundles, evaluation, authenticated service and host connectors."""
 
-__version__ = "0.1.0.dev1"
+__version__ = "0.1.0.dev2"
 
 from .bundle import Bundle, Limits, load_bundle
 from .config import Configuration, load_configuration, preview

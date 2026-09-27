@@ -126,8 +126,11 @@ def main():
             root = Path(tmp)
             calls = []
             captures = []
+            faults = {}
             with (
-                server(policy_app(root / "policies", args.host, mode, captures)) as policyport,
+                server(
+                    policy_app(root / "policies", args.host, mode, captures, faults)
+                ) as policyport,
                 server(downstream(calls)) as modelport,
             ):
                 hostport = port()
@@ -158,6 +161,8 @@ def main():
                                 mode == "monitor",
                             ),
                             ("response_deny", "MAKE_BAD_OUTPUT", 1, mode == "monitor"),
+                            ("response_error", "MAKE_ERROR_OUTPUT", 1, mode == "monitor"),
+                            ("response_timeout", "MAKE_TIMEOUT_OUTPUT", 1, mode == "monitor"),
                             (
                                 "provider_error",
                                 "HW_ERROR",
@@ -253,6 +258,17 @@ def main():
                                     },
                                 ),
                                 (
+                                    "metadata_guardrail_bypass",
+                                    {
+                                        "metadata": {
+                                            "user_api_key_metadata": {
+                                                "disable_global_guardrails": True,
+                                                "opted_out_global_guardrails": ["humanwill"],
+                                            }
+                                        }
+                                    },
+                                ),
+                                (
                                     "history_coverage",
                                     {
                                         "messages": [
@@ -294,6 +310,31 @@ def main():
                                         "passed": True,
                                     }
                                 )
+                        faults["unavailable"] = True
+                        before = len(calls)
+                        response = httpx.post(
+                            f"http://127.0.0.1:{hostport}/v1/chat/completions",
+                            headers={"Authorization": "Bearer sk-synthetic-host-client"},
+                            json={
+                                "model": "synthetic",
+                                "messages": [{"role": "user", "content": "hello"}],
+                            },
+                            timeout=20,
+                            trust_env=False,
+                        )
+                        assert response.status_code != 200 and len(calls) == before, (
+                            "Service outage bypassed"
+                        )
+                        cases.append(
+                            {
+                                "host": args.host,
+                                "mode": mode,
+                                "case": "service_unavailable",
+                                "status": response.status_code,
+                                "downstream_calls": 0,
+                                "passed": True,
+                            }
+                        )
                     finally:
                         process.terminate()
                         try:

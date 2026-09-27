@@ -1,5 +1,5 @@
 recursive-include tests *.py *.json
 recursive-include docs *.md
-recursive-include examples *.md
+recursive-include examples *.md *.yaml *.json
 include requirements*.txt
 include requirements-dev.in
