@@ -142,7 +142,13 @@ def policy_app(root, connector, mode="enforce", captures=None):
             }
         },
     }
-    return create_app(engine, settings)
+    app = create_app(engine, settings)
+    if connector == "agentgateway":
+        @app.middleware("http")
+        async def synthetic_debug(request, call_next):
+            print("FIXTURE HEADER", {k:v for k,v in request.headers.items() if k.startswith("x-fixture") or k == "x-humanwill-text-profile"}, flush=True)
+            return await call_next(request)
+    return app
 
 
 def downstream(calls):

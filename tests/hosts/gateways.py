@@ -14,7 +14,6 @@ from pathlib import Path
 import httpx
 from support import TOKEN, downstream, dump_yaml, policy_app, port, server, wait_http
 
-
 PROFILE_EXPRESSION = (
     "request.path == '/v1/chat/completions' && "
     "(!has(llmRequest.stream) || llmRequest.stream == false) && "
@@ -64,6 +63,8 @@ def config(host, hostport, policyport, modelport):
         "headers": {
             "authorization": '"Bearer ' + TOKEN + '"',
             "x-humanwill-text-profile": PROFILE_EXPRESSION,
+            "x-fixture-debug": "string(llmRequest)",
+            "x-fixture-path": "request.path",
         },
         "failureMode": "failClosed",
     }
