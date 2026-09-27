@@ -1,6 +1,6 @@
 # Project brief
 
-Updated 2026-09-27 · offline foundation implemented; runtime design remains provisional
+Updated 2026-09-27 · evaluation core implemented; host integrations and quality validation pending
 
 ## Product and target user
 
@@ -43,8 +43,8 @@ The bounded reuse review supports a small independent core for the new Markdown/
 The [first-release plan](release-plan.md) specifies the folder contract, example files, architecture, connector boundaries, transports, and completion criteria:
 
 1. Implemented: offline loader, validation, policy IDs, snapshots, and preview; see [foundation evidence](foundation-report.md).
-2. Mock/OpenRouter evaluation and deterministic decisions.
-3. LiteLLM, Agentgateway, and direct TypeSafe transport.
+2. Implemented: mock evaluation, deterministic decisions, and both Jev adapters; live smoke checks remain pending.
+3. LiteLLM/Agentgateway service and runtime enforcement evidence.
 4. Copilot runtime profiles and observed enforcement tests.
 5. Private candidate validation, packaging, and comparative evaluation report, followed by a public preview when release gates pass.
 

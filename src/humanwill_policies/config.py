@@ -53,6 +53,11 @@ def load_configuration(bundle: Bundle, document: dict) -> Configuration:
     validate_contract("config", document, "configuration")
     # Copy into JSON primitives; never mutate the caller's document.
     effective = json.loads(canonical(document))
+    v2 = effective["format"] == "humanwill.config/2"
+    if v2:
+        from .runtime import EvaluationLimits
+
+        effective["evaluation"] = asdict(EvaluationLimits(**effective.get("evaluation", {})))
     expected = {policy.id for policy in bundle.policies}
     supplied = set(effective["policies"])
     if supplied != expected:
@@ -86,20 +91,42 @@ def load_configuration(bundle: Bundle, document: dict) -> Configuration:
         binding.setdefault("on_error", "block")
         binding.setdefault("requires_metadata", [])
         binding.setdefault("predicates", [])
+        if v2:
+            strategy = binding["strategy"]
+            binding.setdefault("monitor_min_confidence", 0.8)
+            binding.setdefault("require_complete_coverage", True)
+            binding.setdefault("when", [])
+            if binding["when"] and strategy != "predicates":
+                raise PolicyError(
+                    "invalid_strategy", "When is only for deterministic predicates", policy.id
+                )
+            if (strategy == "scoped_predicates") != ("scope" in binding):
+                raise PolicyError(
+                    "invalid_strategy", "Only scoped predicates require scope", policy.id
+                )
+            if (strategy != "semantic") != bool(binding["predicates"]):
+                raise PolicyError(
+                    "invalid_strategy", "Predicate strategies require predicates", policy.id
+                )
+            if strategy == "semantic" and binding["requires_metadata"]:
+                raise PolicyError(
+                    "invalid_strategy", "Use predicates for required trusted facts", policy.id
+                )
         binding["requires_metadata"].sort()
         required = set(binding["requires_metadata"])
-        for predicate in binding["predicates"]:
+        for predicate in binding["predicates"] + binding.get("when", []):
             if predicate["field"] not in required:
                 raise PolicyError(
                     "undeclared_metadata", "Predicate field must be declared required", policy.id
                 )
         if not binding["enabled"] or binding["mode"] == "monitor":
             continue
-        if "evaluation_profile" not in binding or "provider" not in effective:
+        semantic = not v2 or binding["strategy"] != "predicates"
+        if semantic and ("evaluation_profile" not in binding or "provider" not in effective):
             raise PolicyError(
                 "missing_profile", "Enforcement requires provider and evaluation profile", policy.id
             )
-        if binding["evaluation_profile"]["model"] != effective["provider"]["model"]:
+        if semantic and binding["evaluation_profile"]["model"] != effective["provider"]["model"]:
             raise PolicyError(
                 "profile_model_mismatch", "Profile must match the configured model", policy.id
             )

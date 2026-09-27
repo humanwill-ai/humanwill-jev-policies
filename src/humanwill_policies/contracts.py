@@ -9,7 +9,7 @@ from jsonschema import Draft202012Validator
 from .errors import PolicyError
 from .serialization import canonical, json_value
 
-SCHEMAS = ("policy", "collection", "config", "request", "result")
+SCHEMAS = ("policy", "collection", "config", "config-v2", "request", "result", "result-v2")
 STAGES = ("prompt", "model_request", "response", "tool_action")
 MAX_REQUEST_BYTES = 262_144
 
@@ -22,7 +22,11 @@ def schema(name: str) -> dict:
 
 def validate_contract(name: str, value: object, location: str = "") -> None:
     json_value(value)
-    if name in ("request", "result") and len(canonical(value).encode()) > MAX_REQUEST_BYTES:
+    if name in ("config", "result") and isinstance(value, dict):
+        if value.get("format") == f"humanwill.{name}/2":
+            name += "-v2"
+    kind = name.removesuffix("-v2")
+    if kind in ("request", "result") and len(canonical(value).encode()) > MAX_REQUEST_BYTES:
         raise PolicyError("payload_limit", "Payload exceeds 262144 canonical JSON bytes", location)
     validator = Draft202012Validator(schema(name))
     error = next(validator.iter_errors(value), None)
@@ -31,7 +35,7 @@ def validate_contract(name: str, value: object, location: str = "") -> None:
         raise PolicyError(
             "schema_error", f"Schema rule {error.validator} failed at /{path}", location
         )
-    if name in ("request", "result"):
+    if kind in ("request", "result"):
         if value["coverage"]["complete"] and value["coverage"]["omitted"]:
             raise PolicyError(
                 "invalid_coverage", "Complete coverage cannot include omissions", location
@@ -59,7 +63,7 @@ def validate_contract(name: str, value: object, location: str = "") -> None:
             raise PolicyError(
                 "missing_action", "A tool_action event needs a proposed action", location
             )
-    elif name == "result":
+    elif kind == "result":
         ids = [part["policy_id"] for part in value["policies"]]
         if len(ids) != len(set(ids)):
             raise PolicyError("duplicate_policy_id", "Result policy IDs must be unique", location)

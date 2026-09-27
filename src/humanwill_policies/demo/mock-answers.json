@@ -1,0 +1,12 @@
+{
+  "DEMO-CONTENT": {
+    "type": "choice",
+    "choice": "compliant",
+    "confidence": 1.0,
+    "probabilities": {
+      "compliant": 1.0,
+      "violation": 0.0,
+      "insufficient_evidence": 0.0
+    }
+  }
+}

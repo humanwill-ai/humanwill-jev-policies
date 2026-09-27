@@ -1,0 +1,19 @@
+{
+  "format": "humanwill.request/1",
+  "request_id": "demo-request",
+  "stage": "prompt",
+  "content": [
+    {
+      "id": "message-1",
+      "kind": "text",
+      "text": "Please explain our refund policy politely."
+    }
+  ],
+  "coverage": {
+    "inspected": [
+      "message-1"
+    ],
+    "omitted": [],
+    "complete": true
+  }
+}

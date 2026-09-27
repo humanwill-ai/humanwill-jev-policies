@@ -1,10 +1,10 @@
 # Roadmap to the first public release
 
-Updated 2026-09-27 · contracts and offline foundation implemented; runtime/release gates pending
+Updated 2026-09-27 · foundation and evaluation core implemented; live-provider and host/release gates pending
 
 **Target: `v0.1.0a1`, a public preview on GitHub.** Publish a usable, tested implementation with all requested connectors and a clear support boundary. Public availability does not establish production suitability or semantic accuracy for arbitrary company policies.
 
-Current inventory: installable offline package/CLI, policy/configuration schemas, synthetic fixtures, automated tests and CI, plus policy/design documentation. See the [foundation report](foundation-report.md). No evaluator, HTTP service, runtime connector, project license, or GitHub release exists. The repository remains private. Steps 1–2 below are the authorized first implementation increment.
+Current inventory: installable offline package/CLI, policy/configuration schemas, synthetic fixtures, automated tests and CI, plus policy/design documentation. See the [foundation report](foundation-report.md). The evaluation core and both provider adapters now have offline tests; live-provider validation remains pending. No HTTP service, runtime connector, project license, or GitHub release exists. See [step 3 evidence](evaluation-core-report.md). The repository remains private. The owner authorized steps 1–3; this does not authorize publication.
 
 This is the delivery and publication checklist. [Release design](release-plan.md), [optional metadata](optional-metadata.md), and [evaluation plan](evaluation-plan.md) remain the technical references. M1–M4 below implement the existing milestones; M5 expands into evaluation, packaging, and publication gates.
 
@@ -89,7 +89,7 @@ Prepare a reviewable draft containing the exact candidate commit, proposed tag `
 - [ ] All required features and real-runtime evidence above are complete.
 - [ ] Publication/privacy/license review is complete; public assets contain no private customer content.
 - [ ] Fresh-environment installation and offline demo pass from the actual release artifacts.
-- [ ] Owner has authorized publishing this concrete candidate; the current request authorizes foundation implementation, not changing visibility now.
+- [ ] Owner has authorized publishing this concrete candidate; the current request authorizes evaluation-core implementation, not changing visibility now.
 - [ ] Make `humanwill-ai/humanwill-jev-policies` public and publish the prepared prerelease at the reviewed commit.
 - [ ] Verify anonymous access, asset downloads, checksums, clean installation, and released configuration examples; verify org repository settings after visibility changes.
 
@@ -97,6 +97,6 @@ If a post-publication defect appears, mark the affected release/feature clearly 
 
 ## Immediate next work and owner inputs
 
-**Steps 1–2 are implemented:** the contracts, offline loader/CLI, CI, and three synthetic policy classes are documented in the [foundation report](foundation-report.md). The next implementation increment is Step 3: a mock evaluator and deterministic decisions, followed by provider transports under an agreed live-call budget. Re-estimate remaining effort after the first real gateway and hook smoke tests; elapsed time cannot substitute for release evidence.
+**Steps 1–2 are implemented:** the contracts, offline loader/CLI, CI, and three synthetic policy classes are documented in the [foundation report](foundation-report.md). Step 3 software is implemented; its budgeted live smoke gate remains pending. Next are the live smoke checks and Step 4 service/gateway work after owner direction. Re-estimate remaining effort after the first real gateway and hook smoke tests; elapsed time cannot substitute for release evidence.
 
 Owner inputs needed before later gates: license choice; three policy intentions and label reviewer; OpenRouter/alternative-judge spending cap; direct TypeSafe credentials for its smoke test; access to the two target Copilot runtimes; and acceptance budgets before held-out evaluation. None requires placing secrets in the repository or in chat. Set a maintainer/security reporting destination before public release.

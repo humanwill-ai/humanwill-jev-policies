@@ -1,6 +1,7 @@
 """Small offline CLI. JSON errors never echo YAML source or provider credentials."""
 
 import argparse
+import asyncio
 import json
 import shutil
 import sys
@@ -30,7 +31,66 @@ def _parser() -> argparse.ArgumentParser:
             command.add_argument("--stage", choices=STAGES)
     commands.add_parser("schema").add_argument("name", choices=SCHEMAS)
     commands.add_parser("init-demo").add_argument("destination", type=Path)
+    evaluate = commands.add_parser("evaluate", help="Assess an event; mock by default")
+    evaluate.add_argument("root", type=Path)
+    evaluate.add_argument("--entrypoint", default="policies.md")
+    evaluate.add_argument("--config", required=True, type=Path)
+    evaluate.add_argument("--request", required=True, type=Path)
+    evaluate.add_argument("--backend", choices=("mock", "configured"), default="mock")
+    evaluate.add_argument("--mock-answers", type=Path)
+    evaluate.add_argument(
+        "--allow-external",
+        action="store_true",
+        help="Authorize disclosing this event and policy bundle to the hosted evaluator",
+    )
+    evaluate.add_argument("--json", action="store_true")
     return parser
+
+
+def _read_json(path: Path) -> dict:
+    import os
+    import stat
+
+    from .providers import decode_json
+
+    fd = os.open(path, os.O_RDONLY | os.O_NONBLOCK)
+    with os.fdopen(fd, "rb") as stream:
+        if not stat.S_ISREG(os.fstat(stream.fileno()).st_mode):
+            raise PolicyError("invalid_file", "JSON input must be a regular file")
+        data = stream.read(262145)
+    if len(data) > 262144:
+        raise PolicyError("payload_limit", "JSON input exceeds 262144 bytes")
+    return decode_json(data)
+
+
+def _evaluate(args, bundle, configuration):
+    from .evaluation import Evaluator
+    from .providers import JevBackend, MockBackend
+    from .runtime import EgressPermit
+    from .serialization import digest
+
+    request = _read_json(args.request)
+    if args.backend == "mock":
+        if args.mock_answers is None or args.allow_external:
+            raise PolicyError(
+                "invalid_options", "Mock evaluation requires answers and no external opt-in"
+            )
+        backend = MockBackend(_read_json(args.mock_answers))
+        permit = None
+    else:
+        if not args.allow_external or args.mock_answers is not None:
+            raise PolicyError(
+                "invalid_options",
+                "Configured evaluation requires external opt-in and no mock answers",
+            )
+        provider = configuration.to_dict().get("provider")
+        if not provider:
+            raise PolicyError("missing_provider", "Configure an explicit evaluator provider")
+        backend = JevBackend(provider)
+        permit = EgressPermit(digest(request), bundle.sha256, backend.transport)
+    result = asyncio.run(Evaluator(bundle, configuration, backend).evaluate(request, egress=permit))
+    print(json.dumps(result, indent=2))
+    return 0 if result["decision"] == "allow" else 3 if result["decision"] == "block" else 4
 
 
 def _init_demo(destination: Path) -> None:
@@ -74,6 +134,8 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Created offline demo: {args.destination}")
             return 0
         bundle, configuration = load_project(args.root, args.config, args.entrypoint)
+        if args.command == "evaluate":
+            return _evaluate(args, bundle, configuration)
         if args.command == "validate":
             result = {
                 "valid": True,

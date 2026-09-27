@@ -2,7 +2,7 @@
 
 Implementation plan · updated 2026-09-27
 
-The owner requires company/user-authored Markdown policies with stable policy IDs, LiteLLM, Agentgateway, and a Copilot hook connector in the first release, plus direct TypeSafe and OpenRouter access to Jev. Development and testing will use OpenRouter. The offline foundation is implemented; the [contract reference](contracts.md) defines its exact behavior and the [foundation report](foundation-report.md) records checks. Evaluation, service, and connectors remain proposed work.
+The owner requires company/user-authored Markdown policies with stable policy IDs, LiteLLM, Agentgateway, and a Copilot hook connector in the first release, plus direct TypeSafe and OpenRouter access to Jev. Development and testing will use OpenRouter. The offline foundation is implemented; the [contract reference](contracts.md) defines its exact behavior and the [foundation report](foundation-report.md) records checks. The evaluation core and both provider adapters are now implemented with synthetic contract tests; service/connectors and live-provider validation remain pending. See the [core reference](evaluation-core.md).
 
 The [public-release roadmap](public-release-plan.md) now defines delivery order and publication gates for a proposed `v0.1.0a1` public preview. This document defines technical scope; private validation remains a step toward publication, not the final release objective.
 
@@ -82,7 +82,7 @@ flowchart LR
 
 Separate modules: `policies`, `evaluation`, `decision`, `providers`, `connectors`, `api`, and `cli`. The hook executable calls the service; it keeps no Jev credentials and emits only the required host JSON on stdout, with diagnostics on stderr.
 
-Proposed operations: `validate`, `preview`, `evaluate` (offline/mock by default), `serve`, and `hook --runtime ... --event ...`. The implemented commands are `validate`, `preview`, `init-demo`, and `schema`; candidate wire schemas have offline fixtures. `evaluate`, `serve`, and `hook` remain future work. Do not install hooks automatically into user projects.
+Proposed operations: `validate`, `preview`, `evaluate` (offline/mock by default), `serve`, and `hook --runtime ... --event ...`. The implemented commands are `validate`, `preview`, `init-demo`, and `schema`; candidate wire schemas have offline fixtures. `evaluate` is now implemented; `serve` and `hook` remain future work. Do not install hooks automatically into user projects.
 
 For each policy, start with a fixed, versioned Choice rubric: `compliant`, `violation`, or `insufficient_evidence`. Preserve probability distributions and use thresholds from labeled examples. Do not ask another model to silently rewrite policies. Policy text is trusted evaluator configuration; request content is untrusted evidence. This separation does not eliminate Jev's documented injection susceptibility.
 
@@ -149,7 +149,7 @@ Development uses synthetic policies and examples through OpenRouter. Production 
 | M4 — Copilot connections | Hook executable and separate selected runtime profiles | Local deny/stop and CLI assessment/deny verified on pinned versions; controlled tool not executed on denial; timeout and disabled-hook behavior documented |
 | M5 — public-preview candidate | Installation/configuration examples, container recipe, compatibility matrix, evaluation report | Three connector families, both transports, privacy defaults, rollback instructions, and no untested enforcement claim; then complete public-release roadmap gates |
 
-M1 is implemented with offline tests and package checks; see the [foundation report](foundation-report.md). The bounded [reuse review](compatibility.md) found that an original compiler avoids importing benchmark scoring contracts or `jev-edge` fail-open runtime behavior. Next is M2, starting with mocks and deterministic decisions before any live calls.
+M1 is implemented with offline tests and package checks; see the [foundation report](foundation-report.md). The bounded [reuse review](compatibility.md) found that an original compiler avoids importing benchmark scoring contracts or `jev-edge` fail-open runtime behavior. M2 software is implemented, including both transports (direct TypeSafe moved forward from M3). Its budgeted live smoke checks remain pending; see [step 3 evidence](evaluation-core-report.md).
 
 Test three narrow policies on legitimate work, violations, exceptions, missing evidence, and direct/indirect injection. Compare Jev with deterministic checks and one suitable alternative judge. Keep held-out cases separate from policy examples. Report false blocks, missed violations, errors, coverage gaps, host bypasses, p50/p95/p99 added latency, and total cost; see [evaluation plan](evaluation-plan.md). The benchmark's FR/usefulness metrics and labels do not automatically measure harmful compliance or this service's enforcement.
 

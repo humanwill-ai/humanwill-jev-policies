@@ -22,7 +22,7 @@ Updated 2026-09-27. Owner requirements and proposed implementation choices are s
 | Human review | Proposed exclusion | Reject unsupported review configuration; no approval workflow in v0.1 |
 | Customer demand | Unvalidated | Enterprise platform/security teams are the target, not validated paying customers |
 | Hosted customer data | Open | Confirm policy-text/content egress, destinations, retention, and geographic constraints |
-| Live budget / quality targets | Open | Agree before paid runs / customer enforcement respectively |
+| Live budget / quality targets | Smoke budget approved; quality targets open | Owner authorized up to $5 total for synthetic OpenRouter/direct smoke tests; semantic acceptance targets remain unapproved |
 | Public release objective | Decided by owner | Plan a first release suitable for public GitHub publication; visibility remains private during preparation |
 | Release label / artifacts | Proposed | `v0.1.0a1` public preview, source/wheel/checksums and evidence; see public-release roadmap |
 | Project license | Awaiting owner choice | Proposed Apache-2.0 for original code/docs/examples; preserve licenses of reused material |
@@ -39,10 +39,18 @@ Publication planning: the owner requested steps toward a confident public first 
 
 Steps 1–2 of the [public-release roadmap](public-release-plan.md) are implemented: authoring/configuration contracts, package/CLI, loader, IDs/digests, preview, tests, and CI. See the [foundation report](foundation-report.md). The roadmap now uses one-based numbering to match the requested steps; these were previously rows 0–1. No model calls, service, or connectors were implemented in this increment.
 
-Next: Step 3 / M2, beginning with mock evaluation and deterministic decisions. Establish how semantic applicability and metadata predicates combine before enabling the provider transports; do not interpret a valid evaluation-profile configuration as measured accuracy.
+Step 3 software is now implemented: mock/backend abstraction, deterministic and scoped predicates, strict Jev adapters, bounded batching/deadlines, and an assessment CLI. Its live-provider exit gate remains pending credentials; owner approved a $5 total synthetic smoke cap. See [core contracts](evaluation-core.md) and [evidence](evaluation-core-report.md). Do not interpret a valid evaluation-profile configuration as measured accuracy.
 
 Foundation decisions: package/CLI `humanwill-policies`, import `humanwill_policies`, version `0.1.0.dev0`; explicit include lists and one policy per file; reject all symlinks under the root; bounded restricted YAML; exact source and normalized configuration hashes; monitoring defaults and required explicit policy bindings. Freeze authoring format v1 and candidate request/result fixtures with versioned changes. Candidate host versions are recorded but untested; final VS Code Copilot extension build remains an integration-stage choice.
 
 ## Additional requirements and ideas
 
 Append dated requirements here and update the plan when they change scope.
+
+## Step 3 decisions — 2026-09-27
+
+- Preserve original v1 shapes; use config/2 for explicit strategies, deterministic applicability conditions, limits, and returned-model allowlists; emit result/2 with probability evidence, simulation marker, and batch usage. Markdown and request/1 remain stable.
+- Combine facts through `predicates` or `scoped_predicates`; no model-derived authorization. Optional `when` conditions avoid applying confidential-document constraints to known-public material. Unknown facts stay errors.
+- Keep trusted evidence and evaluator disclosure authorization in a separate in-process embedding interface. No payload flag, raw header, or CLI metadata file establishes trust. Actual authentication adapters remain future integration work.
+- Default to complete declared coverage, no retries/fallback, bounded sequential batches, an overall deadline, and immediate overload errors. Mock runs never request enforcement.
+- Core transport code covers both providers in step 3, superseding the earlier M3 placement of direct TypeSafe. Live checks remain an outstanding evidence gate for both routes. Owner approved up to $5 total for synthetic smoke tests. Neither provider key was set in the implementation environment; credentials are pending and no paid calls have been made.

@@ -1,10 +1,10 @@
 # Optional metadata and stage-specific checks
 
-Design update · 2026-09-27 · configuration validation implemented; runtime behavior below remains planned
+Design update · 2026-09-27 · core predicates/source checks implemented; host authentication/enforcement remain pending
 
 **The service must work with content alone.** Identity, groups, document classifications, destination information, and other contextual facts are optional inputs. Metadata support is an independently configurable feature, recommended off by default. Enabling it adds evidence to selected policies; it does not make every request require a user identity.
 
-Offline validation checks bindings and source switches; it does not evaluate predicates, authenticate facts, or make enrichment/model calls. See the [implemented contract](contracts.md).
+Offline validation checks bindings and source switches. The new [evaluation core](evaluation-core.md) executes predicates against separately verified evidence, checks freshness/event binding, and handles semantic scope. It performs no identity enrichment and does not itself authenticate a metadata source; the embedding verifier must do that. Real gateway/hook checks below remain release requirements.
 
 ## Configuration and behavior
 

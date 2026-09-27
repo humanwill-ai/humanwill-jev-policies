@@ -37,3 +37,7 @@ tomli==2.4.1
 tomli_w==1.2.0
 urllib3==2.8.0
 typing-extensions==4.16.0; python_version < "3.13"
+httpx==0.28.1
+httpcore==1.0.9
+anyio==4.15.1
+h11==0.16.0

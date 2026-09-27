@@ -1,0 +1,82 @@
+{
+  "format": "humanwill.result/2",
+  "request_id": "demo-request",
+  "request_sha256": "325a0f405219fe1c25630c6f2485046f1c148b07adda129ee4d5e5e6fa9f550c",
+  "rubric": "humanwill.choice/1",
+  "simulated": true,
+  "decision": "allow",
+  "bundle_sha256": "33c6c8fbe7cc42ebd4a3b0b57d923d94d0e7440a0673b7b3133f2ab36c270f8e",
+  "configuration_sha256": "7829d0b98a7e9eaa70a3c75398a903f8ba44942a1011e752c831e07f8a31a0ce",
+  "policies": [
+    {
+      "policy_id": "DEMO-CONTENT",
+      "policy_version": "1",
+      "policy_sha256": "137d87b0239627f85bd12cf168321eaa14d9c9460d9213bdc935e3342e2e0575",
+      "mode": "monitor",
+      "status": "evaluated",
+      "judgment": "compliant",
+      "reasons": [
+        "semantic_judgment"
+      ],
+      "evidence": {
+        "choice": "compliant",
+        "confidence": 1.0,
+        "probabilities": {
+          "compliant": 1.0,
+          "insufficient_evidence": 0.0,
+          "violation": 0.0
+        }
+      }
+    },
+    {
+      "policy_id": "DEMO-DOCUMENTS",
+      "policy_version": "1",
+      "policy_sha256": "02c7a799c4cd8dc999d080a4be4ff263bc73173ed0ca4bb51859765d00fd976b",
+      "mode": "monitor",
+      "status": "disabled",
+      "judgment": "not_evaluated",
+      "reasons": [
+        "disabled"
+      ],
+      "evidence": {}
+    },
+    {
+      "policy_id": "DEMO-FINANCE",
+      "policy_version": "1",
+      "policy_sha256": "1c3f6bc4c09df09ba21e53a63b7b1773998ed8463389cf5b3481c813dec52061",
+      "mode": "monitor",
+      "status": "disabled",
+      "judgment": "not_evaluated",
+      "reasons": [
+        "disabled"
+      ],
+      "evidence": {}
+    }
+  ],
+  "coverage": {
+    "complete": true,
+    "inspected": [
+      "message-1"
+    ],
+    "omitted": []
+  },
+  "evaluation": {
+    "transport": "mock",
+    "requested_model": "mock",
+    "returned_model": "mock",
+    "batches": [
+      {
+        "returned_model": "mock",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cost_usd": 0
+      }
+    ]
+  },
+  "duration_ms": 0,
+  "enforcement": {
+    "requested": "none",
+    "actual": "not_requested"
+  },
+  "errors": []
+}

@@ -1,6 +1,6 @@
 # Contract v1 and offline commands
 
-Implemented for `humanwill-policies` **0.1.0.dev0**. This freezes the offline authoring contract and candidate request/result shapes; it does not implement Jev calls, HTTP endpoints, hooks, authorization verification, or enforcement. Breaking contract changes require a new format identifier rather than silently reinterpreting saved inputs.
+Foundation reference for `humanwill-policies` **0.1.0.dev0**. The current evaluation extension uses [config/2 and result/2](evaluation-core.md); v1 validators remain available. This document describes the original offline contract. It freezes the offline authoring contract and candidate request/result shapes; it does not implement Jev calls, HTTP endpoints, hooks, authorization verification, or enforcement. Breaking contract changes require a new format identifier rather than silently reinterpreting saved inputs.
 
 ## Package and CLI
 
@@ -54,7 +54,7 @@ Policy identity is its stable ID; declared version is author-maintained. `Policy
 
 ## Deployment configuration
 
-`format: humanwill.config/1`, `metadata`, and `policies` are required. Use the [packaged demo config](../src/humanwill_policies/demo/config.yaml) as a starting point. Every policy in the loaded bundle needs an explicit binding; missing or unknown IDs are errors. With no `--config`, only authoring structure is validated and preview marks all rules `unconfigured`.
+`format: humanwill.config/1`, `metadata`, and `policies` are required. The [current packaged demo config](../src/humanwill_policies/demo/config.yaml) now uses config/2; see the evaluation-core migration notes. Every policy in the loaded bundle needs an explicit binding; missing or unknown IDs are errors. With no `--config`, only authoring structure is validated and preview marks all rules `unconfigured`.
 
 Binding fields:
 

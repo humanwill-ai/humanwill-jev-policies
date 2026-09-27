@@ -1,4 +1,4 @@
-name: Offline foundation
+name: Policy core
 
 on:
   push:
@@ -49,6 +49,7 @@ jobs:
           "$RUNNER_TEMP/wheel-env/bin/humanwill-policies" validate demo --config demo/config.yaml --json
           "$RUNNER_TEMP/wheel-env/bin/humanwill-policies" preview demo --config demo/config.yaml --json
           "$RUNNER_TEMP/wheel-env/bin/humanwill-policies" schema request
+          "$RUNNER_TEMP/wheel-env/bin/humanwill-policies" evaluate demo --config demo/config.yaml --request demo/request.json --mock-answers demo/mock-answers.json --json
       - name: Audit runtime dependencies
         if: matrix.os == 'ubuntu-24.04' && matrix.python == '3.14'
         run: pip-audit --disable-pip --no-deps -r requirements.txt

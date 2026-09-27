@@ -1,13 +1,23 @@
-format: humanwill.config/1
+format: humanwill.config/2
 metadata:
   enabled: false
 policies:
   DEMO-CONTENT:
+    strategy: semantic
     enabled: true
     mode: monitor
   DEMO-FINANCE:
+    strategy: scoped_predicates
+    scope: The proposed tool action approves or releases a payment.
+    predicates:
+      - {field: identity.groups, op: contains, value: finance}
     enabled: false
     requires_metadata: [identity.subject, identity.groups]
   DEMO-DOCUMENTS:
+    strategy: predicates
+    when:
+      - {field: documents.classification, op: equals, value: confidential}
+    predicates:
+      - {field: destination.approved, op: equals, value: true}
     enabled: false
     requires_metadata: [documents.classification, destination.provider, destination.approved]

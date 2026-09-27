@@ -1,0 +1,329 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:humanwill:result:2",
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": "humanwill.result/2"
+    },
+    "request_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+    },
+    "decision": {
+      "enum": [
+        "allow",
+        "block",
+        "evaluation_error"
+      ]
+    },
+    "bundle_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "configuration_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "policies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "policy_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+          },
+          "policy_version": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "\\S"
+          },
+          "judgment": {
+            "enum": [
+              "compliant",
+              "violation",
+              "insufficient_evidence",
+              "not_evaluated"
+            ]
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512,
+              "pattern": "\\S"
+            },
+            "minItems": 1,
+            "maxItems": 32
+          },
+          "mode": {
+            "enum": [
+              "monitor",
+              "enforce"
+            ]
+          },
+          "status": {
+            "enum": [
+              "evaluated",
+              "disabled",
+              "not_applicable",
+              "error"
+            ]
+          },
+          "policy_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "evidence": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "type": "string"
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "probabilities": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "predicate_results": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                },
+                "maxItems": 64
+              },
+              "condition_results": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                },
+                "maxItems": 64
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "policy_id",
+          "policy_version",
+          "judgment",
+          "reasons",
+          "mode",
+          "status",
+          "policy_sha256",
+          "evidence"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 500
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "inspected": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+          },
+          "minItems": 0,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "omitted": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "\\S"
+          },
+          "minItems": 0,
+          "maxItems": 256,
+          "uniqueItems": true
+        },
+        "complete": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "inspected",
+        "omitted",
+        "complete"
+      ],
+      "additionalProperties": false
+    },
+    "evaluation": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "transport": {
+              "enum": [
+                "openrouter",
+                "typesafe",
+                "mock"
+              ]
+            },
+            "requested_model": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512,
+              "pattern": "\\S"
+            },
+            "returned_model": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "batches": {
+              "type": "array",
+              "maxItems": 64,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "returned_model": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "input_tokens": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "output_tokens": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "minimum": 0
+                  },
+                  "cost_usd": {
+                    "type": [
+                      "number",
+                      "null"
+                    ],
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "returned_model",
+                  "input_tokens",
+                  "output_tokens",
+                  "cost_usd"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "transport",
+            "requested_model",
+            "returned_model",
+            "batches"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "duration_ms": {
+      "type": "number",
+      "minimum": 0
+    },
+    "enforcement": {
+      "type": "object",
+      "properties": {
+        "requested": {
+          "enum": [
+            "allow",
+            "block",
+            "none"
+          ]
+        },
+        "actual": {
+          "enum": [
+            "unconfirmed",
+            "not_requested"
+          ]
+        }
+      },
+      "required": [
+        "requested",
+        "actual"
+      ],
+      "additionalProperties": false
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9._-]{0,127}$"
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512,
+            "pattern": "\\S"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 128
+    },
+    "request_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "rubric": {
+      "const": "humanwill.choice/1"
+    },
+    "simulated": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "format",
+    "request_id",
+    "decision",
+    "bundle_sha256",
+    "configuration_sha256",
+    "policies",
+    "coverage",
+    "evaluation",
+    "duration_ms",
+    "enforcement",
+    "errors",
+    "request_sha256",
+    "rubric",
+    "simulated"
+  ],
+  "additionalProperties": false
+}
