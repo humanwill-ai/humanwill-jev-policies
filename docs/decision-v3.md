@@ -113,9 +113,12 @@ policy call, per-stage question selection, config/2 compatibility, result/3 hook
 clients and calibration input integrity. A fresh `0.1.0.dev3` wheel installed
 outside the checkout passed schema loading and a trusted no-model decision.
 
-Live re-evaluation uses the existing approved OpenRouter budget and must record
-its own results before any improvement claim. The initial report remains the
-config/2 baseline, not evidence of config/3 performance.
+The [live follow-up report](evaluation-v3-report.md) records 96 development cases
+per evaluator, residual failures and separate offline threshold analyses. The
+original-set false blocks improved, but neither software-policy configuration
+qualifies under the development screen. Action-policy candidates were not
+promoted; all thresholds remain 0.8 and all bindings remain monitor. The initial
+report remains the config/2 baseline, not evidence of config/3 performance.
 
 The implementation at `ed06443` passed all four Ubuntu/macOS × Python 3.11/3.14
 [core CI jobs](https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/36324853819)

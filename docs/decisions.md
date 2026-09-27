@@ -110,3 +110,10 @@ The initial revised runs retain threshold 0.8. Separate model/policy threshold
 curves may suggest development candidates, but do not automatically change
 configuration or create calibrated enforcement profiles. Detailed semantics and
 compatibility are in [the config/3 reference](decision-v3.md).
+
+The completed [follow-up evidence](evaluation-v3-report.md) leaves the release
+quality gate open. The action-policy offline screen suggests 0.6 for Jev and 0.9
+for Gemini, but these are reused-data development candidates, not approved
+threshold changes. Neither model has a qualifying software-policy candidate.
+Keep all configurations in monitoring at 0.8 pending label review and further
+validation; do not remove the already-public-material restriction to fit results.

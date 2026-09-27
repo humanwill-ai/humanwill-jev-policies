@@ -54,4 +54,4 @@ The owner authorized synthetic step 6 OpenRouter evaluations within the remainin
 
 ## Initial development evidence
 
-See the [dated report](evaluation-development-report.md) for the first 60-case comparison, threshold replay and repeat checks. Neither semantic configuration supports an enforcement claim. Review [draft labels](step6-label-review.md) before tuning and freezing the held-out protocol.
+See the [dated baseline report](evaluation-development-report.md) for the first 60-case comparison, threshold replay and repeat checks, and the [config/3 follow-up](evaluation-v3-report.md) for revised runs plus 36 matched attack/control cases and separate model/policy calibration diagnostics. Neither semantic configuration supports an enforcement claim. Review [draft labels](step6-label-review.md) before tuning and freezing the held-out protocol.

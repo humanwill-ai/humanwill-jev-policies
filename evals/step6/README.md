@@ -104,7 +104,7 @@ few templates into hundreds of rows.
   separate held-out families, calibrated/frozen profiles and representative
   workload/host latency measurements are required before an enforcement claim.
 
-The [initial report](../../docs/evaluation-development-report.md) records the live runs and remaining gate. Replay recorded Jev answers without network calls using `python -m evals.step6.replay artifacts/quality/jev-v1`; these diagnostics do not change the configured threshold.
+The [initial report](../../docs/evaluation-development-report.md) records the baseline. The [config/3 follow-up](../../docs/evaluation-v3-report.md) records revised live runs, added attacks, separate uncertainty analyses and the remaining gate. Replay recorded Jev answers without network calls using `python -m evals.step6.replay artifacts/quality/jev-v1`; these diagnostics do not change the configured threshold.
 
 ## Revised development configuration
 
