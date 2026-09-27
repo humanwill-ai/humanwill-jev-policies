@@ -29,6 +29,10 @@ def load_recordings(directories):
     first = None
     for directory in directories:
         manifest = json.loads((directory / "manifest.json").read_text())
+        if manifest.get("also_policies"):
+            raise ValueError(
+                "Combined-policy runs need a separate comparison, not isolated calibration"
+            )
         if manifest["backend"] not in ("jev", "chat"):
             raise ValueError("Calibrate live models independently of deterministic baselines")
         if digest(manifest["configuration"]) != manifest["config_sha256"]:

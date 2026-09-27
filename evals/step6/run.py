@@ -121,6 +121,16 @@ def load_case_bundle(cases, policy_path):
     return bundle
 
 
+def select_configuration(config, policy_id, also_policies=()):
+    selected = copy.deepcopy(config)
+    active = {policy_id, *also_policies}
+    if active - selected["policies"].keys():
+        raise ValueError("Unknown additional policy in comparison")
+    for key, binding in selected["policies"].items():
+        binding["enabled"] = key in active
+    return selected
+
+
 async def run(args):
     output = args.output
     output.mkdir(parents=True, exist_ok=False)
@@ -130,6 +140,10 @@ async def run(args):
     policy_path = args.policies
     bundle = load_case_bundle(cases, policy_path)
     config = yaml.safe_load(args.config.read_text())
+    also_policies = sorted(set(getattr(args, "also_policy", [])))
+    # Validate all selections before any live call or budget reservation.
+    for case in cases:
+        load_configuration(bundle, select_configuration(config, case["policy_id"], also_policies))
     if args.backend == "keyword":
         backend = KeywordBackend()
         ledger = None
@@ -145,6 +159,7 @@ async def run(args):
         "format": "humanwill.eval-run/1",
         "started_at": datetime.now(UTC).isoformat(),
         "backend": args.backend,
+        "also_policies": also_policies,
         "dataset_sha256": hashlib.sha256(args.dataset.read_bytes()).hexdigest(),
         "bundle_sha256": bundle.sha256,
         "config_sha256": digest(config),
@@ -182,11 +197,7 @@ async def run(args):
     stopped = False
     for repeat in range(args.repeats):
         for case in cases:
-            selected = copy.deepcopy(config)
-            for key, binding in selected["policies"].items():
-                binding["enabled"] = key == case["policy_id"]
-            if case["policy_id"] not in selected["policies"]:
-                raise ValueError("Unknown policy in dataset")
+            selected = select_configuration(config, case["policy_id"], also_policies)
             engine = Evaluator(bundle, load_configuration(bundle, selected), backend)
             permit = EgressPermit(digest(case["request"]), bundle.sha256, backend.transport)
             result = await engine.evaluate(
@@ -267,6 +278,12 @@ def main():
     parser.add_argument("--dataset", type=Path, default=ROOT / "development.json")
     parser.add_argument("--config", type=Path, default=ROOT / "config.yaml")
     parser.add_argument("--policies", type=Path, default=ROOT / "policies")
+    parser.add_argument(
+        "--also-policy",
+        action="append",
+        default=[],
+        help="Also enable this policy for every case (repeatable)",
+    )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--allow-external", action="store_true")
     parser.add_argument("--ledger", type=Path, default=Path("artifacts/quality/spending.json"))
