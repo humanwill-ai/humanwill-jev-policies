@@ -29,11 +29,17 @@
     <div class="case-heading"><div><div class="eyebrow" id="caseMeta"></div><h2 id="caseTitle"></h2><code id="caseId"></code></div><span class="badge" id="reviewBadge"></span></div>
     <div class="columns">
       <article class="event-column"><h3>Event to assess</h3><div id="event"></div>
+        <section id="contextPanel" class="expected" aria-label="Additional evaluation context">
+          <div class="eyebrow">ADDITIONAL CONTEXT · PREPARED, NOT YET MEASURED</div>
+          <p class="subtle">These synthetic observations accompany the unchanged event. Your recorded approvals refer to the original labels; this context was not part of the earlier live run.</p>
+          <div id="contextSummary"></div>
+          <details><summary>Exact context prepared for Jev</summary><pre id="questionContext"></pre></details>
+        </section>
         <div class="expected"><div class="eyebrow">EXPECTED RESULT · NOT A MODEL PREDICTION</div><div><span id="expectedBadge" class="badge"></span><span id="scope"></span></div><p id="rationale"></p></div>
         <div id="composition"></div><h3>Trusted test evidence</h3><p class="subtle">These are fixture facts, not claims accepted from the event.</p><pre id="facts"></pre>
         <details><summary>Full case record, including coverage and per-policy labels</summary><pre id="raw"></pre></details>
       </article>
-      <article class="policy-column"><div class="eyebrow" id="policyId"></div><h3 id="policyTitle"></h3><div id="policyBody"></div><details><summary>Exact Markdown source</summary><pre id="policySource"></pre></details><details id="catalogDetails"><summary>Company-approved sources (synthetic YAML)</summary><pre id="catalogSource"></pre></details></article>
+      <article class="policy-column"><div class="eyebrow" id="policyId"></div><h3 id="policyTitle"></h3><div id="policyBody"></div><h3>Evaluation questions · unchanged</h3><div id="scopeQuestions"></div><p class="subtle">Jev assesses these scope questions. Code checks permission separately. A policy may be resolved by trusted facts without a model call.</p><details><summary>Exact Markdown source</summary><pre id="policySource"></pre></details><details id="catalogDetails"><summary>Company-approved sources (synthetic YAML)</summary><pre id="catalogSource"></pre></details></article>
     </div>
     <section class="review-box" aria-label="Your review"><div class="review-heading"><h3>Your review</h3><span id="historical" class="subtle"></span></div>
       <details id="archivedReview" hidden><summary>Previous review of the original single-policy case</summary><pre id="archivedReviewText"></pre></details>

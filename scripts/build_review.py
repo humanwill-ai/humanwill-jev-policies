@@ -134,6 +134,17 @@ def build():
                 "reason": removal["reason"] or "",
                 "authority": "owner_review_export",
             }
+    context_root = ROOT / "evals/step6/context-v1"
+    context_snapshot = json.loads((context_root / "snapshot.json").read_text())
+    for name, expected in context_snapshot["sha256"].items():
+        if hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != expected:
+            raise ValueError(f"Context snapshot changed: {name}")
+    context_path = context_root / "contexts.json"
+    context_pack = json.loads(context_path.read_text())
+    context_cases = context_pack["cases"]
+    if [c["id"] for c in context_cases] != recorded_approvals:
+        raise ValueError("Context cases do not match the accepted review")
+    scope_config = yaml.safe_load((ROOT / "evals/step6/config-sources-v1.yaml").read_text())
     data = json.dumps(
         {
             "packs": packs,
@@ -147,6 +158,12 @@ def build():
             "original_labels": original_labels,
             "source_catalog": catalog_path.read_text(),
             "source_catalog_sha256": catalog_hash,
+            "question_contexts": {c["id"]: c["context"] for c in context_cases},
+            "question_context_sha256": hashlib.sha256(context_path.read_bytes()).hexdigest(),
+            "scope_questions": {
+                pid: binding.get("scope_by_stage", {})
+                for pid, binding in scope_config["policies"].items()
+            },
         },
         ensure_ascii=False,
     )

@@ -122,6 +122,28 @@ function render() {
     pre.textContent = Object.hasOwn(item, 'text') ? (item.text || '(Empty text — see trusted evidence below)') : pretty(item.arguments ?? item);
     $('event').append(heading, pre);
   }
+  const context = DATA.question_contexts?.[c.id];
+  $('contextPanel').hidden = !context;
+  $('contextSummary').replaceChildren();
+  $('questionContext').textContent = context ? pretty(context) : '';
+  if (context) {
+    const add = text => {const p = document.createElement('p'); p.textContent = text; $('contextSummary').append(p);};
+    add(context.assessment_point);
+    for (const tool of context.tool_contracts ?? []) add(tool.name + ': ' + tool.contract);
+    for (const fact of context.resource_observations ?? []) add(fact.resource + ': ' + (fact.availability ? fact.availability + '. ' : '') + fact.description);
+    const source = context.software_origin_resolution;
+    if (source) {
+      add('Software-origin lookup: ' + source.status + '. ' + source.resources.length + ' resource(s) recorded. This does not state whether a source is approved.');
+      for (const resource of source.resources) add([resource.kind, resource.operation, resource.endpoint, resource.package].filter(Boolean).join(' · '));
+    }
+  }
+  $('scopeQuestions').replaceChildren();
+  for (const pid of [c.policy_id, ...(c.also_policy_ids ?? [])]) {
+    const heading = document.createElement('h4'), p = document.createElement('p');
+    heading.textContent = pid;
+    p.textContent = DATA.scope_questions?.[pid]?.[c.request.stage] ?? 'Deterministic policy: no semantic question is sent to Jev.';
+    $('scopeQuestions').append(heading, p);
+  }
   badge($('expectedBadge'), labels[expectedLabel(c)], expectedLabel(c));
   $('scope').textContent = c.review_revision ? 'Combined result · source scope: ' + c.review_scope.replaceAll('_', ' ') : 'Scope: ' + (c.expected_scope?.replaceAll('_', ' ') ?? 'deterministic; no semantic judgment');
   $('rationale').textContent = c.rationale;
@@ -209,6 +231,7 @@ $('approveRemaining').onclick = () => {
 };
 function exportPayload() {
   return {format: 'humanwill.case-review/1', exported_at: now(), fingerprint, ...state,
+    context_preview: {sha256: DATA.question_context_sha256, status: 'prepared_not_live_evaluated', approval_scope: 'Recorded approvals refer to original labels; the added context is a separate experiment.'},
     reviews: {...Object.fromEntries((DATA.recorded_approvals ?? []).filter(id => !allCases.get(id).p.previously_approved).map(id => [id, review(allCases.get(id).c)])), ...state.reviews},
     removals: [...allCases.values()].filter(({c}) => review(c).status === 'removed').map(({c, p}) => ({id: c.id, packet: p.id, reason: review(c).removal_reason ?? review(c).notes, removed_at: review(c).updated_at, authority: DATA.default_removed[c.id]?.removed_at === review(c).updated_at ? (DATA.default_removed[c.id].authority ?? 'owner_instruction') : 'local_review'})),
     packets: DATA.packs.map(p => ({id: p.id, path: p.path, sha256: p.sha256, active_case_count: p.cases.filter(c => review(c).status !== 'removed').length, original_approval_date: p.approval_date,

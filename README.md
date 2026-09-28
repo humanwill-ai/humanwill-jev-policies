@@ -50,7 +50,9 @@ For label review, open [the offline review page](docs/case-review.html) locally 
 your browser: the accepted 93 updated cases (original policy plus source policy), 46 approved-source cases, and the previously approved 36, with policies,
 approval/correction/removal controls, saved progress, and JSON export. See
 [review instructions](docs/case-review.md). GitHub displays HTML source; download
-or open the checked-out file to use it.
+or open the checked-out file to use it. The page also shows the
+[prepared context-only improvement](docs/question-context-v1.md) and unchanged
+evaluation questions; no live accuracy result is yet available for that context.
 
 For installation from exact built artifacts and the local container recipe, use
 the [quickstart](docs/quickstart.md). The [policy-author guide](docs/policy-authoring.md)

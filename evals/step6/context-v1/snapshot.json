@@ -1,0 +1,13 @@
+{
+  "format": "humanwill.context-experiment/1",
+  "status": "prepared_not_live_evaluated",
+  "baseline_commit": "c69ca6fb936886d64737cc3db441bf8f5765a7e2",
+  "case_count": 175,
+  "change": "Add state.assessment_context only; original model, questions, event content, labels, predicates, confidence gate and policy composition remain unchanged.",
+  "sha256": {
+    "evals/step6/context-v1/contexts.json": "9e3b2e5f2700077b438915dd0649c821abf781aa2a5f6048f6a0e5543554d30d",
+    "evals/step6/context-v1/observations.json": "8cbd4e67b1c89961b7f564e26ac4a9783de172a86e1112b4684d07f8129d308b",
+    "evals/step6/question_context.py": "e827674ab19ca4c188490ce940c7d078c6313843d6fdc3683a9016a86aea585c",
+    "evals/step6/release/reviewed-live-v1-protocol.json": "1ed04d80b0923bc954a224bdca008b50d8335a6de4997291d2090f62330eaf6a"
+  }
+}

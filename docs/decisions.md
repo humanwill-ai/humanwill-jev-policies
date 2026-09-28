@@ -283,3 +283,15 @@ target. See [the report](reviewed-live-v1-report.md) and
 $0.071233898 of $5. Human label review is complete for this scope; independent
 qualification and production source resolution remain open. Preserve this first
 pass while developing fixes; do not relabel it as an unseen holdout after tuning.
+
+## Context-only improvement — 2026-09-28
+
+Owner requested clearer evaluation context, leaving everything else unchanged.
+The [prepared experiment](question-context-v1.md) adds stage/tool descriptions,
+existing source-resolution observations and thirteen resource clarifications to
+the accepted 175 events. Policy/scoping text, labels, thresholds, predicates, model
+and composition remain unchanged. The original baseline stays reproducible.
+The review page exposes the added context and actual unchanged scope questions.
+No new live calls or model-accuracy claims; 167 offline tests pass, including
+exact payload comparison and identical scripted decisions for all 175 cases.
+The existing API ledger and release-gate status are unchanged.

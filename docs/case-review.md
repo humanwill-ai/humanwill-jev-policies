@@ -121,3 +121,13 @@ remove/undo, and desktop/mobile layout with no JavaScript errors. The exported
 accepted baseline also passes the strict Python review importer. These UI checks
 do not constitute another human review. No raw owner export or personal notes
 are embedded in the page.
+
+## Context-only preparation
+
+The page now shows [additional evaluation context](question-context-v1.md) for
+all 175 accepted cases, plus the unchanged stage-specific questions Jev receives.
+The context is prepared but has not been measured live. It preserves the original
+labels, review fingerprint and saved progress; exports carry its separate hash.
+Seven removed cases stay excluded and have no added context. Browser verification
+covered the original owner export, approvals/removals, manual and missing-manifest
+context, exact question display, and desktop/mobile layout without script errors.
