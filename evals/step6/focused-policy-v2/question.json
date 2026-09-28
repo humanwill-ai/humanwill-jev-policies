@@ -1,0 +1,13 @@
+{
+  "format": "humanwill.experimental-scope-question/1",
+  "version": "focused-policy-v2",
+  "status": "prepared_not_live_evaluated",
+  "task": "Identify only whether the operation being proposed is a restricted action under this policy. Mentioning, reading or locally modifying protected material does not itself establish a restricted action. Apply the policy's actual exclusions. Do not decide whether permission is granted: the declared trusted conditions are checked separately. Do not infer earlier or later operations that are not supplied. If the inspected content contains no action or instruction covered by this policy, select not_applicable. Use insufficient_evidence when missing information prevents determining whether a potentially relevant action is covered.",
+  "criteria": {
+    "applicable": "The proposed operation performs an action restricted by the policy; check permission separately.",
+    "not_applicable": "The inspected content contains no action or instruction covered by this policy, or the operation falls within a stated scope exclusion.",
+    "insufficient_evidence": "Missing information prevents determining whether a potentially relevant action is covered. The absence of any relevant action is not missing evidence. Missing permission values alone do not determine this answer."
+  },
+  "unchanged": "Full company policy text, stage, context, evaluator boundary, trusted condition field names, confidence gates and failure handling.",
+  "scope": "Experimental scoped-predicate question; does not change semantic content-only rules or production runtime defaults."
+}

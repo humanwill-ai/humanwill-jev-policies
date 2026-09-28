@@ -129,3 +129,5 @@ as requested. The previous offline replay identifies 23 legitimate events still
 failing; review them one by one before further tuning.
 
 The subsequent [focused-question full-pack experiment](focused-policy-v1-report.md) improved151→156 matches at the active gates and reduced legitimate fail-closed blocks23→14, but introduced8 regressions. It remains an evaluation-only candidate; the service's shared template was not replaced.
+
+A further [clarified scope-question candidate](clarified-question-and-error-review.md) distinguishes no covered action from missing information about a potentially relevant action. It is saved as focused-policy-v2 with an opt-in research wrapper; no new live evaluation or runtime promotion has occurred.
