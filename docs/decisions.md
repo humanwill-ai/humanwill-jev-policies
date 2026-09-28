@@ -23,6 +23,7 @@ Updated 2026-09-27. Owner requirements and proposed implementation choices are s
 | Customer demand | Unvalidated | Enterprise platform/security teams are the target, not validated paying customers |
 | Hosted customer data | Open | Confirm policy-text/content egress, destinations, retention, and geographic constraints |
 | Live budget / quality targets | Approved by owner | $5 cumulative synthetic smoke/evaluation budget; per-policy accuracy, error, latency and cost targets recorded below |
+| GitHub Actions allowance | Owner reported 90% used, 2026-09-28 | Conserve remaining account quota through local validation and batched pushes; exact balance, reset date and overage settings unverified; separate from OpenRouter budget |
 | Public release objective | Decided by owner | Plan a first release suitable for public GitHub publication; visibility remains private during preparation |
 | Release label / artifacts | Proposed | `v0.1.0a1` public preview, source/wheel/checksums and evidence; see public-release roadmap |
 | Project license | Awaiting owner choice | Proposed Apache-2.0 for original code/docs/examples; preserve licenses of reused material |
@@ -46,6 +47,35 @@ Foundation decisions: package/CLI `humanwill-policies`, import `humanwill_polici
 ## Additional requirements and ideas
 
 Append dated requirements here and update the plan when they change scope.
+
+## GitHub Actions budget constraint — 2026-09-28
+
+The owner reported GitHub's email that 90% of the included Actions minutes for
+`humanwill-ai` have been used. Treat this as an account-wide resource constraint;
+the email does not identify this repository's share, exact remaining minutes,
+billing-cycle reset date, or paid-usage settings. No account billing audit has
+been performed.
+
+Source inspection at `128378cad8aa06f3677d9d9a8e9028f39bb0e97c` found four core
+matrix jobs (Ubuntu/macOS, Python 3.11/3.14) plus three pinned-host jobs on every
+main push and pull request, including documentation-only changes. Both workflows
+also accept manual dispatch; the host workflow additionally runs on pushes to
+`work/service-gateway-hooks`. Neither has path filters or concurrency cancellation.
+This identifies opportunities to conserve minutes, not measured cost attribution.
+
+For ongoing work, validate locally first, batch CI-triggering pushes, and avoid
+discretionary hosted reruns while quota is unverified. Preserve final-candidate
+Linux/macOS, packaging and host evidence requirements; local results must keep
+their actual scope. Workflow changes such as cancellation of superseded runs,
+safe documentation filtering and a smaller routine matrix remain proposals.
+Existing workflow triggers and organization billing settings are unchanged.
+
+[GitHub's billing documentation](https://docs.github.com/en/billing/concepts/product-billing/github-actions),
+reviewed 2026-09-28 (live documentation; no source revision pinned), says included
+minutes reset each billing cycle. After exhaustion, usage is blocked without a
+valid payment method; paid usage is subject to configured budgets. The warning
+alone therefore does not establish whether future jobs will stop or incur charges.
+Actions spending is separate from the approved $5 OpenRouter evaluation cap.
 
 ## Step 3 decisions — 2026-09-27
 
@@ -338,3 +368,16 @@ violation/compliant answers share the applicable/not_applicable gates. Result/3
 remains compatible with existing connectors. Offline validation is not calibration:
 no new live calls or spending, no qualified asymmetric enforcement profile, and
 release quality gates remain open.
+
+## Offline asymmetric-threshold comparison — 2026-09-28
+
+Owner-approved replay is complete: all 175 original outcomes/evidence reproduce
+through the current core, including the symmetric config/4 control. Changing only
+`not_applicable` 0.80→0.70 improves combined matches 166→168/175 (generic100→101/102,
+advanced66→67/73), policy matches260→264/272, and fail-closed false blocks6→4/79.
+No outcome regresses; no known violation or expected unknown becomes allowed at
+event or policy level. This is reused-answer counterfactual analysis, not new model
+accuracy or calibration. [Report](threshold-replay-v1-report.md) retains all cases
+and limitations. Deployment defaults/configs remain unchanged. Proposed next work:
+three complete live stability repetitions under a new frozen protocol; none run
+as part of this offline comparison. Spend remains $0.078278768 of $5.

@@ -63,6 +63,13 @@ Passing transport tests does not require identical judgments across providers. I
 
 ## CI and supported-environment plan
 
+The owner reported 90% of `humanwill-ai`'s included Actions minutes used on
+2026-09-28. Apply the [Actions budget constraint](decisions.md#github-actions-budget-constraint--2026-09-28):
+validate locally first, batch CI-triggering pushes and reserve discretionary
+hosted runs until quota is checked. Required candidate evidence remains a release
+gate; budget exhaustion is not a passing check. Current automatic triggers are
+unchanged, and Actions overages are outside the OpenRouter evaluation budget.
+
 Start with the minimum supported Python version plus one current version validated during Step 1; record the exact versions rather than promising all future releases. Test the portable package on Linux/macOS and test hook scripts on each OS actually listed as supported. Additional OS coverage is explicit work, not inferred from Python portability.
 
 PR CI: formatting/lint, type checks where useful, meaningful unit/contract tests, package build/install smoke, offline demo, and deterministic integration fixtures. Use a scheduled/manual real-host integration job where feasible; preserve human-run evidence for interactive Copilot checks. Live provider runs are explicitly budgeted and use synthetic inputs, kept separate from untrusted PR jobs. No keys or privileged tokens go to forked PR code.
@@ -176,3 +183,16 @@ violation/compliant answers share the applicable/not_applicable gates. Result/3
 remains compatible with existing connectors. Offline validation is not calibration:
 no new live calls or spending, no qualified asymmetric enforcement profile, and
 release quality gates remain open.
+
+## Offline asymmetric-threshold comparison — 2026-09-28
+
+Owner-approved replay is complete: all 175 original outcomes/evidence reproduce
+through the current core, including the symmetric config/4 control. Changing only
+`not_applicable` 0.80→0.70 improves combined matches 166→168/175 (generic100→101/102,
+advanced66→67/73), policy matches260→264/272, and fail-closed false blocks6→4/79.
+No outcome regresses; no known violation or expected unknown becomes allowed at
+event or policy level. This is reused-answer counterfactual analysis, not new model
+accuracy or calibration. [Report](threshold-replay-v1-report.md) retains all cases
+and limitations. Deployment defaults/configs remain unchanged. Proposed next work:
+three complete live stability repetitions under a new frozen protocol; none run
+as part of this offline comparison. Spend remains $0.078278768 of $5.

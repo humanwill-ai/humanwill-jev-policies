@@ -121,3 +121,8 @@ old and new scripted demos, exported config/4 schema, service/hook contracts and
 service startup/authentication/rollback checks. Local artifact evidence is in
 `artifacts/packaging/outcome-thresholds-verification.json` (ignored). No hosted
 model calls or public publication occurred.
+
+The [first offline replay](threshold-replay-v1-report.md) compares the original
+0.80 gates with a 0.70 not-applicable candidate using unchanged recorded answers.
+The candidate improves two combined outcomes without observed regressions;
+packaged defaults remain unchanged and live stability has not yet been measured.

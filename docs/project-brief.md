@@ -132,3 +132,16 @@ violation/compliant answers share the applicable/not_applicable gates. Result/3
 remains compatible with existing connectors. Offline validation is not calibration:
 no new live calls or spending, no qualified asymmetric enforcement profile, and
 release quality gates remain open.
+
+## Offline asymmetric-threshold comparison — 2026-09-28
+
+Owner-approved replay is complete: all 175 original outcomes/evidence reproduce
+through the current core, including the symmetric config/4 control. Changing only
+`not_applicable` 0.80→0.70 improves combined matches 166→168/175 (generic100→101/102,
+advanced66→67/73), policy matches260→264/272, and fail-closed false blocks6→4/79.
+No outcome regresses; no known violation or expected unknown becomes allowed at
+event or policy level. This is reused-answer counterfactual analysis, not new model
+accuracy or calibration. [Report](threshold-replay-v1-report.md) retains all cases
+and limitations. Deployment defaults/configs remain unchanged. Proposed next work:
+three complete live stability repetitions under a new frozen protocol; none run
+as part of this offline comparison. Spend remains $0.078278768 of $5.
