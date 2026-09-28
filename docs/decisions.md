@@ -295,3 +295,18 @@ The review page exposes the added context and actual unchanged scope questions.
 No new live calls or model-accuracy claims; 167 offline tests pass, including
 exact payload comparison and identical scripted decisions for all 175 cases.
 The existing API ledger and release-gate status are unchanged.
+
+## Context-only live comparison complete — 2026-09-28
+
+The authorized full rerun is complete at clean source `1007939`, with the exact
+prepared context and all policies/questions/labels/thresholds unchanged. See
+[results](context-live-v1-report.md) and [case comparisons](context-live-v1-cases.md).
+Combined matches improve 161→166/175; raw scope errors fall 6→2/227; fail-closed
+false blocks fall 10→6/79. No known violations or expected unknowns are allowed.
+Six events improve and one formerly correct event regresses. The dry-run rsync
+case changes from error to explicit false violation; the Kubernetes source answer
+is still wrong but now contained by lower confidence. Production specified errors
+remain above target, and p95 evaluator latency rises to 2.58 seconds. This one-pass
+development comparison does not close the release gate or prove causality.
+148 calls cost $0.007044870; all charges settled. Cumulative spend $0.078278768
+of $5, leaving $4.921721232. No additional tuning or selective reruns were made.

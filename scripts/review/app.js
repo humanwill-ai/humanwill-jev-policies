@@ -231,7 +231,7 @@ $('approveRemaining').onclick = () => {
 };
 function exportPayload() {
   return {format: 'humanwill.case-review/1', exported_at: now(), fingerprint, ...state,
-    context_preview: {sha256: DATA.question_context_sha256, status: 'prepared_not_live_evaluated', approval_scope: 'Recorded approvals refer to original labels; the added context is a separate experiment.'},
+    context_preview: {sha256: DATA.question_context_sha256, status: 'live_evaluated_once', approval_scope: 'Recorded approvals refer to original labels; the added context is a separate experiment.'},
     reviews: {...Object.fromEntries((DATA.recorded_approvals ?? []).filter(id => !allCases.get(id).p.previously_approved).map(id => [id, review(allCases.get(id).c)])), ...state.reviews},
     removals: [...allCases.values()].filter(({c}) => review(c).status === 'removed').map(({c, p}) => ({id: c.id, packet: p.id, reason: review(c).removal_reason ?? review(c).notes, removed_at: review(c).updated_at, authority: DATA.default_removed[c.id]?.removed_at === review(c).updated_at ? (DATA.default_removed[c.id].authority ?? 'owner_instruction') : 'local_review'})),
     packets: DATA.packs.map(p => ({id: p.id, path: p.path, sha256: p.sha256, active_case_count: p.cases.filter(c => review(c).status !== 'removed').length, original_approval_date: p.approval_date,

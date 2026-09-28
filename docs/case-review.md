@@ -126,7 +126,7 @@ are embedded in the page.
 
 The page now shows [additional evaluation context](question-context-v1.md) for
 all 175 accepted cases, plus the unchanged stage-specific questions Jev receives.
-The context is prepared but has not been measured live. It preserves the original
+The [context-only live comparison](context-live-v1-report.md) is now complete. The context preserves the original
 labels, review fingerprint and saved progress; exports carry its separate hash.
 Seven removed cases stay excluded and have no added context. Browser verification
 covered the original owner export, approvals/removals, manual and missing-manifest

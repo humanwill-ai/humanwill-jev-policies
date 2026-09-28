@@ -4,12 +4,12 @@ Company-authored Markdown policies for AI gateways and coding agents. A companio
 
 **Implemented: service and connectors, `0.1.0.dev3`.** Markdown policy bundles, deterministic/semantic evaluation, direct/OpenRouter Jev adapters, an authenticated HTTP service, LiteLLM/Agentgateway adapters, and separate Copilot Local/CLI hooks. Real gateway, Copilot CLI and VS Code Local enforcement tests pass on the pinned versions; see [integration evidence](docs/integration-report.md). OpenRouter live smoke passed; direct TypeSafe live smoke is optional for v0.1. The repository remains private, with public preview `v0.1.0a1` awaiting the [release gates](docs/public-release-plan.md).
 
-The [latest owner-reviewed Jev run](docs/reviewed-live-v1-report.md) covers 175
-accepted cases and four policies, including approved software sources. It matched
-161 combined outcomes; no known violation was allowed overall, but ten legitimate
-cases returned errors that would block under fail-closed enforcement. One
-source-policy unknown was incorrectly allowed within an event that another policy
-kept indeterminate. The semantic release gate remains open.
+The [latest context-only Jev comparison](docs/context-live-v1-report.md) covers
+175 accepted cases and four policies, including approved software sources. With
+clearer fixture context, matching combined outcomes rose from 161 to 166; raw scope
+errors fell from six to two. Six legitimate events would still be blocked under
+fail-closed enforcement. No known violation was allowed, but command interpretation,
+confidence calibration and measured tail latency leave the semantic release gate open.
 
 The current measured bundle is `evals/step6/policies-sources-v1`, configured by
 `config-sources-v1.yaml`. Earlier three-policy and Gemini comparisons remain
@@ -52,7 +52,9 @@ approval/correction/removal controls, saved progress, and JSON export. See
 [review instructions](docs/case-review.md). GitHub displays HTML source; download
 or open the checked-out file to use it. The page also shows the
 [prepared context-only improvement](docs/question-context-v1.md) and unchanged
-evaluation questions; no live accuracy result is yet available for that context.
+evaluation questions. The [context-only live comparison](docs/context-live-v1-report.md)
+now records 166/175 matching outcomes, six legitimate events that would be blocked
+if fail-closed, and remaining interpretation, confidence and latency issues.
 
 For installation from exact built artifacts and the local container recipe, use
 the [quickstart](docs/quickstart.md). The [policy-author guide](docs/policy-authoring.md)

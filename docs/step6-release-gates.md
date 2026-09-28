@@ -75,3 +75,18 @@ target. See [the report](reviewed-live-v1-report.md) and
 $0.071233898 of $5. Human label review is complete for this scope; independent
 qualification and production source resolution remain open. Preserve this first
 pass while developing fixes; do not relabel it as an unseen holdout after tuning.
+
+## Context-only live comparison complete — 2026-09-28
+
+The authorized full rerun is complete at clean source `1007939`, with the exact
+prepared context and all policies/questions/labels/thresholds unchanged. See
+[results](context-live-v1-report.md) and [case comparisons](context-live-v1-cases.md).
+Combined matches improve 161→166/175; raw scope errors fall 6→2/227; fail-closed
+false blocks fall 10→6/79. No known violations or expected unknowns are allowed.
+Six events improve and one formerly correct event regresses. The dry-run rsync
+case changes from error to explicit false violation; the Kubernetes source answer
+is still wrong but now contained by lower confidence. Production specified errors
+remain above target, and p95 evaluator latency rises to 2.58 seconds. This one-pass
+development comparison does not close the release gate or prove causality.
+148 calls cost $0.007044870; all charges settled. Cumulative spend $0.078278768
+of $5, leaving $4.921721232. No additional tuning or selective reruns were made.

@@ -1,6 +1,9 @@
 # Context-only evaluation preparation
 
-2026-09-28 · prepared offline; no new live Jev calls
+2026-09-28 · preparation record; the [live comparison is now complete](context-live-v1-report.md)
+
+The frozen files retain their pre-measurement status for provenance. The details
+below describe preparation; the dated live report supersedes pending-run wording.
 
 The owner requested clearer context while leaving everything else unchanged.
 This experiment adds `state.assessment_context` to Jev's input for the existing
