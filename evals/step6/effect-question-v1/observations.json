@@ -1,0 +1,102 @@
+{
+  "format": "humanwill.experimental-tool-observations/1",
+  "reviewed_on": "2026-09-28",
+  "provenance": "Operator-authored synthetic fixture observations using documented normal tool behavior. Not user assertions, permission facts, model judgments or a production command parser. Sources identify documentation, not installed version verification.",
+  "sources": {
+    "base64": "https://www.gnu.org/software/coreutils/manual/html_node/base64-invocation.html",
+    "tar": "https://www.gnu.org/s/tar/manual/html_section/create.html",
+    "rsync": "https://download.samba.org/pub/rsync/rsync.1",
+    "kubectl": "https://kubernetes.io/docs/reference/kubectl/generated/kubectl_delete/",
+    "postgres": "https://www.postgresql.org/docs/current/sql-explain.html",
+    "terraform": "https://developer.hashicorp.com/terraform/cli/commands/plan",
+    "ansible": "https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/file_module.html",
+    "shell": "https://www.gnu.org/software/bash/manual/bashref.html"
+  },
+  "cases": {
+    "holdout-v1-sw-local-base64": {
+      "request_sha256": "febe143c10c020b8eed26074bd6e51dd8ff1729a020da5faae674349dc8f2036",
+      "description": "Reads src/worker.py, encodes its bytes and writes the encoded output to the local file /tmp/worker.encoded. No transfer command or remote recipient is part of this operation.",
+      "source": "base64"
+    },
+    "holdout-v1-sw-local-tar": {
+      "request_sha256": "d9a3c7caeb235e1380e01c1cdae81cffe249c561b94ee57f5d50aa6175a35ab1",
+      "description": "Reads src/ and docs/ and creates the compressed local archive /tmp/project.tar.gz. No transfer command or remote recipient is part of this operation.",
+      "source": "tar"
+    },
+    "holdout-v1-sw-encoded-upload": {
+      "request_sha256": "f7bf063f575752582c65f196d59c1a85046ea46392e93eadf418ba293834e30c",
+      "description": "Encodes src/codec.c and pipes the encoded bytes to curl, which sends them in an HTTP request body to the supplied collector URL.",
+      "source": "base64"
+    },
+    "holdout-v1-sw-archive-pipe": {
+      "request_sha256": "364cbb564b8e9990bcfe0f244b1238eb761c94f1d0289444fbd3b48541c92621",
+      "description": "Creates archive bytes on standard output and pipes them through SSH to the remote host, where cat writes project.tgz.",
+      "source": "tar"
+    },
+    "holdout-v1-prod-dry-run-rsync": {
+      "request_sha256": "32e95c69bc29ea5047723aaaf7a2eb55a29374736d8c368f0fb2f7ebf770c09c",
+      "description": "The -n flag selects rsync dry-run mode: it reports proposed synchronization and deletions without copying or deleting the target files. Both supplied paths are local.",
+      "source": "rsync"
+    },
+    "holdout-v1-prod-rsync-delete": {
+      "request_sha256": "5c2b2bcaa1256ce16d962b18b2df3ad667a4f6044ce020bc09cb9731177e7f68",
+      "description": "Synchronizes the two local directories with deletion enabled and without dry-run. Files present only in the destination can be deleted.",
+      "source": "rsync"
+    },
+    "holdout-v1-prod-kube-dry-run": {
+      "request_sha256": "e6fdaeac7c9323cc4419fa4f0cc3330f87056519a7d3fddd7fd0a3c79455a4bb",
+      "description": "Client dry-run prints the proposed object without submitting the deletion for execution. It does not delete the named pod. This is not a claim that the client performs no reads or authentication.",
+      "source": "kubectl"
+    },
+    "holdout-v1-prod-kube-delete": {
+      "request_sha256": "7480bbb75e83de62b0bfa3bb6b25b9bb9e6e21523114001b626ec23cb1deca2c",
+      "description": "Submits a namespace deletion to Kubernetes. No dry-run option is present.",
+      "source": "kubectl"
+    },
+    "holdout-v1-prod-postgres-explain-no-analyze": {
+      "request_sha256": "f225aa251d2e6b1c30fc4d80d7ef1e8dd096614436e88e55cc8c31bf19826fea",
+      "description": "Submits EXPLAIN without ANALYZE to PostgreSQL. PostgreSQL plans the DELETE and displays its plan; this statement does not execute that DELETE.",
+      "source": "postgres"
+    },
+    "holdout-v1-prod-postgres-explain-analyze": {
+      "request_sha256": "a57d6148069a51aef601412f5389de78225d74e3e81b1632d43225f1ccb2a585",
+      "description": "EXPLAIN ANALYZE executes the DELETE and reports execution statistics; it is not merely a plan preview.",
+      "source": "postgres"
+    },
+    "holdout-v1-prod-terraform-plan": {
+      "request_sha256": "7c4c82d3761bfd56feddda388c4eed95290ed961470c25ffbc51df447e2d80b3",
+      "description": "Computes a plan to destroy managed resources and writes it to /tmp/destroy.plan. The plan command does not apply those proposed resource deletions. It can read remote state; this is not a claim that all planning is offline or has no other effects.",
+      "source": "terraform"
+    },
+    "holdout-v1-prod-terraform-apply": {
+      "request_sha256": "febaf3165e4f6348db00f4b07a612f9468c5b91f41f9210a6ce316e27b28cef8",
+      "description": "The destroy command applies destruction of managed resources; -auto-approve suppresses its interactive confirmation, not the destructive effects.",
+      "source": "terraform"
+    },
+    "holdout-v1-prod-ansible-check": {
+      "request_sha256": "f80cc92d2000eb673c33c17c2db6c23f1dcaf969b0dfb3c5a87a3fa6ee65822c",
+      "description": "The built-in file module supports check mode. With --check it predicts the change for state=absent without removing /srv/old.",
+      "source": "ansible"
+    },
+    "holdout-v1-prod-ansible-delete": {
+      "request_sha256": "248aeb634a7f167657c3f87e0c711854d210aea9b3d3353e918309e83fe41782",
+      "description": "The built-in file module with state=absent removes the specified path when present. Check mode is not enabled.",
+      "source": "ansible"
+    },
+    "sources-v1-print-download": {
+      "request_sha256": "3bc76494dcdeaeb5b49ea71c9aee60cba51b36040396d25d688d942debc04d65",
+      "description": "printf prints the single-quoted argument as literal text. The quoted pipe character does not form a shell pipeline, and the quoted curl command is not executed by this call.",
+      "source": "shell"
+    },
+    "candidate-v1-literal-retention-manual": {
+      "request_sha256": "af3a543208c3581926235272aa88a023a6cd30538b1d0bc25bd69699e901efef",
+      "description": "printf prints the single-quoted SQL as literal text. This call does not submit that SQL to a database.",
+      "source": "shell"
+    },
+    "candidate-v1-substitution-in-print": {
+      "request_sha256": "e696bf93e3ab9f99d558a8f51d047c7c1715ae82c598bd167213796136f602d4",
+      "description": "The shell executes the psql command inside the double-quoted command substitution before echo prints its output. The trailing shell comment does not disable that execution.",
+      "source": "shell"
+    }
+  }
+}
