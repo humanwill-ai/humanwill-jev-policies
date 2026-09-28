@@ -1,0 +1,25 @@
+{
+  "format": "humanwill.context-live-protocol/1",
+  "case_count": 175,
+  "change": "Only state.assessment_context added; all frozen context-v1 records unchanged.",
+  "model": "typesafe/jev-1.13",
+  "accepted_model": "typesafe/jev-1.13-20260917",
+  "threshold": 0.8,
+  "mode": "monitor",
+  "concurrency": 1,
+  "repeats": 1,
+  "retries": 0,
+  "fallback": false,
+  "budget": "Existing cumulative $5 authorization; $0.071233898 spent before this run.",
+  "sha256": {
+    "evals/step6/context_live.py": "2b3dd0393bf5ba58efd89aaf20221440fc0bbfcf2759a0063d9f27c503c8e09b",
+    "evals/step6/context-v1/snapshot.json": "7ba75be4dd3ab34e6d4d268767d9347fdff1bd201e6ed35e3b8a89e85c905dfe",
+    "evals/step6/reviewed_live.py": "52713bcf6164330d216813afe52750fb99e2053fe978baffb269231128557ace"
+  },
+  "baseline_artifacts_sha256": {
+    "manifest.json": "c6fde621a1c5606bacb5304e4ea0b9ff6bbac531616b0e57424ab211fb667867",
+    "results.jsonl": "502487bb570067fba99067666a00b86408c3812525525de2100f0ff70915c2fe",
+    "summary.json": "aca448a5d74012fd4db32083cfffd874d871009303779f5e68ee3638a74b84af"
+  },
+  "limits": "One sequential context pass versus original first pass, not a randomized or repeated control. Observed cases now serve development, not independent holdout evidence."
+}
