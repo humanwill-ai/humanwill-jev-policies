@@ -411,3 +411,8 @@ The authorized full175 Jev/OpenRouter pass completed at d624c9c with unchanged p
 ## Applied asymmetric development settings — 2026-09-28
 
 Owner approved applicable0.80 / not_applicable0.70 / insufficient_evidence0.80 and explicitly requested no tests. Applied explicitly in evals/step6/direct-policy-v2/config.yaml and the packaged config-policy-text.yaml demo; frozen v1 and implicit loader defaults are preserved. No tests, replay or API calls performed. Continue human review of the23 remaining legitimate failures identified by the existing offline replay. See direct-policy-evaluation.md and direct-policy-threshold-analysis-v1.md.
+
+
+## Patch-confidence experiment — 2026-09-28
+
+Owner requested100 live synthetic variations to investigate low confidence. Completed50 distinct requests x2 repetitions,100 calls,200 scope questions at clean65dc823. See [protocol](patch-diagnostics-v1-protocol.md) and [report](patch-diagnostics-v1-report.md). Frozen randomized order, no retries, runtime policies/template/gates unchanged.36 scored diagnostic judgments per condition (new labels provisional), four source-origin judgments unscored: correct accepted baseline15,tool context27,focused question30,concise policy16,concise+focused28. Explicit local provenance helps source confidence but not enough for disclosure; focused restricted-action wording is a more promising next experiment than simply shortening policies. All positive controls accepted. Two malformed responses have probabilities summing0.99; strict current validation retained. Not independent quality evidence or causal proof. Cost$0.008754060; total$0.097882856; remaining$4.902117144; all1660 cumulative calls settled.
