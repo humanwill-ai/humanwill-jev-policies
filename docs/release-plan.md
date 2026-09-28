@@ -169,3 +169,12 @@ policy/configuration/reference matching and review cases from pending production
 origin resolution, host wiring and live policy-quality measurements. Cover actual
 package/dependency/redirect origins before making enforcement claims. Preserve
 the historical three-policy profile and frozen review datasets.
+
+## Active 100-case review correction — 2026-09-28
+
+The active packet now includes EVAL-SRC-001 alongside the original named policy
+for all 100 events; see [the revised review](holdout-sources-v2-review.md).
+The direct dependency tarball is unapproved and the combined expected result is
+block. Original review records remain historical; the expanded checks need review.
+The old live runner/protocol remains single-policy historical evidence and does
+not establish the new suite’s quality. No new model calls were made.

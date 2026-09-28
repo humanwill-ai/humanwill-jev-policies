@@ -1,4 +1,7 @@
-# New workflow evaluation: label review v1
+# Original workflow evaluation: historical single-policy label review v1
+
+**Superseded for active review by [the source-aware 100-case revision](holdout-sources-v2-review.md).**
+This original file retains its single-policy labels for provenance.
 
 100 synthetic cases frozen before any Jev measurement. The existing 36 approved cases are unchanged.
 

@@ -7,13 +7,13 @@ open docs/case-review.html
 ```
 
 No server, installation, account, or API key is needed. The page embeds the frozen
-100-case packet, 46 new source-policy cases, previously approved 36-case packet,
+updated 100-case packet (original named policy plus source policy), 46 source-policy cases, previously approved 36-case packet,
 and exact four policy texts.
 There are no external scripts, fonts, analytics, model calls, or executed test
 commands. This is an internal evaluation-label review aid, not a runtime approval
 workflow for agents.
 
-1. Use **Approved sources · 46** or **New 100 cases**, optionally filtering by policy or status. Compare each
+1. Use **Approved sources · 46** or **Updated 100**, optionally filtering by policy or status. Compare each
    event and trusted evidence with the policy beside it. The expected result is
    a proposed test label, not a measured model answer.
 2. Select **Approve expected result**, or enter a reason, choose a proposed result
@@ -66,9 +66,10 @@ export/import round trip, rejection of mismatched imports, and desktop/mobile
 layout. No JavaScript runtime errors occurred. Test progress was cleared after
 verification; no human approval was recorded by these checks.
 
-The extended page migrates local progress and imports exports from the original
-136-case page. Original approvals apply only to those unchanged cases; the 46 new
-source-policy cases start pending. Export format fingerprints now include the
+The page imports exports and browser progress from both prior versions. Reviews
+of the original 100 are archived, visible on each revised case and exported as
+`archived_reviews`; they cannot approve the new combined checks. Reviews of the
+unchanged 46 and 36 packets remain active. See [the 100-case revision](holdout-sources-v2-review.md). Export format fingerprints now include the
 source catalog. Four source cases include combined-policy results; approval
 accepts those stated results too, and correction notes can name a secondary policy.
 
@@ -76,3 +77,7 @@ The 182-case extension was browser-checked on 2026-09-28 for source catalog disp
 combined-policy results, legacy storage migration, legacy JSON imports,
 packet-scoped bulk approval, existing review controls and responsive layout.
 All checks passed in an isolated profile; synthetic QA approvals were cleared.
+
+The active 100-case view now shows the combined result prominently. Its scope
+control refers to EVAL-SRC-001; approval accepts both listed policy judgments.
+The generator validates the revised packet against its own snapshot.

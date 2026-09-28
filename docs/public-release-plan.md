@@ -111,3 +111,12 @@ and latency evidence does not demonstrate production package-source resolution.
 Before advertising automatic download restrictions, implement and test bounded
 trusted origin resolution for the claimed host/tool workflows, including
 redirects, transitive acquisitions, optional metadata and failure behavior.
+
+## Active 100-case review correction — 2026-09-28
+
+The active packet now includes EVAL-SRC-001 alongside the original named policy
+for all 100 events; see [the revised review](holdout-sources-v2-review.md).
+The direct dependency tarball is unapproved and the combined expected result is
+block. Original review records remain historical; the expanded checks need review.
+The old live runner/protocol remains single-policy historical evidence and does
+not establish the new suite’s quality. No new model calls were made.

@@ -4,7 +4,7 @@ const $ = id => document.getElementById(id);
 const fingerprint = DATA.packs.map(p => p.sha256).join(':') + ':' + Object.values(DATA.policies).map(p => p.sha256).join(':') + ':' + DATA.source_catalog_sha256;
 const storageKey = 'humanwill.case-review.v1:' + fingerprint;
 const allCases = new Map(DATA.packs.flatMap(p => p.cases.map(c => [c.id, {c, p}])));
-let state = {reviewer: '', reviews: {}}, packId = 'sources', selectedId = DATA.packs.find(p => p.id === 'sources').cases[0].id;
+let state = {reviewer: '', reviews: {}, archived_reviews: {}}, packId = 'holdout', selectedId = 'holdout-v1-sw-download-dependency';
 let storageOK = true;
 const labels = {allow: 'Allow', block: 'Block / violation', evaluation_error: 'Evaluation error'};
 const statuses = {pending: 'Pending', approved: 'Approved', correction: 'Needs correction'};
@@ -13,33 +13,52 @@ const now = () => new Date().toISOString();
 const pendingCases = () => DATA.packs.filter(p => !p.previously_approved).flatMap(p => p.cases);
 const pack = () => DATA.packs.find(p => p.id === packId);
 const current = () => allCases.get(selectedId)?.c;
+const expectedLabel = c => c.review_expected ?? c.expected;
+const expectedScope = c => c.review_scope ?? c.expected_scope ?? '';
+const legacyFingerprints = [DATA.previous_fingerprint, DATA.legacy_fingerprint];
 function message(text) { $('message').textContent = text; }
-function validateState(candidate) {
-  if (!candidate || typeof candidate.reviewer !== 'string' || !candidate.reviews || Array.isArray(candidate.reviews) || typeof candidate.reviews !== 'object') throw Error('Invalid review data.');
-  const clean = {reviewer: candidate.reviewer, reviews: {}};
-  for (const [id, r] of Object.entries(candidate.reviews)) {
-    const entry = allCases.get(id);
-    if (!entry || !r || !Object.hasOwn(statuses, r.status) || typeof r.notes !== 'string' || !Object.hasOwn(labels, r.label) || !['', 'not_applicable', 'applicable', 'insufficient_evidence'].includes(r.scope) || typeof r.updated_at !== 'string' || !Number.isFinite(Date.parse(r.updated_at))) throw Error('Invalid or unknown case review: ' + id);
+function validateRows(rows, historical = false) {
+  if (!rows || Array.isArray(rows) || typeof rows !== 'object') throw Error('Invalid review records.');
+  const clean = {};
+  for (const [id, r] of Object.entries(rows)) {
+    const c = historical ? DATA.original_labels[id] : allCases.get(id)?.c;
+    if (!c || !r || !Object.hasOwn(statuses, r.status) || typeof r.notes !== 'string' || !Object.hasOwn(labels, r.label) || !['', 'not_applicable', 'applicable', 'insufficient_evidence'].includes(r.scope) || typeof r.updated_at !== 'string' || !Number.isFinite(Date.parse(r.updated_at))) throw Error('Invalid or unknown case review: ' + id);
     if (r.status === 'correction' && !r.notes.trim()) throw Error('A correction needs a reason: ' + id);
-    if (r.status === 'approved' && (r.label !== entry.c.expected || r.scope !== (entry.c.expected_scope ?? ''))) throw Error('Approval must match the original label and scope: ' + id);
-    clean.reviews[id] = {status: r.status, notes: r.notes, label: r.label, scope: r.scope, updated_at: r.updated_at};
+    if (r.status === 'approved' && (r.label !== expectedLabel(c) || r.scope !== expectedScope(c))) throw Error('Approval must match the reviewed label and scope: ' + id);
+    clean[id] = {status: r.status, notes: r.notes, label: r.label, scope: r.scope, updated_at: r.updated_at};
   }
   return clean;
 }
-try { const saved = localStorage.getItem(storageKey) ?? localStorage.getItem('humanwill.case-review.v1:' + DATA.legacy_fingerprint); if (saved) state = validateState(JSON.parse(saved)); }
-catch { storageOK = false; message('Saved progress could not be loaded. Use Export review to keep a backup; import a previous export to restore it.'); }
+function validateState(candidate, legacy = false) {
+  if (!candidate || typeof candidate.reviewer !== 'string') throw Error('Invalid review data.');
+  let reviews = candidate.reviews, archived = candidate.archived_reviews ?? {};
+  if (legacy) {
+    if (!reviews || Array.isArray(reviews) || typeof reviews !== 'object') throw Error('Invalid review records.');
+    reviews = {...reviews}; archived = {...archived};
+    for (const id of Object.keys(reviews)) if (Object.hasOwn(DATA.original_labels, id)) {archived[id] = reviews[id]; delete reviews[id];}
+  }
+  return {reviewer: candidate.reviewer, reviews: validateRows(reviews), archived_reviews: validateRows(archived, true)};
+}
+try {
+  const saved = localStorage.getItem(storageKey);
+  if (saved) state = validateState(JSON.parse(saved));
+  else for (const oldFingerprint of legacyFingerprints) {
+    const old = localStorage.getItem('humanwill.case-review.v1:' + oldFingerprint);
+    if (old) {state = validateState(JSON.parse(old), true); message('Previous reviews restored. The revised 100 cases need fresh review of the added source checks; their original reviews are preserved as history.'); break;}
+  }
+} catch { storageOK = false; message('Saved progress could not be loaded. Use Export review to keep a backup; import a previous export to restore it.'); }
 function persist() {
   try { localStorage.setItem(storageKey, JSON.stringify(state)); storageOK = true; }
   catch { storageOK = false; }
   $('storageStatus').textContent = storageOK ? 'Progress saved in this browser. Export before changing browsers or clearing site data.' : 'Browser storage unavailable — export your review before closing.';
 }
 function review(c) {
-  return state.reviews[c.id] ?? {status: allCases.get(c.id).p.previously_approved ? 'approved' : 'pending', notes: '', label: c.expected, scope: c.expected_scope ?? ''};
+  return state.reviews[c.id] ?? {status: allCases.get(c.id).p.previously_approved ? 'approved' : 'pending', notes: '', label: expectedLabel(c), scope: expectedScope(c)};
 }
 function title(c) { return c.id.replace(/^(holdout-v1-|candidate-v1-|sources-v1-)/, '').replace(/^(sw-|prod-|doc-)/, '').replaceAll('-', ' '); }
 function filtered() {
   const query = $('search').value.toLowerCase().trim();
-  return pack().cases.filter(c => (!$('policyFilter').value || c.policy_id === $('policyFilter').value) && (!$('statusFilter').value || review(c).status === $('statusFilter').value) && (!query || JSON.stringify(c).toLowerCase().includes(query)));
+  return pack().cases.filter(c => (!$('policyFilter').value || (c.policy_id === $('policyFilter').value || c.also_policy_ids?.includes($('policyFilter').value))) && (!$('statusFilter').value || review(c).status === $('statusFilter').value) && (!query || JSON.stringify(c).toLowerCase().includes(query)));
 }
 function badge(el, text, kind) { el.textContent = text; el.className = 'badge ' + kind; }
 function updateProgress() {
@@ -57,7 +76,7 @@ function renderList(cases) {
     const button = document.createElement('button'); button.className = 'case-item'; button.setAttribute('aria-current', String(c.id === selectedId));
     const name = document.createElement('span'); name.className = 'title'; name.textContent = title(c);
     const mini = document.createElement('span'); mini.className = 'mini';
-    const label = document.createElement('span'); label.textContent = labels[c.expected];
+    const label = document.createElement('span'); label.textContent = labels[expectedLabel(c)];
     const status = document.createElement('span'); status.textContent = statuses[review(c).status];
     mini.append(label, status); button.append(name, mini); button.onclick = () => {selectedId = c.id; render();};
     $('caseList').append(button);
@@ -76,9 +95,9 @@ function render() {
   $('position').textContent = selectedId ? `Case ${index + 1} of ${cases.length} shown · ${pack().title}` : 'No cases shown';
   $('prev').disabled = index <= 0; $('next').disabled = index < 0 || index >= cases.length - 1;
   if (!selectedId) return;
-  const c = current(), r = review(c), policy = DATA.policies[c.policy_id];
+  const c = current(), r = review(c), policy = DATA.policies[c.review_policy_id ?? c.policy_id];
   $('caseTitle').textContent = title(c); $('caseId').textContent = c.id;
-  $('caseMeta').textContent = c.request.stage.replaceAll('_', ' ') + ' / ' + c.policy_id;
+  $('caseMeta').textContent = c.request.stage.replaceAll('_', ' ') + ' / ' + [c.policy_id, ...(c.also_policy_ids ?? [])].join(' + ');
   badge($('reviewBadge'), pack().previously_approved && !state.reviews[c.id] ? 'Previously approved' : statuses[r.status], r.status);
   $('event').replaceChildren();
   for (const item of c.request.content) {
@@ -87,8 +106,8 @@ function render() {
     pre.textContent = Object.hasOwn(item, 'text') ? (item.text || '(Empty text — see trusted evidence below)') : pretty(item.arguments ?? item);
     $('event').append(heading, pre);
   }
-  badge($('expectedBadge'), labels[c.expected], c.expected);
-  $('scope').textContent = 'Scope: ' + (c.expected_scope?.replaceAll('_', ' ') ?? 'deterministic; no semantic judgment');
+  badge($('expectedBadge'), labels[expectedLabel(c)], expectedLabel(c));
+  $('scope').textContent = c.review_revision ? 'Combined result · source scope: ' + c.review_scope.replaceAll('_', ' ') : 'Scope: ' + (c.expected_scope?.replaceAll('_', ' ') ?? 'deterministic; no semantic judgment');
   $('rationale').textContent = c.rationale;
   $('facts').textContent = pretty({trusted_facts: c.trusted_facts, ...(c.source_context ? {source_context: c.source_context} : {}), ...(c.disclosure_context ? {disclosure_context: c.disclosure_context} : {})});
   $('raw').textContent = pretty(c);
@@ -97,7 +116,7 @@ function render() {
   $('policyBody').replaceChildren();
   for (const paragraph of policy.body.split(/\n\s*\n/)) { const p = document.createElement('p'); p.textContent = paragraph.replace(/\n/g, ' '); $('policyBody').append(p); }
   $('policySource').textContent = policy.source;
-  $('catalogDetails').hidden = c.policy_id !== 'EVAL-SRC-001';
+  $('catalogDetails').hidden = c.policy_id !== 'EVAL-SRC-001' && !c.also_policy_ids?.includes('EVAL-SRC-001');
   $('catalogSource').textContent = DATA.source_catalog;
   $('composition').replaceChildren();
   if (c.expected_composed) {
@@ -109,7 +128,9 @@ function render() {
   }
   if (c.related_case_id) {const p = document.createElement('p'); p.className = 'subtle'; p.textContent = 'Reassesses the workflow from ' + c.related_case_id + ' under the new source policy; its original disclosure-only label is unchanged.'; $('composition').append(p);}
   $('notes').value = r.notes; $('correctedLabel').value = r.label; $('correctedScope').value = r.scope;
-  $('historical').textContent = pack().previously_approved ? 'Original owner approval: September 27, 2026' : 'New label awaiting your judgment';
+  $('historical').textContent = pack().previously_approved ? 'Original owner approval: September 27, 2026' : (c.review_revision ? 'Revised review: original policy + source policy' : 'New label awaiting your judgment');
+  $('archivedReview').hidden = !state.archived_reviews[c.id];
+  $('archivedReviewText').textContent = state.archived_reviews[c.id] ? pretty({original_policy_only: DATA.original_labels[c.id], previous_review: state.archived_reviews[c.id]}) : '';
   $('approve').textContent = pack().previously_approved ? 'Reconfirm original result' : 'Approve expected result';
   $('undo').textContent = pack().previously_approved ? 'Restore original approval' : 'Reset this review';
 }
@@ -120,7 +141,7 @@ function record(status) {
   const c = current(); if (!c) return;
   if (status === 'correction' && !$('notes').value.trim()) {message('Add a reason so the proposed correction can be applied accurately.'); $('notes').focus(); return;}
   const before = filtered(); const index = before.findIndex(x => x.id === c.id);
-  storeReview(c, status, status === 'approved' ? c.expected : $('correctedLabel').value, status === 'approved' ? (c.expected_scope ?? '') : $('correctedScope').value);
+  storeReview(c, status, status === 'approved' ? expectedLabel(c) : $('correctedLabel').value, status === 'approved' ? expectedScope(c) : $('correctedScope').value);
   if ($('autoNext').checked) selectedId = before[index + 1]?.id ?? c.id;
   message(status === 'approved' ? 'Approved ' + c.id + '. Export your review when ready.' : 'Correction recorded for ' + c.id + '. The frozen source case is unchanged.');
   render();
@@ -147,13 +168,13 @@ $('nextPending').onclick = () => {
 $('approveRemaining').onclick = () => {
   const pending = pack().cases.filter(c => review(c).status === 'pending');
   if (pack().previously_approved || !pending.length || !confirm(`Confirm you have reviewed all ${pending.length} remaining cases in ${pack().title} and accept their ORIGINAL expected results, scopes and any stated combined-policy results. This covers all policies, regardless of filters. Flagged corrections will be preserved.`)) return;
-  for (const c of pending) state.reviews[c.id] = {...review(c), status: 'approved', label: c.expected, scope: c.expected_scope ?? '', updated_at: now()};
+  for (const c of pending) state.reviews[c.id] = {...review(c), status: 'approved', label: expectedLabel(c), scope: expectedScope(c), updated_at: now()};
   persist(); render(); message(pending.length + ' labels approved. Export review to hand off your decisions.');
 };
 function exportPayload() {
   return {format: 'humanwill.case-review/1', exported_at: now(), fingerprint, ...state,
     packets: DATA.packs.map(p => ({id: p.id, path: p.path, sha256: p.sha256, original_approval_date: p.approval_date,
-      cases: p.cases.map(c => ({id: c.id, policy_id: c.policy_id, original_expected: c.expected, original_scope: c.expected_scope, ...(c.expected_composed ? {original_composed: c.expected_composed, original_by_policy: c.expected_by_policy} : {}), ...review(c), provenance: state.reviews[c.id] ? 'local_review' : (p.previously_approved ? 'historical_owner_approval' : 'unreviewed')}))})),
+      cases: p.cases.map(c => ({id: c.id, policy_id: c.policy_id, original_expected: c.expected, original_scope: c.expected_scope, reviewed_expected: expectedLabel(c), reviewed_scope: expectedScope(c), review_revision: c.review_revision ?? null, ...(c.expected_composed ? {original_composed: c.expected_composed, original_by_policy: c.expected_by_policy} : {}), ...review(c), provenance: state.reviews[c.id] ? 'local_review' : (p.previously_approved ? 'historical_owner_approval' : 'unreviewed')}))})),
     note: 'Local label review only; no source or evaluation protocol changed. Corrections require adjudication and a versioned dataset before measurement.'};
 }
 $('export').onclick = () => {
@@ -167,11 +188,12 @@ $('importFile').onchange = async event => {
   try {
     if (file.size > 5_000_000) throw Error('Review file is too large.');
     const imported = JSON.parse(await file.text());
-    if (imported.format !== 'humanwill.case-review/1' || ![fingerprint, DATA.legacy_fingerprint].includes(imported.fingerprint)) throw Error('This review belongs to different datasets or policies. Nothing was imported.');
-    const clean = validateState(imported);
+    if (imported.format !== 'humanwill.case-review/1' || ![fingerprint, ...legacyFingerprints].includes(imported.fingerprint)) throw Error('This review belongs to different datasets or policies. Nothing was imported.');
+    const legacy = legacyFingerprints.includes(imported.fingerprint);
+    const clean = validateState(imported, legacy);
     if (imported.fingerprint === DATA.legacy_fingerprint && Object.keys(clean.reviews).some(id => allCases.get(id).p.id === 'sources')) throw Error('Old-format reviews cannot approve the new source-policy cases.');
     if (!confirm('Replace this browser’s current review with the imported review? Export first if you need to preserve your current progress.')) return;
-    state = clean; $('reviewer').value = state.reviewer; persist(); render(); message('Review restored from file.');
+    state = clean; $('reviewer').value = state.reviewer; persist(); render(); message(legacy ? 'Imported unchanged reviews; original 100-case reviews retained as history. Revised 100-case approvals remain pending.' : 'Review restored from file.');
   } catch (error) {message(error.message);} finally {event.target.value = '';}
 };
 $('fingerprints').textContent = DATA.packs.map(p => p.title + '\nSHA-256 ' + p.sha256).join('\n\n');

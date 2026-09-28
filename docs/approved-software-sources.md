@@ -126,12 +126,14 @@ registry overrides, local work, missing evidence and forged approval claims.
 Four cases show combined source/disclosure/production results with both policies
 available for inspection. These are draft labels, not observed Jev predictions.
 
-The original 100 and approved 36 cases remain byte-for-byte unchanged. Their
+The original 100-case file and approved 36 remain byte-for-byte unchanged as historical inputs.
+The active 100-case review now uses [sources v2](holdout-sources-v2-review.md),
+adding EVAL-SRC-001 and a combined result to every original event. The original
 labels were scoped to one named policy. For example, `git fetch origin` can pass
 EVAL-SW-001 because it does not share project code outward, while EVAL-SRC-001
 allows or blocks depending on the verified remote. The new packet includes both
 source outcomes and links them to that original case. Preserve that distinction
-instead of changing an accurate disclosure-only label into a whole-system claim.
+and show the new combined outcome separately from the accurate original disclosure-only label.
 
 Implemented now: four-policy bundle and monitoring configuration, explicit YAML
 catalog, exact-match reference evaluator, 46 review cases, and offline tests using

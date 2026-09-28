@@ -81,13 +81,38 @@ def build():
         "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
     }
     catalog_path = source_path.parent / "approved-sources.yaml"
+    catalog_hash = hashlib.sha256(catalog_path.read_bytes()).hexdigest()
+    previous_fingerprint = (
+        ":".join(p["sha256"] for p in packs)
+        + ":"
+        + ":".join(p["sha256"] for p in policies.values())
+        + ":"
+        + catalog_hash
+    )
+    original_labels = {
+        c["id"]: {"expected": c["expected"], "expected_scope": c["expected_scope"]}
+        for c in packs[0]["cases"]
+    }
+    revised = ROOT / "evals/step6/release/holdout-sources-v2.json"
+    revised_snapshot = json.loads((revised.parent / "holdout-sources-v2-snapshot.json").read_text())
+    for path, expected in revised_snapshot["sha256"].items():
+        if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != expected:
+            raise ValueError(f"Revised 100-case snapshot changed: {path}")
+    packs[0].update(
+        title="Updated 100 · sources v2",
+        path=str(revised.relative_to(ROOT)),
+        sha256=hashlib.sha256(revised.read_bytes()).hexdigest(),
+        cases=json.loads(revised.read_text())["cases"],
+    )
     data = json.dumps(
         {
             "packs": packs,
             "policies": policies,
             "legacy_fingerprint": legacy_fingerprint,
+            "previous_fingerprint": previous_fingerprint,
+            "original_labels": original_labels,
             "source_catalog": catalog_path.read_text(),
-            "source_catalog_sha256": hashlib.sha256(catalog_path.read_bytes()).hexdigest(),
+            "source_catalog_sha256": catalog_hash,
         },
         ensure_ascii=False,
     )
