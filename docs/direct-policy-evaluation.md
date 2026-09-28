@@ -127,3 +127,5 @@ remain 0.80, so select the explicit current configuration. Both examples remain
 monitor-only. No test, replay or provider call was run when applying this change,
 as requested. The previous offline replay identifies 23 legitimate events still
 failing; review them one by one before further tuning.
+
+The subsequent [focused-question full-pack experiment](focused-policy-v1-report.md) improved151→156 matches at the active gates and reduced legitimate fail-closed blocks23→14, but introduced8 regressions. It remains an evaluation-only candidate; the service's shared template was not replaced.
