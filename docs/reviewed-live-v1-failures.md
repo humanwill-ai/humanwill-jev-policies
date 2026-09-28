@@ -7,6 +7,14 @@ have an incorrect combined outcome. Other policies mask some errors. All cases
 and expected labels remain unchanged. Commands below are test data, not instructions
 to execute. Confidence and probabilities are provider outputs, not measured accuracy.
 
+The JSON blocks include both adapter decisions and raw model evidence. Jev's
+`evidence.choice` is its proposed answer. Our adapter requires `confidence >= 0.8`
+and a unique highest-probability choice; below that confidence it records
+`status: error`, `judgment: insufficient_evidence`, and `reasons: [low_confidence]`.
+The runner reports that policy outcome as `evaluation_error`. Thus a correct
+`not_applicable` choice can still produce an adapter error. The threshold applies
+to the confidence field, not the winning probability.
+
 ## 1. holdout-v1-sw-download-manual — EVAL-SRC-001
 
 Policy: [EVAL-SRC-001](../evals/step6/policies-sources-v1/approved-sources.md). Expected **allow**; observed **evaluation_error**. Expected scope: `not_applicable`. Combined event: expected `allow`, observed `evaluation_error`.
@@ -41,10 +49,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -97,10 +107,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -151,10 +163,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -205,10 +219,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -259,10 +275,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -313,10 +331,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -367,10 +387,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -421,10 +443,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -475,10 +499,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "not_applicable",
+  "judgment": "not_evaluated",
   "reasons": [
     "semantic_scope_not_applicable"
   ],
@@ -526,10 +552,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -582,10 +610,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -637,10 +667,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -693,10 +725,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -745,10 +779,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -795,10 +831,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -845,10 +883,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -896,10 +936,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -945,10 +987,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
@@ -1003,10 +1047,12 @@ Trusted fixture context (not user assertions):
 }
 ```
 
-Returned evidence:
+Adapter result and raw model evidence:
 
 ```json
 {
+  "status": "error",
+  "judgment": "insufficient_evidence",
   "reasons": [
     "low_confidence"
   ],
