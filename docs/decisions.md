@@ -381,3 +381,18 @@ accuracy or calibration. [Report](threshold-replay-v1-report.md) retains all cas
 and limitations. Deployment defaults/configs remain unchanged. Proposed next work:
 three complete live stability repetitions under a new frozen protocol; none run
 as part of this offline comparison. Spend remains $0.078278768 of $5.
+
+## Question wording candidate using existing cases — 2026-09-28
+
+Owner selected immediate question improvement using the current cases, without
+waiting for a new test pack. Prepared `questions-v1/config.yaml`: only the four
+EVAL-SRC-001 stage scope texts change. The candidate explicitly names acquisition
+verbs, separates covered behavior/exclusions, distinguishes discussion from requested
+execution, and retains uncertainty for unavailable behavior. Existing policies,
+all 175 case texts/labels/context, model, predicates, modes and thresholds remain
+unchanged at 0.80. Other policies' questions and the common evaluator boundary are
+unchanged. [Before/after review](question-candidate-v1.md) includes representative
+existing cases and the scope-word counts: this structured candidate is longer,
+not a demonstrated token optimization. All 189 offline tests pass; no live Jev
+calls, measured improvement or deployment change. Candidate and prior broader
+plan are saved locally for the next batched push given the Actions quota warning.
