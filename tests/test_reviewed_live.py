@@ -6,9 +6,11 @@ import json
 import unittest
 from types import SimpleNamespace
 
+from frozen_protocols import source_fixture
+
 from evals.step6.backends import choice_answer
 from evals.step6.review_import import fingerprint, page_data, validate_review
-from evals.step6.reviewed_live import REVIEW, build_report, validate_protocol
+from evals.step6.reviewed_live import PROTOCOL, REVIEW, build_report, validate_protocol
 from evals.step6.run import select_configuration
 from evals.step6.source_approval import source_evidence_for
 from humanwill_policies import load_configuration
@@ -107,7 +109,8 @@ class ReviewedLiveTests(unittest.TestCase):
         self.assertNotIn(text, json.dumps(cases))
 
     def test_all_175_reviewed_labels_compose_without_network(self):
-        _, cases, bundle, config, catalog = validate_protocol()
+        with source_fixture("evals.step6.reviewed_live.source_hashes", PROTOCOL):
+            _, cases, bundle, config, catalog = validate_protocol()
         rows = []
         for case in cases:
             with self.subTest(case=case["id"]):
@@ -137,7 +140,8 @@ class ReviewedLiveTests(unittest.TestCase):
         self.assertTrue(all("known_api_cost_usd" not in v for v in report["by_policy"].values()))
 
     def test_policy_mismatch_is_visible_even_when_other_policy_blocks(self):
-        _, cases, *_ = validate_protocol()
+        with source_fixture("evals.step6.reviewed_live.source_hashes", PROTOCOL):
+            _, cases, *_ = validate_protocol()
         c = next(
             c for c in cases if c["id"] == "sources-v1-compose-unapproved-download-approved-upload"
         )

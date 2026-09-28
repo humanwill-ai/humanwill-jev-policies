@@ -8,6 +8,7 @@ import unittest
 from pathlib import Path
 
 import yaml
+from frozen_protocols import source_fixture
 
 from evals.step6.backends import choice_answer
 from evals.step6.gates import (
@@ -27,7 +28,8 @@ from humanwill_policies.providers import MockBackend
 
 class ReleaseQualityGateTests(unittest.TestCase):
     def test_candidate_snapshot_validates_without_claiming_review(self):
-        result = audit_candidate()
+        with source_fixture("evals.step6.gates.evaluator_sources", SNAPSHOT):
+            result = audit_candidate()
         self.assertEqual(result["cases"], 36)
         self.assertIn("not assessed by snapshot checker", result["human_review"])
         self.assertIn("not_assessable", result["release_gate"])
@@ -63,7 +65,10 @@ class ReleaseQualityGateTests(unittest.TestCase):
                 self.assertEqual(result["enforcement"]["requested"], "none")
 
     def test_changed_candidate_or_rubric_invalidates_snapshot(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with (
+            source_fixture("evals.step6.gates.evaluator_sources", SNAPSHOT),
+            tempfile.TemporaryDirectory() as directory,
+        ):
             candidate = Path(directory) / "candidate.json"
             candidate.write_text(CANDIDATE.read_text().replace("AST visitor", "syntax visitor"))
             with self.assertRaisesRegex(ValueError, "snapshot changed"):
@@ -74,7 +79,10 @@ class ReleaseQualityGateTests(unittest.TestCase):
                 audit_candidate(config_path=config)
 
     def test_editing_attestation_does_not_establish_human_review(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with (
+            source_fixture("evals.step6.gates.evaluator_sources", SNAPSHOT),
+            tempfile.TemporaryDirectory() as directory,
+        ):
             snapshot = Path(directory) / "snapshot.json"
             data = json.loads(SNAPSHOT.read_text())
             data["status"] = "human_reviewed"

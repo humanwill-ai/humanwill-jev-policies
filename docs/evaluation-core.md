@@ -88,3 +88,6 @@ Mock results are always `simulated: true` and request no enforcement. Real-backe
 ## Config/3 development extension
 
 Version `0.1.0.dev3` adds opt-in trusted-predicate short circuiting and per-stage scope questions while preserving config/2 behavior. See [config/3 semantics and migration](decision-v3.md). This produces result/3; upgrade hook clients together with the service.
+
+Config/4 adds [global outcome confidence thresholds](outcome-thresholds.md), keeping
+the same result/3 contract and config/3 questions. Legacy configurations are unchanged.

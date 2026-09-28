@@ -53,8 +53,14 @@ def load_configuration(bundle: Bundle, document: dict) -> Configuration:
     validate_contract("config", document, "configuration")
     # Copy into JSON primitives; never mutate the caller's document.
     effective = json.loads(canonical(document))
-    v2 = effective["format"] in ("humanwill.config/2", "humanwill.config/3")
-    v3 = effective["format"] == "humanwill.config/3"
+    v2 = effective["format"] != "humanwill.config/1"
+    v3 = effective["format"] in ("humanwill.config/3", "humanwill.config/4")
+    v4 = effective["format"] == "humanwill.config/4"
+    if v4:
+        effective.setdefault(
+            "outcome_thresholds",
+            {key: 0.8 for key in ("applicable", "not_applicable", "insufficient_evidence")},
+        )
     if v2:
         from .runtime import EvaluationLimits
 
@@ -94,7 +100,8 @@ def load_configuration(bundle: Bundle, document: dict) -> Configuration:
         binding.setdefault("predicates", [])
         if v2:
             strategy = binding["strategy"]
-            binding.setdefault("monitor_min_confidence", 0.8)
+            if not v4:
+                binding.setdefault("monitor_min_confidence", 0.8)
             binding.setdefault("require_complete_coverage", True)
             binding.setdefault("when", [])
             if binding["when"] and strategy != "predicates":

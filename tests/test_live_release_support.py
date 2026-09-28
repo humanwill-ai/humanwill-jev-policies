@@ -79,6 +79,17 @@ class LiveReleaseSupportTests(unittest.TestCase):
 
 
 class FrozenTrancheTests(unittest.TestCase):
+    def setUp(self):
+        from frozen_protocols import source_fixture
+
+        from evals.step6.release_holdout import PROTOCOL
+
+        self.source_patch = source_fixture(
+            "evals.step6.release_holdout.evaluator_sources", PROTOCOL
+        )
+        self.source_patch.start()
+        self.addCleanup(self.source_patch.stop)
+
     def test_pending_review_is_not_implicitly_approved_by_old_packet(self):
         import json
         from unittest.mock import patch

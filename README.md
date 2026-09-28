@@ -107,3 +107,8 @@ CI tests Python 3.11/3.14 on Ubuntu/macOS, builds the source distribution and wh
 - [Research](docs/research.md) and [evaluation plan](docs/evaluation-plan.md).
 
 OpenRouter transport smoke and synthetic development evaluations are recorded in the linked reports. See the [smoke procedure](docs/provider-smoke.md) for credential-safe reproduction. Project licensing is still an owner decision before public publication.
+
+Global confidence gates are available through opt-in config/4. See
+[configuration and migration](docs/outcome-thresholds.md) for three thresholds shared
+across policies, independent of failure handling. Defaults remain 0.80 and existing
+configurations retain their behavior; this feature is not a calibrated profile.

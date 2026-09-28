@@ -157,6 +157,32 @@ def main():
             )
             if result["decision"] != "allow" or not result["simulated"]:
                 raise ValueError("Offline demo did not produce its scripted allow")
+            run([cli, "schema", "config-v4"], work, environment, output=True)
+            result_v4 = json.loads(
+                run(
+                    [
+                        cli,
+                        "evaluate",
+                        "demo",
+                        "--config",
+                        "demo/config-outcomes.yaml",
+                        "--request",
+                        "demo/request.json",
+                        "--mock-answers",
+                        "demo/mock-answers.json",
+                        "--json",
+                    ],
+                    work,
+                    environment,
+                    output=True,
+                )
+            )
+            if (
+                result_v4["decision"] != "allow"
+                or not result_v4["simulated"]
+                or result_v4["format"] != "humanwill.result/3"
+            ):
+                raise ValueError("Global-threshold demo did not produce a scripted result/3 allow")
             # Existing meaningful contracts include gateway pre/post, both hook dialects,
             # monitor/deny/error, authentication, unsupported coverage and metadata trust.
             run(

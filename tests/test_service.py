@@ -15,6 +15,7 @@ import httpx
 import test_evaluation
 from test_evaluation import ScriptedBackend, answer, event
 from test_foundation import Workspace, write_policy
+from test_outcome_thresholds import v4
 
 from humanwill_policies import load_bundle, load_configuration
 from humanwill_policies.connectors import events
@@ -333,6 +334,75 @@ class ServiceTests(Workspace):
             )
             self.assertEqual(result["format"], "humanwill.result/3")
             self.assertEqual(result["enforcement"]["requested"], "block")
+
+    def test_global_outcome_gates_reach_both_gateway_connectors(self):
+        thresholds = {"applicable": 0.8, "not_applicable": 0.7, "insufficient_evidence": 0.6}
+        for connector, path, body, allow, deny in [
+            (
+                "litellm",
+                "/beta/litellm_basic_guardrail_api",
+                llm(),
+                {"action": "NONE"},
+                {"action": "BLOCKED", "blocked_reason": "HumanWill policy check denied"},
+            ),
+            (
+                "agentgateway",
+                "/request",
+                {"body": {"messages": [{"role": "user", "content": "test"}]}},
+                {"action": {}},
+                {"action": {"body": "HumanWill policy check denied", "status_code": 403}},
+            ),
+        ]:
+            for choice, confidence, on_error, blocked in [
+                ("compliant", 0.75, "block", False),
+                ("compliant", 0.65, "block", True),
+                ("violation", 0.8, "allow", True),
+                ("violation", 0.75, "allow", False),
+                ("insufficient_evidence", 0.6, "block", True),
+            ]:
+                with self.subTest(connector=connector, choice=choice, confidence=confidence):
+                    app = self.app(
+                        connector,
+                        config=v4(self.enforcing(on_error=on_error), thresholds),
+                        backend=ScriptedBackend({"RULE": answer(choice, confidence)}),
+                    )
+                    self.assertEqual(self.post(app, path, body).json(), deny if blocked else allow)
+
+    def test_global_outcome_gates_reach_both_hook_clients(self):
+        thresholds = {"applicable": 0.8, "not_applicable": 0.7, "insufficient_evidence": 0.6}
+        for runtime, name, body in [
+            (
+                "copilot_local",
+                "UserPromptSubmit",
+                {"hook_event_name": "UserPromptSubmit", "prompt": "test"},
+            ),
+            ("copilot_cli", "preToolUse", {"toolName": "shell", "toolArgs": {"command": "test"}}),
+        ]:
+            for choice, confidence, decision, requested in [
+                ("compliant", 0.75, "allow", "allow"),
+                ("violation", 0.8, "block", "block"),
+                ("violation", 0.75, "evaluation_error", "block"),
+                ("insufficient_evidence", 0.6, "evaluation_error", "block"),
+            ]:
+                app = self.app(
+                    runtime,
+                    config=v4(self.enforcing(), thresholds),
+                    backend=ScriptedBackend({"RULE": answer(choice, confidence)}),
+                )
+                result = asyncio.run(
+                    assess(
+                        body,
+                        runtime,
+                        name,
+                        "http://localhost",
+                        TOKEN,
+                        6000,
+                        transport=httpx.ASGITransport(app),
+                    )
+                )
+                self.assertEqual(result["format"], "humanwill.result/3")
+                self.assertEqual(result["decision"], decision)
+                self.assertEqual(result["enforcement"]["requested"], requested)
 
     def test_hook_failures_never_echo_content_and_preserve_default_permissions(self):
         for runtime, name in [

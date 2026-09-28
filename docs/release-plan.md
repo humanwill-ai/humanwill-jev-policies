@@ -193,3 +193,16 @@ error on an empty response is masked by a correct document block. Production
 policy has only one generic example after this split; representative structured
 action cases are required before claiming its quality. Statistical, latency and
 production-resolver gates remain open. No provider calls or new spending.
+
+## Global outcome thresholds — 2026-09-28
+
+Owner authorized three configurable confidence gates shared across all policies,
+rather than per-policy asymmetric settings. Implemented as opt-in config/4; see
+[outcome thresholds](outcome-thresholds.md). All three default to 0.80, old configs
+and historical evidence remain unchanged, and config/4 rejects legacy per-policy
+thresholds. Scope applicability still requires deterministic authorization;
+uncertainty handling and connector enforcement remain separate. Content-only
+violation/compliant answers share the applicable/not_applicable gates. Result/3
+remains compatible with existing connectors. Offline validation is not calibration:
+no new live calls or spending, no qualified asymmetric enforcement profile, and
+release quality gates remain open.

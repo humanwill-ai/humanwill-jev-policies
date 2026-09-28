@@ -15,6 +15,7 @@ SCHEMAS = (
     "config",
     "config-v2",
     "config-v3",
+    "config-v4",
     "request",
     "result",
     "result-v2",
@@ -34,11 +35,11 @@ def schema(name: str) -> dict:
 def validate_contract(name: str, value: object, location: str = "") -> None:
     json_value(value)
     if name in ("config", "result") and isinstance(value, dict):
-        for version in (2, 3):
+        for version in (2, 3, 4) if name == "config" else (2, 3):
             if value.get("format") == f"humanwill.{name}/{version}":
                 name += f"-v{version}"
                 break
-    kind = name.removesuffix("-v2").removesuffix("-v3")
+    kind = name.removesuffix("-v2").removesuffix("-v3").removesuffix("-v4")
     if kind in ("request", "result") and len(canonical(value).encode()) > MAX_REQUEST_BYTES:
         raise PolicyError("payload_limit", "Payload exceeds 262144 canonical JSON bytes", location)
     validator = Draft202012Validator(schema(name))

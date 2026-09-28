@@ -1,0 +1,28 @@
+# Global gates; defaults remain symmetric until a profile is measured.
+format: humanwill.config/4
+outcome_thresholds:
+  applicable: 0.80
+  not_applicable: 0.80
+  insufficient_evidence: 0.80
+metadata:
+  enabled: false
+policies:
+  DEMO-CONTENT:
+    strategy: semantic
+    enabled: true
+    mode: monitor
+  DEMO-FINANCE:
+    strategy: scoped_predicates
+    scope: The proposed tool action approves or releases a payment.
+    predicates:
+      - {field: identity.groups, op: contains, value: finance}
+    enabled: false
+    requires_metadata: [identity.subject, identity.groups]
+  DEMO-DOCUMENTS:
+    strategy: predicates
+    when:
+      - {field: documents.classification, op: equals, value: confidential}
+    predicates:
+      - {field: destination.approved, op: equals, value: true}
+    enabled: false
+    requires_metadata: [documents.classification, destination.provider, destination.approved]

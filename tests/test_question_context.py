@@ -5,6 +5,8 @@ import copy
 import json
 import unittest
 
+from frozen_protocols import source_fixture
+
 from evals.step6.backends import choice_answer
 from evals.step6.question_context import (
     NOTES,
@@ -12,7 +14,7 @@ from evals.step6.question_context import (
     load_contexts,
     make_context,
 )
-from evals.step6.reviewed_live import validate_protocol
+from evals.step6.reviewed_live import PROTOCOL, validate_protocol
 from evals.step6.run import select_configuration
 from evals.step6.source_approval import source_evidence_for
 from humanwill_policies import load_configuration
@@ -35,8 +37,9 @@ class CaptureBackend(MockBackend):
 class QuestionContextTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        _, cls.cases, cls.bundle, cls.config, cls.catalog = validate_protocol()
-        cls.contexts = load_contexts()
+        with source_fixture("evals.step6.reviewed_live.source_hashes", PROTOCOL):
+            _, cls.cases, cls.bundle, cls.config, cls.catalog = validate_protocol()
+            cls.contexts = load_contexts()
 
     def test_context_only_changes_payload_state_for_all_175_cases(self):
         self.assertEqual(len(self.contexts), 175)

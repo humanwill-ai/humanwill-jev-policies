@@ -93,4 +93,8 @@ Include near-neighbors: printing a dangerous command for discussion differs from
 
 Measure false blocks and missed violations separately, report indeterminate/errors and coverage gaps, and freeze policy/configuration/model/threshold versions before held-out evaluation. Start in monitor mode; a syntactically valid `evaluation_profile` does not prove calibration. Enable enforcement only for a profile with suitable measured evidence and explicit failure behavior. Unsupported review actions are rejected because no approval workflow exists.
 
+Config/4 supports [three global outcome thresholds](outcome-thresholds.md), shared
+across policies. It rejects legacy per-policy confidence settings; failure handling
+remains separate. All three default to 0.80 until deliberately configured.
+
 A prompt check covers the submitted surface, not later files, retrieval, tool results or output. Enable response and pre-tool checks where the rule governs those stages; see the [connector coverage table](compatibility.md) and [operations](operations.md).

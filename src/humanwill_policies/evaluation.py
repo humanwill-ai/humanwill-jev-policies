@@ -109,7 +109,7 @@ class Evaluator:
         self.bundle = bundle
         self.configuration = configuration
         self.config = configuration.to_dict()
-        self.v3 = self.config["format"] == "humanwill.config/3"
+        self.v3 = self.config["format"] in ("humanwill.config/3", "humanwill.config/4")
         self.backend = backend
         self.limits = EvaluationLimits(**self.config.get("evaluation", {}))
         self._slots = asyncio.Semaphore(self.limits.max_in_flight)
@@ -316,9 +316,17 @@ class Evaluator:
                             binding = pending[key]
                             row = rows[key]
                             row["evidence"].update(answer)
-                            threshold = binding.get("evaluation_profile", {}).get(
-                                "min_confidence", binding["monitor_min_confidence"]
-                            )
+                            if "outcome_thresholds" in self.config:
+                                # The same global gates also cover content-only policies.
+                                outcome = {
+                                    "violation": "applicable",
+                                    "compliant": "not_applicable",
+                                }.get(answer["choice"], answer["choice"])
+                                threshold = self.config["outcome_thresholds"][outcome]
+                            else:
+                                threshold = binding.get("evaluation_profile", {}).get(
+                                    "min_confidence", binding["monitor_min_confidence"]
+                                )
                             choice, reason = _classify(answer, threshold)
                             if choice == "insufficient_evidence":
                                 fail(key, reason)

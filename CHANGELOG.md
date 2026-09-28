@@ -4,6 +4,7 @@ No public release has been published. Versions below identify private developmen
 
 ## 0.1.0.dev3 — current development candidate
 
+- Adds opt-in config/4 with three global outcome confidence thresholds, preserving config/1–3 behavior and result/3 compatibility. Defaults remain 0.80; asymmetric values are configurable, not calibrated. See [migration and semantics](docs/outcome-thresholds.md).
 - Adds opt-in config/3 and result/3 with per-stage scopes and trusted-predicate short circuiting; retains config/2 behavior.
 - Clarifies approved coding-model use versus onward disclosure. The current synthetic evaluation bundle has software disclosure, production action and classified-document policies. The standalone instruction-integrity policy was removed after its development comparison.
 - Adds exact wheel/source installation verification, installed service startup/rollback checks, a local container recipe and installation, policy-authoring and operations guides.
