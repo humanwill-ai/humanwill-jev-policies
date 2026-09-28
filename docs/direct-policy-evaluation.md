@@ -2,8 +2,8 @@
 
 Config/5 makes the Markdown policy body the semantic rule sent to Jev. The adapter
 supplies one reusable evaluation template; the company does not write a second
-natural-language question for each policy. This is an opt-in implementation, not
-yet a measured improvement in Jev accuracy. Historical configurations and results
+natural-language question for each policy. This is an opt-in implementation. Its [first live comparison](direct-policy-live-v1-report.md)
+regressed; it is not an accuracy improvement. Historical configurations and results
 remain reproducible at their recorded revisions.
 
 ## Runtime flow
@@ -105,3 +105,5 @@ Ruff passes. Wheel and source installations outside the checkout pass the new
 schema/demo checks, all connector contract tests and service startup/rollback
 checks. This is adapter contract evidence, not a fresh test of the actual host
 applications. No provider calls were made; the $5 ledger remains unchanged.
+
+The subsequent authorized [full-pack live run](direct-policy-live-v1-report.md) matched 142/175 outcomes versus 166/175 previously. Keep this template experimental; no thresholds or policies were changed in response.
