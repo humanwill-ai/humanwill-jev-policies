@@ -145,6 +145,16 @@ def build():
     if [c["id"] for c in context_cases] != recorded_approvals:
         raise ValueError("Context cases do not match the accepted review")
     scope_config = yaml.safe_load((ROOT / "evals/step6/config-sources-v1.yaml").read_text())
+    release_scope_path = ROOT / "evals/step6/release-scope-v1/manifest.json"
+    release_scope = json.loads(release_scope_path.read_text())
+    if (
+        [c["id"] for c in release_scope["cases"]] != recorded_approvals
+        or hashlib.sha256((ROOT / release_scope["dataset"]).read_bytes()).hexdigest()
+        != release_scope["dataset_sha256"]
+        or hashlib.sha256((ROOT / "evals/step6/release_scope.py").read_bytes()).hexdigest()
+        != release_scope["selector_sha256"]
+    ):
+        raise ValueError("Release-scope manifest changed")
     data = json.dumps(
         {
             "packs": packs,
@@ -160,6 +170,8 @@ def build():
             "source_catalog_sha256": catalog_hash,
             "question_contexts": {c["id"]: c["context"] for c in context_cases},
             "question_context_sha256": hashlib.sha256(context_path.read_bytes()).hexdigest(),
+            "release_scope": release_scope,
+            "release_scope_sha256": hashlib.sha256(release_scope_path.read_bytes()).hexdigest(),
             "scope_questions": {
                 pid: binding.get("scope_by_stage", {})
                 for pid, binding in scope_config["policies"].items()

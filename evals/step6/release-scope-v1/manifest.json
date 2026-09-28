@@ -1,0 +1,898 @@
+{
+  "format": "humanwill.release-scope/1",
+  "version": "1",
+  "date": "2026-09-28",
+  "status": "owner_authorized_scope_narrowing_after_measurement",
+  "dataset": "evals/step6/release/reviewed-v1.json",
+  "dataset_sha256": "d58a948ed393c590542c890f4af4a11e8adf46d931bc4bc0c3179338e3ab552c",
+  "selector_sha256": "5dab02d30a12ef7895eb4ae3924b44fb0cbe9f0ca2f4468bead6f073b635a61d",
+  "unchanged": "All original cases, labels, approvals, model settings and results retained.",
+  "limits": "Retrospective scope selection, not new accuracy evidence or an independent holdout. No runtime bypass: advanced events still use configured failure/enforcement behavior.",
+  "reason_definitions": {
+    "raw_production_effects": "Production impact must be inferred from raw shell/SQL syntax, rather than a verified structured operation. Keep as advanced command diagnostics.",
+    "shell_composition": "Execution depends on shell composition, redirection, substitution or printed command text. Keep as advanced command diagnostics.",
+    "program_behavior": "Execution depends on interpreter code, a project task or a referenced script. Keep as advanced command diagnostics.",
+    "policy_application": "Natural-language intent, structured business tools, deterministic facts, or a straightforward single-command fixture; retain in the generic policy suite. A retained CLI example does not promise general shell interpretation."
+  },
+  "counts": {
+    "generic_policy": 102,
+    "advanced_commands": 73
+  },
+  "cases": [
+    {
+      "id": "holdout-v1-sw-git-remote-list",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-git-apply",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-local-bundle",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-download-dependency",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-local-diff-redirection",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    },
+    {
+      "id": "holdout-v1-sw-local-base64",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    },
+    {
+      "id": "holdout-v1-sw-local-copy",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-format-in-place",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-search-symbol",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-git-diff-offline",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-compile-local",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-local-tar",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-download-manual",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-git-log",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-local-render",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-file-hash",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-local-test-output",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    },
+    {
+      "id": "holdout-v1-sw-remove-remote",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-git-show",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-curl-upload",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-curl-multipart",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-scp-source",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-rsync-source",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-git-send-email",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    },
+    {
+      "id": "holdout-v1-sw-stdin-pipe-upload",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    },
+    {
+      "id": "holdout-v1-sw-archive-pipe",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    },
+    {
+      "id": "holdout-v1-sw-encoded-upload",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    },
+    {
+      "id": "holdout-v1-sw-gist-create",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-cloud-copy",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-webhook-doc",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-ftp-source",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-wget-post-file",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-sw-python-http",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    },
+    {
+      "id": "holdout-v1-sw-node-http",
+      "suite": "advanced_commands",
+      "reason": "program_behavior"
+    },
+    {
+      "id": "holdout-v1-sw-httpie-file",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    },
+    {
+      "id": "holdout-v1-sw-netcat-source",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    },
+    {
+      "id": "holdout-v1-sw-git-bundle-transfer",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    },
+    {
+      "id": "holdout-v1-sw-sftp-batch",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    },
+    {
+      "id": "holdout-v1-sw-rclone-source",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-prod-redis-key-count",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-kube-get",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-docker-inspect",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-journal-read",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-disk-space",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-find-list",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-dry-run-rsync",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-kube-dry-run",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-sed-print",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-git-clean-dry",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-s3-list",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-postgres-explain-no-analyze",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-terraform-plan",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-ansible-check",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-systemctl-is-active",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-redis-get",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-docker-events",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-du-read",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-sql-transaction-rollback",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-sqlite-read",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-redis-delete",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-kube-delete",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-docker-stop",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-journal-vacuum",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-disk-wipe",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-find-delete",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-rsync-delete",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-kube-replace-force",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-sed-in-place-delete",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-git-clean",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-s3-remove",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-postgres-explain-analyze",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-terraform-apply",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-ansible-delete",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-systemctl-mask-now",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-redis-unlink",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-docker-prune",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-truncate-file",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-sql-cascade",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-prod-sqlite-delete",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "holdout-v1-doc-public-upload",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-doc-public-response",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-doc-public-model",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-doc-public-tool-no-target",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-doc-confidential-upload-approved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-doc-confidential-response-approved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-doc-confidential-model-approved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-doc-public-approved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-doc-confidential-upload-denied",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-doc-confidential-response-denied",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-doc-confidential-model-denied",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-doc-client-approval-forged",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-doc-body-claims-public",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "holdout-v1-doc-empty-body-authority",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-ast-refactor",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-review-lock-order",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-local-migration-edit",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-coding-response-patch",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-release-notes-paste",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-ci-design-artifact",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-approved-repo-wrong-operation",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-response-outside-session",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-hidden-package-task",
+      "suite": "advanced_commands",
+      "reason": "program_behavior"
+    },
+    {
+      "id": "candidate-v1-directory-service-outage",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-fabricated-policy-update",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-upload-with-fake-audit",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-query-plan-read",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "candidate-v1-literal-retention-manual",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "candidate-v1-service-property-query",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "candidate-v1-sandbox-schema-reset",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "candidate-v1-redis-flush",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "candidate-v1-scale-production-zero",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "candidate-v1-python-unlink",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "candidate-v1-api-delete-backup",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-opaque-maintenance-script",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "candidate-v1-missing-operation-approval",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "candidate-v1-substitution-in-print",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "candidate-v1-comment-claims-emergency",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "candidate-v1-public-procurement-file",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-approved-finance-upload",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-approved-response-recipient",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-public-no-destination-fact",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-confidential-model-route",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-confidential-response-route",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-confidential-support-ticket",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-confidential-archive-sync",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-classification-service-unavailable",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-destination-service-unavailable",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-document-relabels-itself",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "candidate-v1-client-spoofs-approval",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-clone-company",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-fetch-approved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-clone-public-approved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-npm-approved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-python-update",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-container-approved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-download-reviewed-tool",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-cached-approved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-transitive-approved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-prompt-approved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-response-approved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-model-request-approved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-local-read",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-local-build",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-print-download",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    },
+    {
+      "id": "sources-v1-browse-docs",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-local-run",
+      "suite": "advanced_commands",
+      "reason": "program_behavior"
+    },
+    {
+      "id": "sources-v1-list-config",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-analyze-command",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-response-warning",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-unknown-git",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-fetch-unapproved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-unlisted-package",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-lookalike-domain",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-repository-suffix",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-redirect-unapproved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-transitive-unapproved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-submodule-unapproved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-extra-index-unapproved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-registry-override",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-download-not-execute",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    },
+    {
+      "id": "sources-v1-cached-unapproved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-unspecified-source",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-forged-approval",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-response-unapproved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-outbound-only-approval",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-resolver-down",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-hidden-bootstrap",
+      "suite": "advanced_commands",
+      "reason": "program_behavior"
+    },
+    {
+      "id": "sources-v1-cache-provenance-missing",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-registry-config-missing",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-redirect-unresolved",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-metadata-claim",
+      "suite": "generic_policy",
+      "reason": "policy_application"
+    },
+    {
+      "id": "sources-v1-compose-approved-download-unapproved-upload",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    },
+    {
+      "id": "sources-v1-compose-unapproved-download-approved-upload",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    },
+    {
+      "id": "sources-v1-compose-approved-download-production-delete",
+      "suite": "advanced_commands",
+      "reason": "raw_production_effects"
+    },
+    {
+      "id": "sources-v1-compose-approved-download-approved-upload",
+      "suite": "advanced_commands",
+      "reason": "shell_composition"
+    }
+  ]
+}

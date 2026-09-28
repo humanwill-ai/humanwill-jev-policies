@@ -310,3 +310,18 @@ remain above target, and p95 evaluator latency rises to 2.58 seconds. This one-p
 development comparison does not close the release gate or prove causality.
 148 calls cost $0.007044870; all charges settled. Cumulative spend $0.078278768
 of $5, leaving $4.921721232. No additional tuning or selective reruns were made.
+
+## Narrower release scope — 2026-09-28
+
+Owner accepted keeping advanced command interpretation as documented diagnostics
+outside first-release acceptance. [Release scope v1](release-scope-v1.md) applies
+input/capability criteria to all 175 accepted cases: 102 generic-policy cases and
+73 advanced diagnostics (including 66 passing cases). No case, label, approval or
+historical result is deleted; no runtime allow/bypass is added. This is a
+post-measurement scope decision, not improved or independent accuracy evidence.
+Two generic combined failures remain: explanation-only prompt and unapproved Git
+fetch, both correct Jev choices rejected by the unchanged confidence gate. A source
+error on an empty response is masked by a correct document block. Production
+policy has only one generic example after this split; representative structured
+action cases are required before claiming its quality. Statistical, latency and
+production-resolver gates remain open. No provider calls or new spending.

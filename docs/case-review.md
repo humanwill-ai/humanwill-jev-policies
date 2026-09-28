@@ -131,3 +131,12 @@ labels, review fingerprint and saved progress; exports carry its separate hash.
 Seven removed cases stay excluded and have no added context. Browser verification
 covered the original owner export, approvals/removals, manual and missing-manifest
 context, exact question display, and desktop/mobile layout without script errors.
+
+## Release-scope filter
+
+Select **Generic policy suite · 102** or **Advanced command diagnostics · 73**
+to view the [versioned capability split](release-scope-v1.md) within the current
+packet. Each case states the reason. All cases and approvals remain intact;
+advanced is not the same as removed. Progress totals still count the original
+review, not only the visible filter. Scope metadata is exported separately and
+does not retroactively alter the original review fingerprint or live inputs.

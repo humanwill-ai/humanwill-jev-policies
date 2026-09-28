@@ -11,6 +11,12 @@ errors fell from six to two. Six legitimate events would still be blocked under
 fail-closed enforcement. No known violation was allowed, but command interpretation,
 confidence calibration and measured tail latency leave the semantic release gate open.
 
+The [first-release scope](docs/release-scope-v1.md) focuses on company-policy
+application. Advanced shell/SQL interpretation stays in a separate diagnostic
+suite; arbitrary command security analysis is not a first-release guarantee.
+All 175 cases remain available: 102 generic-policy cases and 73 advanced diagnostics.
+This retrospective split does not change runtime behavior or establish new accuracy.
+
 The current measured bundle is `evals/step6/policies-sources-v1`, configured by
 `config-sources-v1.yaml`. Earlier three-policy and Gemini comparisons remain
 historical evidence; Jev remains the first release backend. The standalone

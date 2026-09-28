@@ -18,6 +18,7 @@
 <main>
 <aside class="sidebar">
   <label>Find a case<input type="search" id="search" placeholder="Search event, ID, or reason…"></label>
+  <label>Release scope<select id="releaseScopeFilter"><option value="">All retained cases</option><option value="generic_policy">Generic policy suite · 102</option><option value="advanced_commands">Advanced command diagnostics · 73</option></select></label>
   <div class="filters"><label>Policy<select id="policyFilter"><option value="">All policies</option><option value="EVAL-SW-001">Software disclosure</option><option value="EVAL-PROD-001">Production actions</option><option value="EVAL-DOC-001">Confidential documents</option><option value="EVAL-SRC-001">Approved software sources</option></select></label><label>Review status<select id="statusFilter"><option value="">Active cases</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="correction">Needs correction</option><option value="removed">Removed</option></select></label></div>
   <div class="list-heading"><span id="listCount"></span><button id="nextPending" class="quiet">Next pending →</button></div>
   <div id="caseList" aria-label="Cases"></div>
@@ -27,6 +28,7 @@
   <div id="empty" hidden>No cases match. Try changing your filters.</div>
   <div id="casePanel">
     <div class="case-heading"><div><div class="eyebrow" id="caseMeta"></div><h2 id="caseTitle"></h2><code id="caseId"></code></div><span class="badge" id="reviewBadge"></span></div>
+    <p id="releaseScopeLabel" class="subtle"></p>
     <div class="columns">
       <article class="event-column"><h3>Event to assess</h3><div id="event"></div>
         <section id="contextPanel" class="expected" aria-label="Additional evaluation context">

@@ -4,6 +4,7 @@ const $ = id => document.getElementById(id);
 const fingerprint = DATA.packs.map(p => p.sha256).join(':') + ':' + Object.values(DATA.policies).map(p => p.sha256).join(':') + ':' + DATA.source_catalog_sha256;
 const storageKey = 'humanwill.case-review.v1:' + fingerprint;
 const allCases = new Map(DATA.packs.flatMap(p => p.cases.map(c => [c.id, {c, p}])));
+const releaseScope = new Map(DATA.release_scope.cases.map(c => [c.id, c]));
 let state = {reviewer: '', reviews: {}, archived_reviews: {}}, packId = 'holdout', selectedId = 'holdout-v1-sw-download-dependency';
 let storageOK = true, lastRemovedId = null;
 const labels = {allow: 'Allow', block: 'Block / violation', evaluation_error: 'Evaluation error'};
@@ -72,7 +73,7 @@ function review(c) {
 function title(c) { return c.id.replace(/^(holdout-v1-|candidate-v1-|sources-v1-)/, '').replace(/^(sw-|prod-|doc-)/, '').replaceAll('-', ' '); }
 function filtered() {
   const query = $('search').value.toLowerCase().trim();
-  return pack().cases.filter(c => (!$('policyFilter').value || (c.policy_id === $('policyFilter').value || c.also_policy_ids?.includes($('policyFilter').value))) && ($('statusFilter').value ? review(c).status === $('statusFilter').value : review(c).status !== 'removed') && (!query || JSON.stringify(c).toLowerCase().includes(query)));
+  return pack().cases.filter(c => (!$('releaseScopeFilter').value || releaseScope.get(c.id)?.suite === $('releaseScopeFilter').value) && (!$('policyFilter').value || (c.policy_id === $('policyFilter').value || c.also_policy_ids?.includes($('policyFilter').value))) && ($('statusFilter').value ? review(c).status === $('statusFilter').value : review(c).status !== 'removed') && (!query || JSON.stringify(c).toLowerCase().includes(query)));
 }
 function badge(el, text, kind) { el.textContent = text; el.className = 'badge ' + kind; }
 function updateProgress() {
@@ -113,6 +114,8 @@ function render() {
   if (!selectedId) return;
   const c = current(), r = review(c), policy = DATA.policies[c.review_policy_id ?? c.policy_id];
   $('caseTitle').textContent = title(c); $('caseId').textContent = c.id;
+  const cohort = releaseScope.get(c.id);
+  $('releaseScopeLabel').textContent = cohort ? (cohort.suite === 'generic_policy' ? 'Generic policy suite. ' : 'Advanced command diagnostic — retained outside first-release acceptance. ') + DATA.release_scope.reason_definitions[cohort.reason] : 'Historically removed case; outside both current suites.';
   $('caseMeta').textContent = c.request.stage.replaceAll('_', ' ') + ' / ' + [c.policy_id, ...(c.also_policy_ids ?? [])].join(' + ');
   badge($('reviewBadge'), pack().previously_approved && !state.reviews[c.id] ? 'Previously approved' : statuses[r.status], r.status);
   $('event').replaceChildren();
@@ -192,7 +195,7 @@ function restoreRemoved(id) {
   const {previous_status, removal_reason, ...restored} = r;
   state.reviews[id] = {...restored, status: previous_status ?? 'pending', updated_at: now()};
   packId = allCases.get(id).p.id;
-  $('statusFilter').value = ''; $('search').value = ''; $('policyFilter').value = '';
+  $('statusFilter').value = ''; $('search').value = ''; $('policyFilter').value = ''; $('releaseScopeFilter').value = '';
   selectedId = id; lastRemovedId = null; $('undoRemove').hidden = true;
   persist(); render(); message('Restored ' + id + ' to review.');
 }
@@ -213,15 +216,15 @@ $('notes').oninput = () => {
 };
 $('undo').onclick = () => { if (!current()) return; if (!confirm('Reset your review and notes for this case? The original label and any historical approval will be preserved.')) return; delete state.reviews[selectedId]; persist(); message('Original case review state restored.'); render(); };
 $('reviewer').value = state.reviewer; $('reviewer').oninput = () => {state.reviewer = $('reviewer').value; persist();};
-for (const id of ['search', 'policyFilter', 'statusFilter']) $(id).addEventListener(id === 'search' ? 'input' : 'change', render);
-for (const [id, value] of [['tabHoldout', 'holdout'], ['tabSources', 'sources'], ['tabPrevious', 'previous']]) $(id).onclick = () => {packId = value; $('statusFilter').value = ''; $('policyFilter').value = ''; $('search').value = ''; selectedId = null; render();};
+for (const id of ['search', 'policyFilter', 'statusFilter', 'releaseScopeFilter']) $(id).addEventListener(id === 'search' ? 'input' : 'change', render);
+for (const [id, value] of [['tabHoldout', 'holdout'], ['tabSources', 'sources'], ['tabPrevious', 'previous']]) $(id).onclick = () => {packId = value; $('releaseScopeFilter').value = ''; $('statusFilter').value = ''; $('policyFilter').value = ''; $('search').value = ''; selectedId = null; render();};
 function move(delta) {const list = filtered(); selectedId = list[list.findIndex(c => c.id === selectedId) + delta]?.id ?? selectedId; render();}
 $('prev').onclick = () => move(-1); $('next').onclick = () => move(1);
 $('nextPending').onclick = () => {
   const list = pack().cases; const index = list.findIndex(c => c.id === selectedId);
   const next = [...list.slice(index + 1), ...list.slice(0, index + 1)].find(c => review(c).status === 'pending');
   if (!next) {message('No pending cases in this packet.'); return;}
-  $('search').value = ''; $('policyFilter').value = ''; $('statusFilter').value = ''; selectedId = next.id; render();
+  $('search').value = ''; $('policyFilter').value = ''; $('statusFilter').value = ''; $('releaseScopeFilter').value = ''; selectedId = next.id; render();
 };
 $('approveRemaining').onclick = () => {
   const pending = pack().cases.filter(c => review(c).status === 'pending');
@@ -232,6 +235,7 @@ $('approveRemaining').onclick = () => {
 function exportPayload() {
   return {format: 'humanwill.case-review/1', exported_at: now(), fingerprint, ...state,
     context_preview: {sha256: DATA.question_context_sha256, status: 'live_evaluated_once', approval_scope: 'Recorded approvals refer to original labels; the added context is a separate experiment.'},
+    release_scope: {version: DATA.release_scope.version, sha256: DATA.release_scope_sha256, note: 'Retrospective capability grouping; cases and labels retained, not new accuracy evidence.'},
     reviews: {...Object.fromEntries((DATA.recorded_approvals ?? []).filter(id => !allCases.get(id).p.previously_approved).map(id => [id, review(allCases.get(id).c)])), ...state.reviews},
     removals: [...allCases.values()].filter(({c}) => review(c).status === 'removed').map(({c, p}) => ({id: c.id, packet: p.id, reason: review(c).removal_reason ?? review(c).notes, removed_at: review(c).updated_at, authority: DATA.default_removed[c.id]?.removed_at === review(c).updated_at ? (DATA.default_removed[c.id].authority ?? 'owner_instruction') : 'local_review'})),
     packets: DATA.packs.map(p => ({id: p.id, path: p.path, sha256: p.sha256, active_case_count: p.cases.filter(c => review(c).status !== 'removed').length, original_approval_date: p.approval_date,
