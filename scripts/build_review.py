@@ -114,6 +114,26 @@ def build():
         sha256=hashlib.sha256(revised.read_bytes()).hexdigest(),
         cases=revised_data["cases"] + [r["case"] for r in removed],
     )
+    default_removed = {r["id"]: {k: v for k, v in r.items() if k != "case"} for r in removed}
+    recorded_approvals = []
+    recorded_approval_at = None
+    review_path = ROOT / "evals/step6/release/owner-review-v1.json"
+    if review_path.exists():
+        protocol = json.loads((review_path.parent / "reviewed-live-v1-protocol.json").read_text())
+        if (
+            hashlib.sha256(review_path.read_bytes()).hexdigest()
+            != protocol["sha256"][str(review_path.relative_to(ROOT))]
+        ):
+            raise ValueError("Recorded owner review changed")
+        record = json.loads(review_path.read_text())
+        recorded_approvals = record["approved_case_ids"]
+        recorded_approval_at = record["exported_at"]
+        for removal in record["removed"]:
+            default_removed[removal["id"]] = {
+                **removal,
+                "reason": removal["reason"] or "",
+                "authority": "owner_review_export",
+            }
     data = json.dumps(
         {
             "packs": packs,
@@ -121,9 +141,9 @@ def build():
             "legacy_fingerprint": legacy_fingerprint,
             "previous_fingerprint": previous_fingerprint,
             "compatible_fingerprint": compatible_fingerprint,
-            "default_removed": {
-                r["id"]: {k: v for k, v in r.items() if k != "case"} for r in removed
-            },
+            "default_removed": default_removed,
+            "recorded_approvals": recorded_approvals,
+            "recorded_approval_at": recorded_approval_at,
             "original_labels": original_labels,
             "source_catalog": catalog_path.read_text(),
             "source_catalog_sha256": catalog_hash,
@@ -141,7 +161,9 @@ def build():
         html = html.replace(marker, value)
     output = ROOT / "docs/case-review.html"
     output.write_text(html)
-    print(f"Built {output}: {sum(len(p['cases']) for p in packs) - len(removed)} active cases")
+    print(
+        f"Built {output}: {sum(len(p['cases']) for p in packs) - len(default_removed)} active cases"
+    )
 
 
 if __name__ == "__main__":

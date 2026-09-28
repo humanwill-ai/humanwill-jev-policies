@@ -1,6 +1,6 @@
 # Project brief
 
-Updated 2026-09-27 · service/connectors implemented; runtime checks pass; policy-quality validation pending
+Updated 2026-09-28 · reviewed live evaluation complete; semantic release gate remains open
 
 ## Product and target user
 
@@ -76,3 +76,16 @@ The direct dependency tarball is unapproved and the combined expected result is
 block. Original review records remain historical; the expanded checks need review.
 The old live runner/protocol remains single-policy historical evidence and does
 not establish the new suite’s quality. No new model calls were made.
+
+## September 28: completed review and first combined live run
+
+The owner export accepts 175 cases (93 updated, 46 source, 36 previously approved)
+and excludes seven. The frozen Jev/OpenRouter run is complete: 161/175 exact event
+outcomes, no known violations allowed overall, ten legitimate events returning
+errors, and one source-policy unknown incorrectly allowed inside an event that
+remained an error. Production/source uncertainty exceeds the specified-error
+target. See [the report](reviewed-live-v1-report.md) and
+[all policy disagreements](reviewed-live-v1-failures.md). Cumulative spend is
+$0.071233898 of $5. Human label review is complete for this scope; independent
+qualification and production source resolution remain open. Preserve this first
+pass while developing fixes; do not relabel it as an unseen holdout after tuning.

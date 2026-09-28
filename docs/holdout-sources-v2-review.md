@@ -1,6 +1,10 @@
 # Updated 99-case review: original policy plus approved sources
 
-2026-09-28 · draft labels · no live evaluation
+2026-09-28 · preparation record, superseded by the completed owner review
+
+The accepted packet now has 93 active cases after seven owner removals. See the
+[accepted protocol](reviewed-live-v1-protocol.md) and [first live results](reviewed-live-v1-report.md).
+The preparation details below preserve their original review context.
 
 The active [HTML review](case-review.html) now uses
 [`holdout-sources-v2.json`](../evals/step6/release/holdout-sources-v2.json).

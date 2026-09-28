@@ -7,13 +7,13 @@ open docs/case-review.html
 ```
 
 No server, installation, account, or API key is needed. The page embeds the frozen
-updated 99-case packet (original named policy plus source policy), 46 source-policy cases, previously approved 36-case packet,
+updated packet (93 active cases and seven recorded removals) (original named policy plus source policy), 46 source-policy cases, previously approved 36-case packet,
 and exact four policy texts.
 There are no external scripts, fonts, analytics, model calls, or executed test
 commands. This is an internal evaluation-label review aid, not a runtime approval
 workflow for agents.
 
-1. Use **Approved sources · 46** or **Updated 99**, optionally filtering by policy or status. Compare each
+1. Use **Approved sources · 46** or **Updated 93**, optionally filtering by policy or status. Compare each
    event and trusted evidence with the policy beside it. The expected result is
    a proposed test label, not a measured model answer.
 2. Select **Approve expected result**, or enter a reason, choose a proposed result
@@ -39,10 +39,15 @@ Keep reviewer names and personal notes in local exports, out of Git. The export'
 labels and historical approval provenance for readability. This local tool does
 not authenticate a reviewer or provide a tamper-proof signature.
 
-The active packet and new source-case labels remain pending until actually reviewed. The 36-case source
-JSON retains its original pre-review metadata; its dated owner approval is
-recorded in [the review packet](step6-review-candidates-v1.md). Reviewing either
-packet does not establish statistical accuracy or close other release gates.
+The owner supplied the completed review on September 28. All 175 active cases
+are accepted; seven are removed, with no pending corrections. The page now
+embeds that sanitized approval/removal record, so a fresh browser shows the
+accepted baseline. Local edits still take precedence and can be exported for a
+future version; the frozen evaluated dataset is not changed by browser edits.
+The original 36-case JSON retains its pre-review metadata and dated September 27
+approval. See the [accepted protocol](reviewed-live-v1-protocol.md) and
+[first live results](reviewed-live-v1-report.md). Approval of labels does not
+establish statistical accuracy or close other release gates.
 
 ## Maintenance and validation
 
@@ -109,3 +114,10 @@ through the Removed filter, reload persistence, export/import, exclusion from
 bulk approval and denominators, unchanged-review migration, and prevention of
 accidental resurrection from older exports. Targeted 99-case composition and
 snapshot checks pass; no model calls were made.
+
+September 28 acceptance update: an isolated Chrome check verified all 175 recorded
+approvals, seven removals, 93/46/36 active packet counts, export/import round trip,
+remove/undo, and desktop/mobile layout with no JavaScript errors. The exported
+accepted baseline also passes the strict Python review importer. These UI checks
+do not constitute another human review. No raw owner export or personal notes
+are embedded in the page.

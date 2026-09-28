@@ -1,6 +1,6 @@
 # Approved software sources
 
-2026-09-28 · owner-approved scope; new labels and live Jev behavior pending
+2026-09-28 · owner review and first live run complete; operational enforcement pending
 
 The owner added **EVAL-SRC-001**, covering code, libraries, tools and other software
 obtained from external sources. Both company mirrors and explicitly approved
@@ -124,11 +124,13 @@ The cases cover approved/unapproved Git remotes, public repositories, package an
 operation restrictions, lookalike domains, redirects, dependencies, submodules,
 registry overrides, local work, missing evidence and forged approval claims.
 Four cases show combined source/disclosure/production results with both policies
-available for inspection. These are draft labels, not observed Jev predictions.
+available for inspection. These are now owner-approved labels. Observed Jev predictions and disagreements
+are recorded separately in [the first live report](reviewed-live-v1-report.md).
 
 The original 100-case file and approved 36 remain byte-for-byte unchanged as historical inputs.
-The active 100-case review now uses [sources v2](holdout-sources-v2-review.md),
-adding EVAL-SRC-001 and a combined result to every original event. The original
+The revised packet uses [sources v2](holdout-sources-v2-review.md),
+adding EVAL-SRC-001 and a combined result to each event. After owner removals,
+93 events remain active in that packet. The original
 labels were scoped to one named policy. For example, `git fetch origin` can pass
 EVAL-SW-001 because it does not share project code outward, while EVAL-SRC-001
 allows or blocks depending on the verified remote. The new packet includes both
@@ -144,7 +146,8 @@ addition. Scripted answers do not establish Jev's accuracy on the new policy.
 
 Still required for operational enforcement: production origin resolvers for each
 supported tool/package workflow, binding them into host integrations, coverage
-and bypass checks, owner label review and new live Jev measurements. The existing
+and bypass checks, and resolution of the measured semantic errors. Owner review
+and the first live Jev measurement are complete. The existing
 gateway/hook tests do not establish those new resolver capabilities. The generic
 service accepts verified facts through its embedding interface, but its standalone
 CLI does not automatically read this catalog or inspect package-manager internals.

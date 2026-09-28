@@ -67,7 +67,7 @@ function persist() {
 function review(c) {
   if (state.reviews[c.id]) return state.reviews[c.id];
   if (DATA.default_removed[c.id]) return {status: 'removed', previous_status: 'pending', notes: DATA.default_removed[c.id].reason, label: expectedLabel(c), scope: expectedScope(c), updated_at: DATA.default_removed[c.id].removed_at};
-  return {status: allCases.get(c.id).p.previously_approved ? 'approved' : 'pending', notes: '', label: expectedLabel(c), scope: expectedScope(c)};
+  return {status: (allCases.get(c.id).p.previously_approved || DATA.recorded_approvals?.includes(c.id)) ? 'approved' : 'pending', notes: '', label: expectedLabel(c), scope: expectedScope(c), ...(DATA.recorded_approvals?.includes(c.id) ? {updated_at: DATA.recorded_approval_at} : {})};
 }
 function title(c) { return c.id.replace(/^(holdout-v1-|candidate-v1-|sources-v1-)/, '').replace(/^(sw-|prod-|doc-)/, '').replaceAll('-', ' '); }
 function filtered() {
@@ -144,7 +144,7 @@ function render() {
   }
   if (c.related_case_id) {const p = document.createElement('p'); p.className = 'subtle'; p.textContent = 'Reassesses the workflow from ' + c.related_case_id + ' under the new source policy; its original disclosure-only label is unchanged.'; $('composition').append(p);}
   $('notes').value = r.notes; $('correctedLabel').value = r.label; $('correctedScope').value = r.scope;
-  $('historical').textContent = pack().previously_approved ? 'Original owner approval: September 27, 2026' : (c.review_revision ? 'Revised review: original policy + source policy' : 'New label awaiting your judgment');
+  $('historical').textContent = pack().previously_approved ? 'Original owner approval: September 27, 2026' : (DATA.recorded_approvals?.includes(c.id) ? 'Owner approval recorded: September 28, 2026' : c.review_revision ? 'Revised review: original policy + source policy' : 'New label awaiting your judgment');
   $('archivedReview').hidden = !state.archived_reviews[c.id];
   $('archivedReviewText').textContent = state.archived_reviews[c.id] ? pretty({original_policy_only: DATA.original_labels[c.id], previous_review: state.archived_reviews[c.id]}) : '';
   $('approve').textContent = pack().previously_approved ? 'Reconfirm original result' : 'Approve expected result';
@@ -209,9 +209,10 @@ $('approveRemaining').onclick = () => {
 };
 function exportPayload() {
   return {format: 'humanwill.case-review/1', exported_at: now(), fingerprint, ...state,
-    removals: [...allCases.values()].filter(({c}) => review(c).status === 'removed').map(({c, p}) => ({id: c.id, packet: p.id, reason: review(c).removal_reason ?? review(c).notes, removed_at: review(c).updated_at, authority: DATA.default_removed[c.id]?.removed_at === review(c).updated_at ? 'owner_instruction' : 'local_review'})),
+    reviews: {...Object.fromEntries((DATA.recorded_approvals ?? []).filter(id => !allCases.get(id).p.previously_approved).map(id => [id, review(allCases.get(id).c)])), ...state.reviews},
+    removals: [...allCases.values()].filter(({c}) => review(c).status === 'removed').map(({c, p}) => ({id: c.id, packet: p.id, reason: review(c).removal_reason ?? review(c).notes, removed_at: review(c).updated_at, authority: DATA.default_removed[c.id]?.removed_at === review(c).updated_at ? (DATA.default_removed[c.id].authority ?? 'owner_instruction') : 'local_review'})),
     packets: DATA.packs.map(p => ({id: p.id, path: p.path, sha256: p.sha256, active_case_count: p.cases.filter(c => review(c).status !== 'removed').length, original_approval_date: p.approval_date,
-      cases: p.cases.map(c => ({id: c.id, policy_id: c.policy_id, original_expected: c.expected, original_scope: c.expected_scope, reviewed_expected: expectedLabel(c), reviewed_scope: expectedScope(c), review_revision: c.review_revision ?? null, ...(c.expected_composed ? {original_composed: c.expected_composed, original_by_policy: c.expected_by_policy} : {}), ...review(c), provenance: state.reviews[c.id] ? 'local_review' : (p.previously_approved ? 'historical_owner_approval' : 'unreviewed')}))})),
+      cases: p.cases.map(c => ({id: c.id, policy_id: c.policy_id, original_expected: c.expected, original_scope: c.expected_scope, reviewed_expected: expectedLabel(c), reviewed_scope: expectedScope(c), review_revision: c.review_revision ?? null, ...(c.expected_composed ? {original_composed: c.expected_composed, original_by_policy: c.expected_by_policy} : {}), ...review(c), provenance: state.reviews[c.id] ? 'local_review' : (p.previously_approved ? 'historical_owner_approval' : DATA.recorded_approvals?.includes(c.id) ? 'recorded_owner_approval' : 'unreviewed')}))})),
     note: 'Local review decisions and explicit removals. Removed cases are excluded from the active review denominator, never counted as approvals. Apply exported changes to the project before evaluation; historical evidence is retained.'};
 }
 $('export').onclick = () => {

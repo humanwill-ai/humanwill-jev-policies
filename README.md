@@ -4,18 +4,18 @@ Company-authored Markdown policies for AI gateways and coding agents. A companio
 
 **Implemented: service and connectors, `0.1.0.dev3`.** Markdown policy bundles, deterministic/semantic evaluation, direct/OpenRouter Jev adapters, an authenticated HTTP service, LiteLLM/Agentgateway adapters, and separate Copilot Local/CLI hooks. Real gateway, Copilot CLI and VS Code Local enforcement tests pass on the pinned versions; see [integration evidence](docs/integration-report.md). OpenRouter live smoke passed; direct TypeSafe live smoke is optional for v0.1. The repository remains private, with public preview `v0.1.0a1` awaiting the [release gates](docs/public-release-plan.md).
 
-The [latest synthetic development comparison](docs/integrity-live-report.md)
-found that Jev matched all 49 revised software-policy cases. Across all 107
-three-policy cases, it had one false block from an evaluation error and no missed
-violations. These are development results with draft labels, not an independent
-accuracy or enterprise-readiness claim. Gemini was a comparison baseline; Jev
-remains the first release backend.
+The [latest owner-reviewed Jev run](docs/reviewed-live-v1-report.md) covers 175
+accepted cases and four policies, including approved software sources. It matched
+161 combined outcomes; no known violation was allowed overall, but ten legitimate
+cases returned errors that would block under fail-closed enforcement. One
+source-policy unknown was incorrectly allowed within an event that another policy
+kept indeterminate. The semantic release gate remains open.
 
-The measured three-policy evaluation bundle contains the company policies in
-`evals/step6/policies-v2`, configured by `config-disclosure-v2.yaml`. The standalone
-instruction-integrity rule was removed after it increased false blocks without
-fixing Gemini's remaining bypasses. All shipped configurations remain in monitor
-mode; no calibrated enforcement profile is available.
+The current measured bundle is `evals/step6/policies-sources-v1`, configured by
+`config-sources-v1.yaml`. Earlier three-policy and Gemini comparisons remain
+historical evidence; Jev remains the first release backend. The standalone
+instruction-integrity rule remains removed. All shipped configurations remain
+in monitor mode; no calibrated enforcement profile is available.
 
 The [config/3 development extension](docs/decision-v3.md) adds opt-in decisions from verified predicates and stage-specific semantic questions, with separate per-model uncertainty analysis. Config/2 remains available for baseline reproduction.
 
@@ -47,7 +47,7 @@ humanwill-policies schema request
 Step 7 installation/operation checks pass, including all seven CI jobs and the offline container demo; see [packaging evidence](docs/packaging-report.md). The [step 6 gate audit](docs/step6-release-gates.md) and [36-case review packet](docs/step6-review-candidates-v1.md) identify the remaining quality work.
 
 For label review, open [the offline review page](docs/case-review.html) locally in
-your browser: the updated 99 cases (original policy plus source policy), 46 approved-source cases, and the previously approved 36, with policies,
+your browser: the accepted 93 updated cases (original policy plus source policy), 46 approved-source cases, and the previously approved 36, with policies,
 approval/correction/removal controls, saved progress, and JSON export. See
 [review instructions](docs/case-review.md). GitHub displays HTML source; download
 or open the checked-out file to use it.
@@ -59,7 +59,8 @@ covers upgrades, rollback and troubleshooting.
 
 The new [approved software sources policy](docs/approved-software-sources.md) adds
 a separate operator-managed inbound allowlist. Its four-policy bundle and review
-cases are ready; production origin resolution and live Jev evaluation remain pending.
+cases have completed owner review and a first live Jev run; production origin
+resolution and semantic release qualification remain pending.
 
 ## First-release support
 
