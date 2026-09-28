@@ -2,7 +2,7 @@
 format: humanwill.config/5
 outcome_thresholds:
   applicable: 0.8
-  not_applicable: 0.8
+  not_applicable: 0.7
   insufficient_evidence: 0.8
 metadata:
   enabled: false

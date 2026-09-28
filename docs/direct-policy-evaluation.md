@@ -107,3 +107,23 @@ checks. This is adapter contract evidence, not a fresh test of the actual host
 applications. No provider calls were made; the $5 ledger remains unchanged.
 
 The subsequent authorized [full-pack live run](direct-policy-live-v1-report.md) matched 142/175 outcomes versus 166/175 previously. Keep this template experimental; no thresholds or policies were changed in response.
+
+## Active development thresholds — 2026-09-28
+
+The owner applied the proposed settings after the recorded-answer review:
+
+```yaml
+outcome_thresholds:
+  applicable: 0.80
+  not_applicable: 0.70
+  insufficient_evidence: 0.80
+```
+
+Use `evals/step6/direct-policy-v2/config.yaml` for the active synthetic development
+configuration. The packaged `demo/config-policy-text.yaml` uses the same explicit
+thresholds. The frozen v1 configuration and prior measured results remain unchanged;
+the historical runner still targets v1. Loader defaults for omitted thresholds
+remain 0.80, so select the explicit current configuration. Both examples remain
+monitor-only. No test, replay or provider call was run when applying this change,
+as requested. The previous offline replay identifies 23 legitimate events still
+failing; review them one by one before further tuning.

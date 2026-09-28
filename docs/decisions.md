@@ -406,3 +406,8 @@ Owner approved replacing manually authored semantic scope questions with the act
 ## Full-policy live result — 2026-09-28
 
 The authorized full175 Jev/OpenRouter pass completed at d624c9c with unchanged policies, labels, context, model, monitor modes and 0.80 gates. The shared-template path regressed: 142/175 exact events vs166, 228/272 policy outcomes vs260, fail-closed false blocks32/79 vs6, known violations allowed0/84, expected unknowns retained12/12. Raw scope errors12/226 (one malformed response) vs2/227; correct raw choices rejected for low confidence35 vs12. No tuning/reruns. See [full report](direct-policy-live-v1-report.md). Keep the new template experimental and preserve the previous measured path; release quality remains open. Cost $0.010850028, cumulative $0.089128796, remaining $4.910871204. All1560 cumulative evaluation calls settled. One normalized batch lacks usage after answer validation failure; its transport cost is settled and included.
+
+
+## Applied asymmetric development settings — 2026-09-28
+
+Owner approved applicable0.80 / not_applicable0.70 / insufficient_evidence0.80 and explicitly requested no tests. Applied explicitly in evals/step6/direct-policy-v2/config.yaml and the packaged config-policy-text.yaml demo; frozen v1 and implicit loader defaults are preserved. No tests, replay or API calls performed. Continue human review of the23 remaining legitimate failures identified by the existing offline replay. See direct-policy-evaluation.md and direct-policy-threshold-analysis-v1.md.
