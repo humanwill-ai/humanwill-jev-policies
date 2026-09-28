@@ -78,3 +78,7 @@ Export the packaged JSON Schemas with `schema policy|collection|config|request|r
 Metadata entries identify field, value, source, subject/document reference, and timezone-bearing observation timestamp. A schema-valid entry is an assertion, not a trusted fact: a future authenticated connector/source verifier must establish provenance and freshness before a decision uses it. Fields such as `trusted:true` are rejected.
 
 `humanwill.result/1` records decision (`allow`, `block`, or `evaluation_error`), per-policy judgments/reasons, bundle/configuration digests, coverage, evaluator identity or null, duration, errors, and requested enforcement. `enforcement.actual` is limited to `unconfirmed` or `not_requested`; an evaluator cannot claim the host executed its answer. Decision aggregation, probability evidence, and observed host outcomes need the next implementation milestone and versioned additions if contracts change. No endpoint currently accepts these payloads.
+
+## Direct policy-text evaluation (config/5, result/4)
+
+See [the current opt-in contract](direct-policy-evaluation.md). Config/5 rejects manual scope fields and retains config/4 global thresholds; result/4 identifies the `humanwill.policy/1` rubric. Export these schemas using `schema config-v5` and `schema result-v4`. Existing versions remain available.

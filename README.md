@@ -112,3 +112,5 @@ Global confidence gates are available through opt-in config/4. See
 [configuration and migration](docs/outcome-thresholds.md) for three thresholds shared
 across policies, independent of failure handling. Defaults remain 0.80 and existing
 configurations retain their behavior; this feature is not a calibrated profile.
+
+Opt-in [config/5 evaluates the actual Markdown policy](docs/direct-policy-evaluation.md) through a shared adapter template, with no hand-written scope questions. Trusted permission checks stay in code. The packaged `config-policy-text.yaml` demo and preview show the full input; this new template has not yet been measured with live Jev.

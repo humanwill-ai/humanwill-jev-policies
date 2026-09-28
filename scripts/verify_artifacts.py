@@ -183,6 +183,34 @@ def main():
                 or result_v4["format"] != "humanwill.result/3"
             ):
                 raise ValueError("Global-threshold demo did not produce a scripted result/3 allow")
+            run([cli, "schema", "config-v5"], work, environment, output=True)
+            run([cli, "schema", "result-v4"], work, environment, output=True)
+            direct = json.loads(
+                run(
+                    [
+                        cli,
+                        "evaluate",
+                        "demo",
+                        "--config",
+                        "demo/config-policy-text.yaml",
+                        "--request",
+                        "demo/request.json",
+                        "--mock-answers",
+                        "demo/mock-answers.json",
+                        "--json",
+                    ],
+                    work,
+                    environment,
+                    output=True,
+                )
+            )
+            if (
+                direct["decision"] != "allow"
+                or not direct["simulated"]
+                or direct["format"] != "humanwill.result/4"
+                or direct["rubric"] != "humanwill.policy/1"
+            ):
+                raise ValueError("Direct-policy demo did not produce a scripted result/4 allow")
             # Existing meaningful contracts include gateway pre/post, both hook dialects,
             # monitor/deny/error, authentication, unsupported coverage and metadata trust.
             run(

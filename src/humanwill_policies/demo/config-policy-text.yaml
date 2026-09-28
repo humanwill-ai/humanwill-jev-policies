@@ -1,0 +1,38 @@
+# Reusable template includes each actual Markdown policy body.
+format: humanwill.config/5
+outcome_thresholds:
+  applicable: 0.8
+  not_applicable: 0.8
+  insufficient_evidence: 0.8
+metadata:
+  enabled: false
+policies:
+  DEMO-CONTENT:
+    strategy: semantic
+    enabled: true
+    mode: monitor
+  DEMO-FINANCE:
+    strategy: scoped_predicates
+    predicates:
+    - field: identity.groups
+      op: contains
+      value: finance
+    enabled: false
+    requires_metadata:
+    - identity.subject
+    - identity.groups
+  DEMO-DOCUMENTS:
+    strategy: predicates
+    when:
+    - field: documents.classification
+      op: equals
+      value: confidential
+    predicates:
+    - field: destination.approved
+      op: equals
+      value: true
+    enabled: false
+    requires_metadata:
+    - documents.classification
+    - destination.provider
+    - destination.approved

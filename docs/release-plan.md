@@ -206,3 +206,8 @@ violation/compliant answers share the applicable/not_applicable gates. Result/3
 remains compatible with existing connectors. Offline validation is not calibration:
 no new live calls or spending, no qualified asymmetric enforcement profile, and
 release quality gates remain open.
+
+
+## Actual-policy evaluation update — 2026-09-28
+
+Owner approved replacing manually authored semantic scope questions with the actual Markdown policy and a reusable adapter template. Opt-in config/5/result/4 implements this direction; trusted metadata and deterministic predicates stay separate, optional and explicitly configured. See [design, migration and validation limits](direct-policy-evaluation.md). Existing model evidence does not validate the new template; a fresh full-pack Jev run remains required before quality claims or enforcement qualification. No publication/default enforcement change.

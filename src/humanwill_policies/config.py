@@ -54,8 +54,9 @@ def load_configuration(bundle: Bundle, document: dict) -> Configuration:
     # Copy into JSON primitives; never mutate the caller's document.
     effective = json.loads(canonical(document))
     v2 = effective["format"] != "humanwill.config/1"
-    v3 = effective["format"] in ("humanwill.config/3", "humanwill.config/4")
-    v4 = effective["format"] == "humanwill.config/4"
+    v3 = effective["format"] in ("humanwill.config/3", "humanwill.config/4", "humanwill.config/5")
+    v4 = effective["format"] in ("humanwill.config/4", "humanwill.config/5")
+    direct_policy = effective["format"] == "humanwill.config/5"
     if v4:
         effective.setdefault(
             "outcome_thresholds",
@@ -124,7 +125,7 @@ def load_configuration(bundle: Bundle, document: dict) -> Configuration:
                     )
             else:
                 scopes = int("scope" in binding)
-            if (strategy == "scoped_predicates") != bool(scopes):
+            if not direct_policy and (strategy == "scoped_predicates") != bool(scopes):
                 raise PolicyError(
                     "invalid_strategy", "Only scoped predicates require scope", policy.id
                 )
@@ -222,6 +223,18 @@ def preview(
                         source = config["metadata"]["sources"].get(field.split(".")[0])
                         if not source or not source["enabled"]:
                             row["issues"].append(f"metadata_source_disabled:{field}")
+        if config and config["format"] == "humanwill.config/5":
+            from .questions import policy_question
+
+            row["evaluation_questions"] = (
+                {
+                    s: policy_question(policy, binding, s)
+                    for s in policy.stages
+                    if stage is None or s == stage
+                }
+                if binding["strategy"] != "predicates"
+                else {}
+            )
         rows.append(row)
     return {
         "format": "humanwill.preview/1",

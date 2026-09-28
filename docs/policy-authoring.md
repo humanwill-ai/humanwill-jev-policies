@@ -64,7 +64,7 @@ Each rule has one stable ID. Increment its quoted version when meaning changes; 
 Start new semantic rules in monitoring mode:
 
 ```yaml
-format: humanwill.config/3
+format: humanwill.config/5
 metadata:
   enabled: false
 policies:
@@ -98,3 +98,5 @@ across policies. It rejects legacy per-policy confidence settings; failure handl
 remains separate. All three default to 0.80 until deliberately configured.
 
 A prompt check covers the submitted surface, not later files, retrieval, tool results or output. Enable response and pre-tool checks where the rule governs those stages; see the [connector coverage table](compatibility.md) and [operations](operations.md).
+
+For new policy-text evaluation, use [config/5 and the shared template](direct-policy-evaluation.md). The actual Markdown body is sent to Jev; no separately authored `scope` question is required. Trusted-data bindings remain explicit. Preview shows the generated questions.

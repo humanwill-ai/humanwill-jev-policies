@@ -151,3 +151,5 @@ review fingerprints remain valid and unchanged.
 Validation completed: 189 offline tests pass, including three candidate-specific
 checks and full 175-case paired payload/composition checks. Ruff lint and format
 checks pass; the candidate configuration validates against the unchanged bundle.
+
+This hand-written question candidate is preserved as a historical experiment. The owner subsequently selected [actual-policy evaluation](direct-policy-evaluation.md) with a shared template as the next direction. Neither candidate has live quality evidence.

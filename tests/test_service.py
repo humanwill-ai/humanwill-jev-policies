@@ -13,6 +13,7 @@ from unittest.mock import patch
 
 import httpx
 import test_evaluation
+from test_direct_policy import v5
 from test_evaluation import ScriptedBackend, answer, event
 from test_foundation import Workspace, write_policy
 from test_outcome_thresholds import v4
@@ -403,6 +404,80 @@ class ServiceTests(Workspace):
                 self.assertEqual(result["format"], "humanwill.result/3")
                 self.assertEqual(result["decision"], decision)
                 self.assertEqual(result["enforcement"]["requested"], requested)
+
+    def test_direct_policy_results_reach_all_connector_stages(self):
+        for choice, decision in [
+            ("compliant", "allow"),
+            ("violation", "block"),
+            ("insufficient_evidence", "evaluation_error"),
+        ]:
+            for runtime, name, body in [
+                ("copilot_local", "UserPromptSubmit", {"prompt": "test"}),
+                ("copilot_local", "PreToolUse", {"tool_name": "shell", "tool_input": {}}),
+                ("copilot_cli", "userPromptSubmitted", {"prompt": "test"}),
+                ("copilot_cli", "preToolUse", {"toolName": "shell", "toolArgs": {}}),
+            ]:
+                if runtime == "copilot_local":
+                    body["hook_event_name"] = name
+                for mode in ("monitor", "enforce"):
+                    config = v5(self.enforcing())
+                    config["policies"]["RULE"]["mode"] = mode
+                    app = self.app(
+                        runtime, config=config, backend=ScriptedBackend({"RULE": answer(choice)})
+                    )
+                    result = asyncio.run(
+                        assess(
+                            body,
+                            runtime,
+                            name,
+                            "http://localhost",
+                            TOKEN,
+                            6000,
+                            transport=httpx.ASGITransport(app),
+                        )
+                    )
+                    self.assertEqual(result["format"], "humanwill.result/4")
+                    self.assertEqual(result["decision"], decision)
+                    expected = (
+                        "none"
+                        if mode == "monitor" or name == "userPromptSubmitted"
+                        else "allow"
+                        if decision == "allow"
+                        else "block"
+                    )
+                    self.assertEqual(result["enforcement"]["requested"], expected)
+            for connector, path in [
+                ("litellm", "/beta/litellm_basic_guardrail_api"),
+                ("agentgateway", "/request"),
+            ]:
+                for stage in ("request", "response"):
+                    if connector == "litellm":
+                        body = llm(stage=stage)
+                        endpoint = path
+                    else:
+                        endpoint = "/response" if stage == "response" else path
+                        body = {
+                            "body": (
+                                {"choices": [{"message": {"role": "assistant", "content": "test"}}]}
+                                if stage == "response"
+                                else {"messages": [{"role": "user", "content": "test"}]}
+                            )
+                        }
+                    app = self.app(
+                        connector,
+                        config=v5(self.enforcing()),
+                        backend=ScriptedBackend({"RULE": answer(choice)}),
+                    )
+                    response = self.post(app, endpoint, body)
+                    self.assertEqual(response.status_code, 200)
+                    output = response.json()
+                    blocked = decision != "allow"
+                    if connector == "litellm":
+                        self.assertEqual(output["action"], "BLOCKED" if blocked else "NONE")
+                    else:
+                        self.assertEqual(
+                            output["action"].get("status_code"), 403 if blocked else None
+                        )
 
     def test_hook_failures_never_echo_content_and_preserve_default_permissions(self):
         for runtime, name in [

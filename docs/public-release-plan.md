@@ -196,3 +196,8 @@ accuracy or calibration. [Report](threshold-replay-v1-report.md) retains all cas
 and limitations. Deployment defaults/configs remain unchanged. Proposed next work:
 three complete live stability repetitions under a new frozen protocol; none run
 as part of this offline comparison. Spend remains $0.078278768 of $5.
+
+
+## Actual-policy evaluation update — 2026-09-28
+
+Owner approved replacing manually authored semantic scope questions with the actual Markdown policy and a reusable adapter template. Opt-in config/5/result/4 implements this direction; trusted metadata and deterministic predicates stay separate, optional and explicitly configured. See [design, migration and validation limits](direct-policy-evaluation.md). Existing model evidence does not validate the new template; a fresh full-pack Jev run remains required before quality claims or enforcement qualification. No publication/default enforcement change.

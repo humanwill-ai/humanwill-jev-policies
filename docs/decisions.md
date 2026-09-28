@@ -396,3 +396,8 @@ existing cases and the scope-word counts: this structured candidate is longer,
 not a demonstrated token optimization. All 189 offline tests pass; no live Jev
 calls, measured improvement or deployment change. Candidate and prior broader
 plan are saved locally for the next batched push given the Actions quota warning.
+
+
+## Actual-policy evaluation update — 2026-09-28
+
+Owner approved replacing manually authored semantic scope questions with the actual Markdown policy and a reusable adapter template. Opt-in config/5/result/4 implements this direction; trusted metadata and deterministic predicates stay separate, optional and explicitly configured. See [design, migration and validation limits](direct-policy-evaluation.md). Existing model evidence does not validate the new template; a fresh full-pack Jev run remains required before quality claims or enforcement qualification. No publication/default enforcement change.

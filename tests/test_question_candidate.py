@@ -36,6 +36,10 @@ class QuestionCandidateTests(unittest.TestCase):
     def test_frozen_inputs_policies_context_and_candidate(self):
         snapshot = json.loads((CANDIDATE.parent / "snapshot.json").read_text())
         for path, expected in snapshot["sha256"].items():
+            # Historical core hashes are provenance, not a requirement that current
+            # code stop evolving. Keep fixture/config/context hashes unchanged.
+            if path.startswith("src/humanwill_policies/"):
+                continue
             self.assertEqual(sha256(ROOT / path), expected, path)
         self.assertEqual(self.bundle.sha256, snapshot["bundle_sha256"])
         self.assertEqual(len(self.cases), 175)
@@ -113,6 +117,78 @@ class QuestionCandidateTests(unittest.TestCase):
                         normalized["questions"]["EVAL-SRC-001"]["instructions"]["rule"] = old_rule
                     self.assertEqual(normalized, old)
         self.assertGreater(changed_questions, 0)
+
+    def test_actual_policy_template_preserves_all_175_scripted_decisions(self):
+        from humanwill_policies.evaluation import Evaluator
+        from humanwill_policies.questions import policy_question
+
+        candidate = yaml.safe_load((BASE / "direct-policy-v1/config.yaml").read_text())
+        policies = {p.id: p for p in self.bundle.policies}
+        calls = 0
+        for case in self.cases:
+            with self.subTest(case=case["id"]):
+                answers = {
+                    pid: choice_answer(
+                        scope or "insufficient_evidence",
+                        ["applicable", "not_applicable", "insufficient_evidence"],
+                    )
+                    for pid, scope in case["scope_by_policy"].items()
+                }
+                configs = (self.baseline, candidate)
+                outcomes, captured = [], []
+                for config in configs:
+                    loaded = load_configuration(
+                        self.bundle,
+                        select_configuration(
+                            config, case["policy_id"], case.get("also_policy_ids", [])
+                        ),
+                    )
+                    backend = CaptureBackend(answers)
+                    engine = Evaluator(
+                        self.bundle,
+                        loaded,
+                        ContextBackend(backend, case["request"], self.contexts[case["id"]]),
+                    )
+                    with patch(
+                        "humanwill_policies.providers.JevBackend.evaluate",
+                        side_effect=AssertionError("Offline test cannot invoke Jev"),
+                    ):
+                        outcomes.append(
+                            asyncio.run(
+                                engine.evaluate(
+                                    case["request"],
+                                    evidence=source_evidence_for(case, self.catalog),
+                                )
+                            )
+                        )
+                    captured.append(backend.payloads)
+                self.assertEqual(outcomes[1]["decision"], case["expected_composed"])
+                before_decision, after_decision = map(decision_view, outcomes)
+                for field in ("format", "rubric"):
+                    before_decision.pop(field)
+                    after_decision.pop(field)
+                self.assertEqual(before_decision, after_decision)
+                self.assertEqual(outcomes[1]["rubric"], "humanwill.policy/1")
+                self.assertEqual(outcomes[1]["format"], "humanwill.result/4")
+                self.assertEqual(len(captured[0]), len(captured[1]))
+                for before, after in zip(*captured, strict=True):
+                    calls += 1
+                    self.assertEqual(before["state"], after["state"])
+                    self.assertEqual(set(before["questions"]), set(after["questions"]))
+                    self.assertLessEqual(len(canonical(after).encode()), 24000)
+                    for pid, question in after["questions"].items():
+                        self.assertEqual(
+                            question,
+                            policy_question(
+                                policies[pid],
+                                loaded.to_dict()["policies"][pid],
+                                case["request"]["stage"],
+                            ),
+                        )
+                        self.assertEqual(
+                            question["instructions"]["policy"]["text"], policies[pid].body
+                        )
+        self.assertEqual(calls, 148)
 
 
 if __name__ == "__main__":

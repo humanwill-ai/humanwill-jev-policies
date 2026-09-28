@@ -71,3 +71,5 @@ docker run --rm --read-only --cap-drop ALL --security-opt no-new-privileges \
 ```
 
 This example assumes the service configuration retains only its Local principal. Add distinct tokens for other enabled principals. Grant UID 65532 read/traverse access to mounted files without making credentials public. On SELinux hosts apply appropriate local volume labels. Container loopback differs from the host: update connector URLs according to your protected network topology. The service health/readiness endpoints do not probe Jev. Follow the [operations guide](operations.md) for upgrades and rollback. No container is automatically deployed or published by these commands.
+
+To preview/evaluate the new full-policy template, use `demo/config-policy-text.yaml` in the same offline commands. See [config/5](direct-policy-evaluation.md) for result/4 compatibility and trusted-data bindings.

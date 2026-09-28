@@ -10,6 +10,7 @@ from .contracts import validate_contract
 from .errors import PolicyError
 from .metadata import check_metadata
 from .providers import Backend, validate_response
+from .questions import POLICY_RUBRIC, policy_question
 from .runtime import EgressPermit, EvaluationLimits, EvidenceContext, utc_now
 from .serialization import canonical, digest
 
@@ -110,6 +111,7 @@ class Evaluator:
         self.configuration = configuration
         self.config = configuration.to_dict()
         self.v3 = self.config["format"] in ("humanwill.config/3", "humanwill.config/4")
+        self.direct_policy = self.config["format"] == "humanwill.config/5"
         self.backend = backend
         self.limits = EvaluationLimits(**self.config.get("evaluation", {}))
         self._slots = asyncio.Semaphore(self.limits.max_in_flight)
@@ -242,7 +244,11 @@ class Evaluator:
                 continue
             row.update(status="error", judgment="insufficient_evidence", reasons=["not_completed"])
             pending[key] = binding
-            questions[key] = _question(policy, binding, request["stage"], v3=self.v3)
+            questions[key] = (
+                policy_question(policy, binding, request["stage"])
+                if self.direct_policy
+                else _question(policy, binding, request["stage"], v3=self.v3)
+            )
 
         state = {
             "stage": request["stage"],
@@ -427,10 +433,14 @@ class Evaluator:
                 else "allow"
             )
         result = {
-            "format": "humanwill.result/3" if self.v3 else "humanwill.result/2",
+            "format": "humanwill.result/4"
+            if self.direct_policy
+            else ("humanwill.result/3" if self.v3 else "humanwill.result/2"),
             "request_id": request["request_id"],
             "request_sha256": digest(request),
-            "rubric": "humanwill.choice/2" if self.v3 else RUBRIC,
+            "rubric": POLICY_RUBRIC
+            if self.direct_policy
+            else ("humanwill.choice/2" if self.v3 else RUBRIC),
             "simulated": simulated,
             "decision": decision,
             "bundle_sha256": self.bundle.sha256,
