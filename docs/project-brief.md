@@ -165,3 +165,18 @@ Owner requested100 live synthetic variations to investigate low confidence. Comp
 ## Focused full-policy pass — 2026-09-28
 
 Owner accepted testing the focused question on all175 with brief context where needed. Completed at636cb85: full policies/labels unchanged, active0.80/0.70/0.80 gates, one neutral git-apply note,148 calls with no retries. Against recorded answers replayed at the same gates:156/175 vs151 exact,248/272 vs242 policy matches,14/79 vs23 fail-closed false blocks,0/84 known violations allowed,12/12 expected unknowns retained.13 fixes and8 regressions; disclosure improves but source/production policy results regress. Git-apply passes with source confidence0.77/disclosure0.93. Keep candidate experimental; no runtime template promotion. See [report](focused-policy-v1-report.md) and [protocol](focused-policy-v1-protocol.md). Run cost$0.010737426,total$0.108620282,remaining$4.891379718; all1808 cumulative calls settled. No malformed responses in this pass, strict validation unchanged.
+
+
+## Nine-error diagnosis and incomplete effect-question experiment — 2026-09-28
+
+Reviewed the remaining nine legitimate errors and prepared neutral tool descriptions
+plus a shared question clarification. The broader question candidate regressed five
+previously passing cases in the first11 paired events; do not promote it. A provider
+timeout stopped the planned two-arm full-pack run after23 calls (22 priced replies,
+one unresolved charge). No target case is demonstrated fixed; only base64 returned
+new judgments, while tar timed out and the other seven were not reached. See the
+[case-by-case findings and partial report](effect-question-v1-report.md). Keep the
+smaller focused-policy-v2 candidate separate from tool-context experiments. Policies,
+labels, runtime template, gates and release qualification remain unchanged. Known
+cumulative spend$0.110940572 plus$0.01 reserved for the unresolved call; no further
+provider calls until accounting is reconciled. Local source commit e1751bc; no push.

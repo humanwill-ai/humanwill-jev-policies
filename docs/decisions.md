@@ -426,3 +426,18 @@ Owner accepted testing the focused question on all175 with brief context where n
 ## Clarified absence versus missing evidence — 2026-09-28
 
 Owner requested clarifying the experimental generic question and reviewing the other12 legitimate evaluation errors. Added focused-policy-v2/question.json and opt-in clarified_question.py, preserving frozen v1 and runtime defaults. The task and answer criteria now explicitly choose not_applicable when no covered action/instruction is present, and reserve insufficient_evidence for missing information about a potentially relevant action. No policy/context/threshold changes or API calls. Saved-answer review:3 of the other12 are strong matches to this hypothesis (ordinary document text), while9 involve local transformations(2), command effects(5), or quotation/negation(2). This is qualitative diagnosis, not proven internal cause or a measured fix. See [case-by-case review](clarified-question-and-error-review.md).
+
+
+## Nine-error diagnosis and incomplete effect-question experiment — 2026-09-28
+
+Reviewed the remaining nine legitimate errors and prepared neutral tool descriptions
+plus a shared question clarification. The broader question candidate regressed five
+previously passing cases in the first11 paired events; do not promote it. A provider
+timeout stopped the planned two-arm full-pack run after23 calls (22 priced replies,
+one unresolved charge). No target case is demonstrated fixed; only base64 returned
+new judgments, while tar timed out and the other seven were not reached. See the
+[case-by-case findings and partial report](effect-question-v1-report.md). Keep the
+smaller focused-policy-v2 candidate separate from tool-context experiments. Policies,
+labels, runtime template, gates and release qualification remain unchanged. Known
+cumulative spend$0.110940572 plus$0.01 reserved for the unresolved call; no further
+provider calls until accounting is reconciled. Local source commit e1751bc; no push.
