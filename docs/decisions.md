@@ -250,3 +250,11 @@ The direct dependency tarball is unapproved and the combined expected result is
 block. Original review records remain historical; the expanded checks need review.
 The old live runner/protocol remains single-policy historical evidence and does
 not establish the new suite’s quality. No new model calls were made.
+
+## Remove vague fetch example — 2026-09-28
+
+Owner explicitly removed `holdout-v1-sw-git-fetch` as too vague. The active
+source-aware packet now contains 99 cases, with an explicit historical removal
+record and updated snapshot. Preserve approvals/notes of all other unchanged
+cases. The review UI now supports reversible removal, a Removed filter, and
+exported removal decisions; removals never count as approvals or measured passes.

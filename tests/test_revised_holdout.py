@@ -1,4 +1,4 @@
-"""Verify the active 100-case review includes source policy and preserves its history."""
+"""Verify the active 99-case review includes source policy and preserves its history."""
 
 import asyncio
 import hashlib
@@ -24,7 +24,12 @@ class RevisedHoldoutTests(unittest.TestCase):
     def test_all_original_events_preserved_but_source_checks_added(self):
         old = json.loads((BASE / "release/holdout-v1.json").read_text())["cases"]
         new = load_cases(DATASET, allowed_splits={"review_candidate"})
-        self.assertEqual(len(new), 100)
+        self.assertEqual(len(new), 99)
+        removed = json.loads(DATASET.read_text())["removed_cases"]
+        self.assertEqual([r["id"] for r in removed], ["holdout-v1-sw-git-fetch"])
+        self.assertEqual(removed[0]["authority"], "owner_instruction")
+        self.assertNotIn(removed[0]["id"], {c["id"] for c in new})
+        old = [c for c in old if c["id"] != removed[0]["id"]]
         for before, after in zip(old, new, strict=True):
             self.assertEqual(before["request"], after["request"])
             self.assertEqual(before["expected"], after["expected_by_policy"][before["policy_id"]])
@@ -37,7 +42,6 @@ class RevisedHoldoutTests(unittest.TestCase):
             changed,
             {
                 "holdout-v1-sw-download-dependency": "block",
-                "holdout-v1-sw-git-fetch": "evaluation_error",
             },
         )
         manual = next(c for c in new if c["id"] == "holdout-v1-sw-download-manual")
@@ -47,10 +51,11 @@ class RevisedHoldoutTests(unittest.TestCase):
     def test_review_snapshot_is_exact_and_pending(self):
         snapshot = json.loads((BASE / "release/holdout-sources-v2-snapshot.json").read_text())
         self.assertEqual(snapshot["status"], "pending_owner_labels")
+        self.assertEqual(snapshot["case_count"], 99)
         for path, expected in snapshot["sha256"].items():
             self.assertEqual(hashlib.sha256((ROOT / path).read_bytes()).hexdigest(), expected)
 
-    def test_all_hundred_combined_results_with_scripted_semantics(self):
+    def test_active_combined_results_with_scripted_semantics(self):
         cases = load_cases(DATASET, allowed_splits={"review_candidate"})
         bundle = load_case_bundle(cases, BASE / "policies-sources-v1")
         config = yaml.safe_load((BASE / "config-sources-v1.yaml").read_text())

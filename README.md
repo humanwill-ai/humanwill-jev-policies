@@ -47,8 +47,8 @@ humanwill-policies schema request
 Step 7 installation/operation checks pass, including all seven CI jobs and the offline container demo; see [packaging evidence](docs/packaging-report.md). The [step 6 gate audit](docs/step6-release-gates.md) and [36-case review packet](docs/step6-review-candidates-v1.md) identify the remaining quality work.
 
 For label review, open [the offline review page](docs/case-review.html) locally in
-your browser: the updated 100 cases (original policy plus source policy), 46 approved-source cases, and the previously approved 36, with policies,
-approval/correction controls, saved progress, and JSON export. See
+your browser: the updated 99 cases (original policy plus source policy), 46 approved-source cases, and the previously approved 36, with policies,
+approval/correction/removal controls, saved progress, and JSON export. See
 [review instructions](docs/case-review.md). GitHub displays HTML source; download
 or open the checked-out file to use it.
 

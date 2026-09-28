@@ -7,13 +7,13 @@ open docs/case-review.html
 ```
 
 No server, installation, account, or API key is needed. The page embeds the frozen
-updated 100-case packet (original named policy plus source policy), 46 source-policy cases, previously approved 36-case packet,
+updated 99-case packet (original named policy plus source policy), 46 source-policy cases, previously approved 36-case packet,
 and exact four policy texts.
 There are no external scripts, fonts, analytics, model calls, or executed test
 commands. This is an internal evaluation-label review aid, not a runtime approval
 workflow for agents.
 
-1. Use **Approved sources · 46** or **Updated 100**, optionally filtering by policy or status. Compare each
+1. Use **Approved sources · 46** or **Updated 99**, optionally filtering by policy or status. Compare each
    event and trusted evidence with the policy beside it. The expected result is
    a proposed test label, not a measured model answer.
 2. Select **Approve expected result**, or enter a reason, choose a proposed result
@@ -39,7 +39,7 @@ Keep reviewer names and personal notes in local exports, out of Git. The export'
 labels and historical approval provenance for readability. This local tool does
 not authenticate a reviewer or provide a tamper-proof signature.
 
-The 100-case and new source-case labels remain pending until actually reviewed. The 36-case source
+The active packet and new source-case labels remain pending until actually reviewed. The 36-case source
 JSON retains its original pre-review metadata; its dated owner approval is
 recorded in [the review packet](step6-review-candidates-v1.md). Reviewing either
 packet does not establish statistical accuracy or close other release gates.
@@ -78,6 +78,34 @@ combined-policy results, legacy storage migration, legacy JSON imports,
 packet-scoped bulk approval, existing review controls and responsive layout.
 All checks passed in an isolated profile; synthetic QA approvals were cleared.
 
-The active 100-case view now shows the combined result prominently. Its scope
+The active packet view now shows the combined result prominently. Its scope
 control refers to EVAL-SRC-001; approval accepts both listed policy judgments.
 The generator validates the revised packet against its own snapshot.
+
+## Remove a case
+
+Select **Remove from review** on any case. A reason in the notes field is optional.
+The case immediately disappears from the active list and no longer counts toward
+approval progress or bulk approval. Choose **Undo last removal** immediately, or
+select **Removed** in the status filter and use **Restore to review** later.
+Restoring returns the prior review status and notes; removal is not approval.
+
+Removals persist in the browser and round-trip through JSON export/import. The
+export includes a `removals` list and each removed case's explicit `removed`
+status, plus active case counts. Share the export to apply your selections to the
+repository; the offline page itself cannot rewrite dataset files. Historical
+labels and any prior owner approval remain evidence, even when a case is removed
+from the active review.
+
+On 2026-09-28 the owner removed `holdout-v1-sw-git-fetch` as too vague. It is absent
+from the active dataset's `cases` list, retained in `removed_cases` as a dated
+removal record, and visible only through Removed in the page. The active packet
+has 99 cases (181 active cases across all three packets). Saved approvals and
+notes for all other unchanged cases migrate without requiring review again;
+importing an older file cannot silently undo this owner-requested removal.
+
+Removal controls were browser-tested on 2026-09-28: immediate undo, restoration
+through the Removed filter, reload persistence, export/import, exclusion from
+bulk approval and denominators, unchanged-review migration, and prevention of
+accidental resurrection from older exports. Targeted 99-case composition and
+snapshot checks pass; no model calls were made.

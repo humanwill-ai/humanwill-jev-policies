@@ -1,11 +1,11 @@
 {
   "format": "humanwill.composed-review-snapshot/1",
   "status": "pending_owner_labels",
-  "case_count": 100,
+  "case_count": 99,
   "policies_per_case": "original named policy plus EVAL-SRC-001; not all other policies",
   "bundle_sha256": "52dd858359a3a9040bc143d4036b9185f7e8a532071c9b5b78622556126dafa3",
   "sha256": {
-    "evals/step6/release/holdout-sources-v2.json": "dcc8519d1a8c86a881230a2a1dee538ddc8f59fb93611727ede7967b0f3529b7",
+    "evals/step6/release/holdout-sources-v2.json": "b0cebe236cd85d7757befe847d314117e9ce3916b145dbda56ff1d28d26233b2",
     "evals/step6/release/holdout-v1.json": "b81fd70e124a5774d33b8eeac80ec852b6a349aa0b7aba55b0ed0ef88fd3bf5b",
     "evals/step6/sources-v1/approved-sources.yaml": "9a78a45c6254607edbbf079b59328be29802ac8fb5f16ffb8e613a47545f5b0a",
     "evals/step6/source_approval.py": "238fb5fc47ea1d9491873db8a4ea42191c4f42f7c0b9634b797579316ffab6eb",
@@ -17,7 +17,9 @@
     "evals/step6/policies-sources-v1/software.md": "cdfb44ca76e8f3cf2f0d520d0445d766b909b6a71e0a729c8c62a111ecc61924"
   },
   "changed_combined_decisions": [
-    "holdout-v1-sw-git-fetch",
     "holdout-v1-sw-download-dependency"
+  ],
+  "removed_case_ids": [
+    "holdout-v1-sw-git-fetch"
   ]
 }

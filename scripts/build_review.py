@@ -98,11 +98,21 @@ def build():
     for path, expected in revised_snapshot["sha256"].items():
         if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != expected:
             raise ValueError(f"Revised 100-case snapshot changed: {path}")
+    revised_data = json.loads(revised.read_text())
+    # Preserve approvals of unchanged cases from the preceding source-aware packet.
+    compatible_fingerprint = (
+        ":".join([revised_data["previous_dataset_sha256"], *[p["sha256"] for p in packs[1:]]])
+        + ":"
+        + ":".join(p["sha256"] for p in policies.values())
+        + ":"
+        + catalog_hash
+    )
+    removed = revised_data.get("removed_cases", [])
     packs[0].update(
-        title="Updated 100 · sources v2",
+        title="Updated packet · sources v2.1",
         path=str(revised.relative_to(ROOT)),
         sha256=hashlib.sha256(revised.read_bytes()).hexdigest(),
-        cases=json.loads(revised.read_text())["cases"],
+        cases=revised_data["cases"] + [r["case"] for r in removed],
     )
     data = json.dumps(
         {
@@ -110,6 +120,10 @@ def build():
             "policies": policies,
             "legacy_fingerprint": legacy_fingerprint,
             "previous_fingerprint": previous_fingerprint,
+            "compatible_fingerprint": compatible_fingerprint,
+            "default_removed": {
+                r["id"]: {k: v for k, v in r.items() if k != "case"} for r in removed
+            },
             "original_labels": original_labels,
             "source_catalog": catalog_path.read_text(),
             "source_catalog_sha256": catalog_hash,
@@ -127,7 +141,7 @@ def build():
         html = html.replace(marker, value)
     output = ROOT / "docs/case-review.html"
     output.write_text(html)
-    print(f"Built {output}: {sum(len(p['cases']) for p in packs)} cases")
+    print(f"Built {output}: {sum(len(p['cases']) for p in packs) - len(removed)} active cases")
 
 
 if __name__ == "__main__":

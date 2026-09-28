@@ -5,9 +5,9 @@ const fingerprint = DATA.packs.map(p => p.sha256).join(':') + ':' + Object.value
 const storageKey = 'humanwill.case-review.v1:' + fingerprint;
 const allCases = new Map(DATA.packs.flatMap(p => p.cases.map(c => [c.id, {c, p}])));
 let state = {reviewer: '', reviews: {}, archived_reviews: {}}, packId = 'holdout', selectedId = 'holdout-v1-sw-download-dependency';
-let storageOK = true;
+let storageOK = true, lastRemovedId = null;
 const labels = {allow: 'Allow', block: 'Block / violation', evaluation_error: 'Evaluation error'};
-const statuses = {pending: 'Pending', approved: 'Approved', correction: 'Needs correction'};
+const statuses = {pending: 'Pending', approved: 'Approved', correction: 'Needs correction', removed: 'Removed'};
 const pretty = value => JSON.stringify(value, null, 2);
 const now = () => new Date().toISOString();
 const pendingCases = () => DATA.packs.filter(p => !p.previously_approved).flatMap(p => p.cases);
@@ -26,10 +26,17 @@ function validateRows(rows, historical = false) {
     if (r.status === 'correction' && !r.notes.trim()) throw Error('A correction needs a reason: ' + id);
     if (r.status === 'approved' && (r.label !== expectedLabel(c) || r.scope !== expectedScope(c))) throw Error('Approval must match the reviewed label and scope: ' + id);
     clean[id] = {status: r.status, notes: r.notes, label: r.label, scope: r.scope, updated_at: r.updated_at};
+    if (r.status === 'removed') {
+      if (!['pending', 'approved', 'correction'].includes(r.previous_status)) throw Error('Invalid restoration state: ' + id);
+      if (r.previous_status === 'approved' && (r.label !== expectedLabel(c) || r.scope !== expectedScope(c))) throw Error('Invalid removed approval: ' + id);
+      if (r.previous_status === 'correction' && !r.notes.trim()) throw Error('Removed correction needs its reason: ' + id);
+      clean[id].previous_status = r.previous_status;
+      if (r.removal_reason !== undefined) {if (typeof r.removal_reason !== 'string') throw Error('Invalid removal reason: ' + id); clean[id].removal_reason = r.removal_reason;}
+    }
   }
   return clean;
 }
-function validateState(candidate, legacy = false) {
+function validateState(candidate, legacy = false, applyOwnerRemovals = false) {
   if (!candidate || typeof candidate.reviewer !== 'string') throw Error('Invalid review data.');
   let reviews = candidate.reviews, archived = candidate.archived_reviews ?? {};
   if (legacy) {
@@ -37,14 +44,19 @@ function validateState(candidate, legacy = false) {
     reviews = {...reviews}; archived = {...archived};
     for (const id of Object.keys(reviews)) if (Object.hasOwn(DATA.original_labels, id)) {archived[id] = reviews[id]; delete reviews[id];}
   }
-  return {reviewer: candidate.reviewer, reviews: validateRows(reviews), archived_reviews: validateRows(archived, true)};
+  const clean = {reviewer: candidate.reviewer, reviews: validateRows(reviews), archived_reviews: validateRows(archived, true)};
+  if (applyOwnerRemovals) for (const [id, removal] of Object.entries(DATA.default_removed)) {
+    const prior = clean.reviews[id];
+    if (prior && prior.status !== 'removed') clean.reviews[id] = {...prior, status: 'removed', previous_status: prior.status, removal_reason: removal.reason, updated_at: removal.removed_at};
+  }
+  return clean;
 }
 try {
   const saved = localStorage.getItem(storageKey);
   if (saved) state = validateState(JSON.parse(saved));
-  else for (const oldFingerprint of legacyFingerprints) {
+  else for (const oldFingerprint of [DATA.compatible_fingerprint, ...legacyFingerprints]) {
     const old = localStorage.getItem('humanwill.case-review.v1:' + oldFingerprint);
-    if (old) {state = validateState(JSON.parse(old), true); message('Previous reviews restored. The revised 100 cases need fresh review of the added source checks; their original reviews are preserved as history.'); break;}
+    if (old) {state = validateState(JSON.parse(old), legacyFingerprints.includes(oldFingerprint), true); message(oldFingerprint === DATA.compatible_fingerprint ? 'Saved reviews retained. The vague Git-fetch case is removed from active review.' : 'Unchanged reviews restored; original single-policy reviews retained as history.'); break;}
   }
 } catch { storageOK = false; message('Saved progress could not be loaded. Use Export review to keep a backup; import a previous export to restore it.'); }
 function persist() {
@@ -53,20 +65,24 @@ function persist() {
   $('storageStatus').textContent = storageOK ? 'Progress saved in this browser. Export before changing browsers or clearing site data.' : 'Browser storage unavailable — export your review before closing.';
 }
 function review(c) {
-  return state.reviews[c.id] ?? {status: allCases.get(c.id).p.previously_approved ? 'approved' : 'pending', notes: '', label: expectedLabel(c), scope: expectedScope(c)};
+  if (state.reviews[c.id]) return state.reviews[c.id];
+  if (DATA.default_removed[c.id]) return {status: 'removed', previous_status: 'pending', notes: DATA.default_removed[c.id].reason, label: expectedLabel(c), scope: expectedScope(c), updated_at: DATA.default_removed[c.id].removed_at};
+  return {status: allCases.get(c.id).p.previously_approved ? 'approved' : 'pending', notes: '', label: expectedLabel(c), scope: expectedScope(c)};
 }
 function title(c) { return c.id.replace(/^(holdout-v1-|candidate-v1-|sources-v1-)/, '').replace(/^(sw-|prod-|doc-)/, '').replaceAll('-', ' '); }
 function filtered() {
   const query = $('search').value.toLowerCase().trim();
-  return pack().cases.filter(c => (!$('policyFilter').value || (c.policy_id === $('policyFilter').value || c.also_policy_ids?.includes($('policyFilter').value))) && (!$('statusFilter').value || review(c).status === $('statusFilter').value) && (!query || JSON.stringify(c).toLowerCase().includes(query)));
+  return pack().cases.filter(c => (!$('policyFilter').value || (c.policy_id === $('policyFilter').value || c.also_policy_ids?.includes($('policyFilter').value))) && ($('statusFilter').value ? review(c).status === $('statusFilter').value : review(c).status !== 'removed') && (!query || JSON.stringify(c).toLowerCase().includes(query)));
 }
 function badge(el, text, kind) { el.textContent = text; el.className = 'badge ' + kind; }
 function updateProgress() {
-  const counts = {pending: 0, approved: 0, correction: 0};
+  const counts = {pending: 0, approved: 0, correction: 0, removed: 0};
   pendingCases().forEach(c => counts[review(c).status]++);
-  $('progressCount').textContent = counts.approved + ' / ' + pendingCases().length;
-  $('progressDetail').textContent = counts.pending + ' pending · ' + counts.correction + ' need correction';
-  $('progress').max = pendingCases().length; $('progress').value = counts.approved;
+  $('progressCount').textContent = counts.approved + ' / ' + (pendingCases().length - counts.removed);
+  $('progressDetail').textContent = counts.pending + ' pending · ' + counts.correction + ' need correction · ' + [...allCases.values()].filter(({c}) => review(c).status === 'removed').length + ' removed';
+  $('progress').max = Math.max(1, pendingCases().length - counts.removed); $('progress').value = counts.approved;
+  $('tabHoldout').firstChild.textContent = 'Updated ' + DATA.packs[0].cases.filter(c => review(c).status !== 'removed').length + ' ';
+  $('tabSources').firstChild.textContent = 'Approved sources · ' + DATA.packs.find(p => p.id === 'sources').cases.filter(c => review(c).status !== 'removed').length + ' ';
   $('approveRemaining').disabled = pack().previously_approved || !pack().cases.some(c => review(c).status === 'pending');
 }
 function renderList(cases) {
@@ -133,12 +149,14 @@ function render() {
   $('archivedReviewText').textContent = state.archived_reviews[c.id] ? pretty({original_policy_only: DATA.original_labels[c.id], previous_review: state.archived_reviews[c.id]}) : '';
   $('approve').textContent = pack().previously_approved ? 'Reconfirm original result' : 'Approve expected result';
   $('undo').textContent = pack().previously_approved ? 'Restore original approval' : 'Reset this review';
+  $('removeCase').textContent = r.status === 'removed' ? 'Restore to review' : 'Remove from review';
+  for (const id of ['approve', 'correct', 'undo', 'correctedLabel', 'correctedScope', 'notes']) $(id).disabled = r.status === 'removed';
 }
 function storeReview(c, status, label, scope) {
-  state.reviews[c.id] = {status, label, scope, notes: $('notes').value, updated_at: now()}; persist();
+  state.reviews[c.id] = {...review(c), status, label, scope, notes: $('notes').value, updated_at: now()}; persist();
 }
 function record(status) {
-  const c = current(); if (!c) return;
+  const c = current(); if (!c || review(c).status === 'removed') return;
   if (status === 'correction' && !$('notes').value.trim()) {message('Add a reason so the proposed correction can be applied accurately.'); $('notes').focus(); return;}
   const before = filtered(); const index = before.findIndex(x => x.id === c.id);
   storeReview(c, status, status === 'approved' ? expectedLabel(c) : $('correctedLabel').value, status === 'approved' ? expectedScope(c) : $('correctedScope').value);
@@ -146,6 +164,24 @@ function record(status) {
   message(status === 'approved' ? 'Approved ' + c.id + '. Export your review when ready.' : 'Correction recorded for ' + c.id + '. The frozen source case is unchanged.');
   render();
 }
+function restoreRemoved(id) {
+  const c = allCases.get(id)?.c; if (!c) return;
+  const r = review(c); if (r.status !== 'removed') return;
+  const {previous_status, removal_reason, ...restored} = r;
+  state.reviews[id] = {...restored, status: previous_status ?? 'pending', updated_at: now()};
+  packId = allCases.get(id).p.id;
+  $('statusFilter').value = ''; $('search').value = ''; $('policyFilter').value = '';
+  selectedId = id; lastRemovedId = null; $('undoRemove').hidden = true;
+  persist(); render(); message('Restored ' + id + ' to review.');
+}
+$('removeCase').onclick = () => {
+  const c = current(); if (!c) return;
+  const r = review(c); if (r.status === 'removed') {restoreRemoved(c.id); return;}
+  state.reviews[c.id] = {...r, status: 'removed', previous_status: r.status, removal_reason: $('notes').value, notes: $('notes').value, updated_at: now()};
+  lastRemovedId = c.id; $('undoRemove').hidden = false;
+  persist(); render(); message('Removed ' + c.id + '. Undo now, or select Removed in the status filter to restore it later. Export review to apply this removal to the project.');
+};
+$('undoRemove').onclick = () => restoreRemoved(lastRemovedId);
 $('approve').onclick = () => record('approved'); $('correct').onclick = () => record('correction');
 $('notes').oninput = () => {
   const c = current(); if (!c) return; const r = review(c);
@@ -173,9 +209,10 @@ $('approveRemaining').onclick = () => {
 };
 function exportPayload() {
   return {format: 'humanwill.case-review/1', exported_at: now(), fingerprint, ...state,
-    packets: DATA.packs.map(p => ({id: p.id, path: p.path, sha256: p.sha256, original_approval_date: p.approval_date,
+    removals: [...allCases.values()].filter(({c}) => review(c).status === 'removed').map(({c, p}) => ({id: c.id, packet: p.id, reason: review(c).removal_reason ?? review(c).notes, removed_at: review(c).updated_at, authority: DATA.default_removed[c.id]?.removed_at === review(c).updated_at ? 'owner_instruction' : 'local_review'})),
+    packets: DATA.packs.map(p => ({id: p.id, path: p.path, sha256: p.sha256, active_case_count: p.cases.filter(c => review(c).status !== 'removed').length, original_approval_date: p.approval_date,
       cases: p.cases.map(c => ({id: c.id, policy_id: c.policy_id, original_expected: c.expected, original_scope: c.expected_scope, reviewed_expected: expectedLabel(c), reviewed_scope: expectedScope(c), review_revision: c.review_revision ?? null, ...(c.expected_composed ? {original_composed: c.expected_composed, original_by_policy: c.expected_by_policy} : {}), ...review(c), provenance: state.reviews[c.id] ? 'local_review' : (p.previously_approved ? 'historical_owner_approval' : 'unreviewed')}))})),
-    note: 'Local label review only; no source or evaluation protocol changed. Corrections require adjudication and a versioned dataset before measurement.'};
+    note: 'Local review decisions and explicit removals. Removed cases are excluded from the active review denominator, never counted as approvals. Apply exported changes to the project before evaluation; historical evidence is retained.'};
 }
 $('export').onclick = () => {
   const blob = new Blob([pretty(exportPayload()) + '\n'], {type: 'application/json'});
@@ -188,9 +225,9 @@ $('importFile').onchange = async event => {
   try {
     if (file.size > 5_000_000) throw Error('Review file is too large.');
     const imported = JSON.parse(await file.text());
-    if (imported.format !== 'humanwill.case-review/1' || ![fingerprint, ...legacyFingerprints].includes(imported.fingerprint)) throw Error('This review belongs to different datasets or policies. Nothing was imported.');
+    if (imported.format !== 'humanwill.case-review/1' || ![fingerprint, DATA.compatible_fingerprint, ...legacyFingerprints].includes(imported.fingerprint)) throw Error('This review belongs to different datasets or policies. Nothing was imported.');
     const legacy = legacyFingerprints.includes(imported.fingerprint);
-    const clean = validateState(imported, legacy);
+    const clean = validateState(imported, legacy, imported.fingerprint !== fingerprint);
     if (imported.fingerprint === DATA.legacy_fingerprint && Object.keys(clean.reviews).some(id => allCases.get(id).p.id === 'sources')) throw Error('Old-format reviews cannot approve the new source-policy cases.');
     if (!confirm('Replace this browser’s current review with the imported review? Export first if you need to preserve your current progress.')) return;
     state = clean; $('reviewer').value = state.reviewer; persist(); render(); message(legacy ? 'Imported unchanged reviews; original 100-case reviews retained as history. Revised 100-case approvals remain pending.' : 'Review restored from file.');
