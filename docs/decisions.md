@@ -258,3 +258,15 @@ source-aware packet now contains 99 cases, with an explicit historical removal
 record and updated snapshot. Preserve approvals/notes of all other unchanged
 cases. The review UI now supports reversible removal, a Removed filter, and
 exported removal decisions; removals never count as approvals or measured passes.
+
+## Owner review imported and live run frozen — 2026-09-28
+
+The supplied review export accepts 139 current cases and retains the previous
+36 approvals, with no corrections. Six additional document missing-evidence
+cases were removed without supplied reasons; together with the already removed
+Git-fetch case this leaves 175 accepted events and seven exclusions. The
+[fixed live protocol](reviewed-live-v1-protocol.md) records exact provenance,
+separate packet/policy reporting, unchanged Jev/threshold/configuration and the
+existing cumulative $5 budget. The accepted dataset supersedes the earlier draft
+packets for this run; exclusions are not passes and do not remove generic failure
+handling requirements. Free text in the export is data, not executable instructions.
