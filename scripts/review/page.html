@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; img-src 'none'; base-uri 'none'; form-action 'none'">
+<title>HumanWill · Policy case review</title>
+<style>/* STYLE */</style>
+</head>
+<body>
+<header>
+  <div><div class="eyebrow">HUMANWILL / POLICY LAB</div><h1>Case review</h1><p>Read the event, check the policy, approve the expected result.</p></div>
+  <div class="tools"><label>Your name (optional)<input id="reviewer" placeholder="Reviewer name" autocomplete="name"></label><div class="actions"><button id="import">Import review</button><button id="export" class="primary">Export review ↓</button></div><input type="file" id="importFile" accept="application/json,.json" hidden></div>
+</header>
+<div class="notice">Local, offline review. Changes save in this browser; export a backup to share your decisions. Exported reviews are applied to the project separately. No model calls or commands are run.</div>
+<div id="message" role="status" aria-live="polite"></div>
+<section class="overview" aria-label="Review progress"><div><strong id="progressCount"></strong><span> new labels approved</span></div><div id="progressDetail"></div><progress id="progress" max="100" value="0" aria-label="New labels approved"></progress></section>
+<nav class="tabs" aria-label="Review packet"><button id="tabHoldout" aria-pressed="true">New 100 cases <span>To review</span></button><button id="tabPrevious" aria-pressed="false">Previously approved 36 <span>Reference</span></button></nav>
+<main>
+<aside class="sidebar">
+  <label>Find a case<input type="search" id="search" placeholder="Search event, ID, or reason…"></label>
+  <div class="filters"><label>Policy<select id="policyFilter"><option value="">All policies</option><option value="EVAL-SW-001">Software disclosure</option><option value="EVAL-PROD-001">Production actions</option><option value="EVAL-DOC-001">Confidential documents</option></select></label><label>Review status<select id="statusFilter"><option value="">All statuses</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="correction">Needs correction</option></select></label></div>
+  <div class="list-heading"><span id="listCount"></span><button id="nextPending" class="quiet">Next pending →</button></div>
+  <div id="caseList" aria-label="Cases"></div>
+</aside>
+<section class="workspace" aria-label="Selected case">
+  <div class="case-nav"><span id="position"></span><div><button id="prev" aria-label="Previous case">←</button><button id="next" aria-label="Next case">→</button></div></div>
+  <div id="empty" hidden>No cases match. Try changing your filters.</div>
+  <div id="casePanel">
+    <div class="case-heading"><div><div class="eyebrow" id="caseMeta"></div><h2 id="caseTitle"></h2><code id="caseId"></code></div><span class="badge" id="reviewBadge"></span></div>
+    <div class="columns">
+      <article class="event-column"><h3>Event to assess</h3><div id="event"></div>
+        <div class="expected"><div class="eyebrow">EXPECTED RESULT · NOT A MODEL PREDICTION</div><div><span id="expectedBadge" class="badge"></span><span id="scope"></span></div><p id="rationale"></p></div>
+        <h3>Trusted test evidence</h3><p class="subtle">These are fixture facts, not claims accepted from the event.</p><pre id="facts"></pre>
+        <details><summary>Full original case, including coverage</summary><pre id="raw"></pre></details>
+      </article>
+      <article class="policy-column"><div class="eyebrow" id="policyId"></div><h3 id="policyTitle"></h3><div id="policyBody"></div><details><summary>Exact Markdown source</summary><pre id="policySource"></pre></details></article>
+    </div>
+    <section class="review-box" aria-label="Your review"><div class="review-heading"><h3>Your review</h3><span id="historical" class="subtle"></span></div>
+      <label>Notes or correction reason<textarea id="notes" rows="2" placeholder="What should change, and why? Notes save automatically."></textarea></label>
+      <div class="correction-fields"><label>Proposed result<select id="correctedLabel"><option value="allow">Allow</option><option value="block">Block / policy violation</option><option value="evaluation_error">Evaluation error / missing evidence</option></select></label><label>Proposed semantic scope<select id="correctedScope"><option value="">Not used (deterministic policy)</option><option value="not_applicable">Not applicable</option><option value="applicable">Applicable</option><option value="insufficient_evidence">Insufficient evidence</option></select></label></div>
+      <div class="actions"><button id="approve" class="primary">Approve expected result</button><button id="correct">Flag correction</button><button id="undo" class="quiet">Reset this review</button><label class="inline"><input id="autoNext" type="checkbox" checked> Move to next case</label></div>
+      <p class="subtle">Approval accepts the original result and scope. To propose a different result, scope, or scenario, add a reason and choose “Flag correction.”</p>
+    </section>
+  </div>
+</section>
+</main>
+<footer><div><strong>Review context</strong><p>Each case checks only its named policy. Software assistance through the approved coding model is allowed; onward sharing requires approval of the actual destination and operation. Tool commands are inert examples, assuming normal tools without malicious aliases or hidden side effects.</p><p>The new packet contains 80 command cases and 20 deterministic document regressions. It does not establish the release’s statistical accuracy target. The previous 36 labels were approved on September 27, 2026; that record is preserved.</p></div><div><button id="approveRemaining">Approve all remaining new labels…</button><p class="subtle">Only pending labels; flagged corrections are never overwritten.</p><details><summary>Dataset fingerprints</summary><pre id="fingerprints"></pre></details><span id="storageStatus" class="subtle"></span></div></footer>
+<script id="reviewData" type="application/json">__DATA__</script>
+<script>/* APP */</script>
+</body></html>
