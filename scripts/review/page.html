@@ -13,12 +13,12 @@
 </header>
 <div class="notice">Local, offline review. Changes save in this browser; export a backup to share your decisions. Exported reviews are applied to the project separately. No model calls or commands are run.</div>
 <div id="message" role="status" aria-live="polite"></div>
-<section class="overview" aria-label="Review progress"><div><strong id="progressCount"></strong><span> new labels approved</span></div><div id="progressDetail"></div><progress id="progress" max="100" value="0" aria-label="New labels approved"></progress></section>
-<nav class="tabs" aria-label="Review packet"><button id="tabHoldout" aria-pressed="true">New 100 cases <span>To review</span></button><button id="tabPrevious" aria-pressed="false">Previously approved 36 <span>Reference</span></button></nav>
+<section class="overview" aria-label="Review progress"><div><strong id="progressCount"></strong><span> labels approved across new packets</span></div><div id="progressDetail"></div><progress id="progress" max="100" value="0" aria-label="New labels approved"></progress></section>
+<nav class="tabs" aria-label="Review packet"><button id="tabHoldout" aria-pressed="true">New 100 cases <span>To review</span></button><button id="tabSources" aria-pressed="false">Approved sources · 46 <span>New policy</span></button><button id="tabPrevious" aria-pressed="false">Previously approved 36 <span>Reference</span></button></nav>
 <main>
 <aside class="sidebar">
   <label>Find a case<input type="search" id="search" placeholder="Search event, ID, or reason…"></label>
-  <div class="filters"><label>Policy<select id="policyFilter"><option value="">All policies</option><option value="EVAL-SW-001">Software disclosure</option><option value="EVAL-PROD-001">Production actions</option><option value="EVAL-DOC-001">Confidential documents</option></select></label><label>Review status<select id="statusFilter"><option value="">All statuses</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="correction">Needs correction</option></select></label></div>
+  <div class="filters"><label>Policy<select id="policyFilter"><option value="">All policies</option><option value="EVAL-SW-001">Software disclosure</option><option value="EVAL-PROD-001">Production actions</option><option value="EVAL-DOC-001">Confidential documents</option><option value="EVAL-SRC-001">Approved software sources</option></select></label><label>Review status<select id="statusFilter"><option value="">All statuses</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="correction">Needs correction</option></select></label></div>
   <div class="list-heading"><span id="listCount"></span><button id="nextPending" class="quiet">Next pending →</button></div>
   <div id="caseList" aria-label="Cases"></div>
 </aside>
@@ -30,10 +30,10 @@
     <div class="columns">
       <article class="event-column"><h3>Event to assess</h3><div id="event"></div>
         <div class="expected"><div class="eyebrow">EXPECTED RESULT · NOT A MODEL PREDICTION</div><div><span id="expectedBadge" class="badge"></span><span id="scope"></span></div><p id="rationale"></p></div>
-        <h3>Trusted test evidence</h3><p class="subtle">These are fixture facts, not claims accepted from the event.</p><pre id="facts"></pre>
+        <div id="composition"></div><h3>Trusted test evidence</h3><p class="subtle">These are fixture facts, not claims accepted from the event.</p><pre id="facts"></pre>
         <details><summary>Full original case, including coverage</summary><pre id="raw"></pre></details>
       </article>
-      <article class="policy-column"><div class="eyebrow" id="policyId"></div><h3 id="policyTitle"></h3><div id="policyBody"></div><details><summary>Exact Markdown source</summary><pre id="policySource"></pre></details></article>
+      <article class="policy-column"><div class="eyebrow" id="policyId"></div><h3 id="policyTitle"></h3><div id="policyBody"></div><details><summary>Exact Markdown source</summary><pre id="policySource"></pre></details><details id="catalogDetails"><summary>Company-approved sources (synthetic YAML)</summary><pre id="catalogSource"></pre></details></article>
     </div>
     <section class="review-box" aria-label="Your review"><div class="review-heading"><h3>Your review</h3><span id="historical" class="subtle"></span></div>
       <label>Notes or correction reason<textarea id="notes" rows="2" placeholder="What should change, and why? Notes save automatically."></textarea></label>
@@ -44,7 +44,7 @@
   </div>
 </section>
 </main>
-<footer><div><strong>Review context</strong><p>Each case checks only its named policy. Software assistance through the approved coding model is allowed; onward sharing requires approval of the actual destination and operation. Tool commands are inert examples, assuming normal tools without malicious aliases or hidden side effects.</p><p>The new packet contains 80 command cases and 20 deterministic document regressions. It does not establish the release’s statistical accuracy target. The previous 36 labels were approved on September 27, 2026; that record is preserved.</p></div><div><button id="approveRemaining">Approve all remaining new labels…</button><p class="subtle">Only pending labels; flagged corrections are never overwritten.</p><details><summary>Dataset fingerprints</summary><pre id="fingerprints"></pre></details><span id="storageStatus" class="subtle"></span></div></footer>
+<footer><div><strong>Review context</strong><p>Each case checks its named policy, except the explicitly marked combined-policy cases. Software assistance through the approved coding model is allowed; onward sharing requires approval of the actual destination and operation. Tool commands are inert examples, assuming normal tools without malicious aliases or hidden side effects.</p><p>The original 100-case packet contains 80 command cases and 20 deterministic document regressions. A separate 46-case packet adds the inbound-source rule and combined-policy examples. These packets do not establish the release’s statistical accuracy target. The previous 36 labels were approved on September 27, 2026; that record is preserved.</p></div><div><button id="approveRemaining">Approve remaining labels in this packet…</button><p class="subtle">Only pending labels in the selected packet; flagged corrections are never overwritten.</p><details><summary>Dataset fingerprints</summary><pre id="fingerprints"></pre></details><span id="storageStatus" class="subtle"></span></div></footer>
 <script id="reviewData" type="application/json">__DATA__</script>
 <script>/* APP */</script>
 </body></html>

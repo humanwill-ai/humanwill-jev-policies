@@ -100,3 +100,14 @@ If a post-publication defect appears, mark the affected release/feature clearly 
 **Steps 1–2 are implemented:** the contracts, offline loader/CLI, CI, and three synthetic policy classes are documented in the [foundation report](foundation-report.md). Step 3 software is implemented; its OpenRouter smoke passed and direct TypeSafe live smoke is optional for v0.1. Step 4 service/gateway implementation and real-host checks now pass. Step 5 adapters and both CLI/Local runtime tests pass, including documented host bypasses. See [integration evidence](integration-report.md). Step 6’s [initial development comparison](evaluation-development-report.md) and [config/3 follow-up](evaluation-v3-report.md) are complete, as is the [clarified-policy/instruction-integrity live comparison](integrity-live-report.md). Jev matches the revised software cases, and the owner removed the standalone integrity rule after it created false blocks without fixing Gemini's remaining bypasses; draft labels and held-out evidence still need review. The step 6 release gate remains open. Step 7 packaging and the remaining step 6 work now run in parallel. The [gate audit](step6-release-gates.md) separates observed development metrics from qualifying evidence; the [new review packet](step6-review-candidates-v1.md) supplies concrete cases for human adjudication. The [service operation checks](service-operation-gates.md) exercise local load, failures and recovery without provider calls. Step 7 implementation and installation/operation evidence now pass: see the [packaging report](packaging-report.md) for all seven CI jobs, installed-wheel host tests and the offline container demo. Elapsed time cannot substitute for release evidence.
 
 Owner label review of the current 36-case packet is complete. Later inputs include license choice and the separate review protocol for a newly assembled independent holdout. Policy intentions, initial acceptance targets and remaining-$5 synthetic evaluation budget are now recorded in [decisions](decisions.md). None requires placing secrets in the repository or in chat. Set a maintainer/security reporting destination before public release.
+
+## Additional source-policy gate — 2026-09-28
+
+The owner added EVAL-SRC-001 (approved inbound software sources). Its Markdown
+rule, synthetic allowlist/reference matcher, monitoring configuration and new
+46-case review packet are prepared; labels and live quality are pending. See
+[the source-policy design](approved-software-sources.md). Existing integration
+and latency evidence does not demonstrate production package-source resolution.
+Before advertising automatic download restrictions, implement and test bounded
+trusted origin resolution for the claimed host/tool workflows, including
+redirects, transitive acquisitions, optional metadata and failure behavior.

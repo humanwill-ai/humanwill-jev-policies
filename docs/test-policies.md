@@ -121,3 +121,14 @@ The standalone instruction-integrity policy was removed by owner decision after
 the [live comparison](integrity-live-report.md). The three policies above remain
 the current evaluation set. Injection-resistance tests remain part of testing
 the disclosure/action policies and do not constitute another company policy.
+
+## EVAL-SRC-001 — Obtain software only from approved sources
+
+Owner requested this fourth policy on 2026-09-28 and confirmed both company mirrors
+and explicitly approved public sources. Govern fetching, installation, updates and
+remote execution; allow ordinary documentation browsing and existing trusted local
+work. Use a company-controlled YAML catalog, with source and operation permissions
+separate from onward-disclosure approval. See the [policy and source-list contract](approved-software-sources.md)
+and [46 new review cases](case-review.html). No new labels are approved implicitly.
+The new bundle is `evals/step6/policies-sources-v1`; the original three-policy
+bundle and its measured results are preserved.

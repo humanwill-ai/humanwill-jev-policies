@@ -1,0 +1,37 @@
+# Synthetic company-managed fixtures. No real public source is approved by this example.
+format: humanwill.approved-sources/1
+id: synthetic-company-software-sources
+version: "1"
+default: deny
+sources:
+  - id: company-git
+    kind: git
+    endpoint: https://git.example.test/company/project.git
+    operations: [download, update]
+  - id: approved-upstream
+    kind: git
+    endpoint: https://public.example.test/vendor/parser.git
+    operations: [download, update]
+  - id: company-npm
+    kind: npm
+    endpoint: https://packages.example.test/npm
+    operations: [download, install, update, execute]
+    packages: ["@company/build-kit", "@company/parser"]
+  - id: company-python
+    kind: python
+    endpoint: https://packages.example.test/python/simple
+    operations: [download, install, update]
+    packages: [company-parser, company-helper]
+  - id: company-images
+    kind: oci
+    endpoint: https://images.example.test
+    operations: [download, execute]
+    packages: [company/build-env]
+  - id: reviewed-tool
+    kind: https_file
+    endpoint: https://tools.example.test/releases/linter-1.2.3.sh
+    operations: [download, install]
+  - id: company-docs
+    kind: https_file
+    endpoint: https://docs.example.test/install-guide.html
+    operations: [download]

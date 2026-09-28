@@ -49,7 +49,48 @@ def build():
                 "source": source,
                 "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
             }
-    data = json.dumps({"packs": packs, "policies": policies}, ensure_ascii=False)
+    legacy_fingerprint = (
+        ":".join(p["sha256"] for p in packs)
+        + ":"
+        + ":".join(p["sha256"] for p in policies.values())
+    )
+    source_path = ROOT / "evals/step6/sources-v1/candidates.json"
+    snapshot = json.loads((source_path.parent / "snapshot.json").read_text())
+    for path, expected in snapshot["sha256"].items():
+        if hashlib.sha256((ROOT / path).read_bytes()).hexdigest() != expected:
+            raise ValueError(f"Source review snapshot changed: {path}")
+    packs.append(
+        {
+            "id": "sources",
+            "title": "Approved sources · 46",
+            "path": str(source_path.relative_to(ROOT)),
+            "sha256": hashlib.sha256(source_path.read_bytes()).hexdigest(),
+            "previously_approved": False,
+            "approval_date": None,
+            "cases": json.loads(source_path.read_text())["cases"],
+        }
+    )
+    path = ROOT / "evals/step6/policies-sources-v1/approved-sources.md"
+    source = path.read_text()
+    _, front, body = source.split("---", 2)
+    meta = yaml.safe_load(front)
+    policies[meta["id"]] = {
+        **meta,
+        "body": body.strip(),
+        "source": source,
+        "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+    }
+    catalog_path = source_path.parent / "approved-sources.yaml"
+    data = json.dumps(
+        {
+            "packs": packs,
+            "policies": policies,
+            "legacy_fingerprint": legacy_fingerprint,
+            "source_catalog": catalog_path.read_text(),
+            "source_catalog_sha256": hashlib.sha256(catalog_path.read_bytes()).hexdigest(),
+        },
+        ensure_ascii=False,
+    )
     # Keep embedded content inert even if a future fixture contains HTML/script delimiters.
     data = data.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
     html = (TEMPLATE / "page.html").read_text()

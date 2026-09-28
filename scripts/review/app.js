@@ -1,15 +1,16 @@
 'use strict';
 const DATA = JSON.parse(document.getElementById('reviewData').textContent);
 const $ = id => document.getElementById(id);
-const fingerprint = DATA.packs.map(p => p.sha256).join(':') + ':' + Object.values(DATA.policies).map(p => p.sha256).join(':');
+const fingerprint = DATA.packs.map(p => p.sha256).join(':') + ':' + Object.values(DATA.policies).map(p => p.sha256).join(':') + ':' + DATA.source_catalog_sha256;
 const storageKey = 'humanwill.case-review.v1:' + fingerprint;
 const allCases = new Map(DATA.packs.flatMap(p => p.cases.map(c => [c.id, {c, p}])));
-let state = {reviewer: '', reviews: {}}, packId = 'holdout', selectedId = DATA.packs[0].cases[0].id;
+let state = {reviewer: '', reviews: {}}, packId = 'sources', selectedId = DATA.packs.find(p => p.id === 'sources').cases[0].id;
 let storageOK = true;
 const labels = {allow: 'Allow', block: 'Block / violation', evaluation_error: 'Evaluation error'};
 const statuses = {pending: 'Pending', approved: 'Approved', correction: 'Needs correction'};
 const pretty = value => JSON.stringify(value, null, 2);
 const now = () => new Date().toISOString();
+const pendingCases = () => DATA.packs.filter(p => !p.previously_approved).flatMap(p => p.cases);
 const pack = () => DATA.packs.find(p => p.id === packId);
 const current = () => allCases.get(selectedId)?.c;
 function message(text) { $('message').textContent = text; }
@@ -25,7 +26,7 @@ function validateState(candidate) {
   }
   return clean;
 }
-try { const saved = localStorage.getItem(storageKey); if (saved) state = validateState(JSON.parse(saved)); }
+try { const saved = localStorage.getItem(storageKey) ?? localStorage.getItem('humanwill.case-review.v1:' + DATA.legacy_fingerprint); if (saved) state = validateState(JSON.parse(saved)); }
 catch { storageOK = false; message('Saved progress could not be loaded. Use Export review to keep a backup; import a previous export to restore it.'); }
 function persist() {
   try { localStorage.setItem(storageKey, JSON.stringify(state)); storageOK = true; }
@@ -35,7 +36,7 @@ function persist() {
 function review(c) {
   return state.reviews[c.id] ?? {status: allCases.get(c.id).p.previously_approved ? 'approved' : 'pending', notes: '', label: c.expected, scope: c.expected_scope ?? ''};
 }
-function title(c) { return c.id.replace(/^(holdout-v1-|candidate-v1-)/, '').replace(/^(sw-|prod-|doc-)/, '').replaceAll('-', ' '); }
+function title(c) { return c.id.replace(/^(holdout-v1-|candidate-v1-|sources-v1-)/, '').replace(/^(sw-|prod-|doc-)/, '').replaceAll('-', ' '); }
 function filtered() {
   const query = $('search').value.toLowerCase().trim();
   return pack().cases.filter(c => (!$('policyFilter').value || c.policy_id === $('policyFilter').value) && (!$('statusFilter').value || review(c).status === $('statusFilter').value) && (!query || JSON.stringify(c).toLowerCase().includes(query)));
@@ -43,11 +44,11 @@ function filtered() {
 function badge(el, text, kind) { el.textContent = text; el.className = 'badge ' + kind; }
 function updateProgress() {
   const counts = {pending: 0, approved: 0, correction: 0};
-  DATA.packs[0].cases.forEach(c => counts[review(c).status]++);
-  $('progressCount').textContent = counts.approved + ' / 100';
+  pendingCases().forEach(c => counts[review(c).status]++);
+  $('progressCount').textContent = counts.approved + ' / ' + pendingCases().length;
   $('progressDetail').textContent = counts.pending + ' pending · ' + counts.correction + ' need correction';
-  $('progress').value = counts.approved;
-  $('approveRemaining').disabled = !counts.pending;
+  $('progress').max = pendingCases().length; $('progress').value = counts.approved;
+  $('approveRemaining').disabled = pack().previously_approved || !pack().cases.some(c => review(c).status === 'pending');
 }
 function renderList(cases) {
   $('listCount').textContent = cases.length + ' cases';
@@ -68,6 +69,7 @@ function render() {
   if (!cases.some(c => c.id === selectedId)) selectedId = cases[0]?.id ?? null;
   renderList(cases);
   $('tabHoldout').setAttribute('aria-pressed', String(packId === 'holdout'));
+  $('tabSources').setAttribute('aria-pressed', String(packId === 'sources'));
   $('tabPrevious').setAttribute('aria-pressed', String(packId === 'previous'));
   $('empty').hidden = !!selectedId; $('casePanel').hidden = !selectedId;
   const index = cases.findIndex(c => c.id === selectedId);
@@ -88,13 +90,24 @@ function render() {
   badge($('expectedBadge'), labels[c.expected], c.expected);
   $('scope').textContent = 'Scope: ' + (c.expected_scope?.replaceAll('_', ' ') ?? 'deterministic; no semantic judgment');
   $('rationale').textContent = c.rationale;
-  $('facts').textContent = pretty({trusted_facts: c.trusted_facts, ...(c.disclosure_context ? {disclosure_context: c.disclosure_context} : {})});
+  $('facts').textContent = pretty({trusted_facts: c.trusted_facts, ...(c.source_context ? {source_context: c.source_context} : {}), ...(c.disclosure_context ? {disclosure_context: c.disclosure_context} : {})});
   $('raw').textContent = pretty(c);
   $('policyId').textContent = policy.id + ' · VERSION ' + policy.version;
   $('policyTitle').textContent = policy.title;
   $('policyBody').replaceChildren();
   for (const paragraph of policy.body.split(/\n\s*\n/)) { const p = document.createElement('p'); p.textContent = paragraph.replace(/\n/g, ' '); $('policyBody').append(p); }
   $('policySource').textContent = policy.source;
+  $('catalogDetails').hidden = c.policy_id !== 'EVAL-SRC-001';
+  $('catalogSource').textContent = DATA.source_catalog;
+  $('composition').replaceChildren();
+  if (c.expected_composed) {
+    const heading = document.createElement('h3'); heading.textContent = 'Combined-policy result: ' + labels[c.expected_composed]; $('composition').append(heading);
+    for (const [id, decision] of Object.entries(c.expected_by_policy)) {
+      const detail = document.createElement('details'), summary = document.createElement('summary'), text = document.createElement('pre');
+      summary.textContent = id + ': ' + labels[decision] + ' — view policy'; text.textContent = DATA.policies[id].source; detail.append(summary, text); $('composition').append(detail);
+    }
+  }
+  if (c.related_case_id) {const p = document.createElement('p'); p.className = 'subtle'; p.textContent = 'Reassesses the workflow from ' + c.related_case_id + ' under the new source policy; its original disclosure-only label is unchanged.'; $('composition').append(p);}
   $('notes').value = r.notes; $('correctedLabel').value = r.label; $('correctedScope').value = r.scope;
   $('historical').textContent = pack().previously_approved ? 'Original owner approval: September 27, 2026' : 'New label awaiting your judgment';
   $('approve').textContent = pack().previously_approved ? 'Reconfirm original result' : 'Approve expected result';
@@ -122,7 +135,7 @@ $('notes').oninput = () => {
 $('undo').onclick = () => { if (!current()) return; if (!confirm('Reset your review and notes for this case? The original label and any historical approval will be preserved.')) return; delete state.reviews[selectedId]; persist(); message('Original case review state restored.'); render(); };
 $('reviewer').value = state.reviewer; $('reviewer').oninput = () => {state.reviewer = $('reviewer').value; persist();};
 for (const id of ['search', 'policyFilter', 'statusFilter']) $(id).addEventListener(id === 'search' ? 'input' : 'change', render);
-for (const [id, value] of [['tabHoldout', 'holdout'], ['tabPrevious', 'previous']]) $(id).onclick = () => {packId = value; $('statusFilter').value = ''; $('search').value = ''; selectedId = null; render();};
+for (const [id, value] of [['tabHoldout', 'holdout'], ['tabSources', 'sources'], ['tabPrevious', 'previous']]) $(id).onclick = () => {packId = value; $('statusFilter').value = ''; $('policyFilter').value = ''; $('search').value = ''; selectedId = null; render();};
 function move(delta) {const list = filtered(); selectedId = list[list.findIndex(c => c.id === selectedId) + delta]?.id ?? selectedId; render();}
 $('prev').onclick = () => move(-1); $('next').onclick = () => move(1);
 $('nextPending').onclick = () => {
@@ -132,15 +145,15 @@ $('nextPending').onclick = () => {
   $('search').value = ''; $('policyFilter').value = ''; $('statusFilter').value = ''; selectedId = next.id; render();
 };
 $('approveRemaining').onclick = () => {
-  const pending = DATA.packs[0].cases.filter(c => review(c).status === 'pending');
-  if (!pending.length || !confirm(`Confirm you have reviewed all ${pending.length} remaining new cases and accept their ORIGINAL expected results and scopes. This covers all policies, regardless of filters. Flagged corrections will be preserved.`)) return;
+  const pending = pack().cases.filter(c => review(c).status === 'pending');
+  if (pack().previously_approved || !pending.length || !confirm(`Confirm you have reviewed all ${pending.length} remaining cases in ${pack().title} and accept their ORIGINAL expected results, scopes and any stated combined-policy results. This covers all policies, regardless of filters. Flagged corrections will be preserved.`)) return;
   for (const c of pending) state.reviews[c.id] = {...review(c), status: 'approved', label: c.expected, scope: c.expected_scope ?? '', updated_at: now()};
   persist(); render(); message(pending.length + ' labels approved. Export review to hand off your decisions.');
 };
 function exportPayload() {
   return {format: 'humanwill.case-review/1', exported_at: now(), fingerprint, ...state,
     packets: DATA.packs.map(p => ({id: p.id, path: p.path, sha256: p.sha256, original_approval_date: p.approval_date,
-      cases: p.cases.map(c => ({id: c.id, policy_id: c.policy_id, original_expected: c.expected, original_scope: c.expected_scope, ...review(c), provenance: state.reviews[c.id] ? 'local_review' : (p.previously_approved ? 'historical_owner_approval' : 'unreviewed')}))})),
+      cases: p.cases.map(c => ({id: c.id, policy_id: c.policy_id, original_expected: c.expected, original_scope: c.expected_scope, ...(c.expected_composed ? {original_composed: c.expected_composed, original_by_policy: c.expected_by_policy} : {}), ...review(c), provenance: state.reviews[c.id] ? 'local_review' : (p.previously_approved ? 'historical_owner_approval' : 'unreviewed')}))})),
     note: 'Local label review only; no source or evaluation protocol changed. Corrections require adjudication and a versioned dataset before measurement.'};
 }
 $('export').onclick = () => {
@@ -154,8 +167,9 @@ $('importFile').onchange = async event => {
   try {
     if (file.size > 5_000_000) throw Error('Review file is too large.');
     const imported = JSON.parse(await file.text());
-    if (imported.format !== 'humanwill.case-review/1' || imported.fingerprint !== fingerprint) throw Error('This review belongs to different datasets or policies. Nothing was imported.');
+    if (imported.format !== 'humanwill.case-review/1' || ![fingerprint, DATA.legacy_fingerprint].includes(imported.fingerprint)) throw Error('This review belongs to different datasets or policies. Nothing was imported.');
     const clean = validateState(imported);
+    if (imported.fingerprint === DATA.legacy_fingerprint && Object.keys(clean.reviews).some(id => allCases.get(id).p.id === 'sources')) throw Error('Old-format reviews cannot approve the new source-policy cases.');
     if (!confirm('Replace this browser’s current review with the imported review? Export first if you need to preserve your current progress.')) return;
     state = clean; $('reviewer').value = state.reviewer; persist(); render(); message('Review restored from file.');
   } catch (error) {message(error.message);} finally {event.target.value = '';}

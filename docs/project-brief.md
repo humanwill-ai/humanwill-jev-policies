@@ -57,3 +57,13 @@ The [public-release roadmap](public-release-plan.md) defines the proposed `v0.1.
 The three initial policy intentions, remaining-$5 synthetic evaluation budget and initial acceptance targets are recorded. Review proposed labels and choose the project license before publication; corporate data-egress/retention constraints are needed before a customer pilot. These do not block the offline foundation.
 
 Step 6’s [initial synthetic development comparison](evaluation-development-report.md) identifies false blocks and injection-related misses. It does not substantiate enforcement readiness; human label review, development improvements and independent held-out evaluation remain.
+
+## New policy requirement — 2026-09-28
+
+Companies also restrict where agents obtain code, libraries and tools. Add
+EVAL-SRC-001 with an operator-owned source allowlist, independently from upload
+approvals. The owner confirmed mirrors plus approved public sources and scope
+covering acquisition, installation, updates and remote execution, excluding normal
+documentation browsing and existing local work. [The design](approved-software-sources.md)
+and 46 new cases are available for review; production origin resolution and live
+Jev evaluation of this policy are not yet established.

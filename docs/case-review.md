@@ -7,12 +7,13 @@ open docs/case-review.html
 ```
 
 No server, installation, account, or API key is needed. The page embeds the frozen
-100-case packet, previously approved 36-case packet, and exact three policy texts.
+100-case packet, 46 new source-policy cases, previously approved 36-case packet,
+and exact four policy texts.
 There are no external scripts, fonts, analytics, model calls, or executed test
 commands. This is an internal evaluation-label review aid, not a runtime approval
 workflow for agents.
 
-1. Use **New 100 cases**, optionally filtering by policy or status. Compare each
+1. Use **Approved sources · 46** or **New 100 cases**, optionally filtering by policy or status. Compare each
    event and trusted evidence with the policy beside it. The expected result is
    a proposed test label, not a measured model answer.
 2. Select **Approve expected result**, or enter a reason, choose a proposed result
@@ -26,8 +27,8 @@ workflow for agents.
    apply agreed corrections to a versioned dataset before evaluation. Nothing in
    the page edits source datasets or opens the live-run gate automatically.
 
-The bottom-of-page bulk action accepts all pending new labels after confirmation,
-including cases hidden by filters; it never overwrites flagged corrections.
+The bottom-of-page bulk action accepts pending labels in the selected packet after
+confirmation, including cases hidden by filters; it never overwrites flagged corrections.
 
 Progress is saved in local browser storage, keyed to both dataset fingerprints
 and the policy source hashes. Browser storage can be cleared, and behavior for
@@ -38,7 +39,7 @@ Keep reviewer names and personal notes in local exports, out of Git. The export'
 labels and historical approval provenance for readability. This local tool does
 not authenticate a reviewer or provide a tamper-proof signature.
 
-The 100-case labels remain pending until actually reviewed. The 36-case source
+The 100-case and new source-case labels remain pending until actually reviewed. The 36-case source
 JSON retains its original pre-review metadata; its dated owner approval is
 recorded in [the review packet](step6-review-candidates-v1.md). Reviewing either
 packet does not establish statistical accuracy or close other release gates.
@@ -51,7 +52,8 @@ Edit `scripts/review/page.html`, `style.css`, and `app.js`, then regenerate:
 .venv/bin/python scripts/build_review.py
 ```
 
-The generator verifies the new dataset against its protocol hash and the previous
+The generator verifies the original 100-case dataset against its protocol hash,
+the source packet/catalog/matcher against its own snapshot, and the previous
 packet against its approved dataset hash. It embeds event content as escaped
 JSON and displays case/policy text using text nodes. A restrictive page policy
 blocks network connections and external resources. The generated HTML and its
@@ -63,3 +65,14 @@ bulk approval preserving corrections, historical approval, policy/search filters
 export/import round trip, rejection of mismatched imports, and desktop/mobile
 layout. No JavaScript runtime errors occurred. Test progress was cleared after
 verification; no human approval was recorded by these checks.
+
+The extended page migrates local progress and imports exports from the original
+136-case page. Original approvals apply only to those unchanged cases; the 46 new
+source-policy cases start pending. Export format fingerprints now include the
+source catalog. Four source cases include combined-policy results; approval
+accepts those stated results too, and correction notes can name a secondary policy.
+
+The 182-case extension was browser-checked on 2026-09-28 for source catalog display,
+combined-policy results, legacy storage migration, legacy JSON imports,
+packet-scoped bulk approval, existing review controls and responsive layout.
+All checks passed in an isolated profile; synthetic QA approvals were cleared.

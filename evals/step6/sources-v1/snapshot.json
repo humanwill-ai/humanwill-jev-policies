@@ -1,0 +1,18 @@
+{
+  "format": "humanwill.source-review-snapshot/1",
+  "status": "pending_owner_labels",
+  "case_count": 46,
+  "sha256": {
+    "evals/step6/sources-v1/candidates.json": "a85c399c239497decb228835269486896227a8a8b04348b98620d26ef26ca8fd",
+    "evals/step6/config-sources-v1.yaml": "f3a62112196e6a6b5db432bb9a3fea23ca868817f6fbbb92f5c1016f721d1892",
+    "evals/step6/sources-v1/approved-sources.yaml": "9a78a45c6254607edbbf079b59328be29802ac8fb5f16ffb8e613a47545f5b0a",
+    "evals/step6/source_approval.py": "238fb5fc47ea1d9491873db8a4ea42191c4f42f7c0b9634b797579316ffab6eb",
+    "evals/step6/policies-sources-v1/approved-sources.md": "1a0eed6cd404e3141961566e5d9a7540b07f582f5a37dddc219addd0461cce83",
+    "evals/step6/policies-sources-v1/documents.md": "a90502a720de691776b6882f3d774f0d7f31a35280adf7f77b1eb21ebe303f76",
+    "evals/step6/policies-sources-v1/policies.md": "a6eb2e292b150e382cbbcc65cc025548dbf78fe3b1b76156bebcf1d20106880c",
+    "evals/step6/policies-sources-v1/production.md": "83aa6a345e86a77dd1d67f5bf772c676cfc09f7dab0295842c5269f2f542c706",
+    "evals/step6/policies-sources-v1/software.md": "cdfb44ca76e8f3cf2f0d520d0445d766b909b6a71e0a729c8c62a111ecc61924"
+  },
+  "bundle_sha256": "52dd858359a3a9040bc143d4036b9185f7e8a532071c9b5b78622556126dafa3",
+  "limitations": "Operator-owned resolved fixtures, no production command/package resolver, no live Jev measurement, no statistical release claim."
+}

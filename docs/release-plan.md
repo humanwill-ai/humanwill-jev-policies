@@ -159,3 +159,13 @@ The proposed first public version is an alpha preview, validated privately befor
 
 1. Review the new [case-label packet](step6-review-candidates-v1.md), then establish the independent held-out sampling/review protocol. The three policy intentions, $5 cumulative synthetic budget and numerical targets are already recorded.
 2. Choose the project license and publication/security reporting details before step 8. Customer data/retention constraints remain necessary before a pilot.
+
+## Inbound source-policy extension — 2026-09-28
+
+Add the owner-requested approved-software-source policy and an operator-managed
+allowlist supporting company mirrors and approved public sources. The
+[design and current evidence](approved-software-sources.md) separate the completed
+policy/configuration/reference matching and review cases from pending production
+origin resolution, host wiring and live policy-quality measurements. Cover actual
+package/dependency/redirect origins before making enforcement claims. Preserve
+the historical three-policy profile and frozen review datasets.

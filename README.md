@@ -11,7 +11,7 @@ violations. These are development results with draft labels, not an independent
 accuracy or enterprise-readiness claim. Gemini was a comparison baseline; Jev
 remains the first release backend.
 
-The current evaluation bundle contains the three company policies in
+The measured three-policy evaluation bundle contains the company policies in
 `evals/step6/policies-v2`, configured by `config-disclosure-v2.yaml`. The standalone
 instruction-integrity rule was removed after it increased false blocks without
 fixing Gemini's remaining bypasses. All shipped configurations remain in monitor
@@ -47,7 +47,7 @@ humanwill-policies schema request
 Step 7 installation/operation checks pass, including all seven CI jobs and the offline container demo; see [packaging evidence](docs/packaging-report.md). The [step 6 gate audit](docs/step6-release-gates.md) and [36-case review packet](docs/step6-review-candidates-v1.md) identify the remaining quality work.
 
 For label review, open [the offline review page](docs/case-review.html) locally in
-your browser: all 100 new cases and the previously approved 36, with policies,
+your browser: the original 100 cases, 46 new approved-source cases, and the previously approved 36, with policies,
 approval/correction controls, saved progress, and JSON export. See
 [review instructions](docs/case-review.md). GitHub displays HTML source; download
 or open the checked-out file to use it.
@@ -56,6 +56,10 @@ For installation from exact built artifacts and the local container recipe, use
 the [quickstart](docs/quickstart.md). The [policy-author guide](docs/policy-authoring.md)
 explains Markdown bundles and trusted facts; the [operations guide](docs/operations.md)
 covers upgrades, rollback and troubleshooting.
+
+The new [approved software sources policy](docs/approved-software-sources.md) adds
+a separate operator-managed inbound allowlist. Its four-policy bundle and review
+cases are ready; production origin resolution and live Jev evaluation remain pending.
 
 ## First-release support
 

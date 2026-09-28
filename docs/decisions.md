@@ -224,3 +224,20 @@ A new 100-case targeted command/fact tranche is frozen before measurement; its
 labels await owner review. It is an initial generalization check, not enough
 independent observations to establish the approved 5% upper error bounds. Do not
 confuse preparation, completed performance measurement, and semantic gate closure.
+
+## Approved inbound software sources — 2026-09-28
+
+The owner requested EVAL-SRC-001 and explicitly selected company mirrors plus
+approved public repositories/registries. Scope includes fetching, installing,
+updating and running remotely obtained software; ordinary documentation browsing
+and existing trusted local work remain allowed. The [source-list contract](approved-software-sources.md)
+uses operator-controlled YAML with exact resource identities, allowed operations
+and optional package restrictions (registry-wide approval must be explicit).
+This is separate from outbound disclosure approval; Jev never establishes trust.
+
+The new four-policy evaluation bundle, configuration, synthetic catalog/reference
+matcher and 46 draft cases are implemented for offline review. Preserve the
+original 100/36 datasets, their approval provenance and the existing three-policy
+measurements. Combined-policy cases explicitly distinguish each policy verdict
+from the aggregate result. Production source resolution/host enforcement and new
+live model measurements remain work to do; this increment adds no API charges.
