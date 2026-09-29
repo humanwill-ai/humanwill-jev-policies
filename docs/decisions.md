@@ -441,3 +441,17 @@ smaller focused-policy-v2 candidate separate from tool-context experiments. Poli
 labels, runtime template, gates and release qualification remain unchanged. Known
 cumulative spend$0.110940572 plus$0.01 reserved for the unresolved call; no further
 provider calls until accounting is reconciled. Local source commit e1751bc; no push.
+
+
+## Restart completed — 2026-09-29
+
+Owner-requested fresh two-arm test completed at dd975e7:175 events per arm,296 new
+calls, all new charges settled. Question-only149/175 exact; question+context156/175
+versus saved baseline156. Context fixes4 of the nine target cases but still has
+16 legitimate errors and3 known-violation errors; no known violation/expected unknown
+is allowed.11 fixes and11 regressions against baseline; do not promote the broader
+wording. [Full results](effect-question-restart-v1.md) distinguish changed context
+from identical-payload variation and preserve the original interrupted attempt.
+Known cumulative spend$0.135761732 plus the owner-authorized carried$0.01 unresolved
+reservation; total accounted$0.145761732, remaining$4.854238268. No runtime change,
+release qualification or GitHub push.
