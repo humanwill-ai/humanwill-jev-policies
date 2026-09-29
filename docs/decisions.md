@@ -459,3 +459,12 @@ release qualification or GitHub push.
 ## Short-question experiment — 2026-09-29
 
 Keep all ten short instruction variants experimental. Q05 is the most balanced candidate for future full-pack validation; Q02 improves the five difficult cases more but regresses controls. Policies, thresholds and runtime defaults remain unchanged. See [measured results](short-questions-v1-report.md).
+
+## Q05 full-pack results — 2026-09-29
+
+Completed all 175 reviewed cases with the frozen Q05 template: 149 definitive
+decisions, all matching event labels; 26 inconclusive results (14.9%), of which
+12 were expected and 14 unexpected (8.6% of 163 decidable cases). Fail-closed
+would stop 9/79 legitimate requests; fail-open would permit 5/84 known violations
+and all 12 expected unknowns. This remains above the initial error target.
+No runtime default or release-readiness change. See [full measured results](q05-full-pack-v1-report.md).

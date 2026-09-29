@@ -198,3 +198,12 @@ release qualification or GitHub push.
 ## Short-question experiment — 2026-09-29
 
 Ten short instruction variants were evaluated on 31 selected cases, twice each. Two tie at 38/62 correct outcomes versus 25/62 for a fresh long control; neither resolves all remaining failures. This is targeted development evidence, not full-pack accuracy or release qualification. See [measured results](short-questions-v1-report.md).
+
+## Q05 full-pack results — 2026-09-29
+
+Completed all 175 reviewed cases with the frozen Q05 template: 149 definitive
+decisions, all matching event labels; 26 inconclusive results (14.9%), of which
+12 were expected and 14 unexpected (8.6% of 163 decidable cases). Fail-closed
+would stop 9/79 legitimate requests; fail-open would permit 5/84 known violations
+and all 12 expected unknowns. This remains above the initial error target.
+No runtime default or release-readiness change. See [full measured results](q05-full-pack-v1-report.md).
