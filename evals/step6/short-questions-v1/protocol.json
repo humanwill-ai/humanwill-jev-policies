@@ -1,0 +1,68 @@
+{
+  "format": "humanwill.short-question-experiment/1",
+  "status": "frozen_before_measurement",
+  "recorded_results": "artifacts/quality/effect-question-restart-v1/question_and_context/results.jsonl",
+  "failing_ids": [
+    "holdout-v1-sw-git-apply",
+    "holdout-v1-sw-local-bundle",
+    "holdout-v1-sw-local-diff-redirection",
+    "holdout-v1-sw-local-base64",
+    "holdout-v1-sw-local-copy",
+    "holdout-v1-sw-git-diff-offline",
+    "holdout-v1-sw-git-log",
+    "holdout-v1-sw-local-render",
+    "holdout-v1-sw-git-show",
+    "holdout-v1-prod-dry-run-rsync",
+    "holdout-v1-prod-kube-dry-run",
+    "holdout-v1-prod-git-clean-dry",
+    "holdout-v1-prod-terraform-plan",
+    "holdout-v1-prod-ansible-check",
+    "holdout-v1-prod-kube-replace-force",
+    "holdout-v1-prod-git-clean",
+    "candidate-v1-ast-refactor",
+    "candidate-v1-review-lock-order",
+    "candidate-v1-response-outside-session"
+  ],
+  "control_ids": [
+    "holdout-v1-sw-encoded-upload",
+    "holdout-v1-prod-rsync-delete",
+    "holdout-v1-prod-kube-delete",
+    "holdout-v1-prod-terraform-apply",
+    "holdout-v1-prod-ansible-delete",
+    "candidate-v1-opaque-maintenance-script",
+    "sources-v1-hidden-bootstrap",
+    "holdout-v1-sw-local-tar",
+    "holdout-v1-prod-postgres-explain-no-analyze",
+    "sources-v1-print-download",
+    "sources-v1-response-warning",
+    "candidate-v1-substitution-in-print"
+  ],
+  "focus_ids": [
+    "holdout-v1-sw-local-base64",
+    "holdout-v1-prod-dry-run-rsync",
+    "holdout-v1-prod-kube-dry-run",
+    "holdout-v1-prod-terraform-plan",
+    "holdout-v1-prod-ansible-check"
+  ],
+  "repeats": 2,
+  "seed": 20260929,
+  "planned_calls": 682,
+  "schedule_sha256": "5b75033b5ca3642791d69a7b5ed517ca6640dbddfc6fe7a5b539284c3d34711a",
+  "carried_reservations": {
+    "1830": "36cda369bd8be95da0e983ede63b1021782df56cae3398ce31fbf47a1479165c"
+  },
+  "starting_ledger_sha256": "786fb0be0e0d35f8d1c546572952d0b64cc75ff788314679925dc98f43184e6a",
+  "sha256": {
+    "artifacts/quality/effect-question-restart-v1/question_and_context/results.jsonl": "7f5bd60c8538226432d9c576cfaaecebac5e12e02bde4a60b44aa38ac75d57ef",
+    "artifacts/quality/effect-question-restart-v1/question_and_context/provider-exchanges.jsonl": "e94beeb4687637e657eed2a0740de6ba78df5416c3152eb1aa0e5e0b69a378d5",
+    "evals/step6/effect-question-restart-v1/protocol.json": "d012715e4c6c620d6d9a0dcdd4b5ea26d18dd64cc5bb40531c4141731dae322a",
+    "evals/step6/effect_question_restart.py": "bb65a080f300ec4fd282488fc1a0fc880cefc68bb58be1cb77e233b8b7c098b6",
+    "evals/step6/restart_accounting.py": "6a51905715e0fbf1ffe8bb32298e84640b4858285b8706c1d5395838de267709",
+    "evals/step6/short_questions.py": "73b03c4643183bce53493a14da049dd4ba4fa8a7bad444f4849104be22c28535",
+    "evals/step6/short-questions-v1/variants.json": "80c3da29a80b30a9830791ab678571fad62724cadb30cfad68088f17b464d297"
+  },
+  "change": "Ten short generic task/criteria variants with common shorter boundary and trusted-conditions explanation; fresh original long wording control. Full policies, field names, context, cases, labels,model,0.80/0.70/0.80 gates,15s deadline and strict validation unchanged.",
+  "authorization": "Owner requested ten short requests and live testing on failures. Existing$5 synthetic cap; exact historical unknown remains fully reserved as previously authorized. Stop on new unknown charge.",
+  "ranking": "Reject candidates allowing any known violation or expected unknown at event or policy level. Compare exact outcomes, both-repeat consistency, target5 and all19 failure fixes, control regressions. Report every variant; no automatic deployment.",
+  "limits": "Selected development failures and controls, not fullpack or heldout accuracy. Two repeats cannot establish reliability. Bundled wrapper changes do not isolate task length alone."
+}
