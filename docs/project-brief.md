@@ -194,3 +194,7 @@ from identical-payload variation and preserve the original interrupted attempt.
 Known cumulative spend$0.135761732 plus the owner-authorized carried$0.01 unresolved
 reservation; total accounted$0.145761732, remaining$4.854238268. No runtime change,
 release qualification or GitHub push.
+
+## Short-question experiment — 2026-09-29
+
+Ten short instruction variants were evaluated on 31 selected cases, twice each. Two tie at 38/62 correct outcomes versus 25/62 for a fresh long control; neither resolves all remaining failures. This is targeted development evidence, not full-pack accuracy or release qualification. See [measured results](short-questions-v1-report.md).

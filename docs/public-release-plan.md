@@ -245,3 +245,7 @@ from identical-payload variation and preserve the original interrupted attempt.
 Known cumulative spend$0.135761732 plus the owner-authorized carried$0.01 unresolved
 reservation; total accounted$0.145761732, remaining$4.854238268. No runtime change,
 release qualification or GitHub push.
+
+## Short-question experiment — 2026-09-29
+
+The ten-variant wording experiment does not change public-release readiness. No variant resolves every remaining failure; no runtime candidate was promoted and no push or publication occurred. See [measured results](short-questions-v1-report.md).

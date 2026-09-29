@@ -455,3 +455,7 @@ from identical-payload variation and preserve the original interrupted attempt.
 Known cumulative spend$0.135761732 plus the owner-authorized carried$0.01 unresolved
 reservation; total accounted$0.145761732, remaining$4.854238268. No runtime change,
 release qualification or GitHub push.
+
+## Short-question experiment — 2026-09-29
+
+Keep all ten short instruction variants experimental. Q05 is the most balanced candidate for future full-pack validation; Q02 improves the five difficult cases more but regresses controls. Policies, thresholds and runtime defaults remain unchanged. See [measured results](short-questions-v1-report.md).

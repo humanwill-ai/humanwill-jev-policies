@@ -255,3 +255,7 @@ from identical-payload variation and preserve the original interrupted attempt.
 Known cumulative spend$0.135761732 plus the owner-authorized carried$0.01 unresolved
 reservation; total accounted$0.145761732, remaining$4.854238268. No runtime change,
 release qualification or GitHub push.
+
+## Short-question experiment — 2026-09-29
+
+Completed the requested ten-variant wording experiment: 682 calls, with all new charges settled. Q05 and Q02 are candidates only; quality gates remain open. A future full-pack comparison must retain regressions and separate false blocks, missed violations and evaluation errors. See [measured results](short-questions-v1-report.md).
