@@ -468,3 +468,11 @@ decisions, all matching event labels; 26 inconclusive results (14.9%), of which
 would stop 9/79 legitimate requests; fail-open would permit 5/84 known violations
 and all 12 expected unknowns. This remains above the initial error target.
 No runtime default or release-readiness change. See [full measured results](q05-full-pack-v1-report.md).
+
+## Proposed abstention-improvement experiment — 2026-09-29
+
+[The bounded improvement plan](abstention-improvement-plan-v1.md) targets unexpected
+abstention on decidable cases, preserving deliberate uncertainty. It proposes
+Q05 plus one stage-aware secondary assessment, with policy clarification as a
+separate fallback experiment. Saved-answer screening does not demonstrate the
+5% target yet. No new live calls or runtime changes were made for this proposal.
