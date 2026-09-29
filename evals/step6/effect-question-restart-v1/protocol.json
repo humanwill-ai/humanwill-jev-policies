@@ -1,0 +1,26 @@
+{
+  "format": "humanwill.effect-question-restart-protocol/1",
+  "status": "frozen_before_measurement",
+  "authorization": "Owner requested restart the test on2026-09-29 after being told of the unresolved call. Carry its existing$0.01 reservation in full; never label it actual settled spend.",
+  "restart": "Fresh all175 events per arm; same wording/context/config/order as effect-question-v1. Preserve interrupted attempt separately; no cherry-picking or within-run retries.",
+  "planned_calls": 296,
+  "carried_reservations": {
+    "1830": "36cda369bd8be95da0e983ede63b1021782df56cae3398ce31fbf47a1479165c"
+  },
+  "starting_ledger_sha256": "c0e5e110a6e7d7cd24840ec778951622a60203a7b0a283d37cf91d944de6c2fb",
+  "sha256": {
+    "artifacts/quality/effect-question-live-v1/accounting.json": "5caa374706cb67e2186d43170626ea36843f05a3e0e998b812979bbd7f8b4633",
+    "artifacts/quality/effect-question-live-v1/manifest.json": "6caf62f12fc92f37f1ea2e94e230f69131ed320e7d2272d27159671d7f44f376",
+    "artifacts/quality/effect-question-live-v1/question_and_context/comparison.json": "1f9b2461900569ef7fb7ab5ccd525bda185fbfccff2e35a39858c854e0d49f28",
+    "artifacts/quality/effect-question-live-v1/question_and_context/provider-exchanges.jsonl": "10c4c3b2262b5a7c7012a553952b50c1c0f5c2e2f17bf6e387f869df6be01ebc",
+    "artifacts/quality/effect-question-live-v1/question_and_context/results.jsonl": "0045fed1ac7870c790ec848fe755917cbcdb3c55b3481730a3508b3192330100",
+    "artifacts/quality/effect-question-live-v1/question_and_context/summary.json": "f1f8c035712ac65b9ebf06471393738c7f2886925686121cc0425ff432bc7072",
+    "artifacts/quality/effect-question-live-v1/question_only/comparison.json": "dc88d4a64ec55eed4945b385e255376081ba55a2a74e95f62efe6fb758557bea",
+    "artifacts/quality/effect-question-live-v1/question_only/provider-exchanges.jsonl": "c258e01e58e99b0b3da7007979472191852bd78c5882a65a070500b41605572e",
+    "artifacts/quality/effect-question-live-v1/question_only/results.jsonl": "4f5049ee381f7e6570481d55deab4f0e029b7617d64ea7cb02102b2a03572929",
+    "artifacts/quality/effect-question-live-v1/question_only/summary.json": "86fdde1fc829cbd5510cc265fd20552dae26259c68cd0f7284ab9630c7ebe3c6",
+    "evals/step6/effect-question-v1/protocol.json": "79b6231c6c9a5c1a21259f1e349826257a7486449b9ea7a52cc76150ea096a02",
+    "evals/step6/effect_question_restart.py": "bb65a080f300ec4fd282488fc1a0fc880cefc68bb58be1cb77e233b8b7c098b6",
+    "evals/step6/restart_accounting.py": "6a51905715e0fbf1ffe8bb32298e84640b4858285b8706c1d5395838de267709"
+  }
+}
