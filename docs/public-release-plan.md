@@ -268,3 +268,19 @@ accepted event/policy outcomes and all expected unknowns retained. This is promi
 follow-up evidence, not a consistently met 5% target or proof that isolation causes
 the improvement. No classifier, policy change or runtime adoption. See
 [full results](policy-isolation-v1-report.md); discuss the next experiment before proceeding.
+
+## Q04 follow-up comparison — 2026-09-29
+
+Three paired passes of the 175 reviewed cases plus 24 provisional fresh workflows
+are complete at frozen source `03c72bb`. Reviewed unexpected errors per 163 cases:
+Q05 15/15/15, full-batch Q04 10/9/10, isolated Q04 11/10/10; pooled rates are
+9.2%, 5.9% and 6.3%. Fresh errors per 20 decidable cases: Q05 1/3/2, both
+follow-ups 1/2/1 (6.7% pooled). No wrong definitive event or policy decisions;
+all expected unknowns preserved. Fresh labels are model-authored and pending
+review, not independent qualification. Prefer bounded full-batch Q04 as the
+simpler next implementation candidate; isolation has no demonstrated advantage
+and the 5% goal remains unmet. See [full report](q04-comparison-v1-report.md).
+624 calls cost $0.037072056; known total $0.260080178 plus the historical $0.01
+reservation, leaving $4.729919822. All new charges settled. No runtime, classifier,
+policy, threshold or release change, and no push. Experiment complete;
+no automatic additional campaign.
