@@ -268,3 +268,13 @@ decisions, all matching event labels; 26 inconclusive results (14.9%), of which
 would stop 9/79 legitimate requests; fail-open would permit 5/84 known violations
 and all 12 expected unknowns. This remains above the initial error target.
 No runtime default or release-readiness change. See [full measured results](q05-full-pack-v1-report.md).
+
+## Policy-isolation experiment — 2026-09-29
+
+Three fresh full-pack passes compared identical Q05 retry, isolated Q05 and
+isolated Q04 after a shared primary. Isolation alone gave little improvement.
+Isolated Q04 reduced unexpected abstention to 4.9%, 6.1% and 5.5%, with no wrong
+accepted event/policy outcomes and all expected unknowns retained. This is promising
+follow-up evidence, not a consistently met 5% target or proof that isolation causes
+the improvement. No classifier, policy change or runtime adoption. See
+[full results](policy-isolation-v1-report.md); discuss the next experiment before proceeding.

@@ -476,3 +476,13 @@ abstention on decidable cases, preserving deliberate uncertainty. It proposes
 Q05 plus one stage-aware secondary assessment, with policy clarification as a
 separate fallback experiment. Saved-answer screening does not demonstrate the
 5% target yet. No new live calls or runtime changes were made for this proposal.
+
+## Policy-isolation experiment — 2026-09-29
+
+Three fresh full-pack passes compared identical Q05 retry, isolated Q05 and
+isolated Q04 after a shared primary. Isolation alone gave little improvement.
+Isolated Q04 reduced unexpected abstention to 4.9%, 6.1% and 5.5%, with no wrong
+accepted event/policy outcomes and all expected unknowns retained. This is promising
+follow-up evidence, not a consistently met 5% target or proof that isolation causes
+the improvement. No classifier, policy change or runtime adoption. See
+[full results](policy-isolation-v1-report.md); discuss the next experiment before proceeding.
