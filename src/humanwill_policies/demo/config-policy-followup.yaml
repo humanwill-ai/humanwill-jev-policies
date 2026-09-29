@@ -1,0 +1,40 @@
+# Q05 scope questions plus one bounded Q04 follow-up.
+# This starter keeps metadata-dependent rules disabled until their sources are configured.
+format: humanwill.config/5
+policy_assessment: q05_q04
+outcome_thresholds:
+  applicable: 0.8
+  not_applicable: 0.7
+  insufficient_evidence: 0.8
+metadata:
+  enabled: false
+policies:
+  DEMO-CONTENT:
+    strategy: semantic
+    enabled: true
+    mode: monitor
+  DEMO-FINANCE:
+    strategy: scoped_predicates
+    predicates:
+    - field: identity.groups
+      op: contains
+      value: finance
+    enabled: false
+    requires_metadata:
+    - identity.subject
+    - identity.groups
+  DEMO-DOCUMENTS:
+    strategy: predicates
+    when:
+    - field: documents.classification
+      op: equals
+      value: confidential
+    predicates:
+    - field: destination.approved
+      op: equals
+      value: true
+    enabled: false
+    requires_metadata:
+    - documents.classification
+    - destination.provider
+    - destination.approved

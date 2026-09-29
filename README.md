@@ -116,3 +116,6 @@ configurations retain their behavior; this feature is not a calibrated profile.
 Opt-in [config/5 evaluates the actual Markdown policy](docs/direct-policy-evaluation.md) through a shared adapter template, with no hand-written scope questions. Trusted permission checks stay in code. The packaged `config-policy-text.yaml` demo and preview show the full input; the [first live Jev comparison](docs/direct-policy-live-v1-report.md) regressed (142/175 matches versus 166/175). It remains experimental.
 
 The active development configuration is `evals/step6/direct-policy-v2/config.yaml`: gates 0.80 / 0.70 / 0.80 (applicable / not_applicable / insufficient_evidence). The packaged full-policy demo uses the same explicit settings. See the [offline threshold analysis](docs/direct-policy-threshold-analysis-v1.md); these are not newly measured live results.
+
+For bounded low-confidence scope reassessment, config/5 supports
+`policy_assessment: q05_q04`. See [configuration, accounting and limits](docs/bounded-policy-followup.md).

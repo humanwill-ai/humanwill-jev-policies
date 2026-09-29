@@ -8,9 +8,10 @@ from .bundle import Bundle
 from .config import Configuration
 from .contracts import validate_contract
 from .errors import PolicyError
+from .followup import assessment_trace, follow_up
 from .metadata import check_metadata
 from .providers import Backend, validate_response
-from .questions import POLICY_RUBRIC, policy_question
+from .questions import POLICY_RUBRIC, policy_question, scoped_variant
 from .runtime import EgressPermit, EvaluationLimits, EvidenceContext, utc_now
 from .serialization import canonical, digest
 
@@ -101,7 +102,8 @@ class Evaluator:
     """Reuse one instance per event loop; its semaphore bounds active provider work.
 
     Backend implementations must be cooperative async functions. Cancellation propagates;
-    the engine never launches detached tasks or retries a chargeable call.
+    the engine never launches detached tasks. Only the explicit q05_q04 profile
+    permits one bounded semantic follow-up; transport failures are never retried.
     """
 
     def __init__(self, bundle: Bundle, configuration: Configuration, backend: Backend):
@@ -112,6 +114,7 @@ class Evaluator:
         self.config = configuration.to_dict()
         self.v3 = self.config["format"] in ("humanwill.config/3", "humanwill.config/4")
         self.direct_policy = self.config["format"] == "humanwill.config/5"
+        self.assessment = self.config.get("policy_assessment", "standard")
         self.backend = backend
         self.limits = EvaluationLimits(**self.config.get("evaluation", {}))
         self._slots = asyncio.Semaphore(self.limits.max_in_flight)
@@ -151,6 +154,7 @@ class Evaluator:
         rows, pending, questions, metadata_errors = {}, {}, {}, {}
         errors = {}
         batches = []
+        trace = assessment_trace(self.assessment) if self.assessment != "standard" else None
 
         def fail(key, code):
             row = rows[key]
@@ -250,6 +254,9 @@ class Evaluator:
                 else _question(policy, binding, request["stage"], v3=self.v3)
             )
 
+            if self.assessment != "standard":
+                questions[key] = scoped_variant(questions[key], "q05")
+
         state = {
             "stage": request["stage"],
             "content": request["content"],
@@ -259,6 +266,44 @@ class Evaluator:
         def payload(batch):
             # No raw metadata or request assertions cross this boundary, even when enabled.
             return {"model": self.backend.model, "state": state, "questions": batch}
+
+        def apply_answer(key, answer):
+            binding = self.config["policies"][key]
+            row = rows[key]
+            row["evidence"].update(answer)
+            if "outcome_thresholds" in self.config:
+                # The same global gates also cover content-only policies.
+                outcome = {
+                    "violation": "applicable",
+                    "compliant": "not_applicable",
+                }.get(answer["choice"], answer["choice"])
+                threshold = self.config["outcome_thresholds"][outcome]
+            else:
+                threshold = binding.get("evaluation_profile", {}).get(
+                    "min_confidence", binding["monitor_min_confidence"]
+                )
+            choice, reason = _classify(answer, threshold)
+            if choice == "insufficient_evidence":
+                fail(key, reason)
+            elif binding["strategy"] == "scoped_predicates":
+                if choice == "not_applicable":
+                    row.update(
+                        status="not_applicable",
+                        judgment="not_evaluated",
+                        reasons=["semantic_scope_not_applicable"],
+                    )
+                elif key in metadata_errors:
+                    fail(key, metadata_errors[key])
+                else:
+                    row.update(
+                        status="evaluated",
+                        judgment="compliant"
+                        if all(row["evidence"]["predicate_results"])
+                        else "violation",
+                        reasons=["semantic_scope_and_predicates"],
+                    )
+            else:
+                row.update(status="evaluated", judgment=choice, reasons=[reason])
 
         async def perform():
             if not pending:
@@ -319,42 +364,7 @@ class Evaluator:
                         )
                         attempt.update(usage)
                         for key, answer in answers.items():
-                            binding = pending[key]
-                            row = rows[key]
-                            row["evidence"].update(answer)
-                            if "outcome_thresholds" in self.config:
-                                # The same global gates also cover content-only policies.
-                                outcome = {
-                                    "violation": "applicable",
-                                    "compliant": "not_applicable",
-                                }.get(answer["choice"], answer["choice"])
-                                threshold = self.config["outcome_thresholds"][outcome]
-                            else:
-                                threshold = binding.get("evaluation_profile", {}).get(
-                                    "min_confidence", binding["monitor_min_confidence"]
-                                )
-                            choice, reason = _classify(answer, threshold)
-                            if choice == "insufficient_evidence":
-                                fail(key, reason)
-                            elif binding["strategy"] == "scoped_predicates":
-                                if choice == "not_applicable":
-                                    row.update(
-                                        status="not_applicable",
-                                        judgment="not_evaluated",
-                                        reasons=["semantic_scope_not_applicable"],
-                                    )
-                                elif key in metadata_errors:
-                                    fail(key, metadata_errors[key])
-                                else:
-                                    row.update(
-                                        status="evaluated",
-                                        judgment="compliant"
-                                        if all(row["evidence"]["predicate_results"])
-                                        else "violation",
-                                        reasons=["semantic_scope_and_predicates"],
-                                    )
-                            else:
-                                row.update(status="evaluated", judgment=choice, reasons=[reason])
+                            apply_answer(key, answer)
                             pending.pop(key)
                     except PolicyError as exc:
                         for key in batch:
@@ -363,12 +373,28 @@ class Evaluator:
                         # Stop after a failed batch; no retry or extra charges.
                         raise
 
+                if self.assessment == "q05_q04":
+                    await follow_up(
+                        rows=rows,
+                        planned=planned,
+                        payload=payload,
+                        backend=self.backend,
+                        limits=self.limits,
+                        start=start,
+                        batches=batches,
+                        thresholds=self.config["outcome_thresholds"],
+                        apply_answer=apply_answer,
+                        trace=trace,
+                    )
+
         try:
             async with asyncio.timeout(
                 max(0, self.limits.timeout_ms / 1000 - (time.monotonic() - start))
             ):
                 await perform()
         except TimeoutError:
+            if trace and trace["status"] == "failed":
+                trace["error"] = "evaluation_timeout"
             for key in pending:
                 fail(key, "evaluation_timeout")
         except PolicyError as exc:
@@ -404,6 +430,11 @@ class Evaluator:
             except PolicyError as exc:
                 fail(key, exc.code)
 
+        # A successful follow-up may have resolved an earlier error code.
+        active_errors = {
+            code for row in rows.values() if row["status"] == "error" for code in row["reasons"]
+        }
+        errors = {code: value for code, value in errors.items() if code in active_errors}
         values = list(rows.values())
         decision = (
             "block"
@@ -462,5 +493,7 @@ class Evaluator:
             },
             "errors": list(errors.values()),
         }
+        if trace is not None:
+            result["policy_assessment"] = trace
         validate_contract("result", result)
         return result

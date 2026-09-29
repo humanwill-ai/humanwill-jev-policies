@@ -224,7 +224,7 @@ def preview(
                         if not source or not source["enabled"]:
                             row["issues"].append(f"metadata_source_disabled:{field}")
         if config and config["format"] == "humanwill.config/5":
-            from .questions import policy_question
+            from .questions import policy_question, scoped_variant
 
             row["evaluation_questions"] = (
                 {
@@ -235,6 +235,16 @@ def preview(
                 if binding["strategy"] != "predicates"
                 else {}
             )
+            if config.get("policy_assessment", "standard") != "standard":
+                row["evaluation_questions"] = {
+                    s: scoped_variant(q, "q05") for s, q in row["evaluation_questions"].items()
+                }
+                if config["policy_assessment"] == "q05_q04":
+                    row["followup_questions"] = {
+                        s: scoped_variant(q, "q04")
+                        for s, q in row["evaluation_questions"].items()
+                        if binding["strategy"] == "scoped_predicates"
+                    }
         rows.append(row)
     return {
         "format": "humanwill.preview/1",

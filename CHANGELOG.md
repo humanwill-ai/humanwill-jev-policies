@@ -4,6 +4,8 @@ No public release has been published. Versions below identify private developmen
 
 ## 0.1.0.dev3 — current development candidate
 
+- Adds opt-in `policy_assessment: q05_q04` to config/5: measured scope wording and one bounded full-batch follow-up, with unchanged confidence gates, trusted checks and error fallback. Result/4 records normalized follow-up evidence and both call usage records. Existing configurations keep their behavior; upgrade service and strict clients together. See [runtime contract](docs/bounded-policy-followup.md).
+
 - Adds opt-in config/5: actual Markdown policy text plus a shared evaluator template, explicit trusted-data bindings, question preview and result/4. Legacy formats remain unchanged. See [behavior and migration](docs/direct-policy-evaluation.md); live quality validation remains pending.
 
 - Adds opt-in config/4 with three global outcome confidence thresholds, preserving config/1–3 behavior and result/3 compatibility. Defaults remain 0.80; asymmetric values are configurable, not calibrated. See [migration and semantics](docs/outcome-thresholds.md).

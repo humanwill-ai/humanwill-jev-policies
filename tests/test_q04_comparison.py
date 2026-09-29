@@ -4,6 +4,7 @@ import asyncio
 import copy
 import unittest
 
+from offline_reviewed_fixture import comparison_inputs as validate_experiment
 from test_policy_isolation import GATES, ScriptedBackend
 
 from evals.step6.q04_comparison import (
@@ -13,7 +14,6 @@ from evals.step6.q04_comparison import (
     evaluate,
     followup_payloads,
     refine,
-    validate_experiment,
 )
 from evals.step6.reviewed_live import observed_policy
 from evals.step6.run import select_configuration

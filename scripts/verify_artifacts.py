@@ -218,6 +218,32 @@ def main():
                 work,
                 environment,
             )
+            run(
+                [cli, "validate", "demo", "--config", "demo/config-policy-followup.yaml", "--json"],
+                work,
+                environment,
+            )
+            # Exercise the new paid-call orchestration with synthetic replies from the
+            # installed artifact, including all connector paths and failed follow-ups.
+            run(
+                [
+                    python,
+                    "-m",
+                    "unittest",
+                    "discover",
+                    "-s",
+                    tests,
+                    "-p",
+                    "test_assessment_followup.py",
+                    "-k",
+                    "connector_paths",
+                    "-k",
+                    "timeout_failure",
+                    "-v",
+                ],
+                work,
+                environment,
+            )
             runtime = json.loads(
                 run(
                     [python, source / "scripts/artifact_runtime.py", "--cli", cli, "--root", work],

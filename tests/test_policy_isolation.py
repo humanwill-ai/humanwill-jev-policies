@@ -5,6 +5,8 @@ import copy
 import json
 import unittest
 
+from offline_reviewed_fixture import reviewed_inputs as validate_experiment
+
 from evals.step6.backends import choice_answer
 from evals.step6.policy_isolation import (
     ARMS,
@@ -15,7 +17,6 @@ from evals.step6.policy_isolation import (
     merge_answers,
     refine,
 )
-from evals.step6.q05_full_pack import validate_experiment
 from evals.step6.run import select_configuration
 from evals.step6.short_questions import transform
 from evals.step6.source_approval import source_evidence_for

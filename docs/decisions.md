@@ -502,3 +502,17 @@ and the 5% goal remains unmet. See [full report](q04-comparison-v1-report.md).
 reservation, leaving $4.729919822. All new charges settled. No runtime, classifier,
 policy, threshold or release change, and no push. Experiment complete;
 no automatic additional campaign.
+
+## Bounded Q04 runtime implementation — 2026-09-29
+
+Owner authorized implementing the full-batch follow-up. Config/5 now supports
+`policy_assessment: q05_q04`: Q05 first, at most one Q04 call for eligible
+low-confidence scope answers, with unchanged gates, trusted metadata checks and
+error fallback. Existing configurations retain their behavior. Result/4 includes
+normalized primary/secondary evidence and usage for both attempts. See the
+[runtime contract](bounded-policy-followup.md) and [verification](bounded-policy-followup-verification.md).
+231 offline tests and 12 Python 3.11 focused tests pass; all 597 saved event views
+replay exactly across 569 recorded payloads. Exact wheel/source artifacts pass
+isolated installation, connector contracts and service process checks. No new
+paid calls or interactive/live-host acceptance test. Semantic release gates and
+the 5% target remain open; no deployment, publication or push.

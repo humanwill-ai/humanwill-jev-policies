@@ -155,6 +155,25 @@ def validate_response(response, questions, accepted_models):
                 probabilities.values()
             ):
                 raise ValueError
+        normalized = response_usage(response, accepted_models)
+        # Copy only known answer fields, never provider-supplied prose or debugging data.
+        cleaned = {
+            key: {field: answer[field] for field in ("choice", "confidence", "probabilities")}
+            for key, answer in answers.items()
+        }
+        return cleaned, normalized
+    except PolicyError:
+        raise
+    except (KeyError, TypeError, ValueError, AttributeError):
+        raise PolicyError("malformed_response", "Invalid evaluator answer or usage") from None
+
+
+def response_usage(response, accepted_models):
+    """Validate accounting separately, even if a returned answer is rejected."""
+    try:
+        json_value(response)
+        if response["model"] not in accepted_models:
+            raise PolicyError("model_mismatch", "Returned model is not explicitly accepted")
         usage = response["usage"]
         if not isinstance(usage, dict):
             raise ValueError
@@ -172,13 +191,6 @@ def validate_response(response, questions, accepted_models):
             if source != "cost" and value is not None and type(value) is not int:
                 raise ValueError
             normalized[target] = value
-        # Copy only known answer fields, never provider-supplied prose or debugging data.
-        cleaned = {
-            key: {field: answer[field] for field in ("choice", "confidence", "probabilities")}
-            for key, answer in answers.items()
-        }
-        return cleaned, normalized
-    except PolicyError:
-        raise
+        return normalized
     except (KeyError, TypeError, ValueError, AttributeError):
-        raise PolicyError("malformed_response", "Invalid evaluator answer or usage") from None
+        raise PolicyError("malformed_response", "Invalid evaluator usage") from None

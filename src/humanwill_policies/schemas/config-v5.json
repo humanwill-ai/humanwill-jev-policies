@@ -546,6 +546,14 @@
         "insufficient_evidence"
       ],
       "additionalProperties": false
+    },
+    "policy_assessment": {
+      "enum": [
+        "standard",
+        "q05",
+        "q05_q04"
+      ],
+      "description": "Scoped-predicate question profile. standard preserves the original template; q05_q04 enables at most one bounded full-batch Q04 follow-up after Q05. Omitted means standard."
     }
   },
   "required": [

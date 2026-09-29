@@ -307,6 +307,182 @@
     },
     "simulated": {
       "type": "boolean"
+    },
+    "policy_assessment": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "enum": [
+            "q05",
+            "q05_q04"
+          ]
+        },
+        "status": {
+          "enum": [
+            "disabled",
+            "not_needed",
+            "skipped",
+            "attempted",
+            "completed",
+            "failed"
+          ]
+        },
+        "batch_index": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 63
+        },
+        "eligible": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "maxItems": 500
+        },
+        "accepted": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "maxItems": 500
+        },
+        "rejected": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "maxProperties": 500
+        },
+        "primary_answers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "enum": [
+                  "applicable",
+                  "not_applicable",
+                  "insufficient_evidence"
+                ]
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "probabilities": {
+                "type": "object",
+                "properties": {
+                  "applicable": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "not_applicable": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "insufficient_evidence": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                "required": [
+                  "applicable",
+                  "not_applicable",
+                  "insufficient_evidence"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "choice",
+              "confidence",
+              "probabilities"
+            ],
+            "additionalProperties": false
+          },
+          "maxProperties": 64
+        },
+        "secondary_answers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "choice": {
+                "enum": [
+                  "applicable",
+                  "not_applicable",
+                  "insufficient_evidence"
+                ]
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "probabilities": {
+                "type": "object",
+                "properties": {
+                  "applicable": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "not_applicable": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "insufficient_evidence": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                "required": [
+                  "applicable",
+                  "not_applicable",
+                  "insufficient_evidence"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "choice",
+              "confidence",
+              "probabilities"
+            ],
+            "additionalProperties": false
+          },
+          "maxProperties": 64
+        },
+        "error": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "profile",
+        "status",
+        "batch_index",
+        "eligible",
+        "accepted",
+        "rejected",
+        "primary_answers",
+        "secondary_answers",
+        "error"
+      ],
+      "additionalProperties": false
     }
   },
   "required": [
