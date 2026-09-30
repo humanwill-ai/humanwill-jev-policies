@@ -159,6 +159,21 @@ def build():
     for removal in active_pack["removals"]:
         default_removed[removal["id"]] = removal
     active_removals = {r["id"]: r for r in active_pack["removals"]}
+    # Preserve prior labels/progress under the owner's explicit policy clarification.
+    active_previous_fingerprint = (
+        ":".join(p["sha256"] for p in packs) + ":"
+        + ":".join(p["sha256"] for p in policies.values()) + ":" + catalog_hash
+    )
+    if "policy_directory" in active_pack:
+        for path in sorted((ROOT / active_pack["policy_directory"]).glob("*.md")):
+            source = path.read_text()
+            _, front, body = source.split("---", 2)
+            meta = yaml.safe_load(front)
+            if meta["kind"] == "policy":
+                policies[meta["id"]] = {
+                    **meta, "body": body.strip(), "source": source,
+                    "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                }
     data = json.dumps(
         {
             "packs": packs,
@@ -166,6 +181,7 @@ def build():
             "legacy_fingerprint": legacy_fingerprint,
             "previous_fingerprint": previous_fingerprint,
             "compatible_fingerprint": compatible_fingerprint,
+            "active_previous_fingerprint": active_previous_fingerprint,
             "default_removed": default_removed,
             "active_removals": active_removals,
             "owner_removals_revision": active_pack["revision"],

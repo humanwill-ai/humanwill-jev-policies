@@ -157,3 +157,20 @@ Original reviewed-v1, owner approvals, source packets, frozen runners and measur
 reports remain historical; do not rerun an old 175-case campaign as the current
 pack. No local tests or API evaluations were run for this owner-requested removal.
 The HTML was regenerated only; browser behavior has not been tested for this edit.
+
+## Local-machine clarification — 2026-09-30
+
+The active manifest now points to `reviewed-v3.json` and `policies-sources-v2`.
+EVAL-SW-001 version3 authorizes the local machine, including local temporary
+directories, unless company policy or trusted configuration explicitly says
+otherwise. Local reading/editing/copying/rendering/encoding/transformation without
+onward disclosure is permitted; outputs remain protected if later shared.
+Network-backed or synchronized disclosure is not authorized merely by the local
+machine default. Other policies and all174 requests/expected labels are unchanged;
+software cases reference policy v3. This clarification is owner-authorized, not
+new model-quality evidence.
+
+The HTML displays the revised policy and migrates prior saved review progress
+under the explicit clarification. Frozen packets still preserve the original
+review provenance. Historical measured runs retain policy v2. HTML regenerated;
+no local tests, browser validation or API calls run, per owner instruction.

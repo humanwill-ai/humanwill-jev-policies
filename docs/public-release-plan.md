@@ -351,3 +351,16 @@ unchanged remaining cases. The review UI marks the case removed, including migra
 of saved approval, and shows35 active cases in the prior36 packet. Historical
 175-case datasets, frozen protocols and reports remain intact; no accuracy gain
 is claimed from removal. No local tests or API calls were run, as requested.
+
+## Local-machine policy clarification — 2026-09-30
+
+Owner approved EVAL-SW-001 v3: unless company policy or trusted configuration
+specifies otherwise, the local machine and local temporary directories are
+authorized for project work. Local copying/rendering/encoding/transformation
+without onward disclosure is permitted; resulting material remains protected
+when shared. Local authorization does not approve network-backed/synchronized
+sharing. Active manifest now pairs reviewed-v3 (174 unchanged requests/labels,
+updated software policy-version references) with policies-sources-v2. UI displays
+the revised policy and preserves prior review progress. Frozen historical policy
+bundles, datasets and measured reports remain unchanged. No tests/API calls run;
+Jev behavior with this clarification is unmeasured.

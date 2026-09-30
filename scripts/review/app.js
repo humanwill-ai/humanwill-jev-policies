@@ -16,6 +16,7 @@ const pack = () => DATA.packs.find(p => p.id === packId);
 const current = () => allCases.get(selectedId)?.c;
 const expectedLabel = c => c.review_expected ?? c.expected;
 const expectedScope = c => c.review_scope ?? c.expected_scope ?? '';
+const compatibleFingerprints = [DATA.active_previous_fingerprint, DATA.compatible_fingerprint].filter(Boolean);
 const legacyFingerprints = [DATA.previous_fingerprint, DATA.legacy_fingerprint];
 function message(text) { $('message').textContent = text; }
 function validateRows(rows, historical = false) {
@@ -62,9 +63,9 @@ function validateState(candidate, legacy = false, applyOwnerRemovals = false) {
 try {
   const saved = localStorage.getItem(storageKey);
   if (saved) state = validateState(JSON.parse(saved));
-  else for (const oldFingerprint of [DATA.compatible_fingerprint, ...legacyFingerprints]) {
+  else for (const oldFingerprint of [...compatibleFingerprints, ...legacyFingerprints]) {
     const old = localStorage.getItem('humanwill.case-review.v1:' + oldFingerprint);
-    if (old) {state = validateState(JSON.parse(old), legacyFingerprints.includes(oldFingerprint), true); message(oldFingerprint === DATA.compatible_fingerprint ? 'Saved reviews retained. The vague Git-fetch case is removed from active review.' : 'Unchanged reviews restored; original single-policy reviews retained as history.'); break;}
+    if (old) {state = validateState(JSON.parse(old), legacyFingerprints.includes(oldFingerprint), true); message(compatibleFingerprints.includes(oldFingerprint) ? 'Saved reviews retained with the current owner-approved policy clarification and removals.' : 'Unchanged reviews restored; original single-policy reviews retained as history.'); break;}
   }
 } catch { storageOK = false; message('Saved progress could not be loaded. Use Export review to keep a backup; import a previous export to restore it.'); }
 function persist() {
@@ -261,7 +262,7 @@ $('importFile').onchange = async event => {
   try {
     if (file.size > 5_000_000) throw Error('Review file is too large.');
     const imported = JSON.parse(await file.text());
-    if (imported.format !== 'humanwill.case-review/1' || ![fingerprint, DATA.compatible_fingerprint, ...legacyFingerprints].includes(imported.fingerprint)) throw Error('This review belongs to different datasets or policies. Nothing was imported.');
+    if (imported.format !== 'humanwill.case-review/1' || ![fingerprint, ...compatibleFingerprints, ...legacyFingerprints].includes(imported.fingerprint)) throw Error('This review belongs to different datasets or policies. Nothing was imported.');
     const legacy = legacyFingerprints.includes(imported.fingerprint);
     const clean = validateState(imported, legacy, imported.fingerprint !== fingerprint);
     if (imported.fingerprint === DATA.legacy_fingerprint && Object.keys(clean.reviews).some(id => allCases.get(id).p.id === 'sources')) throw Error('Old-format reviews cannot approve the new source-policy cases.');

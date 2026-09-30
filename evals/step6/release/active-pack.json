@@ -1,8 +1,8 @@
 {
   "format": "humanwill.active-review-pack/1",
-  "revision": "reviewed-v2",
-  "dataset": "evals/step6/release/reviewed-v2.json",
-  "dataset_sha256": "21746cfeffa5f66f2f6fdc62996bc2dfc50836da635dbf38ee5bf23e1042ed1c",
+  "revision": "reviewed-v3",
+  "dataset": "evals/step6/release/reviewed-v3.json",
+  "dataset_sha256": "d1abf610a97e23ed16eee8697601fd4da8c65b5312e9d827c33e4cab9818ca02",
   "active_case_count": 174,
   "removals": [
     {
@@ -13,5 +13,13 @@
       "authority": "owner_instruction"
     }
   ],
-  "note": "Use this dataset for future campaigns. Frozen historical runners and reports retain reviewed-v1 and must not be treated as the active pack."
+  "note": "Use this dataset AND policy_directory for future campaigns. Historical packs, bundles, frozen runners and reports retain their original policy wording; no new model evaluation has been run.",
+  "policy_directory": "evals/step6/policies-sources-v2",
+  "policy_sha256": {
+    "evals/step6/policies-sources-v2/approved-sources.md": "1a0eed6cd404e3141961566e5d9a7540b07f582f5a37dddc219addd0461cce83",
+    "evals/step6/policies-sources-v2/documents.md": "a90502a720de691776b6882f3d774f0d7f31a35280adf7f77b1eb21ebe303f76",
+    "evals/step6/policies-sources-v2/policies.md": "fa08f699b8493c6e58b09b390d3b9ae00dfe4a4c044de9df15e6202331eb4a8b",
+    "evals/step6/policies-sources-v2/production.md": "83aa6a345e86a77dd1d67f5bf772c676cfc09f7dab0295842c5269f2f542c706",
+    "evals/step6/policies-sources-v2/software.md": "89bee9f7ab94b63b4f2a29ba960fec1462188a774d313af6d05eb2ae88f3b172"
+  }
 }
