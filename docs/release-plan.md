@@ -374,3 +374,16 @@ updated software policy-version references) with policies-sources-v2. UI display
 the revised policy and preserves prior review progress. Frozen historical policy
 bundles, datasets and measured reports remain unchanged. No tests/API calls run;
 Jev behavior with this clarification is unmeasured.
+
+## Local-policy targeted rerun — 2026-09-30
+
+Owner-requested live rerun completed at99b630a: eight remaining tool failures×3,
+actual q05_stage_aware runtime and active disclosure policyv3. Copying/rendering
+allow3/3 each on first Q05 at confidence.97–.98; patch still errors on unchanged
+source policy. Targeted errors20/24→13/24; five distinct cases still abstain,
+alllowconfidence. No wrong definitive event/policy answers or malformed replies.
+Gitclean3/3block; its inputs were unchanged, so do not attribute its recovery to
+the policy edit. No full174-case quality claim. See [report](local-policy-rerun-v1-report.md).
+41calls cost$0.003006066; known total$0.302038094+old$.01reservation,
+remaining$4.687961906. All41payloads and24runtimeviews audited; allnewcharges settled.
+No full localtests, extra campaign, deployment, publication or push.
