@@ -2,6 +2,7 @@
 
 import asyncio
 import copy
+import json
 import unittest
 
 from test_policy_isolation import ScriptedBackend
@@ -12,14 +13,22 @@ from evals.step6.short_questions import transform
 from evals.step6.source_approval import source_evidence_for
 from evals.step6.tool_probe import (
     ARMS,
+    BASE,
     classifier_payload,
     followup_payload,
+    load_inputs,
     qualified,
     refine,
-    validate_experiment,
+)
+from evals.step6.tool_probe import (
+    validate_experiment as validate_live,
 )
 from humanwill_policies import load_configuration
 from humanwill_policies.providers import validate_response
+
+
+def validate_experiment():
+    return load_inputs(json.loads((BASE / "protocol.json").read_text()))
 
 
 def classification(intent="proposed_execution", operation="local_transform", confidence=0.9):
@@ -161,3 +170,7 @@ class ToolProbeTests(unittest.TestCase):
         self.assertEqual(notes["error"], "evaluation_timeout")
         self.assertEqual(notes["calls"], 0)
         self.assertEqual(merged, primary.records[0]["raw_response"])
+
+    def test_historical_paid_guard_rejects_post_measurement_source_cleanup(self):
+        with self.assertRaisesRegex(ValueError, "Frozen"):
+            validate_live()

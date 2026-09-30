@@ -45,6 +45,11 @@ def validate_experiment():
     for path, expected in frozen["sha256"].items():
         if sha256(ROOT / path) != expected:
             raise ValueError(f"Frozen tool probe changed: {path}")
+    return load_inputs(frozen)
+
+
+def load_inputs(frozen):
+    """Read diagnostic fixtures offline; paid execution must use validate_experiment."""
     cases = json.loads((BASE / "cases.json").read_text())["cases"]
     if [c["id"] for c in cases] != frozen["case_ids"]:
         raise ValueError("Case selection changed")
@@ -294,8 +299,10 @@ async def measure(output, ledger):
                     Counter(
                         c["run_id"].split("/")[-1]
                         for c in [
-                            json.loads(l)
-                            for l in (output / "provider-exchanges.jsonl").read_text().splitlines()
+                            json.loads(line)
+                            for line in (output / "provider-exchanges.jsonl")
+                            .read_text()
+                            .splitlines()
                         ]
                     )
                 ),

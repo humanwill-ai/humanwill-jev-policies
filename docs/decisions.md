@@ -516,3 +516,17 @@ replay exactly across 569 recorded payloads. Exact wheel/source artifacts pass
 isolated installation, connector contracts and service process checks. No new
 paid calls or interactive/live-host acceptance test. Semantic release gates and
 the 5% target remain open; no deployment, publication or push.
+
+## Small tool-classification probe — 2026-09-30
+
+The owner-requested diagnostic tested ten previously failing tool-action cases plus
+six controls, twice each, at frozen source `5518daa`. On 20 focus observations:
+Q05 primary left 19 unresolved, Q04 left 17, explicit tool wording left 13, and
+classifier-informed tool wording left 14. No wrong accepted event/policy decisions;
+all control outcomes and expected unknowns retained. Classification added no unique
+recovery. Prefer broader validation of tool-specific wording for known tool_action
+stages before considering adoption; no runtime change or general error-rate claim.
+See [full results](tool-probe-v1-report.md). 124 calls cost $0.007679826; known
+cumulative spend $0.267760004 plus historical $0.01 reserve, remaining $4.722239996.
+One classifier answer was malformed and rejected with its charge settled; no new
+unknown charges. All exchanges and compositions audited; no push or further campaign.
