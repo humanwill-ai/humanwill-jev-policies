@@ -1,5 +1,7 @@
 # Project working instructions
 
+- Latest owner instruction (2026-09-30): reserve GitHub Actions validation for immediately before the final release. Use local checks during preparation; do not dispatch workflows or make CI-triggering pushes/PR updates now. At the final candidate, reuse the existing Ubuntu/host workflows for Agentgateway, container and cross-platform validation. Preserve the reported remaining Actions allowance; its current balance is not independently verified. This timing instruction does not waive release checks or authorize publication, billing changes or paid overages.
+
 - Begin with research and planning. Do not treat a suggested architecture, schema, integration order, or commercial hypothesis as approved.
 - Read `docs/project-brief.md`, `docs/decisions.md`, `docs/release-plan.md`, and `docs/public-release-plan.md` before substantial work. Keep them editable as the owner adds requirements.
 - Owner requirements: Markdown policy folders with recursive references and stable policy IDs; LiteLLM, Agentgateway, and Copilot hook connectors for both VS Code Local and Copilot CLI in v0.1; direct Jev and OpenRouter transports, with OpenRouter for development/testing. Keep Copilot runtime contracts explicit.

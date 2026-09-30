@@ -54,6 +54,14 @@ Append dated requirements here and update the plan when they change scope.
 
 ## GitHub Actions budget constraint — 2026-09-28
 
+**Owner update, 2026-09-30:** defer GitHub Actions runs until immediately before
+the final release. Use local validation in the meantime and avoid workflow
+dispatches or pushes/PR updates that trigger CI. Reuse the existing Actions
+infrastructure for final-candidate Agentgateway, container and cross-platform
+checks. This preserves the reported remaining allowance; no fresh account balance
+was checked. Required checks remain required, and publication still needs separate
+owner approval. This supersedes the earlier suggestion to batch interim CI pushes.
+
 The owner reported GitHub's email that 90% of the included Actions minutes for
 `humanwill-ai` have been used. Treat this as an account-wide resource constraint;
 the email does not identify this repository's share, exact remaining minutes,

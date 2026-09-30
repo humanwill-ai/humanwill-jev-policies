@@ -64,6 +64,12 @@ research configuration. No production identity/source/destination resolver ships
 
 ## Before publishing
 
+**Actions timing, owner decision 2026-09-30:** use local checks throughout
+preparation. Reserve the existing GitHub Actions workflows for immediately before
+the final release, validating the final candidate on Linux/other supported runners,
+including actual Agentgateway and the container. Avoid interim workflow dispatches
+and CI-triggering pushes/PR updates. This defers the checks; it does not waive them.
+
 Choose the license and maintainer/security contact; complete contribution/security
 policies, notices/dependency inventory and public-content/history review; resolve
 or explicitly bound the remaining fresh-host evidence; finalize and verify the
