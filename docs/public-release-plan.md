@@ -312,3 +312,18 @@ See [full results](tool-probe-v1-report.md). 124 calls cost $0.007679826; known
 cumulative spend $0.267760004 plus historical $0.01 reserve, remaining $4.722239996.
 One classifier answer was malformed and rejected with its charge settled; no new
 unknown charges. All exchanges and compositions audited; no push or further campaign.
+
+## Full-pack tool wording comparison — 2026-09-30
+
+The authorized three-pass comparison of all175 reviewed cases completed at frozen
+`03f9a03`. Q05→Q04 unexpected errors:10/8/11 per163; stage-routed tool wording:
+8/6/9. Pooled5.9%→4.7%, with9 paired recoveries and3 regressions to uncertainty;
+no wrong definitive event/policy outcomes and all36 expected unknowns retained.
+Same call count per strategy, no classifier, policies/gates/context unchanged.
+The third pass remains5.5%, so consistent5% and independent release qualification
+are not established. Recommend an optional stage-aware runtime profile next;
+production currently remains Q05→Q04. See [full report](stage-tool-v1-report.md).
+523 calls cost$0.031272024; known total$0.299032028 plus historical$0.01 reserve,
+remaining$4.690967972. Two malformed primaries rejected/settled, no new unknowns.
+All523 payloads/1575 views audited;11 focused offline tests and Ruff pass. No
+publication, deployment, push, or automatic further campaign.
