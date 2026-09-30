@@ -10,7 +10,7 @@ from frozen_protocols import source_fixture
 
 from evals.step6.backends import choice_answer
 from evals.step6.review_import import fingerprint, page_data, validate_review
-from evals.step6.reviewed_live import PROTOCOL, REVIEW, build_report, validate_protocol
+from evals.step6.reviewed_live import PROTOCOL, build_report, validate_protocol
 from evals.step6.run import select_configuration
 from evals.step6.source_approval import source_evidence_for
 from humanwill_policies import load_configuration
@@ -20,8 +20,7 @@ from humanwill_policies.providers import MockBackend
 
 def synthetic_export():
     page = page_data()
-    accepted = json.loads(REVIEW.read_text())
-    removed = {r["id"] for r in accepted["removed"]}
+    removed = set(page["default_removed"])
     data = {
         "format": "humanwill.case-review/1",
         "fingerprint": fingerprint(page),
@@ -69,10 +68,10 @@ class ReviewedLiveTests(unittest.TestCase):
         data, page = synthetic_export()
         record, cases = validate_review(json.dumps(data).encode(), page)
         self.assertEqual(
-            record["approved_by_packet"], {"holdout": 93, "previous": 36, "sources": 46}
+            record["approved_by_packet"], {"holdout": 89, "previous": 35, "sources": 46}
         )
-        self.assertEqual(len(cases), 175)
-        self.assertEqual(len(record["removed"]), 7)
+        self.assertEqual(len(cases), 170)
+        self.assertEqual(len(record["removed"]), 12)
         self.assertFalse({c["id"] for c in cases} & {r["id"] for r in record["removed"]})
 
     def test_pending_forged_label_or_mismatched_removal_is_rejected(self):

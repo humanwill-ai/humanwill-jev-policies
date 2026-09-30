@@ -161,8 +161,11 @@ def build():
     active_removals = {r["id"]: r for r in active_pack["removals"]}
     # Preserve prior labels/progress under the owner's explicit policy clarification.
     active_previous_fingerprint = (
-        ":".join(p["sha256"] for p in packs) + ":"
-        + ":".join(p["sha256"] for p in policies.values()) + ":" + catalog_hash
+        ":".join(p["sha256"] for p in packs)
+        + ":"
+        + ":".join(p["sha256"] for p in policies.values())
+        + ":"
+        + catalog_hash
     )
     if "policy_directory" in active_pack:
         for path in sorted((ROOT / active_pack["policy_directory"]).glob("*.md")):
@@ -171,7 +174,9 @@ def build():
             meta = yaml.safe_load(front)
             if meta["kind"] == "policy":
                 policies[meta["id"]] = {
-                    **meta, "body": body.strip(), "source": source,
+                    **meta,
+                    "body": body.strip(),
+                    "source": source,
                     "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
                 }
     data = json.dumps(

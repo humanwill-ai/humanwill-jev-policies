@@ -1,6 +1,6 @@
 """Company policy bundles, evaluation, authenticated service and host connectors."""
 
-__version__ = "0.1.0.dev3"
+__version__ = "0.1.0a1"
 
 from .bundle import Bundle, Limits, load_bundle
 from .config import Configuration, load_configuration, preview
