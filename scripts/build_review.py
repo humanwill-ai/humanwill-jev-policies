@@ -182,6 +182,7 @@ def build():
             "previous_fingerprint": previous_fingerprint,
             "compatible_fingerprint": compatible_fingerprint,
             "active_previous_fingerprint": active_previous_fingerprint,
+            "active_previous_fingerprints": active_pack.get("review_previous_fingerprints", []),
             "default_removed": default_removed,
             "active_removals": active_removals,
             "owner_removals_revision": active_pack["revision"],

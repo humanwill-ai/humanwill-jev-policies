@@ -16,7 +16,7 @@ const pack = () => DATA.packs.find(p => p.id === packId);
 const current = () => allCases.get(selectedId)?.c;
 const expectedLabel = c => c.review_expected ?? c.expected;
 const expectedScope = c => c.review_scope ?? c.expected_scope ?? '';
-const compatibleFingerprints = [DATA.active_previous_fingerprint, DATA.compatible_fingerprint].filter(Boolean);
+const compatibleFingerprints = [...(DATA.active_previous_fingerprints ?? []), DATA.active_previous_fingerprint, DATA.compatible_fingerprint].filter(Boolean);
 const legacyFingerprints = [DATA.previous_fingerprint, DATA.legacy_fingerprint];
 function message(text) { $('message').textContent = text; }
 function validateRows(rows, historical = false) {
