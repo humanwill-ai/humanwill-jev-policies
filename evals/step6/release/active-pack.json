@@ -1,8 +1,8 @@
 {
   "format": "humanwill.active-review-pack/1",
-  "revision": "reviewed-v4",
-  "dataset": "evals/step6/release/reviewed-v4.json",
-  "dataset_sha256": "d9d8559532559705b74ac6e997fdb458915a4ca6fcd361cd023888eca8780814",
+  "revision": "reviewed-v5",
+  "dataset": "evals/step6/release/reviewed-v5.json",
+  "dataset_sha256": "70b30e27104ff13f75353a3b9997f8b532696a4da76fb87408d5c01b10e55313",
   "active_case_count": 174,
   "removals": [
     {
@@ -14,15 +14,16 @@
     }
   ],
   "note": "Use this active dataset and policy_directory for future campaigns. Historical packs, bundles, frozen runners and reports retain their original inputs.",
-  "policy_directory": "evals/step6/policies-sources-v3",
+  "policy_directory": "evals/step6/policies-sources-v4",
   "policy_sha256": {
-    "evals/step6/policies-sources-v3/approved-sources.md": "03c5b75c8a36e22741a409640302bcf96f2b8678238e10b89b799b42fc3fbec8",
-    "evals/step6/policies-sources-v3/documents.md": "a90502a720de691776b6882f3d774f0d7f31a35280adf7f77b1eb21ebe303f76",
-    "evals/step6/policies-sources-v3/policies.md": "4b976c310c9b934d6b0be530cb07a9b2072a82e6d5ea1ee90ac7da7456e2ab8c",
-    "evals/step6/policies-sources-v3/production.md": "83aa6a345e86a77dd1d67f5bf772c676cfc09f7dab0295842c5269f2f542c706",
-    "evals/step6/policies-sources-v3/software.md": "89bee9f7ab94b63b4f2a29ba960fec1462188a774d313af6d05eb2ae88f3b172"
+    "evals/step6/policies-sources-v4/approved-sources.md": "1ea7fcb28e6411057c91e79789d84a252d69e881fe313ac23d400231e949a187",
+    "evals/step6/policies-sources-v4/documents.md": "a90502a720de691776b6882f3d774f0d7f31a35280adf7f77b1eb21ebe303f76",
+    "evals/step6/policies-sources-v4/policies.md": "b378e9be0f161e33606c2148a98f10a72fa2ba8210269c1471a98bea5474d432",
+    "evals/step6/policies-sources-v4/production.md": "83aa6a345e86a77dd1d67f5bf772c676cfc09f7dab0295842c5269f2f542c706",
+    "evals/step6/policies-sources-v4/software.md": "89bee9f7ab94b63b4f2a29ba960fec1462188a774d313af6d05eb2ae88f3b172"
   },
   "review_previous_fingerprints": [
-    "b0cebe236cd85d7757befe847d314117e9ce3916b145dbda56ff1d28d26233b2:06b8baa96cf62d956fbcbc12114ca4bdd1293db763d6945a0d574b71314b8a62:a85c399c239497decb228835269486896227a8a8b04348b98620d26ef26ca8fd:a90502a720de691776b6882f3d774f0d7f31a35280adf7f77b1eb21ebe303f76:83aa6a345e86a77dd1d67f5bf772c676cfc09f7dab0295842c5269f2f542c706:89bee9f7ab94b63b4f2a29ba960fec1462188a774d313af6d05eb2ae88f3b172:1a0eed6cd404e3141961566e5d9a7540b07f582f5a37dddc219addd0461cce83:9a78a45c6254607edbbf079b59328be29802ac8fb5f16ffb8e613a47545f5b0a"
+    "b0cebe236cd85d7757befe847d314117e9ce3916b145dbda56ff1d28d26233b2:06b8baa96cf62d956fbcbc12114ca4bdd1293db763d6945a0d574b71314b8a62:a85c399c239497decb228835269486896227a8a8b04348b98620d26ef26ca8fd:a90502a720de691776b6882f3d774f0d7f31a35280adf7f77b1eb21ebe303f76:83aa6a345e86a77dd1d67f5bf772c676cfc09f7dab0295842c5269f2f542c706:89bee9f7ab94b63b4f2a29ba960fec1462188a774d313af6d05eb2ae88f3b172:1a0eed6cd404e3141961566e5d9a7540b07f582f5a37dddc219addd0461cce83:9a78a45c6254607edbbf079b59328be29802ac8fb5f16ffb8e613a47545f5b0a",
+    "b0cebe236cd85d7757befe847d314117e9ce3916b145dbda56ff1d28d26233b2:06b8baa96cf62d956fbcbc12114ca4bdd1293db763d6945a0d574b71314b8a62:a85c399c239497decb228835269486896227a8a8b04348b98620d26ef26ca8fd:a90502a720de691776b6882f3d774f0d7f31a35280adf7f77b1eb21ebe303f76:83aa6a345e86a77dd1d67f5bf772c676cfc09f7dab0295842c5269f2f542c706:89bee9f7ab94b63b4f2a29ba960fec1462188a774d313af6d05eb2ae88f3b172:03c5b75c8a36e22741a409640302bcf96f2b8678238e10b89b799b42fc3fbec8:9a78a45c6254607edbbf079b59328be29802ac8fb5f16ffb8e613a47545f5b0a"
   ]
 }
