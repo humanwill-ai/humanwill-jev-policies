@@ -37,7 +37,7 @@ One force-replace classification failed strict validation: its selected operatio
 
 ## Controls and policy-level checks
 
-All 12 control observations retained their expected event outcomes in every arm: four allows, two violation blocks and six expected errors. No wrong definitive event or individual-policy decision occurred. Exact policy outcomes out of 56 were primary33, Q0435, tool wording39, classifier38; remaining mismatches were errors rather than accepted wrong decisions.
+All 12 control observations retained their expected event outcomes in every arm: four allows, two violation blocks and six expected errors. No wrong definitive event or individual-policy decision occurred. Exact policy outcomes out of 54 were primary 33, Q04 35, tool wording 39, and classifier 38; remaining mismatches were errors rather than accepted wrong decisions.
 
 Controls are a limited guard, not proof of safety: accepted primary decisions were deliberately protected from follow-up changes. The classifier was also measured on settled controls for diagnostics; a runtime cascade would not spend that extra call on them. Classification alone does not resolve missing script contents or unavailable trusted provenance.
 
