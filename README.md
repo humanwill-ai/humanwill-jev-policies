@@ -118,4 +118,5 @@ Opt-in [config/5 evaluates the actual Markdown policy](docs/direct-policy-evalua
 The active development configuration is `evals/step6/direct-policy-v2/config.yaml`: gates 0.80 / 0.70 / 0.80 (applicable / not_applicable / insufficient_evidence). The packaged full-policy demo uses the same explicit settings. See the [offline threshold analysis](docs/direct-policy-threshold-analysis-v1.md); these are not newly measured live results.
 
 For bounded low-confidence scope reassessment, config/5 supports
-`policy_assessment: q05_q04`. See [configuration, accounting and limits](docs/bounded-policy-followup.md).
+`policy_assessment: q05_q04`, or `q05_stage_aware` for tool-specific wording on
+actual tool-action follow-ups and Q04 elsewhere. Both are opt-in. See [configuration, accounting and limits](docs/bounded-policy-followup.md).

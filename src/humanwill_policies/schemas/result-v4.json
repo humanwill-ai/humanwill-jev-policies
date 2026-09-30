@@ -314,7 +314,8 @@
         "profile": {
           "enum": [
             "q05",
-            "q05_q04"
+            "q05_q04",
+            "q05_stage_aware"
           ]
         },
         "status": {

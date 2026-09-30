@@ -337,3 +337,18 @@ production currently remains Q05→Q04. See [full report](stage-tool-v1-report.m
 remaining$4.690967972. Two malformed primaries rejected/settled, no new unknowns.
 All523 payloads/1575 views audited;11 focused offline tests and Ruff pass. No
 publication, deployment, push, or automatic further campaign.
+
+## Optional stage-aware runtime profile — 2026-09-30
+
+Owner authorized `policy_assessment: q05_stage_aware` in config/5. It uses Q05
+first, then at most one tool-specific scope follow-up on normalized tool_action
+stages, Q04 elsewhere. Existing profiles and defaults remain unchanged. No
+classifier, command-specific routing, policy selection or threshold changes.
+Preview and result/4 profile enum are updated; upgrade strict clients with the
+service. See [activation and contract](bounded-policy-followup.md) and
+[verification](stage-aware-followup-verification.md). Full offline suite253 passed,
+then all17 focused tests passed on Python3.14/3.11;1050 recorded event views and970
+payloads replay exactly across both campaign arms. Wheel/source isolated install,
+profile/connector and service process checks pass. This is implementation evidence,
+not a new live host/model test or release qualification. No API calls, deployment,
+publication or push; remaining API authorization unchanged at$4.690967972.

@@ -1,6 +1,6 @@
 # Bounded policy follow-up
 
-The runtime can use the measured Q05 scope question followed by **one Q04 call**
+The runtime can use the measured Q05 scope question followed by **one scope follow-up**
 when the initial assessment abstains on a low-confidence scope answer. It operates
 on the request and configured policies at runtime, without test labels, policy-ID
 rules, an extra content classifier, or a tool detector.
@@ -17,6 +17,23 @@ outcome_thresholds:
   insufficient_evidence: 0.8
 ```
 
+For the optional stage-aware variant, use:
+
+```yaml
+policy_assessment: q05_stage_aware
+```
+
+Both profiles start with Q05. On an eligible abstention, `q05_stage_aware` uses the
+measured tool-specific question only for normalized `tool_action` events; prompt,
+model-request and response events use Q04. The connector supplies the stage. A
+prompt mentioning a tool does not become a tool-action event, and no model
+classification call or command-specific rule is added.
+
+The tool-specific question is: “Considering only the actual proposed tool use and
+its supplied arguments, does it perform or request an operation restricted by this
+policy? Apply exclusions; do not infer earlier or later actions. Leave authorization
+to code.” Full policies and trusted checks are retained.
+
 The profile does not change thresholds; these are the values used in the development
 comparison. `policy_assessment: q05` retains Q05 with no follow-up. `standard` or
 omitting the setting preserves the original template and single-assessment behavior.
@@ -24,11 +41,12 @@ Older configuration formats reject the setting. The configuration digest capture
 this choice. `preview` displays primary and potential follow-up questions.
 
 `init-demo` includes `config-policy-followup.yaml` with the profile selected and
-metadata-dependent rules still disabled. It is a starter, not an approved enforcement
+metadata-dependent rules still disabled. The stage-aware equivalent is
+`config-stage-aware-followup.yaml`. It is a starter, not an approved enforcement
 configuration. Enable your own policy bindings and trusted metadata sources as needed.
 Metadata remains optional; content-only policies continue to work with it disabled.
 
-Only `scoped_predicates` questions use Q05/Q04. These ask whether an operation needs
+Only `scoped_predicates` questions use these scope profiles. These ask whether an operation needs
 the policy's trusted checks; they do not establish authorization. `semantic` rules
 retain their compliant/violation questions and are not eligible for this scope
 follow-up. Deterministic policies remain deterministic. A mixed batch retains all
@@ -43,7 +61,7 @@ reason `low_confidence` with raw choice `applicable` or `not_applicable`.
 It does not retry malformed primary answers, transport failures, explicit
 `insufficient_evidence`, missing-metadata errors, accepted outcomes, or errors
 masked by another policy's violation. It sends the full original question batch
-containing the first eligible policy, with Q04 scope wording. Policy bodies, event
+containing the first eligible policy, with the selected follow-up wording. Policy bodies, event
 content, coverage, stage and declared trusted fields are unchanged. Approval facts
 remain in deterministic code. No synthetic fixture context is added to real events.
 
@@ -71,7 +89,7 @@ mode and connector enforcement limitations continue to govern the outcome.
 
 ## Results and accounting
 
-For `q05` and `q05_q04`, result/4 includes `policy_assessment`:
+For `q05`, `q05_q04` and `q05_stage_aware`, result/4 includes `policy_assessment`:
 
 - profile, status, eligible and accepted policy IDs;
 - rejected/deferred policy IDs and reasons;
@@ -87,7 +105,7 @@ apply to this runtime implementation.
 
 The audit fields contain no raw prompt or policy text. Existing minimal-content
 service logging is unchanged. Use matching updated service and hook/client builds:
-older strict result/4 validators may reject the new optional field. Omitting the
+older strict result/4 validators may reject the new profile value or optional field. Omitting the
 profile keeps the old result shape.
 
 ## Validation and limits
@@ -104,3 +122,11 @@ question wording does not guarantee identical production accuracy or latency.
 Supported connector wire paths use the same evaluator; this change does not add
 interception stages, trusted source resolution, or CLI prompt blocking. No new
 interactive VS Code/Copilot or real gateway-host acceptance run is implied.
+
+The [stage-aware full-pack comparison](stage-tool-v1-report.md) measured 4.7%
+unexpected abstention versus 5.9% for Q04, with nine recoveries and three regressions
+to uncertainty across three repeated passes. It produced no wrong definitive
+decisions and retained expected unknowns. One pass remained at 5.5%; this is tuned
+development evidence, not independent release qualification. See the
+[implementation verification](stage-aware-followup-verification.md) for offline
+payload parity, schema and connector checks. The existing Q04 profile remains available.

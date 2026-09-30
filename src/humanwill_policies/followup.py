@@ -1,4 +1,4 @@
-"""One runtime-selected Q04 continuation; no dataset or policy-specific routing."""
+"""One runtime-selected scope continuation; no dataset or policy-specific routing."""
 
 import asyncio
 import copy
@@ -6,7 +6,7 @@ import time
 
 from .errors import PolicyError
 from .providers import response_usage, validate_response
-from .questions import scoped_variant
+from .questions import followup_variant, scoped_variant
 from .serialization import canonical
 
 
@@ -25,7 +25,18 @@ def assessment_trace(profile):
 
 
 async def follow_up(
-    *, rows, planned, payload, backend, limits, start, batches, thresholds, apply_answer, trace
+    *,
+    rows,
+    planned,
+    payload,
+    backend,
+    limits,
+    start,
+    batches,
+    thresholds,
+    apply_answer,
+    trace,
+    stage,
 ):
     # Preserve accepted decisions and errors masked by a block, across ALL primary batches.
     if any(row["judgment"] == "violation" for row in rows.values()):
@@ -55,7 +66,8 @@ async def follow_up(
     if len(batches) >= limits.max_batches:
         trace["error"] = "batch_limit"
         return
-    request = payload({key: scoped_variant(q, "q04") for key, q in batch.items()})
+    variant = followup_variant(trace["profile"], stage)
+    request = payload({key: scoped_variant(q, variant) for key, q in batch.items()})
     if len(canonical(request).encode()) > limits.max_batch_bytes:
         trace["error"] = "batch_limit"
         return

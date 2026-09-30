@@ -4,6 +4,8 @@ No public release has been published. Versions below identify private developmen
 
 ## 0.1.0.dev3 — current development candidate
 
+- Adds optional `policy_assessment: q05_stage_aware`: Q05 first, then at most one tool-specific scope follow-up for `tool_action` or Q04 for other stages. Preserves existing profiles, gates, full policy batches and trusted checks. Includes stage-specific preview and packaged demo configuration; update strict clients with the service.
+
 - Adds opt-in `policy_assessment: q05_q04` to config/5: measured scope wording and one bounded full-batch follow-up, with unchanged confidence gates, trusted checks and error fallback. Result/4 records normalized follow-up evidence and both call usage records. Existing configurations keep their behavior; upgrade service and strict clients together. See [runtime contract](docs/bounded-policy-followup.md).
 
 - Adds opt-in config/5: actual Markdown policy text plus a shared evaluator template, explicit trusted-data bindings, question preview and result/4. Legacy formats remain unchanged. See [behavior and migration](docs/direct-policy-evaluation.md); live quality validation remains pending.

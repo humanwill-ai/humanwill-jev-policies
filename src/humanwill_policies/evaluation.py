@@ -11,7 +11,7 @@ from .errors import PolicyError
 from .followup import assessment_trace, follow_up
 from .metadata import check_metadata
 from .providers import Backend, validate_response
-from .questions import POLICY_RUBRIC, policy_question, scoped_variant
+from .questions import FOLLOWUP_PROFILES, POLICY_RUBRIC, policy_question, scoped_variant
 from .runtime import EgressPermit, EvaluationLimits, EvidenceContext, utc_now
 from .serialization import canonical, digest
 
@@ -102,8 +102,8 @@ class Evaluator:
     """Reuse one instance per event loop; its semaphore bounds active provider work.
 
     Backend implementations must be cooperative async functions. Cancellation propagates;
-    the engine never launches detached tasks. Only the explicit q05_q04 profile
-    permits one bounded semantic follow-up; transport failures are never retried.
+    the engine never launches detached tasks. Only explicit follow-up profiles
+    permit one bounded semantic follow-up; transport failures are never retried.
     """
 
     def __init__(self, bundle: Bundle, configuration: Configuration, backend: Backend):
@@ -373,7 +373,7 @@ class Evaluator:
                         # Stop after a failed batch; no retry or extra charges.
                         raise
 
-                if self.assessment == "q05_q04":
+                if self.assessment in FOLLOWUP_PROFILES:
                     await follow_up(
                         rows=rows,
                         planned=planned,
@@ -385,6 +385,7 @@ class Evaluator:
                         thresholds=self.config["outcome_thresholds"],
                         apply_answer=apply_answer,
                         trace=trace,
+                        stage=request["stage"],
                     )
 
         try:

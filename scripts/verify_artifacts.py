@@ -244,6 +244,39 @@ def main():
                 work,
                 environment,
             )
+            run(
+                [
+                    cli,
+                    "validate",
+                    "demo",
+                    "--config",
+                    "demo/config-stage-aware-followup.yaml",
+                    "--json",
+                ],
+                work,
+                environment,
+            )
+            run(
+                [
+                    python,
+                    "-m",
+                    "unittest",
+                    "discover",
+                    "-s",
+                    tests,
+                    "-p",
+                    "test_stage_aware_followup.py",
+                    "-k",
+                    "connector_paths",
+                    "-k",
+                    "timeout_failure",
+                    "-k",
+                    "tool_stage_contract",
+                    "-v",
+                ],
+                work,
+                environment,
+            )
             runtime = json.loads(
                 run(
                     [python, source / "scripts/artifact_runtime.py", "--cli", cli, "--root", work],
@@ -258,6 +291,7 @@ def main():
                 ).strip(),
                 "offline_demo": "pass",
                 "service_and_hook_contracts": "pass",
+                "stage_aware_profile_and_connectors": "pass",
                 "service_process": runtime,
             }
     args.report.parent.mkdir(parents=True, exist_ok=True)

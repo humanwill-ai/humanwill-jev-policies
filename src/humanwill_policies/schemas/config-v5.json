@@ -551,9 +551,10 @@
       "enum": [
         "standard",
         "q05",
-        "q05_q04"
+        "q05_q04",
+        "q05_stage_aware"
       ],
-      "description": "Scoped-predicate question profile. standard preserves the original template; q05_q04 enables at most one bounded full-batch Q04 follow-up after Q05. Omitted means standard."
+      "description": "Scoped-predicate profile. q05_q04 enables one bounded Q04 follow-up after Q05. q05_stage_aware uses measured tool-specific wording for tool_action follow-ups and Q04 elsewhere. q05 has no follow-up. Omitted or standard preserves the original template."
     }
   },
   "required": [

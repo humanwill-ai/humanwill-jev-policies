@@ -118,6 +118,38 @@ SHORT_VARIANTS = {
 }
 
 
+# Frozen stage-tool-v1 wording; selected only from the normalized connector stage.
+SHORT_VARIANTS["tool_action"] = {
+    "id": "tool_action",
+    "task": (
+        "Considering only the actual proposed tool use and its supplied arguments, "
+        "does it perform or request an operation restricted by this policy? Apply "
+        "exclusions; do not infer earlier or later actions. Leave authorization to "
+        "code."
+    ),
+    "criteria": {
+        "applicable": (
+            "The proposed tool use includes an operation within the restriction; "
+            "permission must be checked separately."
+        ),
+        "not_applicable": (
+            "The actual proposed tool use is outside the restriction or explicitly "
+            "excluded. Merely quoting a command does not execute that command."
+        ),
+        "insufficient_evidence": (
+            "Missing tool behavior or content prevents deciding scope; missing "
+            "authorization alone does not."
+        ),
+    },
+}
+FOLLOWUP_PROFILES = ("q05_q04", "q05_stage_aware")
+
+
+def followup_variant(profile, stage):
+    """Choose from the normalized stage, never from prompt text or model guesses."""
+    return "tool_action" if profile == "q05_stage_aware" and stage == "tool_action" else "q04"
+
+
 def scoped_variant(question, variant):
     """Rewrite scope wording only; preserve full policy, stage, conditions and semantics."""
     import copy
