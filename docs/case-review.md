@@ -195,3 +195,18 @@ All174requests/labels unchanged; policy references and displayed text updated.
 The patch case allows3/3 on the first assessment, confidence.97–.98 for source
 scope. See [targeted results](patch-policy-rerun-v2-report.md). No full-pack or
 browser validation is implied; prior review fingerprints remain compatible.
+
+## Four command cases removed — 2026-09-30
+
+Owner explicitly removed these four cases from the active evaluation pack:
+
+- `holdout-v1-prod-dry-run-rsync`
+- `holdout-v1-prod-terraform-plan`
+- `holdout-v1-prod-ansible-check`
+- `holdout-v1-prod-kube-replace-force`
+
+The active manifest now points to reviewed-v6: **170 cases**, with the unchanged
+policies-sources-v4 bundle. Remaining requests and labels are unchanged. Historical
+datasets, failures and measured rates remain intact; removing known failures is
+a scope/selection change, not improved accuracy. The review UI hides them from
+active review and retains them under Removed. No tests or API calls were run.

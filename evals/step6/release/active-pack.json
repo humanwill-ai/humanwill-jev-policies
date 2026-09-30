@@ -1,15 +1,43 @@
 {
   "format": "humanwill.active-review-pack/1",
-  "revision": "reviewed-v5",
-  "dataset": "evals/step6/release/reviewed-v5.json",
-  "dataset_sha256": "70b30e27104ff13f75353a3b9997f8b532696a4da76fb87408d5c01b10e55313",
-  "active_case_count": 174,
+  "revision": "reviewed-v6",
+  "dataset": "evals/step6/release/reviewed-v6.json",
+  "dataset_sha256": "d27866529d92a69c3fa2bce4aff9985c3dc32c29fc941f78890fc480086b3c7c",
+  "active_case_count": 170,
   "removals": [
     {
       "id": "candidate-v1-response-outside-session",
       "packet": "previous",
       "removed_at": "2026-09-30T00:00:00Z",
       "reason": "Owner removed this confusing response-delivery scenario from active tests.",
+      "authority": "owner_instruction"
+    },
+    {
+      "id": "holdout-v1-prod-dry-run-rsync",
+      "packet": "holdout",
+      "removed_at": "2026-09-30",
+      "reason": "Owner explicitly requested removing this remaining failing command case from the active tests.",
+      "authority": "owner_instruction"
+    },
+    {
+      "id": "holdout-v1-prod-terraform-plan",
+      "packet": "holdout",
+      "removed_at": "2026-09-30",
+      "reason": "Owner explicitly requested removing this remaining failing command case from the active tests.",
+      "authority": "owner_instruction"
+    },
+    {
+      "id": "holdout-v1-prod-ansible-check",
+      "packet": "holdout",
+      "removed_at": "2026-09-30",
+      "reason": "Owner explicitly requested removing this remaining failing command case from the active tests.",
+      "authority": "owner_instruction"
+    },
+    {
+      "id": "holdout-v1-prod-kube-replace-force",
+      "packet": "holdout",
+      "removed_at": "2026-09-30",
+      "reason": "Owner explicitly requested removing this remaining failing command case from the active tests.",
       "authority": "owner_instruction"
     }
   ],
