@@ -377,3 +377,17 @@ the policy edit. No full174-case quality claim. See [report](local-policy-rerun-
 41calls cost$0.003006066; known total$0.302038094+old$.01reservation,
 remaining$4.687961906. All41payloads and24runtimeviews audited; allnewcharges settled.
 No full localtests, extra campaign, deployment, publication or push.
+
+## Patch-origin clarification and rerun — 2026-09-30
+
+Owner authorized EVAL-SRC-001v2 clarifying locally produced patches as ordinary
+editing, while third-party incorporation still requires source approval. Local
+storage alone does not approve origin. Active manifest now reviewed-v4 plus
+policies-sources-v3 (174unchanged requests/labels, updated source-version refs).
+UI displays the new policy and preserves prior saved progress. Patch-only live
+rerun at1501bca still errors3/3: primary applicable confidence.14/.04/.14; follow-up
+insufficient_evidence.10 each, rejected asstill_indeterminate. Context still leaves
+origin unestablished; label remains allow for comparison, no provenance invented.
+See [report](patch-policy-rerun-v1-report.md).6calls cost$.000502236; known total
+$.302540330+old$.01reserve, remaining$4.687459670. All6payloads/3views audited;
+no newunknowns, broad localtests, extra campaign, deployment, publication or push.

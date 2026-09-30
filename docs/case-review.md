@@ -174,3 +174,14 @@ The HTML displays the revised policy and migrates prior saved review progress
 under the explicit clarification. Frozen packets still preserve the original
 review provenance. Historical measured runs retain policy v2. HTML regenerated;
 no local tests, browser validation or API calls run, per owner instruction.
+
+## Patch-source clarification — 2026-09-30
+
+The active manifest now pairs reviewed-v4 with policies-sources-v3. Source policy
+v2 exempts ordinary local editing including locally produced patches, and retains
+source approval for externally obtained third-party code even when stored locally.
+The 174 requests and labels are unchanged; source-policy version references are
+updated. Previous browser fingerprints migrate under the owner's clarification.
+The patch-only live rerun remains uncertain3/3 because the supplied context does
+not establish its origin. See [results](patch-policy-rerun-v1-report.md); no browser
+or general local tests were run.
