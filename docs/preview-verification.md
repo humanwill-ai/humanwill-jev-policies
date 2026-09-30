@@ -17,6 +17,13 @@
   an installed candidate wheel and copied harnesses. Both pass their allow, deny,
   monitor/assessment and failure/bypass scenarios. The host fixtures use controlled
   model answers; this is protocol/enforcement evidence, not live model accuracy.
+- **Fresh VS Code Local acceptance passes all 14 scenarios** on editor 1.139.1 /
+  Copilot Chat 0.67.0, macOS x86_64, using the exact installed candidate wheel
+  outside the checkout. See [sanitized results and hashes](evidence/preview-vscode-local-2026-09-30.json).
+  A short private temporary profile reused the earlier dedicated sign-in. Prompt
+  denial stops before model invocation; tool denial prevents the marker; provider,
+  service and malformed-input failures block; monitoring permits; host timeouts
+  and disabled hooks bypass; restoring hooks restores denial. No paid model calls.
 - Fresh Jev fullpack run and separate real-LiteLLM/hook-process live latency run;
   see [quality](preview-final-v1-report.md) and [latency](preview-latency-v1-report.md).
 
@@ -28,13 +35,6 @@ kept public-safe; raw test/profile logs and evaluator payloads remain ignored.
 
 ## Limits and unfinished fresh-host checks
 
-- **VS Code Local:** the candidate passes Local adapter contracts and executable
-  live latency checks. A fresh actual-editor attempt reused a private copy of the
-  earlier isolated signed-in profile but timed out before the first `allow` case
-  completed. No fresh editor pass is claimed. The successful fourteen-scenario
-  signed-in run on VS Code 1.139.1 / Copilot Chat 0.67.0 remains historical evidence
-  in [the integration report](integration-report.md). The current attempt did not
-  establish whether the obstacle was session state or fixture startup.
 - **Agentgateway 1.5.0:** fresh installed-artifact adapter contracts pass. The real
   Linux amd64 host evidence is the earlier pinned Actions run. This macOS x86_64
   machine has no matching release binary, Linux runtime or Docker. No fresh actual
@@ -54,3 +54,19 @@ directory; this was a harness reporting issue, not a service failure.
 These checks establish a useful local candidate. They do not close the independent
 semantic qualification or the remaining public-release licensing/history/exposure
 review. No public release, deployment, tag, visibility change or push occurred.
+
+## VS Code retry and harness correction
+
+The earlier inconclusive attempt is preserved. A diagnostic retry exposed
+`listen EINVAL`: the profile's IPC socket path exceeded macOS's 103-byte limit.
+The editor exited before the fixture started; this was not a policy denial or an
+established authentication failure. Launching the native editor with a short
+`/tmp` profile reached fixture readiness and completed all fourteen cases.
+
+The harness now defaults to a private short temporary directory and rejects overly
+long macOS profile paths before launching. Ruff and a negative startup-preflight
+check pass. The successful host run used the candidate's original harness with an
+explicit short path; the subsequent harness change only prevents this setup error.
+The candidate wheel and source archive bytes were not replaced by this retry;
+updated documentation/harness belong in the next source packaging pass before
+publication. Original artifact reports remain preserved beside the new retry record.

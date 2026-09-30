@@ -16,8 +16,8 @@ and decision history remain preserved.
 2. **Local artifact, connector and latency checks completed within available
    environments; fresh host gaps remain explicit.** Both Python versions and
    wheel/source installs pass; actual LiteLLM and CLI host scenarios pass.
-   Current Local hook contracts/executable pass, but the attempted fresh IDE run
-   did not complete its first case. Agentgateway Linux and container runtime retain
+   Fresh VS Code Local acceptance now passes all 14 scenarios after fixing an
+   overly long test-profile path; the original unsuccessful attempt is preserved. Agentgateway Linux and container runtime retain
    earlier evidence because this machine has neither that Linux runtime nor Docker.
    See [verification detail](preview-verification.md). Live profile latency p95:
    about 1.8 seconds added through LiteLLM and 1 second for hook processes. The

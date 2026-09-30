@@ -13,6 +13,7 @@ import os
 import shlex
 import subprocess
 import sys
+import tempfile
 import time
 from pathlib import Path
 
@@ -138,9 +139,17 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--binary", required=True, type=Path)
     parser.add_argument("--copilot-extension", required=True, type=Path)
-    parser.add_argument("--state-dir", type=Path, default=Path("artifacts/hosts/vscode-local"))
+    parser.add_argument("--state-dir", type=Path, help="Dedicated short test-profile path")
     args = parser.parse_args()
-    root = args.state_dir.resolve()
+    root = (
+        args.state_dir
+        if args.state_dir is not None
+        else Path(tempfile.mkdtemp(prefix="hw-vscode-", dir="/tmp"))
+    ).resolve()
+    # Leave room for VS Code's versioned IPC socket under macOS's 103-byte limit.
+    if sys.platform == "darwin" and len(os.fsencode(root / "profile")) > 80:
+        parser.error("Test profile path is too long for macOS IPC; use a short --state-dir")
+    print(f"Private test state: {root}", flush=True)
     workspace = root / "workspace"
     (workspace / ".github/hooks").mkdir(parents=True, exist_ok=True)
     (root / "profile/User").mkdir(parents=True, exist_ok=True)
