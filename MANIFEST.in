@@ -1,8 +1,11 @@
 recursive-include tests *.py *.json *.js
-recursive-include docs *.md *.html
+recursive-include docs *.md *.html *.json
 recursive-include examples *.md *.yaml *.json
 include requirements*.txt
 include requirements-dev.in
 recursive-include evals *.py *.json *.md *.yaml
 include Dockerfile .dockerignore CHANGELOG.md
 recursive-include scripts *.py *.html *.css *.js
+include LICENSE NOTICE LICENSING.md THIRD_PARTY_NOTICES.md CONTRIBUTING.md SECURITY.md
+
+recursive-include third_party/licenses *

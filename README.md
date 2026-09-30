@@ -116,5 +116,14 @@ python -m build --no-isolation
 
 Current guides and evidence are indexed in [release status](docs/preview-status.md).
 Earlier dated reports preserve the development history and do not describe the
-current profile unless explicitly stated. License choice, public-content review and
-publication approval remain before public distribution; no release is published yet.
+current profile unless explicitly stated. Final public-content review, release checks and publication approval remain
+before public distribution; no release is published yet.
+
+## License and contributions
+
+Original software, documentation and synthetic examples use [Apache-2.0](LICENSE),
+matching HumanWill Benchmark's software license. Company-authored policies and
+inputs retain their existing rights; benchmark content and dependencies retain
+their separate terms. See [license scope](LICENSING.md),
+[third-party notices](THIRD_PARTY_NOTICES.md), [contributing](CONTRIBUTING.md) and
+[private security reporting](SECURITY.md).

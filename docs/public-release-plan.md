@@ -69,8 +69,8 @@ Passing transport tests does not require identical judgments across providers. I
 
 The owner reported 90% of `humanwill-ai`'s included Actions minutes used on
 2026-09-28. Apply the [Actions budget constraint](decisions.md#github-actions-budget-constraint--2026-09-28):
-validate locally first, batch CI-triggering pushes and reserve discretionary
-hosted runs until quota is checked. Required candidate evidence remains a release
+validate locally and defer all hosted validation until immediately before the
+final release, avoiding interim CI-triggering pushes or workflow dispatches. Required candidate evidence remains a release
 gate; budget exhaustion is not a passing check. Current automatic triggers are
 unchanged, and Actions overages are outside the OpenRouter evaluation budget.
 
@@ -89,7 +89,7 @@ Create these as working artifacts during Steps 7–8, not empty placeholders now
 - Policy/config/API references, one runnable guide per connector profile, troubleshooting, compatibility matrix, and clear monitoring-to-enforcement instructions.
 - Source distribution and wheel from the reviewed commit, SHA-256 checksums, dependency inventory/SBOM, test evidence, and public-safe evaluation artifacts. Provide a container recipe; defer image-registry and PyPI publication unless separately selected.
 
-**License proposal:** Apache-2.0 for newly authored code and, if the owner agrees, new docs/examples. Review the [license text](https://www.apache.org/licenses/LICENSE-2.0) and preserve the actual licenses of anything reused. Do not automatically import or relicense benchmark datasets, policy material, or `jev-edge` code. Final licensing is an owner decision before publication.
+**License prepared 2026-09-30:** Apache-2.0 for original software, documentation and synthetic examples, matching the owner-proposed Benchmark software license. See [license scope](../LICENSING.md). Review the [license text](https://www.apache.org/licenses/LICENSE-2.0) and preserve the actual licenses of anything reused. Do not automatically import or relicense benchmark datasets, policy material, or `jev-edge` code. Final licensing is an owner decision before publication.
 
 Review **all Git history and refs**, commit metadata, tracked examples, reports, release assets, existing issues/PRs, Actions logs/artifacts, and references to private projects. Scan for credentials and private material; investigate findings rather than treating a clean scanner result as proof. GitHub notes that [making a repository public exposes Actions history/logs](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility). Resolve any exposure before the visibility change, and recheck access/rules afterward. If a secret is found, revoke/rotate it and resolve history exposure before release.
 

@@ -30,7 +30,7 @@ Updated 2026-09-27. Owner requirements and proposed implementation choices are s
 | GitHub Actions allowance | Owner reported 90% used, 2026-09-28 | Conserve remaining account quota through local validation and batched pushes; exact balance, reset date and overage settings unverified; separate from OpenRouter budget |
 | Public release objective | Decided by owner | Plan a first release suitable for public GitHub publication; visibility remains private during preparation |
 | Release label / artifacts | Proposed | `v0.1.0a1` public preview, source/wheel/checksums and evidence; see public-release roadmap |
-| Project license | Awaiting owner choice | Proposed Apache-2.0 for original code/docs/examples; preserve licenses of reused material |
+| Project license | Prepared for release review, 2026-09-30 | Apache-2.0, matching the owner-proposed Benchmark software license; original software/docs/synthetic examples, with explicit exclusions and third-party notices |
 
 ## Requirement update: 2026-09-27
 
@@ -648,3 +648,19 @@ policies-sources-v4 bundle. Remaining requests and labels are unchanged. Histori
 datasets, failures and measured rates remain intact; removing known failures is
 a scope/selection change, not improved accuracy. The review UI hides them from
 active review and retains them under Removed. No tests or API calls were run.
+
+## Public-release preparation — 2026-09-30
+
+The owner requested the next release-preparation step and proposed matching
+HumanWill Benchmark's license. Its software license was verified locally and
+through GitHub as Apache-2.0; the separately licensed benchmark content was not
+imported. Prepared LICENSE, NOTICE, LICENSING.md and package license metadata use
+Apache-2.0 for this project's original software, documentation and synthetic
+examples, preserving third-party and company-input rights. The owner selected
+email security reporting and supplied sergio@humanwill.ai; SECURITY.md uses that
+address. No mailbox access or response SLA was verified or promised.
+
+See [public-release preparation evidence](public-preparation-report.md) for local
+history/log scans, notices, dependency inventory, artifact validation and limits.
+Actions remains deferred until final-candidate validation. No visibility change,
+workflow dispatch, push, tag, release or deployment is authorized by this work.

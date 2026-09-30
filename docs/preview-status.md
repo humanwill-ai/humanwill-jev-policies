@@ -27,6 +27,10 @@ and decision history remain preserved.
    connector guide, authoring guidance and this index describe the candidate.
    Historical experiments remain dated evidence rather than current setup advice.
 
+4. **Public repository materials prepared.** Apache-2.0 license/scope, notices,
+   contribution and security reporting guidance, Python runtime inventory and
+   local publication-exposure review. See [scope and remaining checks](public-preparation-report.md).
+
 No deployment, public visibility change, GitHub push or additional Actions run was
 performed for this preparation. API spending remains inside the authorized $5.
 
@@ -70,10 +74,11 @@ the final release, validating the final candidate on Linux/other supported runne
 including actual Agentgateway and the container. Avoid interim workflow dispatches
 and CI-triggering pushes/PR updates. This defers the checks; it does not waive them.
 
-Choose the license and maintainer/security contact; complete contribution/security
-policies, notices/dependency inventory and public-content/history review; resolve
-or explicitly bound the remaining fresh-host evidence; finalize and verify the
-publication artifacts; then obtain owner approval for the concrete public release.
+Apache-2.0 licensing, contribution/security guidance, the owner-selected reporting
+address and dependency notices/inventory are prepared. See [step 4 evidence](public-preparation-report.md).
+Complete final-candidate Actions validation and image inventory, recheck changes
+to history/logs/assets since the preparation audit, finalize the publication
+artifacts, then obtain owner approval for the concrete public release.
 The candidate is prepared locally, not uploaded or published. Packaging may need
 rebuilding after licensing and other publication material is added.
 

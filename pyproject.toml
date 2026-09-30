@@ -7,6 +7,8 @@ name = "humanwill-policies"
 version = "0.1.0a1"
 description = "Company policy evaluation for AI gateways and coding agents"
 readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE", "LICENSING.md", "THIRD_PARTY_NOTICES.md", "third_party/licenses/*/*"]
 requires-python = ">=3.11,<3.15"
 dependencies = ["PyYAML==6.0.3", "jsonschema==4.26.0", "httpx==0.28.1", "starlette==1.7.0", "uvicorn==0.54.0"]
 
