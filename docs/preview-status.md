@@ -56,7 +56,7 @@ research configuration. No production identity/source/destination resolver ships
 | Write policies and bind trusted facts | [Author guide](policy-authoring.md), [metadata](optional-metadata.md) |
 | Understand questions and abstentions | [Config/5](direct-policy-evaluation.md), [bounded follow-up](bounded-policy-followup.md) |
 | Connect a gateway or agent | [Connector guide](service-and-connectors.md), [compatibility](compatibility.md) |
-| Operate, monitor and roll back | [Operations](operations.md) |
+| Operate, monitor and roll back | [Operations](operations.md), [security considerations](operations.md#security-considerations) |
 | Inspect the 170 approved cases | [Review instructions](case-review.md), [local HTML](case-review.html) |
 | Assess measured quality and latency | [Pack report](preview-final-v1-report.md), [latency report](preview-latency-v1-report.md) |
 | Review build/install/host evidence | [Candidate verification](preview-verification.md) |

@@ -48,6 +48,10 @@ Example deadlines: evaluator 5000 ms < hook HTTP 6000 ms / service 7000 ms < hos
 
 Audit logs contain generated event IDs, hashes, policy IDs/versions/judgments, coverage, decisions, requested enforcement, duration and safe error codes. They exclude raw content, arguments, facts, credentials and exception bodies. Protect logs: IDs/hashes may still be sensitive. HTTP access logs are disabled in `serve`; independently review gateway and ingress logging. `actual: unconfirmed` stays unconfirmed until a host observation proves the action. Hook stdout contains exactly one host JSON object; sanitized diagnostics go to stderr. Allows emit `{}` to preserve ordinary host permission prompts.
 
+See [security considerations](operations.md#security-considerations) for tested
+host-timeout and disabled-hook bypasses, their distinction from adapter-handled
+failures, and deployment responsibilities.
+
 ## Coverage and optional metadata
 
 Coverage `complete` refers to **the declared event surface**, not all agent context. Gateway profiles accept plain text chat messages and non-streaming text answers. LiteLLM request messages preserve supplied roles where available; output text has unknown role provenance. Agentgateway includes all supplied messages/choices. Tool definitions, tool-call messages, images and streaming are outside this gateway profile and rejected. The LiteLLM profile callback and Agentgateway request-profile CEL header are required parts of the configuration; neither generic webhook alone proves that upstream data was fully represented.

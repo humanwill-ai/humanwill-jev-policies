@@ -72,6 +72,10 @@ Use [connector setup and removal](docs/service-and-connectors.md),
 [operations and rollback](docs/operations.md). These are specific tested profiles,
 not universal interception of Copilot or every gateway payload.
 
+Read [security considerations](docs/operations.md#security-considerations) before
+relying on hook enforcement: host timeouts and removed hooks can permit continuation
+even when the adapter is configured to block errors.
+
 Jev is available through OpenRouter and direct TypeSafe. OpenRouter has live
 synthetic evidence; direct TypeSafe has transport contract tests, with its separate
 live smoke optional for this release. Hosted evaluation sends active policy text
