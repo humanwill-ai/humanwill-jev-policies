@@ -155,6 +155,10 @@ def build():
         != release_scope["selector_sha256"]
     ):
         raise ValueError("Release-scope manifest changed")
+    active_pack = json.loads((ROOT / "evals/step6/release/active-pack.json").read_text())
+    for removal in active_pack["removals"]:
+        default_removed[removal["id"]] = removal
+    active_removals = {r["id"]: r for r in active_pack["removals"]}
     data = json.dumps(
         {
             "packs": packs,
@@ -163,6 +167,8 @@ def build():
             "previous_fingerprint": previous_fingerprint,
             "compatible_fingerprint": compatible_fingerprint,
             "default_removed": default_removed,
+            "active_removals": active_removals,
+            "owner_removals_revision": active_pack["revision"],
             "recorded_approvals": recorded_approvals,
             "recorded_approval_at": recorded_approval_at,
             "original_labels": original_labels,

@@ -1,0 +1,17 @@
+{
+  "format": "humanwill.active-review-pack/1",
+  "revision": "reviewed-v2",
+  "dataset": "evals/step6/release/reviewed-v2.json",
+  "dataset_sha256": "21746cfeffa5f66f2f6fdc62996bc2dfc50836da635dbf38ee5bf23e1042ed1c",
+  "active_case_count": 174,
+  "removals": [
+    {
+      "id": "candidate-v1-response-outside-session",
+      "packet": "previous",
+      "removed_at": "2026-09-30T00:00:00Z",
+      "reason": "Owner removed this confusing response-delivery scenario from active tests.",
+      "authority": "owner_instruction"
+    }
+  ],
+  "note": "Use this dataset for future campaigns. Frozen historical runners and reports retain reviewed-v1 and must not be treated as the active pack."
+}

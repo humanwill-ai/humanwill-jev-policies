@@ -7,7 +7,7 @@ open docs/case-review.html
 ```
 
 No server, installation, account, or API key is needed. The page embeds the frozen
-updated packet (93 active cases and seven recorded removals) (original named policy plus source policy), 46 source-policy cases, previously approved 36-case packet,
+updated packet (93 active cases and seven recorded removals) (original named policy plus source policy), 46 source-policy cases, previously approved packet (35 active cases, one later removal),
 and exact four policy texts.
 There are no external scripts, fonts, analytics, model calls, or executed test
 commands. This is an internal evaluation-label review aid, not a runtime approval
@@ -20,7 +20,7 @@ workflow for agents.
    and semantic scope if needed, and select **Flag correction**. Notes save as you
    type; proposed dropdown changes are recorded when you flag the correction.
    Approval always accepts the original result and scope. Move-to-next is optional.
-3. **Previously approved 36** preserves the owner's September 27 approval. You can
+3. **Previously approved · 35** preserves the owner's September 27 approval. You can
    reconfirm a case or flag a correction without changing the historical record.
 4. **Export review** downloads a JSON file. Give that file to Codex (or put it in
    the ignored `artifacts/` folder and share its path) to record approvals and
@@ -140,3 +140,20 @@ packet. Each case states the reason. All cases and approvals remain intact;
 advanced is not the same as removed. Progress totals still count the original
 review, not only the visible filter. Scope metadata is exported separately and
 does not retroactively alter the original review fingerprint or live inputs.
+
+## Active pack revision — 2026-09-30
+
+The owner removed `candidate-v1-response-outside-session` because the response
+and delivery context were confusing. The current pack is **174 cases**: 93 updated,
+46 source-policy and 35 previously approved cases, with eight total removals.
+The review interface hides this case from active review and keeps it under Removed.
+Existing saved approvals for this case migrate to removed once for this revision;
+other saved reviews are retained. Manual restore remains available in the UI but
+does not alter the repository's active pack without a new reviewed export.
+
+`evals/step6/release/active-pack.json` identifies `reviewed-v2.json` and its hash
+for future campaigns. The remaining case contents and labels are unchanged.
+Original reviewed-v1, owner approvals, source packets, frozen runners and measured
+reports remain historical; do not rerun an old 175-case campaign as the current
+pack. No local tests or API evaluations were run for this owner-requested removal.
+The HTML was regenerated only; browser behavior has not been tested for this edit.

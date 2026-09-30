@@ -5,7 +5,7 @@ const fingerprint = DATA.packs.map(p => p.sha256).join(':') + ':' + Object.value
 const storageKey = 'humanwill.case-review.v1:' + fingerprint;
 const allCases = new Map(DATA.packs.flatMap(p => p.cases.map(c => [c.id, {c, p}])));
 const releaseScope = new Map(DATA.release_scope.cases.map(c => [c.id, c]));
-let state = {reviewer: '', reviews: {}, archived_reviews: {}}, packId = 'holdout', selectedId = 'holdout-v1-sw-download-dependency';
+let state = {reviewer: '', reviews: {}, archived_reviews: {}, owner_removals_revision: DATA.owner_removals_revision}, packId = 'holdout', selectedId = 'holdout-v1-sw-download-dependency';
 let storageOK = true, lastRemovedId = null;
 const labels = {allow: 'Allow', block: 'Block / violation', evaluation_error: 'Evaluation error'};
 const statuses = {pending: 'Pending', approved: 'Approved', correction: 'Needs correction', removed: 'Removed'};
@@ -50,6 +50,13 @@ function validateState(candidate, legacy = false, applyOwnerRemovals = false) {
     const prior = clean.reviews[id];
     if (prior && prior.status !== 'removed') clean.reviews[id] = {...prior, status: 'removed', previous_status: prior.status, removal_reason: removal.reason, updated_at: removal.removed_at};
   }
+  if (candidate.owner_removals_revision !== DATA.owner_removals_revision) {
+    for (const [id, removal] of Object.entries(DATA.active_removals ?? {})) {
+      const prior = clean.reviews[id];
+      if (prior && prior.status !== 'removed') clean.reviews[id] = {...prior, status: 'removed', previous_status: prior.status, removal_reason: removal.reason, updated_at: removal.removed_at};
+    }
+  }
+  clean.owner_removals_revision = DATA.owner_removals_revision;
   return clean;
 }
 try {
@@ -83,6 +90,7 @@ function updateProgress() {
   $('progressDetail').textContent = counts.pending + ' pending · ' + counts.correction + ' need correction · ' + [...allCases.values()].filter(({c}) => review(c).status === 'removed').length + ' removed';
   $('progress').max = Math.max(1, pendingCases().length - counts.removed); $('progress').value = counts.approved;
   $('tabHoldout').firstChild.textContent = 'Updated ' + DATA.packs[0].cases.filter(c => review(c).status !== 'removed').length + ' ';
+  $('tabPrevious').firstChild.textContent = 'Previously approved · ' + DATA.packs.find(p => p.id === 'previous').cases.filter(c => review(c).status !== 'removed').length + ' ';
   $('tabSources').firstChild.textContent = 'Approved sources · ' + DATA.packs.find(p => p.id === 'sources').cases.filter(c => review(c).status !== 'removed').length + ' ';
   $('approveRemaining').disabled = pack().previously_approved || !pack().cases.some(c => review(c).status === 'pending');
 }

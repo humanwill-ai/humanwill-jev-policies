@@ -560,3 +560,12 @@ payloads replay exactly across both campaign arms. Wheel/source isolated install
 profile/connector and service process checks pass. This is implementation evidence,
 not a new live host/model test or release qualification. No API calls, deployment,
 publication or push; remaining API authorization unchanged at$4.690967972.
+
+## Active test-pack removal — 2026-09-30
+
+Owner removed `candidate-v1-response-outside-session` as confusing. Future campaigns
+must use `evals/step6/release/active-pack.json`, pointing to reviewed-v2 with174
+unchanged remaining cases. The review UI marks the case removed, including migration
+of saved approval, and shows35 active cases in the prior36 packet. Historical
+175-case datasets, frozen protocols and reports remain intact; no accuracy gain
+is claimed from removal. No local tests or API calls were run, as requested.
