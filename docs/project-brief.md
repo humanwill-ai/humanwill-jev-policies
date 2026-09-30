@@ -1,5 +1,9 @@
 # Project brief
 
+> Current candidate status and the guide index are in [preview status](preview-status.md).
+> The dated sections below retain planning and decision history; older counts,
+> profiles and milestone status are superseded by that current summary.
+
 Updated 2026-09-28 · reviewed live evaluation complete; semantic release gate remains open
 
 ## Product and target user

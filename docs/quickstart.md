@@ -1,15 +1,15 @@
 # Install and run the preview candidate
 
-The current private development version is `0.1.0.dev3`; no public release or registry package is published. Use Python 3.11–3.14 on Linux/macOS. This guide needs only the source distribution, wheel and locked runtime requirements from the same candidate. Installation downloads dependencies; the demo and contract checks make no evaluator calls.
+The current experimental developer preview candidate is `0.1.0a1`; no public release or registry package is published. Use Python 3.11–3.14 on Linux/macOS. This guide needs only the source distribution, wheel and locked runtime requirements from the same candidate. Installation downloads dependencies; the demo and contract checks make no evaluator calls.
 
 ## Install an exact artifact
 
-Extract `humanwill_policies-0.1.0.dev3.tar.gz` into a new directory. From that extracted directory, install into a fresh environment, using the wheel supplied alongside the archive:
+Extract `humanwill_policies-0.1.0a1.tar.gz` into a new directory. From that extracted directory, install into a fresh environment, using the wheel supplied alongside the archive:
 
 ```sh
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
-.venv/bin/python -m pip install --no-deps /absolute/path/humanwill_policies-0.1.0.dev3-py3-none-any.whl
+.venv/bin/python -m pip install --no-deps /absolute/path/humanwill_policies-0.1.0a1-py3-none-any.whl
 .venv/bin/python -m pip check
 .venv/bin/humanwill-policies --version
 ```
@@ -38,8 +38,8 @@ From an extracted source artifact with its wheel available:
 
 ```sh
 python3 scripts/verify_artifacts.py \
-  --wheel /absolute/path/humanwill_policies-0.1.0.dev3-py3-none-any.whl \
-  --sdist /absolute/path/humanwill_policies-0.1.0.dev3.tar.gz \
+  --wheel /absolute/path/humanwill_policies-0.1.0a1-py3-none-any.whl \
+  --sdist /absolute/path/humanwill_policies-0.1.0a1.tar.gz \
   --report artifacts/packaging/verification.json
 ```
 
@@ -50,9 +50,9 @@ The script creates temporary environments outside the checkout, installs each ex
 Docker is an optional local packaging route. Build from the source directory with the selected wheel in `dist/`:
 
 ```sh
-docker build --build-arg WHEEL=dist/humanwill_policies-0.1.0.dev3-py3-none-any.whl \
-  -t humanwill-policies:0.1.0.dev3 .
-docker run --rm --network none humanwill-policies:0.1.0.dev3 --version
+docker build --build-arg WHEEL=dist/humanwill_policies-0.1.0a1-py3-none-any.whl \
+  -t humanwill-policies:0.1.0a1 .
+docker run --rm --network none humanwill-policies:0.1.0a1 --version
 ```
 
 The recipe installs the selected wheel and locked dependencies, runs as numeric UID/GID 65532, and includes no policy folder or credentials. Its context is allowlisted to the recipe, runtime lock and wheels. The default Python image is a mutable development tag; for release evidence set `--build-arg PYTHON_IMAGE=python@sha256:YOUR_APPROVED_DIGEST` and record the image ID/base digest. Do not treat a recipe as a published or verified image.
@@ -65,7 +65,7 @@ docker run --rm --read-only --cap-drop ALL --security-opt no-new-privileges \
   --mount type=bind,src=/absolute/policies,dst=/policies,readonly \
   --mount type=bind,src=/absolute/configuration,dst=/configuration,readonly \
   --env OPENROUTER_API_KEY --env HUMANWILL_LOCAL_TOKEN \
-  humanwill-policies:0.1.0.dev3 serve /policies \
+  humanwill-policies:0.1.0a1 serve /policies \
   --config /configuration/policies.yaml --service-config /configuration/service.yaml \
   --host 0.0.0.0 --port 8088
 ```
@@ -73,3 +73,8 @@ docker run --rm --read-only --cap-drop ALL --security-opt no-new-privileges \
 This example assumes the service configuration retains only its Local principal. Add distinct tokens for other enabled principals. Grant UID 65532 read/traverse access to mounted files without making credentials public. On SELinux hosts apply appropriate local volume labels. Container loopback differs from the host: update connector URLs according to your protected network topology. The service health/readiness endpoints do not probe Jev. Follow the [operations guide](operations.md) for upgrades and rollback. No container is automatically deployed or published by these commands.
 
 To preview/evaluate the new full-policy template, use `demo/config-policy-text.yaml` in the same offline commands. See [config/5](direct-policy-evaluation.md) for result/4 compatibility and trusted-data bindings.
+
+For the optional stage-aware profile use `demo/config-stage-aware-followup.yaml`.
+It retains monitoring and metadata-off defaults. Content-only rules keep their
+semantic question; scoped-predicate follow-ups require trusted metadata bindings.
+See [profile limits](bounded-policy-followup.md) and [candidate evidence](preview-status.md).

@@ -1,5 +1,9 @@
 # Roadmap to the first public release
 
+> Current candidate status and the guide index are in [preview status](preview-status.md).
+> The dated sections below retain planning and decision history; older counts,
+> profiles and milestone status are superseded by that current summary.
+
 Updated 2026-09-28 · review and first combined live run complete; semantic and later release gates remain open
 
 **Target: `v0.1.0a1`, a public preview on GitHub.** Publish a usable, tested implementation with all requested connectors and a clear support boundary. Public availability does not establish production suitability or semantic accuracy for arbitrary company policies.

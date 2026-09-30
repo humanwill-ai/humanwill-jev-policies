@@ -1,5 +1,9 @@
 # Decisions and open requirements
 
+> Current candidate status and the guide index are in [preview status](preview-status.md).
+> The dated sections below retain planning and decision history; older counts,
+> profiles and milestone status are superseded by that current summary.
+
 Updated 2026-09-27. Owner requirements and proposed implementation choices are separate.
 
 | Topic | State | Current direction |

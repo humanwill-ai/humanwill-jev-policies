@@ -7,13 +7,13 @@ open docs/case-review.html
 ```
 
 No server, installation, account, or API key is needed. The page embeds the frozen
-updated packet (93 active cases and seven recorded removals) (original named policy plus source policy), 46 source-policy cases, previously approved packet (35 active cases, one later removal),
+updated packet (89 active cases and eleven recorded removals) (original named policy plus source policy), 46 source-policy cases, previously approved packet (35 active cases, one later removal),
 and exact four policy texts.
 There are no external scripts, fonts, analytics, model calls, or executed test
 commands. This is an internal evaluation-label review aid, not a runtime approval
 workflow for agents.
 
-1. Use **Approved sources · 46** or **Updated 93**, optionally filtering by policy or status. Compare each
+1. Use **Approved sources · 46** or **Updated 89**, optionally filtering by policy or status. Compare each
    event and trusted evidence with the policy beside it. The expected result is
    a proposed test label, not a measured model answer.
 2. Select **Approve expected result**, or enter a reason, choose a proposed result
@@ -39,8 +39,9 @@ Keep reviewer names and personal notes in local exports, out of Git. The export'
 labels and historical approval provenance for readability. This local tool does
 not authenticate a reviewer or provide a tamper-proof signature.
 
-The owner supplied the completed review on September 28. All 175 active cases
-are accepted; seven are removed, with no pending corrections. The page now
+The owner supplied the completed review on September 28 and approved later policy
+clarifications and removals. The current pack has 170 accepted active cases and
+12 recorded removals, with no pending corrections. Historical runs used 175 cases. The page now
 embeds that sanitized approval/removal record, so a fresh browser shows the
 accepted baseline. Local edits still take precedence and can be exported for a
 future version; the frozen evaluated dataset is not changed by browser edits.

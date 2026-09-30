@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0a1 — unpublished developer preview candidate
+
+- Company-authored Markdown bundles, optional trusted metadata, Jev transports,
+  authenticated service and LiteLLM/Agentgateway/Local/CLI connector profiles.
+- Config/5 policy-text evaluation, global outcome thresholds, optional bounded
+  Q05/Q04 and stage-aware follow-ups with result/4 audit/usage fields.
+- Final 170-case development-pack measurement and refreshed installation evidence.
+- Monitoring examples; no calibrated enforcement or independent holdout claim.
+- See [current status](docs/preview-status.md) for remaining publication gates.
+
 No public release has been published. Versions below identify private development snapshots; proposed `0.1.0a1` awaits the release, licensing and publication gates.
 
 ## 0.1.0.dev3 — current development candidate

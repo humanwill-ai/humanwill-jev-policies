@@ -1,5 +1,9 @@
 # First-release plan: company-owned policy enforcement
 
+> Current candidate status and the guide index are in [preview status](preview-status.md).
+> The dated sections below retain planning and decision history; older counts,
+> profiles and milestone status are superseded by that current summary.
+
 Implementation plan · updated 2026-09-27
 
 The owner requires company/user-authored Markdown policies with stable policy IDs, LiteLLM, Agentgateway, and a Copilot hook connector in the first release, plus direct TypeSafe and OpenRouter access to Jev. Development and testing will use OpenRouter. The offline foundation is implemented; the [contract reference](contracts.md) defines its exact behavior and the [foundation report](foundation-report.md) records checks. The evaluation core and both provider adapters are now implemented with synthetic contract tests; OpenRouter live smoke passed; service/gateway/CLI/Local integrations now have runtime evidence. Direct TypeSafe live smoke is optional for v0.1. See the [core reference](evaluation-core.md).
