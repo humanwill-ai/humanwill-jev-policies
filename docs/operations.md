@@ -1,6 +1,6 @@
 # Operate, upgrade and troubleshoot
 
-Applies to `0.1.0.dev3`, Linux/macOS and the pinned [compatibility matrix](compatibility.md). Use [installation](quickstart.md) and the [service/connector guide](service-and-connectors.md) first. All shipped company examples remain monitoring-only; no calibrated enforcement profile is supplied.
+Applies to candidate `0.1.0a1`, Linux/macOS and the pinned [compatibility matrix](compatibility.md). Use [installation](quickstart.md) and the [service/connector guide](service-and-connectors.md) first. All shipped company examples remain monitoring-only; no calibrated enforcement profile is supplied.
 
 ## Establish a known deployment
 
@@ -13,10 +13,10 @@ Logs exclude raw content, arguments, facts, credentials and exception bodies, bu
 ## Upgrade and roll back
 
 1. Preserve the previous exact package artifact, complete policy folder and configuration, protected hook/gateway files, and evidence hashes. Build a fresh virtual environment for the new artifact; never replace a running environment piecemeal.
-2. Validate the candidate bundle/configuration and reproduce the offline demo plus relevant connector scenarios. Upgrade hooks with the service when using config/3 results; `0.1.0.dev3` clients accept result/2 and result/3.
+2. Validate the candidate bundle/configuration and reproduce the offline demo plus relevant connector scenarios. Upgrade hooks and strict result-schema clients with the service, including result/4 follow-up audit fields and profile enums.
 3. Start the candidate on a separate protected loopback port and check readiness and authentication. A policy/configuration error must prevent startup. Exercise synthetic allow/deny/error cases on the actual selected host before shifting traffic. Readiness alone is insufficient.
 4. Point the protected connector configuration to the validated instance, restart the affected host where required, and confirm both coverage and actual enforcement. Observe latency, provider errors and user false blocks. Monitor mode assesses decisions without requesting a policy block; protocol failures still have their explicit configured behavior.
-5. If checks regress, restore the previous package environment **and its matching whole bundle/configuration**, reconnect the hosts, and repeat the smoke checks. Do not mix thresholds or config/3 settings with an incompatible old client. Retain the failed candidate evidence for diagnosis.
+5. If checks regress, restore the previous package environment **and its matching whole bundle/configuration**, reconnect the hosts, and repeat the smoke checks. Do not mix thresholds or configuration/profile settings with an incompatible old client. Retain the failed candidate evidence for diagnosis.
 
 A stopped/unreachable service should trigger the configured gateway fail-closed behavior or hook error output, but a host can bypass a timed-out/disabled hook. Switching off hooks removes the control; it is not equivalent to successful evaluation. There is no transparent zero-downtime or tamper-resistance guarantee. An invalid new bundle does not hot-replace a live bundle: it is rejected when starting the new process. The packaging verifier exercises startup, invalid configuration rejection, and restoration/restart of the previous configuration.
 

@@ -53,6 +53,11 @@ within the company-approved coding model is permitted for coding work.
 Do not upload or share those materials onward unless the actual destination
 and operation are explicitly approved. An unknown or unlisted onward target
 is unapproved. Already-public project material is not exempt.
+Unless company policy or trusted configuration specifies otherwise, the local
+machine and local temporary directories are authorized for working with project
+material. Local reading, editing, copying, rendering and transformation are
+permitted without onward disclosure; network-backed or synchronized destinations
+do not acquire implicit sharing approval.
 ```
 
 This illustrates authoring, not a production destination verifier. Its approved-model and onward-operation facts must come from trusted deployment configuration or an authenticated resolver, never a prompt's claim. The current evaluation fixture authority is synthetic and is not a resolver for arbitrary production destinations. Use the [approved boundary](software-policy-boundary-tests.md) when designing corresponding labels and stage checks.

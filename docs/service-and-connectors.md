@@ -1,10 +1,10 @@
 # Service and connector operation
 
-Implementation reference · 2026-09-27. See [runtime evidence](integration-report.md) before making enforcement claims. Linux/macOS only; use the pinned host versions/configurations. No hooks are automatically installed.
+Current connector contract · candidate `0.1.0a1`. See [runtime evidence](integration-report.md) before making enforcement claims. Linux/macOS only; use the pinned host versions/configurations. No hooks are automatically installed.
 
 ## Run the service
 
-Install the package following the README. Supply your validated policy folder and config/2. The demo remains monitoring-only. Add this provider configuration to its `config.yaml` for hosted evaluation:
+Install the package following the README. Supply your validated policy folder and matching supported configuration (config/2 through config/5). The demo remains monitoring-only. Add this provider configuration to its `config.yaml` for hosted evaluation:
 
 ```yaml
 provider:
@@ -34,11 +34,11 @@ Restart activates a complete validated bundle; invalid bundles/configuration pre
 
 | Endpoint | Authentication | Result |
 | --- | --- | --- |
-| `POST /v1/evaluate` | Native-principal Bearer token | request/1 → result/2; embedding caller owns enforcement |
+| `POST /v1/evaluate` | Native-principal Bearer token | request/1 → versioned result/2, /3 or /4; embedding caller owns enforcement |
 | `POST /beta/litellm_basic_guardrail_api` | LiteLLM-principal `x-api-key` or Bearer, never both | `NONE` or `BLOCKED` |
 | `POST /request`, `/response` | Agentgateway-principal Bearer | Pass/reject webhook action |
-| `POST /v1/hooks/copilot_local/{event}` | Local-principal Bearer | result/2 for the documented Local event |
-| `POST /v1/hooks/copilot_cli/{event}` | CLI-principal Bearer | result/2; CLI prompt always assessment-only |
+| `POST /v1/hooks/copilot_local/{event}` | Local-principal Bearer | versioned result for the documented Local event |
+| `POST /v1/hooks/copilot_cli/{event}` | CLI-principal Bearer | versioned result; CLI prompt always assessment-only |
 
 The token's connector and stages are deployment-bound. Unknown/wrong tokens return 401; connector/stage mismatches return 403. Callers cannot replace policies, thresholds, provider settings or failure actions. Neither raw headers nor request metadata are used as trusted facts. JSON bodies are limited to 262144 bytes, duplicate keys/compression are rejected, and body reading plus evaluation has a total deadline. Default service concurrency is eight; overload is immediate.
 
@@ -54,7 +54,7 @@ Coverage `complete` refers to **the declared event surface**, not all agent cont
 
 Local/CLI prompt coverage is only submitted text. Tool coverage is the supplied tool name and exact arguments. The client never reads transcript paths, files, repository contents or session paths from hook input. Attachments, retrieved material, history, tool results, final answers and subsequent tool-argument mutations are not covered by these hooks. A hook allow does not override native permission requirements.
 
-Metadata is independently controlled by `metadata.enabled` and source mappings in config/2. It defaults off, makes no enrichment calls, and content-only rules work normally. With metadata on, embed `create_app(evaluator, settings, evidence_resolver=...)` with a trusted **async deployment resolver**. It receives the authenticated principal ID and exact normalized event, and returns `EvidenceContext.from_verified(event, facts)` after authenticating the user/document/route sources. No resolver is loaded from a request, Markdown file or arbitrary import string. The basic `serve` command has no identity/directory resolver: required facts remain indeterminate until a trusted embedding supplies them. This is an extension boundary, not shipped enterprise directory integration. Test source authentication and subject/event binding in your deployment before enforcing metadata-dependent policies.
+Metadata is independently controlled by `metadata.enabled` and source mappings in config/2–5. It defaults off, makes no enrichment calls, and content-only rules work normally. With metadata on, embed `create_app(evaluator, settings, evidence_resolver=...)` with a trusted **async deployment resolver**. It receives the authenticated principal ID and exact normalized event, and returns `EvidenceContext.from_verified(event, facts)` after authenticating the user/document/route sources. No resolver is loaded from a request, Markdown file or arbitrary import string. The basic `serve` command has no identity/directory resolver: required facts remain indeterminate until a trusted embedding supplies them. This is an extension boundary, not shipped enterprise directory integration. Test source authentication and subject/event binding in your deployment before enforcing metadata-dependent policies.
 
 ## Install and remove Copilot hooks
 

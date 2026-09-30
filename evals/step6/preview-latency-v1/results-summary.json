@@ -1,0 +1,890 @@
+{
+  "source_commit": "6450402bd94bac243c2a813fafb1a9300f15029c",
+  "calls": 159,
+  "assessments": 122,
+  "new_cost_usd": 0.01486220399999999,
+  "total_accounted_usd": 0.355280118,
+  "workloads": {
+    "litellm-baseline-first": {
+      "latency": {
+        "n": 1,
+        "p50_ms": 1065.0782817974687,
+        "p95_ms": 1065.0782817974687,
+        "p99_ms": 1065.0782817974687
+      },
+      "rows": [
+        {
+          "index": 0,
+          "input_chars": 128,
+          "duration_ms": 1065.0782817974687,
+          "status": 200
+        }
+      ]
+    },
+    "litellm-baseline-serial": {
+      "latency": {
+        "n": 12,
+        "p50_ms": 11.34639186784625,
+        "p95_ms": 17.819048836827278,
+        "p99_ms": 17.819048836827278
+      },
+      "rows": [
+        {
+          "index": 0,
+          "input_chars": 128,
+          "duration_ms": 17.819048836827278,
+          "status": 200
+        },
+        {
+          "index": 1,
+          "input_chars": 4096,
+          "duration_ms": 12.163471896201372,
+          "status": 200
+        },
+        {
+          "index": 2,
+          "input_chars": 12000,
+          "duration_ms": 11.9892000220716,
+          "status": 200
+        },
+        {
+          "index": 3,
+          "input_chars": 128,
+          "duration_ms": 11.601977981626987,
+          "status": 200
+        },
+        {
+          "index": 4,
+          "input_chars": 4096,
+          "duration_ms": 11.263470631092787,
+          "status": 200
+        },
+        {
+          "index": 5,
+          "input_chars": 12000,
+          "duration_ms": 11.534546967595816,
+          "status": 200
+        },
+        {
+          "index": 6,
+          "input_chars": 128,
+          "duration_ms": 12.698360718786716,
+          "status": 200
+        },
+        {
+          "index": 7,
+          "input_chars": 4096,
+          "duration_ms": 11.34639186784625,
+          "status": 200
+        },
+        {
+          "index": 8,
+          "input_chars": 12000,
+          "duration_ms": 11.047224048525095,
+          "status": 200
+        },
+        {
+          "index": 9,
+          "input_chars": 128,
+          "duration_ms": 10.420246981084347,
+          "status": 200
+        },
+        {
+          "index": 10,
+          "input_chars": 4096,
+          "duration_ms": 10.358323808759451,
+          "status": 200
+        },
+        {
+          "index": 11,
+          "input_chars": 12000,
+          "duration_ms": 10.610081721097231,
+          "status": 200
+        }
+      ]
+    },
+    "litellm-baseline-concurrent4": {
+      "latency": {
+        "n": 24,
+        "p50_ms": 32.49014588072896,
+        "p95_ms": 36.35310707613826,
+        "p99_ms": 37.05657320097089
+      },
+      "rows": [
+        {
+          "index": 0,
+          "input_chars": 128,
+          "duration_ms": 33.34570815786719,
+          "status": 200
+        },
+        {
+          "index": 1,
+          "input_chars": 4096,
+          "duration_ms": 37.05657320097089,
+          "status": 200
+        },
+        {
+          "index": 2,
+          "input_chars": 12000,
+          "duration_ms": 36.35310707613826,
+          "status": 200
+        },
+        {
+          "index": 3,
+          "input_chars": 128,
+          "duration_ms": 33.908840734511614,
+          "status": 200
+        },
+        {
+          "index": 4,
+          "input_chars": 4096,
+          "duration_ms": 32.80425118282437,
+          "status": 200
+        },
+        {
+          "index": 5,
+          "input_chars": 12000,
+          "duration_ms": 31.45321784541011,
+          "status": 200
+        },
+        {
+          "index": 6,
+          "input_chars": 128,
+          "duration_ms": 31.77326312288642,
+          "status": 200
+        },
+        {
+          "index": 7,
+          "input_chars": 4096,
+          "duration_ms": 32.79338916763663,
+          "status": 200
+        },
+        {
+          "index": 8,
+          "input_chars": 12000,
+          "duration_ms": 31.895164400339127,
+          "status": 200
+        },
+        {
+          "index": 9,
+          "input_chars": 128,
+          "duration_ms": 31.540163792669773,
+          "status": 200
+        },
+        {
+          "index": 10,
+          "input_chars": 4096,
+          "duration_ms": 32.96631574630737,
+          "status": 200
+        },
+        {
+          "index": 11,
+          "input_chars": 12000,
+          "duration_ms": 30.9640527702868,
+          "status": 200
+        },
+        {
+          "index": 12,
+          "input_chars": 128,
+          "duration_ms": 31.95688407868147,
+          "status": 200
+        },
+        {
+          "index": 13,
+          "input_chars": 4096,
+          "duration_ms": 30.229540076106787,
+          "status": 200
+        },
+        {
+          "index": 14,
+          "input_chars": 12000,
+          "duration_ms": 31.625826843082905,
+          "status": 200
+        },
+        {
+          "index": 15,
+          "input_chars": 128,
+          "duration_ms": 30.831385869532824,
+          "status": 200
+        },
+        {
+          "index": 16,
+          "input_chars": 4096,
+          "duration_ms": 33.868792001158,
+          "status": 200
+        },
+        {
+          "index": 17,
+          "input_chars": 12000,
+          "duration_ms": 34.79064395651221,
+          "status": 200
+        },
+        {
+          "index": 18,
+          "input_chars": 128,
+          "duration_ms": 32.49014588072896,
+          "status": 200
+        },
+        {
+          "index": 19,
+          "input_chars": 4096,
+          "duration_ms": 33.960610162466764,
+          "status": 200
+        },
+        {
+          "index": 20,
+          "input_chars": 12000,
+          "duration_ms": 33.59139710664749,
+          "status": 200
+        },
+        {
+          "index": 21,
+          "input_chars": 128,
+          "duration_ms": 31.743228901177645,
+          "status": 200
+        },
+        {
+          "index": 22,
+          "input_chars": 4096,
+          "duration_ms": 34.35306902974844,
+          "status": 200
+        },
+        {
+          "index": 23,
+          "input_chars": 12000,
+          "duration_ms": 31.70303301885724,
+          "status": 200
+        }
+      ]
+    },
+    "litellm-guarded-first": {
+      "latency": {
+        "n": 1,
+        "p50_ms": 2208.7226272560656,
+        "p95_ms": 2208.7226272560656,
+        "p99_ms": 2208.7226272560656
+      },
+      "rows": [
+        {
+          "index": 0,
+          "input_chars": 128,
+          "duration_ms": 2208.7226272560656,
+          "status": 200
+        }
+      ]
+    },
+    "litellm-guarded-serial": {
+      "latency": {
+        "n": 12,
+        "p50_ms": 1090.6090065836906,
+        "p95_ms": 1817.8878710605204,
+        "p99_ms": 1817.8878710605204
+      },
+      "rows": [
+        {
+          "index": 0,
+          "input_chars": 128,
+          "duration_ms": 1817.8878710605204,
+          "status": 200
+        },
+        {
+          "index": 1,
+          "input_chars": 4096,
+          "duration_ms": 1040.9552589990199,
+          "status": 200
+        },
+        {
+          "index": 2,
+          "input_chars": 12000,
+          "duration_ms": 1044.0948349423707,
+          "status": 200
+        },
+        {
+          "index": 3,
+          "input_chars": 128,
+          "duration_ms": 1025.1671983860433,
+          "status": 200
+        },
+        {
+          "index": 4,
+          "input_chars": 4096,
+          "duration_ms": 1149.5486698113382,
+          "status": 200
+        },
+        {
+          "index": 5,
+          "input_chars": 12000,
+          "duration_ms": 1163.1127097643912,
+          "status": 200
+        },
+        {
+          "index": 6,
+          "input_chars": 128,
+          "duration_ms": 1197.938913013786,
+          "status": 200
+        },
+        {
+          "index": 7,
+          "input_chars": 4096,
+          "duration_ms": 1069.3611800670624,
+          "status": 200
+        },
+        {
+          "index": 8,
+          "input_chars": 12000,
+          "duration_ms": 1100.7261388003826,
+          "status": 200
+        },
+        {
+          "index": 9,
+          "input_chars": 128,
+          "duration_ms": 1088.1833038292825,
+          "status": 200
+        },
+        {
+          "index": 10,
+          "input_chars": 4096,
+          "duration_ms": 1090.6090065836906,
+          "status": 200
+        },
+        {
+          "index": 11,
+          "input_chars": 12000,
+          "duration_ms": 1116.5354498662055,
+          "status": 200
+        }
+      ]
+    },
+    "litellm-guarded-concurrent4": {
+      "latency": {
+        "n": 24,
+        "p50_ms": 1360.0951940752566,
+        "p95_ms": 1781.7199272103608,
+        "p99_ms": 2937.0025037787855
+      },
+      "rows": [
+        {
+          "index": 0,
+          "input_chars": 128,
+          "duration_ms": 2937.0025037787855,
+          "status": 200
+        },
+        {
+          "index": 1,
+          "input_chars": 4096,
+          "duration_ms": 1294.7739767841995,
+          "status": 200
+        },
+        {
+          "index": 2,
+          "input_chars": 12000,
+          "duration_ms": 1333.4984527900815,
+          "status": 200
+        },
+        {
+          "index": 3,
+          "input_chars": 128,
+          "duration_ms": 1385.376072023064,
+          "status": 200
+        },
+        {
+          "index": 4,
+          "input_chars": 4096,
+          "duration_ms": 1213.178003206849,
+          "status": 200
+        },
+        {
+          "index": 5,
+          "input_chars": 12000,
+          "duration_ms": 1191.904028877616,
+          "status": 200
+        },
+        {
+          "index": 6,
+          "input_chars": 128,
+          "duration_ms": 1254.3509481474757,
+          "status": 200
+        },
+        {
+          "index": 7,
+          "input_chars": 4096,
+          "duration_ms": 1391.2943596951663,
+          "status": 200
+        },
+        {
+          "index": 8,
+          "input_chars": 12000,
+          "duration_ms": 1586.2380121834576,
+          "status": 200
+        },
+        {
+          "index": 9,
+          "input_chars": 128,
+          "duration_ms": 1402.3289112374187,
+          "status": 200
+        },
+        {
+          "index": 10,
+          "input_chars": 4096,
+          "duration_ms": 1506.2165572308004,
+          "status": 200
+        },
+        {
+          "index": 11,
+          "input_chars": 12000,
+          "duration_ms": 1508.6078839376569,
+          "status": 200
+        },
+        {
+          "index": 12,
+          "input_chars": 128,
+          "duration_ms": 1384.2304069548845,
+          "status": 200
+        },
+        {
+          "index": 13,
+          "input_chars": 4096,
+          "duration_ms": 1334.9267458543181,
+          "status": 200
+        },
+        {
+          "index": 14,
+          "input_chars": 12000,
+          "duration_ms": 1357.5474540702999,
+          "status": 200
+        },
+        {
+          "index": 15,
+          "input_chars": 128,
+          "duration_ms": 1360.0951940752566,
+          "status": 200
+        },
+        {
+          "index": 16,
+          "input_chars": 4096,
+          "duration_ms": 1302.7207730337977,
+          "status": 200
+        },
+        {
+          "index": 17,
+          "input_chars": 12000,
+          "duration_ms": 1423.3336811885238,
+          "status": 200
+        },
+        {
+          "index": 18,
+          "input_chars": 128,
+          "duration_ms": 1781.7199272103608,
+          "status": 200
+        },
+        {
+          "index": 19,
+          "input_chars": 4096,
+          "duration_ms": 1448.1954593211412,
+          "status": 200
+        },
+        {
+          "index": 20,
+          "input_chars": 12000,
+          "duration_ms": 1403.331648092717,
+          "status": 200
+        },
+        {
+          "index": 21,
+          "input_chars": 128,
+          "duration_ms": 1232.3023118078709,
+          "status": 200
+        },
+        {
+          "index": 22,
+          "input_chars": 4096,
+          "duration_ms": 1264.0549433417618,
+          "status": 200
+        },
+        {
+          "index": 23,
+          "input_chars": 12000,
+          "duration_ms": 1243.4321590699255,
+          "status": 200
+        }
+      ]
+    },
+    "hook-copilot_local-concurrency1": {
+      "latency": {
+        "n": 12,
+        "p50_ms": 792.7132118493319,
+        "p95_ms": 980.1780479028821,
+        "p99_ms": 980.1780479028821
+      },
+      "rows": [
+        {
+          "index": 0,
+          "input_chars": 128,
+          "duration_ms": 813.2397951558232,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 1,
+          "input_chars": 4096,
+          "duration_ms": 827.3081397637725,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 2,
+          "input_chars": 12000,
+          "duration_ms": 780.5043654516339,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 3,
+          "input_chars": 128,
+          "duration_ms": 774.4969571940601,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 4,
+          "input_chars": 4096,
+          "duration_ms": 980.1780479028821,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 5,
+          "input_chars": 12000,
+          "duration_ms": 867.844597902149,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 6,
+          "input_chars": 128,
+          "duration_ms": 722.3008600994945,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 7,
+          "input_chars": 4096,
+          "duration_ms": 792.7132118493319,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 8,
+          "input_chars": 12000,
+          "duration_ms": 827.8986546210945,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 9,
+          "input_chars": 128,
+          "duration_ms": 742.6726571284235,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 10,
+          "input_chars": 4096,
+          "duration_ms": 751.9290316849947,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 11,
+          "input_chars": 12000,
+          "duration_ms": 877.2324668243527,
+          "exit_code": 0,
+          "host_output": {}
+        }
+      ]
+    },
+    "hook-copilot_local-concurrency4": {
+      "latency": {
+        "n": 12,
+        "p50_ms": 886.1731579527259,
+        "p95_ms": 974.7517318464816,
+        "p99_ms": 974.7517318464816
+      },
+      "rows": [
+        {
+          "index": 0,
+          "input_chars": 128,
+          "duration_ms": 886.1731579527259,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 1,
+          "input_chars": 4096,
+          "duration_ms": 920.9993961267173,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 2,
+          "input_chars": 12000,
+          "duration_ms": 962.4058846384287,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 3,
+          "input_chars": 128,
+          "duration_ms": 974.7517318464816,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 4,
+          "input_chars": 4096,
+          "duration_ms": 816.417986061424,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 5,
+          "input_chars": 12000,
+          "duration_ms": 919.3996717222035,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 6,
+          "input_chars": 128,
+          "duration_ms": 911.3687518984079,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 7,
+          "input_chars": 4096,
+          "duration_ms": 965.8192899078131,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 8,
+          "input_chars": 12000,
+          "duration_ms": 862.7697653137147,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 9,
+          "input_chars": 128,
+          "duration_ms": 793.1507332250476,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 10,
+          "input_chars": 4096,
+          "duration_ms": 791.2823958322406,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 11,
+          "input_chars": 12000,
+          "duration_ms": 825.4967681132257,
+          "exit_code": 0,
+          "host_output": {}
+        }
+      ]
+    },
+    "hook-copilot_cli-concurrency1": {
+      "latency": {
+        "n": 12,
+        "p50_ms": 816.5520830079913,
+        "p95_ms": 898.1462582014501,
+        "p99_ms": 898.1462582014501
+      },
+      "rows": [
+        {
+          "index": 0,
+          "input_chars": 128,
+          "duration_ms": 798.422743100673,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 1,
+          "input_chars": 4096,
+          "duration_ms": 828.7249901331961,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 2,
+          "input_chars": 12000,
+          "duration_ms": 816.5520830079913,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 3,
+          "input_chars": 128,
+          "duration_ms": 862.2665600851178,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 4,
+          "input_chars": 4096,
+          "duration_ms": 898.1462582014501,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 5,
+          "input_chars": 12000,
+          "duration_ms": 826.7573672346771,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 6,
+          "input_chars": 128,
+          "duration_ms": 790.4958897270262,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 7,
+          "input_chars": 4096,
+          "duration_ms": 747.6691021583974,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 8,
+          "input_chars": 12000,
+          "duration_ms": 760.8803631737828,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 9,
+          "input_chars": 128,
+          "duration_ms": 791.6568988002837,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 10,
+          "input_chars": 4096,
+          "duration_ms": 824.2500317282975,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 11,
+          "input_chars": 12000,
+          "duration_ms": 844.988530036062,
+          "exit_code": 0,
+          "host_output": {}
+        }
+      ]
+    },
+    "hook-copilot_cli-concurrency4": {
+      "latency": {
+        "n": 12,
+        "p50_ms": 895.8045719191432,
+        "p95_ms": 979.3341271579266,
+        "p99_ms": 979.3341271579266
+      },
+      "rows": [
+        {
+          "index": 0,
+          "input_chars": 128,
+          "duration_ms": 958.1713993102312,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 1,
+          "input_chars": 4096,
+          "duration_ms": 875.6268690340221,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 2,
+          "input_chars": 12000,
+          "duration_ms": 914.4671228714287,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 3,
+          "input_chars": 128,
+          "duration_ms": 879.1154222562909,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 4,
+          "input_chars": 4096,
+          "duration_ms": 979.3341271579266,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 5,
+          "input_chars": 12000,
+          "duration_ms": 939.7123577073216,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 6,
+          "input_chars": 128,
+          "duration_ms": 892.3957208171487,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 7,
+          "input_chars": 4096,
+          "duration_ms": 835.5630137957633,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 8,
+          "input_chars": 12000,
+          "duration_ms": 976.7918628640473,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 9,
+          "input_chars": 128,
+          "duration_ms": 894.6451037190855,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 10,
+          "input_chars": 4096,
+          "duration_ms": 895.8045719191432,
+          "exit_code": 0,
+          "host_output": {}
+        },
+        {
+          "index": 11,
+          "input_chars": 12000,
+          "duration_ms": 924.2669008672237,
+          "exit_code": 0,
+          "host_output": {}
+        }
+      ]
+    }
+  },
+  "report_sha256": "5e3a1f5d6296eb870cd655f93aa069bf4a88ba6be79d194a73c592b2938c0748"
+}

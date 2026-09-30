@@ -63,7 +63,7 @@ The owner approved initial per-policy targets: 95% interval upper bounds ≤5% f
 
 Publish results for each policy, route, and relevant stage, including failed cases that can be shared safely. Include a representative concurrency/failure exercise, p50/p95/p99 added latency, retries, billed usage, and service overhead. Compare alternatives under the same evidence and fixed budgets. Do not claim superiority from advertised price or one aggregate score.
 
-Passing transport tests does not require identical judgments across providers. It requires valid contracts, recorded model identity, and no silently substituted route. If no semantic policy meets its agreed targets, the planned enforcement preview is not ready: improve it or explicitly agree to a narrower assessment-only release. Publication is not a reason to conceal failure.
+Passing transport tests does not require identical judgments across providers. It requires valid contracts, recorded model identity, and no silently substituted route. Those targets gate claims of qualified enforcement. The current release path is an experimental developer preview with monitoring defaults, explicitly optional enforcement and visible fallback limitations; it makes no enterprise-readiness claim. Independent qualification remains separate work, and publication is not a reason to conceal failure.
 
 ## CI and supported-environment plan
 

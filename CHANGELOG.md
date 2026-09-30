@@ -12,7 +12,7 @@
 
 No public release has been published. Versions below identify private development snapshots; proposed `0.1.0a1` awaits the release, licensing and publication gates.
 
-## 0.1.0.dev3 — current development candidate
+## 0.1.0.dev3 — historical development series
 
 - Adds optional `policy_assessment: q05_stage_aware`: Q05 first, then at most one tool-specific scope follow-up for `tool_action` or Q04 for other stages. Preserves existing profiles, gates, full policy batches and trusted checks. Includes stage-specific preview and packaged demo configuration; update strict clients with the service.
 
