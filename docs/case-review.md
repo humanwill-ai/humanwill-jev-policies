@@ -185,3 +185,13 @@ updated. Previous browser fingerprints migrate under the owner's clarification.
 The patch-only live rerun remains uncertain3/3 because the supplied context does
 not establish its origin. See [results](patch-policy-rerun-v1-report.md); no browser
 or general local tests were run.
+
+## Existing-local-patch exemption — 2026-09-30
+
+The active manifest now pairs reviewed-v5 with policies-sources-v4. Source policyv3
+permits applying an existing local patch without re-establishing origin; fetching
+or downloading remains governed. Prior locally-produced wording is superseded.
+All174requests/labels unchanged; policy references and displayed text updated.
+The patch case allows3/3 on the first assessment, confidence.97–.98 for source
+scope. See [targeted results](patch-policy-rerun-v2-report.md). No full-pack or
+browser validation is implied; prior review fingerprints remain compatible.

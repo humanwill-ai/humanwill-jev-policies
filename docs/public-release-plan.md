@@ -391,3 +391,15 @@ origin unestablished; label remains allow for comparison, no provenance invented
 See [report](patch-policy-rerun-v1-report.md).6calls cost$.000502236; known total
 $.302540330+old$.01reserve, remaining$4.687459670. All6payloads/3views audited;
 no newunknowns, broad localtests, extra campaign, deployment, publication or push.
+
+## Existing local patch exemption passes — 2026-09-30
+
+Owner authorized replacing “locally produced” with an exemption for applying any
+existing local patch without re-establishing origin; fetching/downloading remains
+governed. EVAL-SRC-001v3 in active policies-sources-v4/reviewed-v5 (174unchanged
+requests/labels, source-versionrefs3). Patch-only rerun at06f2eea allows3/3 onfirst
+Q05, source confidence.97/.98/.98, nofollowup; disclosure also passes. Context and
+allotherinputs unchanged; no invented provenance. See [report](patch-policy-rerun-v2-report.md).
+3calls cost$.000239400,known$.302779730+old$.01reserve,remaining$4.687220270.
+All3payloads/3views audited. No fullpack/othercases/broadlocaltests/browserchecks/
+deployment/publication/push. Full-pack regression behavior remains unmeasured.
