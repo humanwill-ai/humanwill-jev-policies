@@ -72,9 +72,43 @@ Use [connector setup and removal](docs/service-and-connectors.md),
 [operations and rollback](docs/operations.md). These are specific tested profiles,
 not universal interception of Copilot or every gateway payload.
 
-Read [security considerations](docs/operations.md#security-considerations) before
-relying on hook enforcement: host timeouts and removed hooks can permit continuation
-even when the adapter is configured to block errors.
+## Security considerations
+
+**Use this service as one layer of defense.** Policy violations can still pass
+through because of model mistakes, prompt injection, missing context, unchecked
+stages, host bypasses or an error fallback configured to allow. Combine policy
+evaluation with independently enforced access controls, least-privilege tool
+permissions, sandboxing, approved network destinations and approval requirements
+for sensitive actions. Checking a prompt does not establish that later tool actions
+or generated responses are safe; check those stages where supported.
+
+In our [final development-pack evaluation](docs/preview-final-v1-report.md),
+**509/510 outcomes matched expectations (99.8%)** across three passes of 170
+distinct cases. All **246 known-violation observations** produced a block decision;
+none was incorrectly allowed. These were assessments in monitoring mode, not
+measurements of actual host blocking or a production enforcement success rate.
+There were 36 expected uncertain outcomes and one unexpected abstention on a
+legitimate request. An allow-on-error fallback permits uncertain requests; a
+block-on-error fallback can stop legitimate work. The pack was used for tuning,
+known difficult cases were removed, and repeated passes are not independent
+examples. These results do not establish the rate of violations that would escape
+in deployment; validate your own policies, traffic and failure settings.
+
+**Jev is not immune to prompt injection.** TypeSafe's official
+[Jev 1.13 guidance on adversarial content](https://docs.typesafe.ai/model-jaggedness/jev-1.13#adversarial-content)
+explains that supplied state is not treated as hostile by default and that injected
+instructions, misleading framing or content arguing for its own classification
+can influence the answer (verified 2026-10-01). Typed output does not make the
+judgment trustworthy by itself. Keep policy/configuration and trusted authorization
+facts outside requester control, and test adversarial inputs as well as legitimate
+workflows.
+
+Before relying on **Visual Studio Code Local agent hook enforcement**, read the
+[hook security considerations](docs/operations.md#security-considerations): host
+timeouts, disabled or removed hooks, and workspace configuration can permit
+continuation even when the adapter is configured to block errors. Copilot CLI has
+a separate contract: its prompt hook is assessment-only, and its tool hooks also
+have timeout/disabled-hook bypasses. Neither is a tamper-proof security boundary.
 
 Jev is available through OpenRouter and direct TypeSafe. OpenRouter has live
 synthetic evidence; direct TypeSafe has transport contract tests, with its separate
@@ -102,6 +136,36 @@ violations and abstentions separately, including fallback consequences.
 This service is not a shell security scanner, a full workflow observer, or a
 complete defense against prompt injection. It sees only the stages and content its
 connector supplies. Customer demand and enterprise suitability remain unvalidated.
+
+## Performance and request latency
+
+In our [2026-09-30 latency test](docs/preview-latency-v1-report.md), policy checks
+added roughly **1.1–1.3 seconds at the median and 1.8 seconds at p95** through
+LiteLLM, including both request and response checks. Individual hook executions
+took roughly **0.8–0.9 seconds at the median and up to 1.0 second at p95**.
+Here, p95 means 95% of the measured samples were at or below that duration.
+
+| Measured path | Median (p50) | p95 |
+| --- | ---: | ---: |
+| LiteLLM added delay, serial requests | 1,080 ms | 1,800 ms |
+| LiteLLM added delay, four concurrent requests | 1,329 ms | 1,749 ms |
+| VS Code Local hook executable, serial / concurrency 4 | 793 / 886 ms | 980 / 975 ms |
+| Copilot CLI hook executable, serial / concurrency 4 | 817 / 896 ms | 898 / 979 ms |
+
+These measurements used live Jev through OpenRouter, four policies in monitoring
+mode, the optional `q05_stage_aware` follow-up profile, and synthetic inputs of
+128–12,000 characters. Gateway figures are added delay against a baseline with
+guards disabled; downstream generation was mocked. Hook figures include process
+startup and evaluation, but exclude IDE/CLI scheduling. An agent turn with multiple
+checked actions can incur this overhead repeatedly.
+
+This was a small test (12–24 warm samples per group), not a latency guarantee or
+load-capacity benchmark. Gateway p99 reached 2,904 ms at concurrency four. The
+timings include follow-ups: all 37 synthetic placeholder responses remained
+uncertain and passed only because monitoring was enabled. They are not evidence
+of successful response enforcement. Actual latency depends on content, policies,
+network/provider conditions and follow-ups; Agentgateway live-provider latency
+was not measured. See the linked report for cold-request timing and full limits.
 
 ## Develop
 
