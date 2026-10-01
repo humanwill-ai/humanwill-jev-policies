@@ -13,12 +13,11 @@ and decision history remain preserved.
    individual-policy errors are masked by correct blocks from another policy.
    [Full report](preview-final-v1-report.md),
    [machine-readable summary](../evals/step6/preview-final-v1/results-summary.json).
-2. **Local artifact, connector and latency checks completed within available
-   environments; fresh host gaps remain explicit.** Both Python versions and
+2. **Local and hosted artifact/connector verification complete.** Both Python versions and
    wheel/source installs pass; actual LiteLLM and CLI host scenarios pass.
    Fresh VS Code Local acceptance now passes all 14 scenarios after fixing an
-   overly long test-profile path; the original unsuccessful attempt is preserved. Agentgateway Linux and container runtime retain
-   earlier evidence because this machine has neither that Linux runtime nor Docker.
+   overly long test-profile path; the original unsuccessful attempt is preserved. Final GitHub checks now refresh
+   actual Agentgateway, LiteLLM, CLI, Linux container and the cross-platform matrix.
    See [verification detail](preview-verification.md). Live profile latency p95:
    about 1.8 seconds added through LiteLLM and 1 second for hook processes. The
    placeholder response workload produced 37 visible evaluation errors; see
@@ -31,9 +30,10 @@ and decision history remain preserved.
    contribution and security reporting guidance, Python runtime inventory and
    local publication-exposure review. See [scope and remaining checks](public-preparation-report.md).
 
-5. **Final hosted validation in progress.** The owner authorized the postponed
-   GitHub checks on 2026-10-01: one batched private push, existing core/host jobs,
-   retained packages and container inventory. Results are not yet established.
+5. **Final hosted validation complete.** All seven jobs passed on the first run
+   at `5b1786b`, including 22 Agentgateway, 22 LiteLLM and six CLI scenarios.
+   Exact packages, hashes, container inventory and new-log exposure review are
+   recorded in the [final CI report](final-ci-report.md).
 
 No deployment or public visibility change is authorized. API spending remains
 inside the authorized $5; hosted validation uses synthetic offline evaluators.
@@ -78,9 +78,10 @@ the remaining allowance; no billing changes or paid overages are authorized.
 
 Apache-2.0 licensing, contribution/security guidance, the owner-selected reporting
 address and dependency notices/inventory are prepared. See [step 4 evidence](public-preparation-report.md).
-Complete final-candidate Actions validation and image inventory, recheck changes
-to history/logs/assets since the preparation audit, finalize the publication
-artifacts, then obtain owner approval for the concrete public release.
+Final-candidate Actions validation, image inventory and the history/log/asset
+review delta are complete. Obtain owner approval for the concrete public release,
+including the recorded author/path exposure and exact assets. The CI source archive
+contains the tested snapshot; this later documentation-only closure is separate.
 The candidate remains private and unpublished. CI rebuilds packages including
 licensing and publication materials and retains the exact tested assets.
 

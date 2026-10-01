@@ -89,6 +89,10 @@ from history. Local detailed identity information remains in the ignored review
 folder. Linked private/local artifact references are provenance, not public asset
 availability promises.
 
+**2026-10-01 update:** the [final hosted checks and exposure-review delta](final-ci-report.md)
+now pass; final image inventory and exact CI assets are retained. The list below
+records the original preparation checklist; concrete publication approval remains.
+
 Before publication:
 
 1. Assemble the final candidate after owner review of license/scope and the

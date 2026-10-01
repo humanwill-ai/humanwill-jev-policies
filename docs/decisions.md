@@ -674,3 +674,10 @@ private push, retaining exact packages and container package/license inventory.
 Local preflight passed 254 tests. This authorizes validation now, not public
 visibility, release publication, billing changes or Actions overages. No paid
 model calls are needed. Final results and publication approval remain pending.
+
+
+Final result: all seven jobs passed at `5b1786b` without reruns. See
+[final CI evidence](final-ci-report.md). Record the result with a documentation-only
+follow-up that skips redundant CI; exact retained packages remain tied to the
+tested commit. No provider spending, billing changes, public visibility change,
+tag or release. The next step is concrete publication approval.

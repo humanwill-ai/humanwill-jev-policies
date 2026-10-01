@@ -1,0 +1,571 @@
+{
+  "date": "2026-10-01",
+  "candidate_version": "0.1.0a1",
+  "tested_commit": "5b1786bf0e24e8cd6203badf808653e8682716cb",
+  "runs": [
+    {
+      "headSha": "5b1786bf0e24e8cd6203badf808653e8682716cb",
+      "url": "https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/36823008685",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "test (ubuntu-24.04, 3.14)",
+          "conclusion": "success",
+          "url": "https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/36823008685/job/110242446192",
+          "startedAt": "2026-10-01T06:06:05Z",
+          "completedAt": "2026-10-01T06:07:32Z"
+        },
+        {
+          "name": "test (macos-15, 3.11)",
+          "conclusion": "success",
+          "url": "https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/36823008685/job/110242446305",
+          "startedAt": "2026-10-01T06:06:08Z",
+          "completedAt": "2026-10-01T06:07:02Z"
+        },
+        {
+          "name": "test (ubuntu-24.04, 3.11)",
+          "conclusion": "success",
+          "url": "https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/36823008685/job/110242446372",
+          "startedAt": "2026-10-01T06:06:05Z",
+          "completedAt": "2026-10-01T06:07:28Z"
+        },
+        {
+          "name": "test (macos-15, 3.14)",
+          "conclusion": "success",
+          "url": "https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/36823008685/job/110242446445",
+          "startedAt": "2026-10-01T06:06:08Z",
+          "completedAt": "2026-10-01T06:06:56Z"
+        }
+      ]
+    },
+    {
+      "headSha": "5b1786bf0e24e8cd6203badf808653e8682716cb",
+      "url": "https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/36823008686",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "litellm",
+          "conclusion": "success",
+          "url": "https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/36823008686/job/110242446219",
+          "startedAt": "2026-10-01T06:06:05Z",
+          "completedAt": "2026-10-01T06:10:57Z"
+        },
+        {
+          "name": "copilot-cli",
+          "conclusion": "success",
+          "url": "https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/36823008686/job/110242446344",
+          "startedAt": "2026-10-01T06:06:06Z",
+          "completedAt": "2026-10-01T06:06:41Z"
+        },
+        {
+          "name": "agentgateway",
+          "conclusion": "success",
+          "url": "https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/36823008686/job/110242446346",
+          "startedAt": "2026-10-01T06:06:06Z",
+          "completedAt": "2026-10-01T06:06:22Z"
+        }
+      ]
+    }
+  ],
+  "host_versions": {
+    "agentgateway": "1.5.0",
+    "litellm": "1.102.1",
+    "copilot-cli": "1.0.88"
+  },
+  "host_scenarios": {
+    "agentgateway": [
+      {
+        "host": "agentgateway",
+        "mode": "enforce",
+        "case": "allow",
+        "status": 200,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "enforce",
+        "case": "request_deny",
+        "status": 403,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "enforce",
+        "case": "response_deny",
+        "status": 403,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "enforce",
+        "case": "response_error",
+        "status": 403,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "enforce",
+        "case": "response_timeout",
+        "status": 403,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "enforce",
+        "case": "provider_error",
+        "status": 403,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "enforce",
+        "case": "provider_timeout",
+        "status": 403,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "enforce",
+        "case": "stream_unsupported",
+        "status": 403,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "enforce",
+        "case": "image_unsupported",
+        "status": 403,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "enforce",
+        "case": "tool_definition_unsupported",
+        "status": 403,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "enforce",
+        "case": "client_guardrail_bypass",
+        "status": 403,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "enforce",
+        "case": "metadata_guardrail_bypass",
+        "status": 403,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "enforce",
+        "case": "history_coverage",
+        "status": 403,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "enforce",
+        "case": "service_unavailable",
+        "status": 503,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "monitor",
+        "case": "allow",
+        "status": 200,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "monitor",
+        "case": "request_deny",
+        "status": 200,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "monitor",
+        "case": "response_deny",
+        "status": 200,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "monitor",
+        "case": "response_error",
+        "status": 200,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "monitor",
+        "case": "response_timeout",
+        "status": 200,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "monitor",
+        "case": "provider_error",
+        "status": 200,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "monitor",
+        "case": "provider_timeout",
+        "status": 200,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "agentgateway",
+        "mode": "monitor",
+        "case": "service_unavailable",
+        "status": 503,
+        "downstream_calls": 0,
+        "passed": true
+      }
+    ],
+    "litellm": [
+      {
+        "host": "litellm",
+        "mode": "enforce",
+        "case": "allow",
+        "status": 200,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "enforce",
+        "case": "request_deny",
+        "status": 400,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "enforce",
+        "case": "response_deny",
+        "status": 400,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "enforce",
+        "case": "response_error",
+        "status": 400,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "enforce",
+        "case": "response_timeout",
+        "status": 400,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "enforce",
+        "case": "provider_error",
+        "status": 400,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "enforce",
+        "case": "provider_timeout",
+        "status": 400,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "enforce",
+        "case": "stream_unsupported",
+        "status": 400,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "enforce",
+        "case": "image_unsupported",
+        "status": 400,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "enforce",
+        "case": "tool_definition_unsupported",
+        "status": 400,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "enforce",
+        "case": "client_guardrail_bypass",
+        "status": 400,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "enforce",
+        "case": "metadata_guardrail_bypass",
+        "status": 400,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "enforce",
+        "case": "history_coverage",
+        "status": 400,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "enforce",
+        "case": "service_unavailable",
+        "status": 500,
+        "downstream_calls": 0,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "monitor",
+        "case": "allow",
+        "status": 200,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "monitor",
+        "case": "request_deny",
+        "status": 200,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "monitor",
+        "case": "response_deny",
+        "status": 200,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "monitor",
+        "case": "response_error",
+        "status": 200,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "monitor",
+        "case": "response_timeout",
+        "status": 200,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "monitor",
+        "case": "provider_error",
+        "status": 200,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "monitor",
+        "case": "provider_timeout",
+        "status": 200,
+        "downstream_calls": 1,
+        "passed": true
+      },
+      {
+        "host": "litellm",
+        "mode": "monitor",
+        "case": "service_unavailable",
+        "status": 500,
+        "downstream_calls": 0,
+        "passed": true
+      }
+    ],
+    "copilot-cli": [
+      {
+        "case": "allow",
+        "marker_exists": true,
+        "evaluated_stages": [
+          "prompt",
+          "tool_action"
+        ],
+        "model_calls": 2,
+        "passed": true
+      },
+      {
+        "case": "deny",
+        "marker_exists": false,
+        "evaluated_stages": [
+          "prompt",
+          "tool_action"
+        ],
+        "model_calls": 2,
+        "passed": true
+      },
+      {
+        "case": "prompt_assessment",
+        "marker_exists": true,
+        "evaluated_stages": [
+          "prompt",
+          "tool_action"
+        ],
+        "model_calls": 2,
+        "passed": true
+      },
+      {
+        "case": "service_down",
+        "marker_exists": false,
+        "evaluated_stages": [],
+        "model_calls": 2,
+        "passed": true
+      },
+      {
+        "case": "host_timeout",
+        "marker_exists": true,
+        "evaluated_stages": [
+          "prompt"
+        ],
+        "model_calls": 2,
+        "passed": true
+      },
+      {
+        "case": "disabled",
+        "marker_exists": true,
+        "evaluated_stages": [],
+        "model_calls": 2,
+        "passed": true
+      }
+    ]
+  },
+  "core_tests_per_job": 254,
+  "exact_artifact_verification": {
+    "python": "3.14.7 (main, Aug  6 2026, 02:19:46) [GCC 13.3.0]",
+    "artifacts": {
+      "humanwill_policies-0.1.0a1-py3-none-any.whl": "f823c4abec9aba86730d3a4a5d1385e84ee5c5d379fcd96314ce222b82ee2068",
+      "humanwill_policies-0.1.0a1.tar.gz": "fb4b684c2b32bf65f781fcb5f3b50f75f1285f187ebc68aad9d06f0d0d343606"
+    },
+    "checks": {
+      "wheel": {
+        "installed_version": "0.1.0a1",
+        "offline_demo": "pass",
+        "service_and_hook_contracts": "pass",
+        "stage_aware_profile_and_connectors": "pass",
+        "service_process": {
+          "startup": "pass",
+          "authentication": "pass",
+          "external_egress_disabled": "pass",
+          "invalid_configuration_rejected": "pass",
+          "restart_previous_configuration": "pass"
+        }
+      },
+      "sdist": {
+        "installed_version": "0.1.0a1",
+        "offline_demo": "pass",
+        "service_and_hook_contracts": "pass",
+        "stage_aware_profile_and_connectors": "pass",
+        "service_process": {
+          "startup": "pass",
+          "authentication": "pass",
+          "external_egress_disabled": "pass",
+          "invalid_configuration_rejected": "pass",
+          "restart_previous_configuration": "pass"
+        }
+      }
+    }
+  },
+  "container": {
+    "base_image": "python@sha256:a36c24f9cbdf4fd0f52d67f0823eeac19c2028c637cecc392d97f980d4fec56b",
+    "image_id": "sha256:816458ff985ec5c3fbf929e49f1ee62686b68eddfdfa0890fea66ae97d1814b7",
+    "python": "3.11.16",
+    "debian_package_count": 105,
+    "python_distribution_count": 21,
+    "missing_debian_copyright": [],
+    "missing_python_license_files": [],
+    "inventory_sha256": "0a245fdc59f8c01470cbc18e67eebd2c886d734f0be7fcdf9f9da183f8317df1",
+    "audit_scope": "pip-audit requirements.txt passed; no OS or base-image vulnerability audit claimed"
+  },
+  "retained_ci_artifact": {
+    "id": 11143428748,
+    "node_id": "MDg6QXJ0aWZhY3QxMTE0MzQyODc0OA==",
+    "name": "preview-candidate-5b1786bf0e24e8cd6203badf808653e8682716cb",
+    "size_in_bytes": 1315482,
+    "url": "https://api.github.com/repos/humanwill-ai/humanwill-jev-policies/actions/artifacts/11143428748",
+    "archive_download_url": "https://api.github.com/repos/humanwill-ai/humanwill-jev-policies/actions/artifacts/11143428748/zip",
+    "expired": false,
+    "digest": "sha256:874cadf94bef48fc9237a70f65f8f42ff2c18823c9ae9d3a47d23b763ff5abeb",
+    "created_at": "2026-10-01T06:07:30Z",
+    "updated_at": "2026-10-01T06:07:30Z",
+    "expires_at": "2026-10-15T06:07:29Z",
+    "workflow_run": {
+      "id": 36823008685,
+      "repository_id": 1390494218,
+      "head_repository_id": 1390494218,
+      "head_branch": "main",
+      "head_sha": "5b1786bf0e24e8cd6203badf808653e8682716cb"
+    }
+  },
+  "secret_review": {
+    "scanner": "gitleaks 8.30.1",
+    "git_matches": 0,
+    "new_logs_inventory_and_extracted_assets_matches": 0
+  },
+  "vscode_evidence": "preview-vscode-local-2026-09-30.json",
+  "runtime_source_unchanged_since_vscode_commit": "d6897c7",
+  "publication_authorized": false,
+  "provider_calls": 0,
+  "reruns": 0,
+  "limits": [
+    "Controlled evaluator/downstream host tests are not live Jev accuracy tests.",
+    "Independent holdout and statistical enforcement qualification remain open.",
+    "Exact retained packages use tested commit; later documentation-only closure is separate.",
+    "No container image registry publication; inventory is not a vulnerability or legal certification."
+  ]
+}

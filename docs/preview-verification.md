@@ -1,6 +1,7 @@
 # Candidate verification
 
-2026-09-30 · `0.1.0a1` · local preparation, no new GitHub Actions run.
+Updated 2026-10-01 · `0.1.0a1` · [final hosted checks pass](final-ci-report.md).
+The local preparation and VS Code retry below retain their original evidence.
 
 ## Completed checks
 
@@ -33,13 +34,12 @@ string alone does not. Host checks initially used the preparation wheel; package
 member parity against the final wheel is checked separately. Source reports are
 kept public-safe; raw test/profile logs and evaluator payloads remain ignored.
 
-## Limits and unfinished fresh-host checks
+## Limits and hosted refresh
 
-- **Agentgateway 1.5.0:** fresh installed-artifact adapter contracts pass. The real
-  Linux amd64 host evidence is the earlier pinned Actions run. This macOS x86_64
-  machine has no matching release binary, Linux runtime or Docker. No fresh actual
-  Agentgateway or container build is claimed, and no quota-consuming job was
-  dispatched. Cross-platform candidate CI also remains unrefreshed.
+- **Final hosted refresh complete:** Agentgateway 1.5.0, LiteLLM 1.102.1 and
+  Copilot CLI 1.0.88 pass on Linux against installed candidate wheels. All four
+  core matrix jobs pass, including the Linux container. See the
+  [exact candidate, job links and inventory](final-ci-report.md).
 - Native gateway host fixtures use the stable synthetic contract configuration;
   config/5 follow-up behavior is covered by installed-artifact tests and live
   LiteLLM/hook latency. Do not imply every host/profile combination was exercised.
@@ -51,9 +51,10 @@ but could not write its provenance report because the harness expects Git metada
 It was rerun with the installed wheel and copied harness from a Git-aware working
 directory; this was a harness reporting issue, not a service failure.
 
-These checks establish a useful local candidate. They do not close the independent
-semantic qualification or the remaining public-release licensing/history/exposure
-review. No public release, deployment, tag, visibility change or push occurred.
+These checks establish a tested preview candidate. Independent semantic
+qualification remains open. Licensing/history review and its post-CI delta are
+recorded separately. The private candidate was pushed for final CI; no public
+release, deployment, tag or visibility change occurred.
 
 ## VS Code retry and harness correction
 
