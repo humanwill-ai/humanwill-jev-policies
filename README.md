@@ -42,13 +42,29 @@ collections within one folder. Each policy has a stable ID, version, title, stag
 and rule text. The service loads an immutable bundle; callers cannot replace its
 policies, thresholds or permissions. See [policy authoring](docs/policy-authoring.md).
 
-Config/5 sends the actual Markdown rule with a reusable evaluation question.
-Optional `policy_assessment: q05_stage_aware` starts with Q05 and permits one bounded
-follow-up for eligible low-confidence scope judgments. At `tool_action` it asks
-about the actual proposed tool and arguments; elsewhere it uses Q04. It does not
-classify tools from prose, select policies using test labels, or retry every error.
-A follow-up must agree with the first scope choice and pass the configured gate.
-Unresolved results remain `evaluation_error`, handled by the configured fallback.
+Config/5 sends the covered request, response or proposed action alongside the
+actual Markdown policies and reusable evaluation questions. Our selected
+development profile, optional `policy_assessment: q05_stage_aware`, uses a
+**first assessment followed by at most one additional Jev call when needed**:
+
+1. **Assess with Q05**, the general question about whether the supplied operation
+   falls within a policy's restrictions. Trusted authorization checks remain in
+   deterministic code.
+2. **Follow up only on eligible low-confidence answers** that leave the combined
+   result as `evaluation_error`. For a connector-reported `tool_action`, ask more
+   directly about the proposed tool and its arguments. For other stages, use Q04,
+   an alternative general wording. The policies and supplied content stay the same;
+   the adapter does not ask Jev to select a smaller policy set or infer tool use
+   from a prompt mentioning a tool.
+3. **Accept the follow-up only if it agrees with the original scope choice and
+   meets the configured confidence threshold.** Already accepted answers stay
+   unchanged. Unresolved results remain `evaluation_error`, handled by the
+   configured allow/block fallback and monitoring mode.
+
+This is not a retry for every error: explicit `insufficient_evidence`, missing
+trusted facts, malformed primary replies and transport failures are not eligible.
+The extra call shares the original deadline and resource limits. Follow-ups are
+opt-in; omitting the profile retains the standard single-assessment behavior.
 See [the exact questions and limits](docs/bounded-policy-followup.md).
 
 Metadata is independently switchable. When enabled, a trusted application resolver
@@ -175,6 +191,29 @@ Python startup but excluding IDE/CLI scheduling. An agent turn can incur repeate
 checks. Actual latency depends on workload, provider/network conditions and
 follow-ups; production capacity and Agentgateway live-provider latency remain
 unmeasured.
+
+### Why we keep follow-up questions sequential
+
+We also tested sending **Q05 and Q04 together, plus the tool-specific question for
+tool-action events**, in the initial request. This would make alternative answers
+available without a second API call. In our [2026-10-01 experiment](docs/fanout-v1-report.md),
+however, it did not provide a compelling improvement:
+
+| Measurement | Current sequential approach | Questions together |
+| --- | ---: | ---: |
+| Median evaluator latency | 356 ms | 375 ms |
+| p95 evaluator latency | 518 ms | 498 ms |
+| Total evaluator API cost | $0.0205 | $0.0454 |
+
+Each approach evaluated the same **188 distinct cases twice (376 observations)**:
+170 reviewed development cases and 18 new cases with provisional labels. These
+are evaluator timings, including deterministic cases, not gateway added-delay
+measurements from the table above. Batching reduced overall p95 by about 4%, but
+slightly increased median latency and cost about **2.2 times as much**. It also
+failed our separate quality gates. We therefore retain the current approach:
+request an alternative question only when an eligible assessment needs it.
+This result concerns the tested design and workload, not every possible batching
+strategy; full results and limitations are in the linked report.
 
 ## Develop
 
