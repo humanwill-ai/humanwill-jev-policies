@@ -681,3 +681,17 @@ Final result: all seven jobs passed at `5b1786b` without reruns. See
 follow-up that skips redundant CI; exact retained packages remain tied to the
 tested commit. No provider spending, billing changes, public visibility change,
 tag or release. The next step is concrete publication approval.
+
+
+## Controlled latency comparison — 2026-10-01
+
+Owner authorized separating prompt-only, prompt/response and natural follow-up
+latency after reviewing the historical ~500ms versus ~1.8s results. Frozen0436c05,
+current runtime/policies/gates unchanged. See [report](latency-paths-v1-report.md):
+117requests,141calls,$0.013086738, no new unknowns. Meaningful prompt-only p95
+470ms; two-call code-review p95 1,454ms; three-call warning subgroup p95 1,168ms.
+All13warning and13placeholder response assessments error; monitoring permits
+HTTPdelivery. These are measured paths, not a performance optimization, coverage
+recommendation or independent accuracy result. README security/latency clarified;
+no runtime change, CI push, deployment or publication. Remaining$4.631633144,
+including unchanged historical$0.01 reservation in accounted spend.

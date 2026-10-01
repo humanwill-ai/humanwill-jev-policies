@@ -139,33 +139,39 @@ connector supplies. Customer demand and enterprise suitability remain unvalidate
 
 ## Performance and request latency
 
-In our [2026-09-30 latency test](docs/preview-latency-v1-report.md), policy checks
-added roughly **1.1–1.3 seconds at the median and 1.8 seconds at p95** through
-LiteLLM, including both request and response checks. Individual hook executions
-took roughly **0.8–0.9 seconds at the median and up to 1.0 second at p95**.
-Here, p95 means 95% of the measured samples were at or below that duration.
+**The number of evaluation calls matters.** In our
+[controlled 2026-10-01 comparison](docs/latency-paths-v1-report.md), prompt-only
+checks added **378 ms median / 470 ms p95** with the current four-policy profile.
+Checking the response adds another sequential evaluation; a follow-up can add a
+third. These are measured paths, not interchangeable latency guarantees.
 
-| Measured path | Median (p50) | p95 |
-| --- | ---: | ---: |
-| LiteLLM added delay, serial requests | 1,080 ms | 1,800 ms |
-| LiteLLM added delay, four concurrent requests | 1,329 ms | 1,749 ms |
-| VS Code Local hook executable, serial / concurrency 4 | 793 / 886 ms | 980 / 975 ms |
-| Copilot CLI hook executable, serial / concurrency 4 | 817 / 896 ms | 898 / 979 ms |
+| Warm gateway path | Samples | Jev calls per request | Median added delay | p95 added delay |
+| --- | ---: | ---: | ---: | ---: |
+| Prompt-only, meaningful code-review and warning workloads | 24 | 1 | 378 ms | 470 ms |
+| Prompt + response, local code review without follow-up | 12 | 2 | 733 ms | 1,454 ms |
+| Prompt + response, warning workload with a natural follow-up | 10 | 3 | 1,106 ms | 1,168 ms |
 
-These measurements used live Jev through OpenRouter, four policies in monitoring
-mode, the optional `q05_stage_aware` follow-up profile, and synthetic inputs of
-128–12,000 characters. Gateway figures are added delay against a baseline with
-guards disabled; downstream generation was mocked. Hook figures include process
-startup and evaluation, but exclude IDE/CLI scheduling. An agent turn with multiple
-checked actions can incur this overhead repeatedly.
+p95 means 95% of samples were at or below that duration. Small samples and network
+variation make tail estimates coarse: the lower p95 in the follow-up row does not
+mean an extra call is faster. Timings use real LiteLLM 1.102.1, live Jev through
+OpenRouter, serial requests, 128–12,000-character synthetic inputs, monitoring and
+`q05_stage_aware`. Added delay subtracts matched baseline request timings; downstream
+generation was mocked. The report includes all arms, errors and cold requests.
 
-This was a small test (12–24 warm samples per group), not a latency guarantee or
-load-capacity benchmark. Gateway p99 reached 2,904 ms at concurrency four. The
-timings include follow-ups: all 37 synthetic placeholder responses remained
-uncertain and passed only because monitoring was enabled. They are not evidence
-of successful response enforcement. Actual latency depends on content, policies,
-network/provider conditions and follow-ups; Agentgateway live-provider latency
-was not measured. See the linked report for cold-request timing and full limits.
+The warning response returned `evaluation_error` on all 13 attempts (including the
+initial request): 11 low-confidence outcomes and two malformed model replies.
+Its follow-ups did not resolve the uncertainty. The separately tested historical
+placeholder also remained uncertain, with p95 added delay of 1,725 ms. This helps
+explain the earlier roughly 1.8-second result; it is not the cost of every request
+or evidence of successful response enforcement. Prompt-only checks cover less
+than prompt-and-response checks, so select stages according to the policy's needs.
+
+[Earlier hook measurements](docs/preview-latency-v1-report.md) were roughly
+0.8–0.9 seconds median and up to 1.0 second p95 per hook execution, including
+Python startup but excluding IDE/CLI scheduling. An agent turn can incur repeated
+checks. Actual latency depends on workload, provider/network conditions and
+follow-ups; production capacity and Agentgateway live-provider latency remain
+unmeasured.
 
 ## Develop
 

@@ -1,0 +1,2108 @@
+{
+  "source_commit": "0436c056ad9ad6c687363b0bf0347ad10f42c50f",
+  "simulated": false,
+  "cost_before_usd": 0.355280118,
+  "cost_after_usd": 0.36836685599999996,
+  "new_cost_usd": 0.013086737999999987,
+  "physical_calls": 141,
+  "accounting_stopped": false,
+  "request_count": 117,
+  "assessment_decisions": {
+    "allow": 91,
+    "evaluation_error": 26
+  },
+  "groups": {
+    "local_code_review/baseline": {
+      "warm_total": {
+        "n": 12,
+        "p50_ms": 12.459893245249987,
+        "p95_ms": 19.501646049320698,
+        "p99_ms": 19.501646049320698
+      },
+      "warm_added": {
+        "n": 12,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0
+      },
+      "rows": [
+        {
+          "index": 0,
+          "cold": true,
+          "duration_ms": 1028.4915422089398,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 1,
+          "cold": false,
+          "duration_ms": 16.918567940592766,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 2,
+          "cold": false,
+          "duration_ms": 14.052842743694782,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 3,
+          "cold": false,
+          "duration_ms": 12.496393639594316,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 4,
+          "cold": false,
+          "duration_ms": 12.345826718956232,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 5,
+          "cold": false,
+          "duration_ms": 12.960352934896946,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 6,
+          "cold": false,
+          "duration_ms": 13.11717415228486,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 7,
+          "cold": false,
+          "duration_ms": 12.321642134338617,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 8,
+          "cold": false,
+          "duration_ms": 19.501646049320698,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 9,
+          "cold": false,
+          "duration_ms": 12.072324752807617,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 10,
+          "cold": false,
+          "duration_ms": 12.083421926945448,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 11,
+          "cold": false,
+          "duration_ms": 12.459893245249987,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 12,
+          "cold": false,
+          "duration_ms": 11.939681135118008,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        }
+      ]
+    },
+    "local_code_review/prompt_only": {
+      "warm_total": {
+        "n": 12,
+        "p50_ms": 378.6892630159855,
+        "p95_ms": 488.9247100800276,
+        "p99_ms": 488.9247100800276
+      },
+      "warm_added": {
+        "n": 12,
+        "p50_ms": 361.7706950753927,
+        "p95_ms": 475.96435714513063,
+        "p99_ms": 475.96435714513063
+      },
+      "rows": [
+        {
+          "index": 0,
+          "cold": true,
+          "duration_ms": 1513.2416542619467,
+          "added_ms": 484.7501120530069,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 1,
+          "cold": false,
+          "duration_ms": 378.6892630159855,
+          "added_ms": 361.7706950753927,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 2,
+          "cold": false,
+          "duration_ms": 408.67929905653,
+          "added_ms": 394.6264563128352,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 3,
+          "cold": false,
+          "duration_ms": 435.3140164166689,
+          "added_ms": 422.8176227770746,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 4,
+          "cold": false,
+          "duration_ms": 373.58108069747686,
+          "added_ms": 361.23525397852063,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 5,
+          "cold": false,
+          "duration_ms": 488.9247100800276,
+          "added_ms": 475.96435714513063,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 6,
+          "cold": false,
+          "duration_ms": 326.95434615015984,
+          "added_ms": 313.837171997875,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 7,
+          "cold": false,
+          "duration_ms": 361.9747129268944,
+          "added_ms": 349.6530707925558,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 8,
+          "cold": false,
+          "duration_ms": 397.3627910017967,
+          "added_ms": 377.861144952476,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 9,
+          "cold": false,
+          "duration_ms": 378.9564869366586,
+          "added_ms": 366.884162183851,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 10,
+          "cold": false,
+          "duration_ms": 373.4379671514034,
+          "added_ms": 361.354545224458,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 11,
+          "cold": false,
+          "duration_ms": 462.54060324281454,
+          "added_ms": 450.08070999756455,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 12,
+          "cold": false,
+          "duration_ms": 352.2874368354678,
+          "added_ms": 340.3477557003498,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        }
+      ]
+    },
+    "local_code_review/prompt_and_response": {
+      "warm_total": {
+        "n": 12,
+        "p50_ms": 745.6214660778642,
+        "p95_ms": 1470.5749559216201,
+        "p99_ms": 1470.5749559216201
+      },
+      "warm_added": {
+        "n": 12,
+        "p50_ms": 733.2756393589079,
+        "p95_ms": 1453.6563879810274,
+        "p99_ms": 1453.6563879810274
+      },
+      "rows": [
+        {
+          "index": 0,
+          "cold": true,
+          "duration_ms": 1774.0172697231174,
+          "added_ms": 745.5257275141776,
+          "provider_calls": 2,
+          "followups": 0,
+          "decisions": [
+            "allow",
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed",
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 1,
+          "cold": false,
+          "duration_ms": 1470.5749559216201,
+          "added_ms": 1453.6563879810274,
+          "provider_calls": 2,
+          "followups": 0,
+          "decisions": [
+            "allow",
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed",
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 2,
+          "cold": false,
+          "duration_ms": 740.1924352161586,
+          "added_ms": 726.1395924724638,
+          "provider_calls": 2,
+          "followups": 0,
+          "decisions": [
+            "allow",
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed",
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 3,
+          "cold": false,
+          "duration_ms": 731.9667208939791,
+          "added_ms": 719.4703272543848,
+          "provider_calls": 2,
+          "followups": 0,
+          "decisions": [
+            "allow",
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed",
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 4,
+          "cold": false,
+          "duration_ms": 745.6214660778642,
+          "added_ms": 733.2756393589079,
+          "provider_calls": 2,
+          "followups": 0,
+          "decisions": [
+            "allow",
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed",
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 5,
+          "cold": false,
+          "duration_ms": 923.4468420036137,
+          "added_ms": 910.4864890687168,
+          "provider_calls": 2,
+          "followups": 0,
+          "decisions": [
+            "allow",
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed",
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 6,
+          "cold": false,
+          "duration_ms": 684.5926586538553,
+          "added_ms": 671.4754845015705,
+          "provider_calls": 2,
+          "followups": 0,
+          "decisions": [
+            "allow",
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed",
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 7,
+          "cold": false,
+          "duration_ms": 677.0456372760236,
+          "added_ms": 664.723995141685,
+          "provider_calls": 2,
+          "followups": 0,
+          "decisions": [
+            "allow",
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed",
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 8,
+          "cold": false,
+          "duration_ms": 823.0801722966135,
+          "added_ms": 803.5785262472928,
+          "provider_calls": 2,
+          "followups": 0,
+          "decisions": [
+            "allow",
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed",
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 9,
+          "cold": false,
+          "duration_ms": 794.2152847535908,
+          "added_ms": 782.1429600007832,
+          "provider_calls": 2,
+          "followups": 0,
+          "decisions": [
+            "allow",
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed",
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 10,
+          "cold": false,
+          "duration_ms": 757.6595270074904,
+          "added_ms": 745.576105080545,
+          "provider_calls": 2,
+          "followups": 0,
+          "decisions": [
+            "allow",
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed",
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 11,
+          "cold": false,
+          "duration_ms": 763.6815779842436,
+          "added_ms": 751.2216847389936,
+          "provider_calls": 2,
+          "followups": 0,
+          "decisions": [
+            "allow",
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed",
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 12,
+          "cold": false,
+          "duration_ms": 701.2504176236689,
+          "added_ms": 689.3107364885509,
+          "provider_calls": 2,
+          "followups": 0,
+          "decisions": [
+            "allow",
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed",
+            "not_needed"
+          ],
+          "status": 200
+        }
+      ]
+    },
+    "download_warning/prompt_only": {
+      "warm_total": {
+        "n": 12,
+        "p50_ms": 391.4075242355466,
+        "p95_ms": 487.6294760033488,
+        "p99_ms": 487.6294760033488
+      },
+      "warm_added": {
+        "n": 12,
+        "p50_ms": 378.2080803066492,
+        "p95_ms": 470.14322504401207,
+        "p99_ms": 470.14322504401207
+      },
+      "rows": [
+        {
+          "index": 0,
+          "cold": true,
+          "duration_ms": 1376.4004409313202,
+          "added_ms": 349.3809630163014,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 1,
+          "cold": false,
+          "duration_ms": 487.6294760033488,
+          "added_ms": 470.14322504401207,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 2,
+          "cold": false,
+          "duration_ms": 401.5406365506351,
+          "added_ms": 385.702520608902,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 3,
+          "cold": false,
+          "duration_ms": 393.8764319755137,
+          "added_ms": 380.6716981343925,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 4,
+          "cold": false,
+          "duration_ms": 380.7858373038471,
+          "added_ms": 367.2779933549464,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 5,
+          "cold": false,
+          "duration_ms": 391.4075242355466,
+          "added_ms": 377.99310917034745,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 6,
+          "cold": false,
+          "duration_ms": 391.1440600641072,
+          "added_ms": 378.2080803066492,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 7,
+          "cold": false,
+          "duration_ms": 433.5057958960533,
+          "added_ms": 419.1327537409961,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 8,
+          "cold": false,
+          "duration_ms": 432.2757408954203,
+          "added_ms": 419.86444871872663,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 9,
+          "cold": false,
+          "duration_ms": 370.8320837467909,
+          "added_ms": 356.32824758067727,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 10,
+          "cold": false,
+          "duration_ms": 342.9107698611915,
+          "added_ms": 330.2315566688776,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 11,
+          "cold": false,
+          "duration_ms": 409.38281500712037,
+          "added_ms": 393.73184833675623,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 12,
+          "cold": false,
+          "duration_ms": 357.1162703447044,
+          "added_ms": 341.99714846909046,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        }
+      ]
+    },
+    "download_warning/prompt_and_response": {
+      "warm_total": {
+        "n": 12,
+        "p50_ms": 1118.8008380122483,
+        "p95_ms": 1180.925845168531,
+        "p99_ms": 1180.925845168531
+      },
+      "warm_added": {
+        "n": 12,
+        "p50_ms": 1104.4859290122986,
+        "p95_ms": 1168.246631976217,
+        "p99_ms": 1168.246631976217
+      },
+      "rows": [
+        {
+          "index": 0,
+          "cold": true,
+          "duration_ms": 2121.3316237553954,
+          "added_ms": 1094.3121458403766,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 1,
+          "cold": false,
+          "duration_ms": 1022.1522031351924,
+          "added_ms": 1004.6659521758556,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 2,
+          "cold": false,
+          "duration_ms": 1117.8601700812578,
+          "added_ms": 1102.0220541395247,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 3,
+          "cold": false,
+          "duration_ms": 1175.026106648147,
+          "added_ms": 1161.821372807026,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 4,
+          "cold": false,
+          "duration_ms": 1131.1199148185551,
+          "added_ms": 1117.6120708696544,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 5,
+          "cold": false,
+          "duration_ms": 691.2833298556507,
+          "added_ms": 677.8689147904515,
+          "provider_calls": 2,
+          "followups": 0,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 6,
+          "cold": false,
+          "duration_ms": 740.2884168550372,
+          "added_ms": 727.3524370975792,
+          "provider_calls": 2,
+          "followups": 0,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 7,
+          "cold": false,
+          "duration_ms": 1084.6048649400473,
+          "added_ms": 1070.23182278499,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 8,
+          "cold": false,
+          "duration_ms": 1118.8008380122483,
+          "added_ms": 1106.3895458355546,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 9,
+          "cold": false,
+          "duration_ms": 1118.9897651784122,
+          "added_ms": 1104.4859290122986,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 10,
+          "cold": false,
+          "duration_ms": 1180.925845168531,
+          "added_ms": 1168.246631976217,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 11,
+          "cold": false,
+          "duration_ms": 1146.5283669531345,
+          "added_ms": 1130.8774002827704,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 12,
+          "cold": false,
+          "duration_ms": 1125.2397210337222,
+          "added_ms": 1110.1205991581082,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        }
+      ]
+    },
+    "download_warning/baseline": {
+      "warm_total": {
+        "n": 12,
+        "p50_ms": 13.5078439489007,
+        "p95_ms": 17.486250959336758,
+        "p99_ms": 17.486250959336758
+      },
+      "warm_added": {
+        "n": 12,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0
+      },
+      "rows": [
+        {
+          "index": 0,
+          "cold": true,
+          "duration_ms": 1027.0194779150188,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 1,
+          "cold": false,
+          "duration_ms": 17.486250959336758,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 2,
+          "cold": false,
+          "duration_ms": 15.838115941733122,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 3,
+          "cold": false,
+          "duration_ms": 13.204733841121197,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 4,
+          "cold": false,
+          "duration_ms": 13.5078439489007,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 5,
+          "cold": false,
+          "duration_ms": 13.414415065199137,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 6,
+          "cold": false,
+          "duration_ms": 12.935979757457972,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 7,
+          "cold": false,
+          "duration_ms": 14.373042155057192,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 8,
+          "cold": false,
+          "duration_ms": 12.411292176693678,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 9,
+          "cold": false,
+          "duration_ms": 14.503836166113615,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 10,
+          "cold": false,
+          "duration_ms": 12.67921319231391,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 11,
+          "cold": false,
+          "duration_ms": 15.650966670364141,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 12,
+          "cold": false,
+          "duration_ms": 15.119121875613928,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        }
+      ]
+    },
+    "legacy_placeholder_diagnostic/prompt_and_response": {
+      "warm_total": {
+        "n": 12,
+        "p50_ms": 1123.9143973216414,
+        "p95_ms": 1741.997370030731,
+        "p99_ms": 1741.997370030731
+      },
+      "warm_added": {
+        "n": 12,
+        "p50_ms": 1111.726297531277,
+        "p95_ms": 1725.2457039430737,
+        "p99_ms": 1725.2457039430737
+      },
+      "rows": [
+        {
+          "index": 0,
+          "cold": true,
+          "duration_ms": 2215.7930359244347,
+          "added_ms": 1344.671128783375,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 1,
+          "cold": false,
+          "duration_ms": 1741.997370030731,
+          "added_ms": 1725.2457039430737,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 2,
+          "cold": false,
+          "duration_ms": 1098.6117287538946,
+          "added_ms": 1085.5519203469157,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 3,
+          "cold": false,
+          "duration_ms": 1271.6153799556196,
+          "added_ms": 1258.4795993752778,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 4,
+          "cold": false,
+          "duration_ms": 1099.0863610059023,
+          "added_ms": 1085.2177441120148,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 5,
+          "cold": false,
+          "duration_ms": 1128.8484348915517,
+          "added_ms": 1115.5586037784815,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 6,
+          "cold": false,
+          "duration_ms": 1233.5103792138398,
+          "added_ms": 1220.8857173100114,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 7,
+          "cold": false,
+          "duration_ms": 1069.9322228319943,
+          "added_ms": 1056.906151585281,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 8,
+          "cold": false,
+          "duration_ms": 1238.3721489459276,
+          "added_ms": 1225.424346048385,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 9,
+          "cold": false,
+          "duration_ms": 1048.4052011743188,
+          "added_ms": 1036.2166441045702,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 10,
+          "cold": false,
+          "duration_ms": 1057.0227690041065,
+          "added_ms": 1024.8880158178508,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 11,
+          "cold": false,
+          "duration_ms": 1151.9500641152263,
+          "added_ms": 1139.6225052885711,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 12,
+          "cold": false,
+          "duration_ms": 1123.9143973216414,
+          "added_ms": 1111.726297531277,
+          "provider_calls": 3,
+          "followups": 1,
+          "decisions": [
+            "allow",
+            "evaluation_error"
+          ],
+          "followup_status": [
+            "not_needed",
+            "completed"
+          ],
+          "status": 200
+        }
+      ]
+    },
+    "legacy_placeholder_diagnostic/baseline": {
+      "warm_total": {
+        "n": 12,
+        "p50_ms": 13.0260712467134,
+        "p95_ms": 32.13475318625569,
+        "p99_ms": 32.13475318625569
+      },
+      "warm_added": {
+        "n": 12,
+        "p50_ms": 0.0,
+        "p95_ms": 0.0,
+        "p99_ms": 0.0
+      },
+      "rows": [
+        {
+          "index": 0,
+          "cold": true,
+          "duration_ms": 871.1219071410596,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 1,
+          "cold": false,
+          "duration_ms": 16.751666087657213,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 2,
+          "cold": false,
+          "duration_ms": 13.059808406978846,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 3,
+          "cold": false,
+          "duration_ms": 13.135780580341816,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 4,
+          "cold": false,
+          "duration_ms": 13.86861689388752,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 5,
+          "cold": false,
+          "duration_ms": 13.28983111307025,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 6,
+          "cold": false,
+          "duration_ms": 12.624661903828382,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 7,
+          "cold": false,
+          "duration_ms": 13.0260712467134,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 8,
+          "cold": false,
+          "duration_ms": 12.947802897542715,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 9,
+          "cold": false,
+          "duration_ms": 12.18855706974864,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 10,
+          "cold": false,
+          "duration_ms": 32.13475318625569,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 11,
+          "cold": false,
+          "duration_ms": 12.32755882665515,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        },
+        {
+          "index": 12,
+          "cold": false,
+          "duration_ms": 12.188099790364504,
+          "added_ms": 0.0,
+          "provider_calls": 0,
+          "followups": 0,
+          "decisions": [],
+          "followup_status": [],
+          "status": 200
+        }
+      ]
+    },
+    "legacy_placeholder_diagnostic/prompt_only": {
+      "warm_total": {
+        "n": 12,
+        "p50_ms": 378.0365842394531,
+        "p95_ms": 417.22094314172864,
+        "p99_ms": 417.22094314172864
+      },
+      "warm_added": {
+        "n": 12,
+        "p50_ms": 364.90080365911126,
+        "p95_ms": 404.19487189501524,
+        "p99_ms": 404.19487189501524
+      },
+      "rows": [
+        {
+          "index": 0,
+          "cold": true,
+          "duration_ms": 1294.4522453472018,
+          "added_ms": 423.3303382061422,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 1,
+          "cold": false,
+          "duration_ms": 381.9856750778854,
+          "added_ms": 365.2340089902282,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 2,
+          "cold": false,
+          "duration_ms": 358.98860497400165,
+          "added_ms": 345.9287965670228,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 3,
+          "cold": false,
+          "duration_ms": 378.0365842394531,
+          "added_ms": 364.90080365911126,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 4,
+          "cold": false,
+          "duration_ms": 354.24463963136077,
+          "added_ms": 340.37602273747325,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 5,
+          "cold": false,
+          "duration_ms": 410.27909610420465,
+          "added_ms": 396.9892649911344,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 6,
+          "cold": false,
+          "duration_ms": 370.1968928799033,
+          "added_ms": 357.57223097607493,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 7,
+          "cold": false,
+          "duration_ms": 417.22094314172864,
+          "added_ms": 404.19487189501524,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 8,
+          "cold": false,
+          "duration_ms": 413.46160462126136,
+          "added_ms": 400.51380172371864,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 9,
+          "cold": false,
+          "duration_ms": 356.46734293550253,
+          "added_ms": 344.2787858657539,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 10,
+          "cold": false,
+          "duration_ms": 352.3086649365723,
+          "added_ms": 320.1739117503166,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 11,
+          "cold": false,
+          "duration_ms": 402.6545281521976,
+          "added_ms": 390.32696932554245,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        },
+        {
+          "index": 12,
+          "cold": false,
+          "duration_ms": 413.3151317946613,
+          "added_ms": 401.1270320042968,
+          "provider_calls": 1,
+          "followups": 0,
+          "decisions": [
+            "allow"
+          ],
+          "followup_status": [
+            "not_needed"
+          ],
+          "status": 200
+        }
+      ]
+    }
+  },
+  "pooled_warm_paths": {
+    "meaningful/prompt_and_response": {
+      "added": {
+        "n": 24,
+        "p50_ms": 803.5785262472928,
+        "p95_ms": 1168.246631976217,
+        "p99_ms": 1453.6563879810274
+      },
+      "total": {
+        "n": 24,
+        "p50_ms": 823.0801722966135,
+        "p95_ms": 1180.925845168531,
+        "p99_ms": 1470.5749559216201
+      },
+      "provider_call_counts": {
+        "2": 14,
+        "3": 10
+      },
+      "followup_requests": 10,
+      "assessment_decisions": {
+        "allow": 36,
+        "evaluation_error": 12
+      }
+    },
+    "meaningful/prompt_and_response/followup": {
+      "added": {
+        "n": 10,
+        "p50_ms": 1106.3895458355546,
+        "p95_ms": 1168.246631976217,
+        "p99_ms": 1168.246631976217
+      },
+      "total": {
+        "n": 10,
+        "p50_ms": 1118.9897651784122,
+        "p95_ms": 1180.925845168531,
+        "p99_ms": 1180.925845168531
+      },
+      "provider_call_counts": {
+        "3": 10
+      },
+      "followup_requests": 10,
+      "assessment_decisions": {
+        "allow": 10,
+        "evaluation_error": 10
+      }
+    },
+    "meaningful/prompt_and_response/no_followup": {
+      "added": {
+        "n": 14,
+        "p50_ms": 727.3524370975792,
+        "p95_ms": 1453.6563879810274,
+        "p99_ms": 1453.6563879810274
+      },
+      "total": {
+        "n": 14,
+        "p50_ms": 740.2884168550372,
+        "p95_ms": 1470.5749559216201,
+        "p99_ms": 1470.5749559216201
+      },
+      "provider_call_counts": {
+        "2": 14
+      },
+      "followup_requests": 0,
+      "assessment_decisions": {
+        "allow": 26,
+        "evaluation_error": 2
+      }
+    },
+    "meaningful/prompt_only": {
+      "added": {
+        "n": 24,
+        "p50_ms": 377.861144952476,
+        "p95_ms": 470.14322504401207,
+        "p99_ms": 475.96435714513063
+      },
+      "total": {
+        "n": 24,
+        "p50_ms": 391.1440600641072,
+        "p95_ms": 487.6294760033488,
+        "p99_ms": 488.9247100800276
+      },
+      "provider_call_counts": {
+        "1": 24
+      },
+      "followup_requests": 0,
+      "assessment_decisions": {
+        "allow": 24
+      }
+    },
+    "meaningful/prompt_only/no_followup": {
+      "added": {
+        "n": 24,
+        "p50_ms": 377.861144952476,
+        "p95_ms": 470.14322504401207,
+        "p99_ms": 475.96435714513063
+      },
+      "total": {
+        "n": 24,
+        "p50_ms": 391.1440600641072,
+        "p95_ms": 487.6294760033488,
+        "p99_ms": 488.9247100800276
+      },
+      "provider_call_counts": {
+        "1": 24
+      },
+      "followup_requests": 0,
+      "assessment_decisions": {
+        "allow": 24
+      }
+    },
+    "placeholder/prompt_and_response": {
+      "added": {
+        "n": 12,
+        "p50_ms": 1111.726297531277,
+        "p95_ms": 1725.2457039430737,
+        "p99_ms": 1725.2457039430737
+      },
+      "total": {
+        "n": 12,
+        "p50_ms": 1123.9143973216414,
+        "p95_ms": 1741.997370030731,
+        "p99_ms": 1741.997370030731
+      },
+      "provider_call_counts": {
+        "3": 12
+      },
+      "followup_requests": 12,
+      "assessment_decisions": {
+        "allow": 12,
+        "evaluation_error": 12
+      }
+    },
+    "placeholder/prompt_and_response/followup": {
+      "added": {
+        "n": 12,
+        "p50_ms": 1111.726297531277,
+        "p95_ms": 1725.2457039430737,
+        "p99_ms": 1725.2457039430737
+      },
+      "total": {
+        "n": 12,
+        "p50_ms": 1123.9143973216414,
+        "p95_ms": 1741.997370030731,
+        "p99_ms": 1741.997370030731
+      },
+      "provider_call_counts": {
+        "3": 12
+      },
+      "followup_requests": 12,
+      "assessment_decisions": {
+        "allow": 12,
+        "evaluation_error": 12
+      }
+    },
+    "placeholder/prompt_only": {
+      "added": {
+        "n": 12,
+        "p50_ms": 364.90080365911126,
+        "p95_ms": 404.19487189501524,
+        "p99_ms": 404.19487189501524
+      },
+      "total": {
+        "n": 12,
+        "p50_ms": 378.0365842394531,
+        "p95_ms": 417.22094314172864,
+        "p99_ms": 417.22094314172864
+      },
+      "provider_call_counts": {
+        "1": 12
+      },
+      "followup_requests": 0,
+      "assessment_decisions": {
+        "allow": 12
+      }
+    },
+    "placeholder/prompt_only/no_followup": {
+      "added": {
+        "n": 12,
+        "p50_ms": 364.90080365911126,
+        "p95_ms": 404.19487189501524,
+        "p99_ms": 404.19487189501524
+      },
+      "total": {
+        "n": 12,
+        "p50_ms": 378.0365842394531,
+        "p95_ms": 417.22094314172864,
+        "p99_ms": 417.22094314172864
+      },
+      "provider_call_counts": {
+        "1": 12
+      },
+      "followup_requests": 0,
+      "assessment_decisions": {
+        "allow": 12
+      }
+    }
+  },
+  "audit": {
+    "audited_provider_exchanges": 141,
+    "stage_calls": {
+      "model_request": 78,
+      "response": 63
+    },
+    "assessment_decisions": {
+      "allow": 91,
+      "evaluation_error": 26
+    },
+    "malformed_batches": [
+      {
+        "ledger_index": 5536,
+        "code": "malformed_response",
+        "probability_sums": {
+          "EVAL-SRC-001": 1.0,
+          "EVAL-SW-001": 0.9900000000000001
+        }
+      },
+      {
+        "ledger_index": 5538,
+        "code": "malformed_response",
+        "probability_sums": {
+          "EVAL-SRC-001": 0.9999999999999999,
+          "EVAL-SW-001": 0.9900000000000001
+        }
+      }
+    ],
+    "cold_requests": [
+      {
+        "group": "local_code_review/baseline",
+        "duration_ms": 1028.4915422089398
+      },
+      {
+        "group": "local_code_review/prompt_only",
+        "duration_ms": 1513.2416542619467
+      },
+      {
+        "group": "local_code_review/prompt_and_response",
+        "duration_ms": 1774.0172697231174
+      },
+      {
+        "group": "download_warning/prompt_only",
+        "duration_ms": 1376.4004409313202
+      },
+      {
+        "group": "download_warning/prompt_and_response",
+        "duration_ms": 2121.3316237553954
+      },
+      {
+        "group": "download_warning/baseline",
+        "duration_ms": 1027.0194779150188
+      },
+      {
+        "group": "legacy_placeholder_diagnostic/prompt_and_response",
+        "duration_ms": 2215.7930359244347
+      },
+      {
+        "group": "legacy_placeholder_diagnostic/baseline",
+        "duration_ms": 871.1219071410596
+      },
+      {
+        "group": "legacy_placeholder_diagnostic/prompt_only",
+        "duration_ms": 1294.4522453472018
+      }
+    ],
+    "new_cost_usd": 0.013086738,
+    "cumulative_known_usd": 0.358366856,
+    "accounted_usd": 0.368366856,
+    "remaining_usd": 4.631633144,
+    "historical_unknown_index": 1830,
+    "new_unknowns": 0,
+    "scope": "Frozen-input, stage/content, batch-validation and ledger audit; not full result replay"
+  }
+}

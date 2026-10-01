@@ -21,7 +21,11 @@ and decision history remain preserved.
    See [verification detail](preview-verification.md). Live profile latency p95:
    about 1.8 seconds added through LiteLLM and 1 second for hook processes. The
    placeholder response workload produced 37 visible evaluation errors; see
-   [latency results and limits](preview-latency-v1-report.md).
+   [latency results and limits](preview-latency-v1-report.md). A subsequent
+   [controlled latency comparison](latency-paths-v1-report.md) separates the paths:
+   prompt-only 378ms median/470ms p95; code-review prompt+response 733ms/1,454ms;
+   warning follow-up path 1,106ms/1,168ms. Warning and placeholder response errors
+   remain explicit; this is not a new semantic qualification.
 3. **Current documentation consolidated.** README, quickstart, operations,
    connector guide, authoring guidance and this index describe the candidate.
    Historical experiments remain dated evidence rather than current setup advice.
