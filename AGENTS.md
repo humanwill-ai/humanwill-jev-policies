@@ -1,5 +1,7 @@
 # Project working instructions
 
+- Latest publication status (2026-10-01): owner explicitly approved making the repository public and publishing the reviewed candidate. GitHub prerelease v0.1.0a1 is now public at commit 3f086c0ec102b202d8150cf42739baf1ad62047e with six approved assets. See docs/publication-v0.1.0a1.md and docs/evidence/publication-v0.1.0a1.json. Anonymous access/clone, downloaded checksums and fresh installed-wheel demo passed. Earlier private/unpublished statements are historical. Do not move the release tag or replace its assets. No new CI/provider spending, deployment, PyPI/container publication or announcements; documentation-only closure skips CI. Independent qualification remains open.
+
 - Latest owner instruction (2026-10-01): run the postponed final-candidate GitHub checks now. Batch the prepared private-repository changes into one push and reuse the existing core/host workflows; do not dispatch duplicate runs. Retain exact artifacts and the container inventory for review. Preserve the remaining Actions allowance; no billing changes, paid overages or public publication are authorized. This supersedes the 2026-09-30 timing deferral.
 
 - Begin with research and planning. Do not treat a suggested architecture, schema, integration order, or commercial hypothesis as approved.

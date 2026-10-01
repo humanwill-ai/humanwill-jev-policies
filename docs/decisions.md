@@ -716,3 +716,17 @@ plus unchanged historical $0.01 reservation, leaving $4.565699990 of the $5 cap.
 No new unknown charges. Research files and reports only; no CI, push, deployment
 or public visibility change. Continue the existing experimental-preview release
 path; independent qualification and concrete publication approval remain separate.
+
+
+## First public prerelease published — 2026-10-01
+
+Owner explicitly approved the concrete release and instructed making it public.
+Published GitHub prerelease v0.1.0a1 at 3f086c0ec102b202d8150cf42739baf1ad62047e,
+with all six approved assets and notes. Anonymous access/clone, exact downloaded
+checksums and fresh Python 3.11 wheel installation/offline demo pass. See
+[publication record](publication-v0.1.0a1.md). The repository is now public; prior
+private/unpublished statements are dated history. Runtime, policies, thresholds
+and monitoring defaults remain unchanged. No new CI/provider spend, deployment,
+PyPI/container upload or announcements. Main documentation may record publication;
+do not move the published tag or replace its approved assets. Qualification remains
+open and separate from this experimental developer preview.

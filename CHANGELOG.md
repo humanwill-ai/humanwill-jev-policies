@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0a1 — unpublished developer preview candidate
+## 0.1.0a1 — 2026-10-01, experimental developer preview
 
 - Company-authored Markdown bundles, optional trusted metadata, Jev transports,
   authenticated service and LiteLLM/Agentgateway/Local/CLI connector profiles.
@@ -9,10 +9,11 @@
 - Final 170-case development-pack measurement and refreshed installation evidence.
 - Monitoring examples; no calibrated enforcement or independent holdout claim.
 - Apache-2.0 license, third-party notices, security reporting and measured latency
-  documentation. See the [draft release notes](docs/release-notes-v0.1.0a1.md).
-- See [current status](docs/preview-status.md) for remaining publication gates.
+  documentation. See the [published release](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.1.0a1).
+- See [current status](docs/preview-status.md) for evidence and qualification limits.
 
-No public release has been published. Versions below identify private development snapshots; proposed `0.1.0a1` awaits final asset verification and owner publication approval. Licensing materials and hosted candidate validation are complete.
+The first public prerelease is published at commit `3f086c0`. Versions below identify
+private development snapshots; their dated limitations are preserved as history.
 
 ## 0.1.0.dev3 — historical development series
 

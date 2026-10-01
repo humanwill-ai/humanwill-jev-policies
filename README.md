@@ -4,8 +4,8 @@ Apply company-authored Markdown policies to AI requests, responses and proposed
 tool actions through a shared service. Jev supplies semantic judgments; the adapter
 combines them with deterministic rules and, when enabled, trusted metadata.
 
-**Experimental developer preview candidate: `0.1.0a1`.** This repository is being
-prepared for its first public release. It is not an enterprise-qualified policy
+**First public release: [v0.1.0a1 — experimental developer preview](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.1.0a1).**
+Published 2026-10-01. It is not an enterprise-qualified policy
 control. Examples default to monitoring; enforcement and error fallback are explicit
 operator choices. See [current release status](docs/preview-status.md) and
 [final development-pack evidence](docs/preview-final-v1-report.md).
@@ -228,8 +228,8 @@ python -m build --no-isolation
 
 Current guides and evidence are indexed in [release status](docs/preview-status.md).
 Earlier dated reports preserve the development history and do not describe the
-current profile unless explicitly stated. Final public-content review, release checks and publication approval remain
-before public distribution; no release is published yet.
+current profile unless explicitly stated. See the [publication record](docs/publication-v0.1.0a1.md)
+for the exact release commit, assets and post-publication verification.
 
 ## License and contributions
 

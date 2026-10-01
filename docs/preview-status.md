@@ -1,6 +1,7 @@
 # Current developer preview status
 
-Updated 2026-10-01. Candidate **`0.1.0a1`**, still private and unpublished.
+Updated 2026-10-01. **[v0.1.0a1 is public](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.1.0a1)**
+as an experimental developer preview. See the [publication record](publication-v0.1.0a1.md).
 This page supersedes older milestone/count summaries; dated experiment reports
 and decision history remain preserved.
 
@@ -39,8 +40,9 @@ and decision history remain preserved.
    Exact packages, hashes, container inventory and new-log exposure review are
    recorded in the [final CI report](final-ci-report.md).
 
-No deployment or public visibility change is authorized. API spending remains
-inside the authorized $5; hosted validation uses synthetic offline evaluators.
+The owner approved publication of the concrete candidate and its six attachments.
+No deployment was performed. API spending remains inside the authorized $5;
+hosted validation uses synthetic offline evaluators.
 
 ## What ships
 
@@ -79,7 +81,7 @@ sequential stage-aware follow-up is unchanged. See the
 | Review build/install/host evidence | [Candidate verification](preview-verification.md) |
 | Understand project and publication decisions | [Brief](project-brief.md), [history](decisions.md), [publication roadmap](public-release-plan.md) |
 
-## Before publishing
+## Publication complete
 
 **Actions timing, owner decision 2026-10-01:** run the postponed final-candidate
 checks now using the existing workflows. Avoid duplicate dispatches and preserve
@@ -88,11 +90,11 @@ the remaining allowance; no billing changes or paid overages are authorized.
 Apache-2.0 licensing, contribution/security guidance, the owner-selected reporting
 address and dependency notices/inventory are prepared. See [step 4 evidence](public-preparation-report.md).
 Final-candidate Actions validation, image inventory and the history/log/asset
-review delta are complete. Obtain owner approval for the concrete public release,
-including the recorded author/path exposure and exact assets. The CI source archive
-contains the tested snapshot; this later documentation-only closure is separate.
-The candidate remains private and unpublished. CI rebuilds packages including
-licensing and publication materials and retains the exact tested assets.
+review delta are complete. The owner approved the exact candidate, assets and
+recorded identity/path exposure. The public tag points to `3f086c0`; release assets
+were rebuilt from that commit and verified locally on Python 3.11/3.14, preserving
+the earlier CI artifacts separately. This documentation-only publication record
+does not move the tag or replace release assets.
 
 Independent holdout validation and original statistical enforcement-readiness
 criteria remain separate open qualification work. Do not delay all public learning
