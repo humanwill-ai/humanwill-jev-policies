@@ -139,11 +139,13 @@ connector supplies. Customer demand and enterprise suitability remain unvalidate
 
 ## Performance and request latency
 
-**The number of evaluation calls matters.** In our
-[controlled 2026-10-01 comparison](docs/latency-paths-v1-report.md), prompt-only
-checks added **378 ms median / 470 ms p95** with the current four-policy profile.
-Checking the response adds another sequential evaluation; a follow-up can add a
-third. These are measured paths, not interchangeable latency guarantees.
+**Typical added latency in our test:** approximately **0.38 seconds** for prompt
+checks, or **0.73 seconds** for prompt-and-response checks on the code-review
+workload. These are median timings from our
+[controlled 2026-10-01 comparison](docs/latency-paths-v1-report.md) with the current
+four-policy profile. Checking the response adds another sequential evaluation;
+a follow-up can add a third. Detailed measurements, including slower-request
+timings (p95), are below.
 
 | Warm gateway path | Samples | Jev calls per request | Median added delay | p95 added delay |
 | --- | ---: | ---: | ---: | ---: |
@@ -151,7 +153,8 @@ third. These are measured paths, not interchangeable latency guarantees.
 | Prompt + response, local code review without follow-up | 12 | 2 | 733 ms | 1,454 ms |
 | Prompt + response, warning workload with a natural follow-up | 10 | 3 | 1,106 ms | 1,168 ms |
 
-p95 means 95% of samples were at or below that duration. Small samples and network
+p95 means 95% of samples were at or below that duration. These are test observations,
+not guaranteed service levels. Small samples and network
 variation make tail estimates coarse: the lower p95 in the follow-up row does not
 mean an extra call is faster. Timings use real LiteLLM 1.102.1, live Jev through
 OpenRouter, serial requests, 128–12,000-character synthetic inputs, monitoring and
