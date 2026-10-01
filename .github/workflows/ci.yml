@@ -52,6 +52,12 @@ jobs:
           docker build --build-arg PYTHON_IMAGE="$CONTAINER_BASE" --tag humanwill-policies:ci .
           docker image inspect humanwill-policies:ci --format '{{.Id}}'
           docker image inspect python:3.11-slim-bookworm --format '{{json .RepoDigests}}'
+          CONTAINER_IMAGE=$(docker image inspect humanwill-policies:ci --format '{{.Id}}')
+          docker run --rm --network none --entrypoint python \
+            --mount type=bind,src="$PWD/scripts/container_inventory.py",dst=/tmp/container_inventory.py,readonly \
+            humanwill-policies:ci /tmp/container_inventory.py \
+            --base-image "$CONTAINER_BASE" --image-id "$CONTAINER_IMAGE" \
+            > artifacts/packaging/container-inventory.json
           docker run --rm --network none --entrypoint sh --tmpfs /work:uid=65532,gid=65532 -w /work humanwill-policies:ci -ec '
             humanwill-policies init-demo demo
             humanwill-policies validate demo --config demo/config.yaml --json
@@ -60,3 +66,15 @@ jobs:
       - name: Audit runtime dependencies
         if: matrix.os == 'ubuntu-24.04' && matrix.python == '3.14'
         run: pip-audit --disable-pip --no-deps -r requirements.txt
+      - name: Retain exact release packages and verification evidence
+        if: matrix.os == 'ubuntu-24.04' && matrix.python == '3.14'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: preview-candidate-${{ github.sha }}
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            dist/*.whl
+            dist/*.tar.gz
+            artifacts/packaging/*.json
+            artifacts/hosts/service-operations.json

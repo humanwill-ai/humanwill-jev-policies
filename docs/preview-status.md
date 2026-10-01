@@ -1,6 +1,6 @@
 # Current developer preview status
 
-Updated 2026-09-30. Candidate **`0.1.0a1`**, still private and unpublished.
+Updated 2026-10-01. Candidate **`0.1.0a1`**, still private and unpublished.
 This page supersedes older milestone/count summaries; dated experiment reports
 and decision history remain preserved.
 
@@ -31,8 +31,12 @@ and decision history remain preserved.
    contribution and security reporting guidance, Python runtime inventory and
    local publication-exposure review. See [scope and remaining checks](public-preparation-report.md).
 
-No deployment, public visibility change, GitHub push or additional Actions run was
-performed for this preparation. API spending remains inside the authorized $5.
+5. **Final hosted validation in progress.** The owner authorized the postponed
+   GitHub checks on 2026-10-01: one batched private push, existing core/host jobs,
+   retained packages and container inventory. Results are not yet established.
+
+No deployment or public visibility change is authorized. API spending remains
+inside the authorized $5; hosted validation uses synthetic offline evaluators.
 
 ## What ships
 
@@ -68,19 +72,17 @@ research configuration. No production identity/source/destination resolver ships
 
 ## Before publishing
 
-**Actions timing, owner decision 2026-09-30:** use local checks throughout
-preparation. Reserve the existing GitHub Actions workflows for immediately before
-the final release, validating the final candidate on Linux/other supported runners,
-including actual Agentgateway and the container. Avoid interim workflow dispatches
-and CI-triggering pushes/PR updates. This defers the checks; it does not waive them.
+**Actions timing, owner decision 2026-10-01:** run the postponed final-candidate
+checks now using the existing workflows. Avoid duplicate dispatches and preserve
+the remaining allowance; no billing changes or paid overages are authorized.
 
 Apache-2.0 licensing, contribution/security guidance, the owner-selected reporting
 address and dependency notices/inventory are prepared. See [step 4 evidence](public-preparation-report.md).
 Complete final-candidate Actions validation and image inventory, recheck changes
 to history/logs/assets since the preparation audit, finalize the publication
 artifacts, then obtain owner approval for the concrete public release.
-The candidate is prepared locally, not uploaded or published. Packaging may need
-rebuilding after licensing and other publication material is added.
+The candidate remains private and unpublished. CI rebuilds packages including
+licensing and publication materials and retains the exact tested assets.
 
 Independent holdout validation and original statistical enforcement-readiness
 criteria remain separate open qualification work. Do not delay all public learning

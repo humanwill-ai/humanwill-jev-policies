@@ -664,3 +664,13 @@ See [public-release preparation evidence](public-preparation-report.md) for loca
 history/log scans, notices, dependency inventory, artifact validation and limits.
 Actions remains deferred until final-candidate validation. No visibility change,
 workflow dispatch, push, tag, release or deployment is authorized by this work.
+
+
+## Final candidate hosted validation — 2026-10-01
+
+Owner requested proceeding with the postponed GitHub checks at release-preparation
+step 5. Run the existing core matrix and pinned host integrations with one batched
+private push, retaining exact packages and container package/license inventory.
+Local preflight passed 254 tests. This authorizes validation now, not public
+visibility, release publication, billing changes or Actions overages. No paid
+model calls are needed. Final results and publication approval remain pending.
