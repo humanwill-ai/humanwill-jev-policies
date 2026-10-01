@@ -8,9 +8,11 @@
   Q05/Q04 and stage-aware follow-ups with result/4 audit/usage fields.
 - Final 170-case development-pack measurement and refreshed installation evidence.
 - Monitoring examples; no calibrated enforcement or independent holdout claim.
+- Apache-2.0 license, third-party notices, security reporting and measured latency
+  documentation. See the [draft release notes](docs/release-notes-v0.1.0a1.md).
 - See [current status](docs/preview-status.md) for remaining publication gates.
 
-No public release has been published. Versions below identify private development snapshots; proposed `0.1.0a1` awaits the release, licensing and publication gates.
+No public release has been published. Versions below identify private development snapshots; proposed `0.1.0a1` awaits final asset verification and owner publication approval. Licensing materials and hosted candidate validation are complete.
 
 ## 0.1.0.dev3 — historical development series
 
