@@ -695,3 +695,24 @@ HTTPdelivery. These are measured paths, not a performance optimization, coverage
 recommendation or independent accuracy result. README security/latency clarified;
 no runtime change, CI push, deployment or publication. Remaining$4.631633144,
 including unchanged historical$0.01 reservation in accounted spend.
+
+
+## Multi-question experiment rejected — 2026-10-01
+
+Owner authorized testing Q05/Q04/tool-specific questions together, with a runtime
+refactor only for exceptional success. The frozen experiment at fcd9c2b compared
+188 cases twice per arm (170 reviewed, 18 provisionally labeled fresh cases).
+See [report](fanout-v1-report.md). Unexpected abstentions increased from 1/346 to
+4/346 decidable observations; no paired event recoveries and three regressions.
+No wrong definitive combined outcomes, but fresh individual-policy disagreements
+were 1 control / 2 candidate, masked by correct blocks from another policy.
+Overall evaluator p95 was 518/498 ms; follow-up-subset p95 was 853/2539 ms.
+Candidate cost was 2.21 times control. Exceptional-success gates failed: retain
+current sequential q05_stage_aware, with no runtime refactor or automatic retuning.
+
+All 752 event views and 645 exact payloads were replay-audited. Six focused offline
+tests passed before measurement. Cost $0.065933154; known cumulative $0.424300010
+plus unchanged historical $0.01 reservation, leaving $4.565699990 of the $5 cap.
+No new unknown charges. Research files and reports only; no CI, push, deployment
+or public visibility change. Continue the existing experimental-preview release
+path; independent qualification and concrete publication approval remain separate.

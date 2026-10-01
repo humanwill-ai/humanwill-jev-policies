@@ -62,6 +62,11 @@ research configuration. No production identity/source/destination resolver ships
 
 ## Read next
 
+The optional multi-question optimization was evaluated and rejected: it increased
+unexpected abstentions and cost without a reliable latency benefit. The current
+sequential stage-aware follow-up is unchanged. See the
+[experiment report](fanout-v1-report.md).
+
 | Need | Current reference |
 | --- | --- |
 | Install and exercise locally | [Quickstart](quickstart.md) |
