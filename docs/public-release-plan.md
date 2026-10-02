@@ -1,5 +1,10 @@
 # Roadmap to the first public release
 
+> Development update 2026-10-02: the published v0.1.0a1 remains unchanged.
+> Non-streaming proposal inspection passes actual LiteLLM/Agentgateway tests;
+> [LiteLLM MCP pre-execution](mcp-pre-execution.md) now passes local installed-host
+> tests. These are unreleased additions; streaming and broader MCP bindings remain planned.
+
 > Current candidate status and the guide index are in [preview status](preview-status.md).
 > The dated sections below retain planning and decision history; older counts,
 > profiles and milestone status are superseded by that current summary.

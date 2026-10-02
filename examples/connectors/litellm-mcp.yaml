@@ -1,0 +1,17 @@
+# Install HumanWill in the same environment as litellm[proxy]==1.102.1.
+# Replace the server URL with a company-managed route; require gateway access.
+mcp_servers:
+  company_tools:
+    url: http://127.0.0.1:9000/mcp
+    transport: http
+guardrails:
+  - guardrail_name: humanwill-mcp
+    litellm_params:
+      guardrail: humanwill_policies.connectors.litellm_mcp.HumanWillMCPGuardrail
+      mode: pre_mcp_call
+      default_on: true
+      service_url: http://127.0.0.1:8088
+      token_env: HUMANWILL_MCP_TOKEN
+      timeout_ms: 6000
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY

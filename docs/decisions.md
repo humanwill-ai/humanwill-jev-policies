@@ -758,3 +758,25 @@ trusted evidence resolution. Existing policies, semantic gates and follow-up
 logic remain unchanged. No new API calls, host CI, push or release. See
 [setup and verification](structured-tool-calls.md). Local real LiteLLM and relay
 checks pass; actual Agentgateway relay acceptance remains an open Linux host gate.
+
+## Agentgateway relay accepted; MCP execution binding — 2026-10-02
+
+Owner approved actual Agentgateway validation followed by MCP implementation. One
+targeted existing-workflow dispatch at `dabbbfb` passed 26 relay and 22 text
+scenarios through Agentgateway 1.5.0; no duplicate jobs or paid provider calls.
+[Evidence](evidence/agentgateway-tool-calls-ci.json) records the run and hashes.
+
+The first MCP binding targets a dedicated LiteLLM 1.102.1 gateway. Its mandatory
+pre-execution callback sends full arguments and resolved server context to the
+existing native policy endpoint. Company metadata remains optional and separately
+verified; server names/claims do not grant permission. No policy, evaluator,
+threshold or follow-up changes. Existing proposal inspection is not disabled.
+
+Actual local MCP server tests pass 18 scenarios with side-effect assertions; four
+installed callback tests and 279 offline tests pass. Initial development testing
+exposed LiteLLM skipping a ValueError-invalid guardrail while starting the proxy;
+the final connector raises fatal configuration errors, verified for disabled mode
+and missing credentials. This does not protect a deployment where the guardrail
+is removed entirely or a later hook mutates arguments. Full setup, precise failure
+behavior and exclusions are in [the MCP guide](mcp-pre-execution.md). No streaming,
+new release, hosted MCP CI or live semantic/latency campaign.

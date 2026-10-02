@@ -3,8 +3,12 @@
 Development `0.1.0a2.dev0` adds opt-in non-streaming function-call inspection.
 See [implementation, setup and evidence](structured-tool-calls.md). Existing public
 `v0.1.0a1` assets and text profiles are unchanged. Real LiteLLM checks pass; the
-Agentgateway relay needs Linux host validation before a support/release claim.
-No MCP connector, streaming support, paid API campaign or CI dispatch was added.
+Agentgateway relay passes 26 new plus 22 existing scenarios in the single targeted
+[Linux CI run](evidence/agentgateway-tool-calls-ci.json). The new
+[LiteLLM MCP execution binding](mcp-pre-execution.md) passes 18 local runtime
+scenarios with an actual tool server, plus four installed callback checks and
+279 offline tests. No streaming, paid API calls or new publication. MCP hosted
+CI and representative latency are not newly measured.
 
 # Current developer preview status
 
@@ -15,8 +19,8 @@ and decision history remain preserved.
 
 **Next implementation sequence:** structured tool-call inspection without
 streaming → MCP pre-execution enforcement → streaming with tested buffering and
-blocking. See the [saved next action plan](next-action-plan.md). These capabilities
-are planned and are not part of the published connector coverage.
+blocking. See the [saved next action plan](next-action-plan.md). The first two have
+development implementations; none is part of the published `v0.1.0a1` coverage.
 
 ## Release-preparation steps requested by the owner
 

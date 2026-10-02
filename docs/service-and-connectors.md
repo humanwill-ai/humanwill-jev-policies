@@ -7,7 +7,8 @@ before making enforcement claims. Linux/macOS only; use the pinned host
 versions/configurations. No hooks are automatically installed.
 
 For the unreleased `0.1.0a2.dev0` tool-call profiles, use the separate
-[structured-call setup guide](structured-tool-calls.md). The text-only webhook
+[structured-call setup guide](structured-tool-calls.md) and the separate
+[LiteLLM MCP pre-execution guide](mcp-pre-execution.md). The text-only webhook
 configuration on this page remains the published `v0.1.0a1` path.
 
 ## Run the service

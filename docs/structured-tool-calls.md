@@ -121,7 +121,7 @@ upstream and deadline errors fail closed, including monitoring deployments. Poli
 evaluation errors still use their policy's configured fallback. No relay latency
 or production throughput has been measured.
 
-## Verification and remaining gate
+## Verification
 
 The full offline suite passes **273 tests** on Python 3.14, including 13 new
 focused tests. Ruff and formatting checks pass. Original LiteLLM text-profile
@@ -139,9 +139,10 @@ oversized/unsupported output. These test enforcement plumbing, not Jev accuracy.
 - Relay over loopback HTTP: 26 corresponding scenarios pass. This is a real relay
   service/network test, **not** a real Agentgateway test.
 - Agentgateway route configuration validates against the exact v1.5.0 JSON schema.
-  **Real Agentgateway relay acceptance remains pending Linux validation**: the
-  current macOS x86_64 environment has neither a compatible binary nor Docker.
-  Its old text-profile results do not qualify this new route.
+  **Actual Agentgateway relay acceptance passes** on Ubuntu 24.04: 26 new
+  scenarios plus 22 original text scenarios at `dabbbfb`, with an installed wheel
+  outside the checkout. [Exact CI evidence](evidence/agentgateway-tool-calls-ci.json)
+  links the single targeted run and records wheel/binary hashes.
 
 Run the prepared host checks after installing the current wheel:
 
@@ -151,10 +152,9 @@ python tests/hosts/tool_calls.py --host agentgateway --binary /path/to/agentgate
 python tests/hosts/tool_calls.py --host relay
 ```
 
-The existing host workflow includes the first two checks for the next authorized
-batched CI run. No workflow was dispatched or paid provider called for this change.
-Do not publish a new release or claim Agentgateway tool enforcement verified until
-that remaining host gate passes. No MCP execution interception or streaming was added.
+The existing host workflow ran only the Agentgateway job for the owner-authorized
+validation. No paid provider calls or new release. Streaming remains excluded;
+MCP pre-execution is a separate integration described in [the MCP guide](mcp-pre-execution.md).
 
 Machine-readable evidence: [local verification record](evidence/tool-calls-v1.json).
 The raw synthetic reports and artifacts are retained locally under

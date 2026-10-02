@@ -196,7 +196,7 @@ def policy_app(
             }
         },
     }
-    if tool_profile:
+    if tool_profile and connector != "native":
         settings["principals"]["fixture"].update(
             inspect_tool_calls=True, stages=["model_request", "response", "tool_action"]
         )

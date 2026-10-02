@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased — 0.1.0a2.dev0
+
+- Optional non-streaming function-call inspection through LiteLLM and an
+  Agentgateway fixed-backend relay; real-host synthetic enforcement tests pass.
+- LiteLLM MCP pre-execution checks with full arguments, bounded authenticated
+  service calls and explicit monitoring/error behavior. Actual MCP server tests
+  verify denied calls have no side effects. See [scope and setup](docs/mcp-pre-execution.md).
+- Published v0.1.0a1 assets, existing text profiles and evaluator defaults unchanged.
+
 ## 0.1.0a1 — 2026-10-01, experimental developer preview
 
 - Company-authored Markdown bundles, optional trusted metadata, Jev transports,

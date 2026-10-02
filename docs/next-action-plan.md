@@ -1,10 +1,12 @@
 # Next action plan: tool-call and MCP enforcement
 
-Owner-approved sequence, 2026-10-01. **Step 1 implementation authorized 2026-10-02.**
+Owner-approved sequence, 2026-10-01. **Steps 1–2 authorized 2026-10-02.**
 The opt-in development implementation and local evidence are in
 [structured tool calls](structured-tool-calls.md). LiteLLM real-host checks pass;
 Agentgateway requires a backend relay because its webhook drops tool fields, and
-the relay's real Agentgateway/Linux acceptance gate remains open. Steps 2–3 remain planned.
+the relay's real Agentgateway/Linux acceptance now passes. Step 2 is implemented
+for LiteLLM with an actual local MCP server: [setup and evidence](mcp-pre-execution.md).
+Step 3 remains planned; no streaming implementation is included.
 This is the next feature sequence after the public `v0.1.0a1` preview. Saving this
 plan does not start implementation, paid evaluations, deployment or another release.
 

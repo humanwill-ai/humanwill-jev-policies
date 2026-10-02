@@ -1,0 +1,189 @@
+{
+  "format": "humanwill.mcp-verification/1",
+  "reviewed_on": "2026-10-02",
+  "version": "0.1.0a2.dev0",
+  "base_commit": "dabbbfb598d73f7f0021cbab96430c0102b851e0",
+  "source_state": "working tree, runtime files pinned below",
+  "runtime_sha256": {
+    "src/humanwill_policies/__init__.py": "b38398351130373f63e640f872685050eddee1cedf5b202c32d11c127c9a33fd",
+    "src/humanwill_policies/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/humanwill_policies/bundle.py": "a7ba362d28672376a052e313163c8d09a508428b3b471f4ad35dd815d5571524",
+    "src/humanwill_policies/cli.py": "ad7bca72e900de682dca4f0f2fe782025ea71945c757f6a6c37423daba707543",
+    "src/humanwill_policies/config.py": "e7c72b1b54592d424891ce3a38dde7b9ed6d37cde99bab85164a1ac042b2ce76",
+    "src/humanwill_policies/connectors/__init__.py": "b01982502270f7c0781c36d041380446929bb059a124deeed5a9c9496a0bc385",
+    "src/humanwill_policies/connectors/chat.py": "bf3aee858d04662e415afc3407dccc619026361f69372ff7fc8e49155e58606d",
+    "src/humanwill_policies/connectors/events.py": "4272bc8465e92defcf744cc51d0fb89900a10c03fc4aafdd4b518eea419725e9",
+    "src/humanwill_policies/connectors/litellm_mcp.py": "b7f537a7f2fbb53a0c062ed3fa234f69c344fc914711c8eec4e081bbe38b4a61",
+    "src/humanwill_policies/connectors/litellm_profile.py": "1e48155c53d6946b1486964524f4d64fc5058e25bb999835b3d54d29bb7895f4",
+    "src/humanwill_policies/connectors/mcp.py": "dd46c8c2d472f92065b99715d575b92edddaece2e92da241212679634872728f",
+    "src/humanwill_policies/connectors/relay.py": "508dfb3ac0551b66d130883264c03f266da5ca2078be0446cd57b0bbcf46cc19",
+    "src/humanwill_policies/contracts.py": "595dc48927c4069552e28e668637b7653f3075fbcaff321b0644b49a51c6aa79",
+    "src/humanwill_policies/demo/config-outcomes.yaml": "8e6f08635153295be8edd9e3a07a36295d3042ab2f5704ea8a25251f410e3c3c",
+    "src/humanwill_policies/demo/config-policy-followup.yaml": "44626d0a5d1dca4c037b48c143e320ff586255749ce503734f7026df67a61932",
+    "src/humanwill_policies/demo/config-policy-text.yaml": "392efda680b8edc33f1b317a5ba6a83bcaea4da68d01b263a043f2fc0be9c138",
+    "src/humanwill_policies/demo/config-stage-aware-followup.yaml": "18aabd2572e19e77033bd0788785d408abf64600bea2a60440059100c6b2aa45",
+    "src/humanwill_policies/demo/config.yaml": "c2a83b35812da4939ccded45f2746f9cc3f4582afcc5f71a77f3313b585e5290",
+    "src/humanwill_policies/demo/mock-answers.json": "e85dd3115395521b992e4932fdb71f03c71457ed58811010600a026883392b35",
+    "src/humanwill_policies/demo/policies.md": "cb00833fd3cb121662273d2af1601d58e9b2cdf381abf4744d6d34f16e0cd9d3",
+    "src/humanwill_policies/demo/request.json": "467dbc823c258e44f2bdeca7789686497e69c7384464706f46051f4d37e9680c",
+    "src/humanwill_policies/demo/rules/content.md": "137d87b0239627f85bd12cf168321eaa14d9c9460d9213bdc935e3342e2e0575",
+    "src/humanwill_policies/demo/rules/documents.md": "02c7a799c4cd8dc999d080a4be4ff263bc73173ed0ca4bb51859765d00fd976b",
+    "src/humanwill_policies/demo/rules/finance.md": "1c3f6bc4c09df09ba21e53a63b7b1773998ed8463389cf5b3481c813dec52061",
+    "src/humanwill_policies/errors.py": "a3431f65ff2636cb67968c2c263c3dba25c32a12fc2aa331a1ed10cfd5e3c954",
+    "src/humanwill_policies/evaluation.py": "9dfcd4b033ab1ad03708366675166daddc7d24e786796b3ffd8d23eb3fa9adcc",
+    "src/humanwill_policies/followup.py": "11dc37f3b90635587bafd2089d6a76157f5be763ba1378b06f74083a5051bf09",
+    "src/humanwill_policies/hooks.py": "5ebb800aa727495db80f549fc0adefc189b6700f25bd0b1ab453b2ec905c5fe8",
+    "src/humanwill_policies/metadata.py": "4fb95d9fa614812674c3d902d44a50e5b9d7c5375aa175d82a3a450cd387d906",
+    "src/humanwill_policies/providers.py": "d64240e8864653d39134b4048df66f4c14698c1475282e7e354e5b6723f3d8eb",
+    "src/humanwill_policies/questions.py": "b0a3c2585305f8e7964ac35fb046f2a690ecb80b0dfa2fce91158fa60d31f3d4",
+    "src/humanwill_policies/runtime.py": "8be99ee7cc70a86fdf3dbcc907c569d02ecee7db41d19d8e0f9b29368b2d45c5",
+    "src/humanwill_policies/schemas/collection.json": "c174dfd3394498273e7c42977cde5b7956b37d4f7d364432e77ad122404f2d6e",
+    "src/humanwill_policies/schemas/config-v2.json": "92d514a195be5f7e775937bb7c9012e273f49b1a7900b33cdf4c0fcef9e327b9",
+    "src/humanwill_policies/schemas/config-v3.json": "61e96f550acd3ca68d7647eb0725a16dcbc818600ddd89f853aba8bd91a4353b",
+    "src/humanwill_policies/schemas/config-v4.json": "23d3c4b069e849ec3813af790a385e73f0cc62108dfd4b97c4ab63444cad778e",
+    "src/humanwill_policies/schemas/config-v5.json": "a87e49f5ab12a9ce58185e30b2e7a68d953f69b5a92615c8f4b4a615168280b3",
+    "src/humanwill_policies/schemas/config.json": "83145f5d7517ffe6e14372fb792dcb5e43c759cb6f97ea623866f2800a1ca835",
+    "src/humanwill_policies/schemas/policy.json": "9a3ca126cf8f0b0e8bffaeb25407c15596dc2758dcda9efa1839f8a75d00eb5d",
+    "src/humanwill_policies/schemas/request.json": "edb60444ee6a8e3e2438a3904a92a03f0ffdd16f2d7f036be3862b0636c4e03f",
+    "src/humanwill_policies/schemas/result-v2.json": "805d59fd771a52c37657994fd329a7f28c4ef5480d8a7ae46b37852e3412e5c7",
+    "src/humanwill_policies/schemas/result-v3.json": "dcd0585429d49803195e2a22b4d7a0ddb6e984a974347af792a3f22276411177",
+    "src/humanwill_policies/schemas/result-v4.json": "185c14c365e2a17292f04e1e754be590c95b9b8b070fada1dec03a311f3a8104",
+    "src/humanwill_policies/schemas/result.json": "07331de7d9b3235ca423be1d305a65c7bd24d374a8eb45cb4c54602dbbdd4c26",
+    "src/humanwill_policies/schemas/service.json": "3deda1343824fe738b26e9e0f4a8465ead90b169c380c9a81d4253aeb8454f14",
+    "src/humanwill_policies/serialization.py": "09b76e17d56fa7ed75f8aedb48cdccffed05d963e9153258de6dcccd1f09f297",
+    "src/humanwill_policies/service.py": "e84a710d054fcde6df3989b8b0d799e3e8399dd8df69ef829324e10c108e795e"
+  },
+  "litellm_version": "1.102.1",
+  "host_source_sha256": {
+    "proxy/_experimental/mcp_server/mcp_server_manager.py": "81f3f1d7ec69b56efb7403cf42b6bcc1234db9b0db2fe07bb077aeee10673605",
+    "proxy/utils.py": "eb990a71d0c12cb7d8115de0daf39c662915134cf0ca35cc79b4e48552437cf2",
+    "integrations/custom_guardrail.py": "a2f57dd91134b0da884a432e2a7efb659e6c631cd48ba0092352af73fbddf7de",
+    "proxy/guardrails/init_guardrails.py": "f103fcc33c0baae7a10a2bdd7cefadbc1e26fe8b9b1aa711f3587fe231df76cc",
+    "proxy/guardrails/guardrail_registry.py": "3fea75b6ecdbcb06b67ea72260fa1b2def58c0116212edf297901ac3fccd90d6"
+  },
+  "wheel_sha256": "144ce6d1ac33358bb1de22c228bdcfb724ff86b35739bce542a4e8d8148480ed",
+  "runtime_harness_sha256": {
+    "tests/hosts/mcp_calls.py": "272e5b7a5ac77a4f308511cd845eb4d5403ac73dc13da41e2570ce504541af90",
+    "tests/hosts/mcp_guardrail.py": "0c21f22a4d4a7892a050eff27cac5739cbc6d4ce3d4e3af5ec53ebbad7244029",
+    "tests/hosts/support.py": "0b07c0afe0ab7293bdbd0e876e710c6ce7e0feffe41f5656b3f28e0b174ce61d"
+  },
+  "host": "macOS x86_64, Python 3.11, installed wheel and copied harnesses outside checkout",
+  "runtime_scenarios": [
+    {
+      "mode": "enforce",
+      "case": "discovery",
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "allow",
+      "executed": true,
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "HW_DENY",
+      "executed": false,
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "HW_ERROR",
+      "executed": false,
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "HW_TIMEOUT",
+      "executed": false,
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "MISSING_FACTS",
+      "executed": false,
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "outage",
+      "executed": false,
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "concurrent_isolated_calls",
+      "passed": true
+    },
+    {
+      "case": "startup_disabled",
+      "passed": true
+    },
+    {
+      "case": "startup_missing_token",
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "discovery",
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "allow",
+      "executed": true,
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "HW_DENY",
+      "executed": true,
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "HW_ERROR",
+      "executed": true,
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "HW_TIMEOUT",
+      "executed": true,
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "MISSING_FACTS",
+      "executed": true,
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "outage",
+      "executed": false,
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "concurrent_isolated_calls",
+      "passed": true
+    }
+  ],
+  "offline_tests": 279,
+  "installed_callback_tests": 4,
+  "paid_provider_calls": 0,
+  "mcp_hosted_ci": false,
+  "scope": "Actual LiteLLM MCP gateway and local MCP server with observable side effects; synthetic evaluator only. No semantic accuracy or production latency claim.",
+  "local_reports_sha256": {
+    "artifacts/mcp/verified-runtime.log": "823ca427851b2f4b006b927f93acf3a0c259d9209eb0059017fd80e6c112204a",
+    "artifacts/mcp/verified-callback-tests.log": "256e590ba9183f73cc663d8cfa132c3c8611787f5bb806ea54e951f3d8a7d3ca",
+    "artifacts/mcp-unit-tests.log": "719f28d047f2a264532fb18c8c63c0960a80d2dcc89ea4f1490b50ca32b49b5d",
+    "artifacts/mcp/verified-hosts/litellm-mcp-report.json": "db9ff561af6259392460a77d47301934fef7a983cd2104b16b4eb0a816d0a522"
+  },
+  "packaging_report": {
+    "path": "artifacts/mcp/verified-packaging.json",
+    "sha256": "97834c098db8b034be5ac64be6bf8793d28d66e74e3eb17dbfae1609eb53a743",
+    "scope": "Exact wheel and source installation outside checkout; demo, service/hook contracts and real service process checks pass. Host tests above use this wheel; packaged documentation predates this evidence-record update."
+  }
+}

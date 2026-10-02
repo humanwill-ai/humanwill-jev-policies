@@ -1,0 +1,22 @@
+{
+  "format": "humanwill.agentgateway-tool-call-ci/1",
+  "reviewed_on": "2026-10-02",
+  "source_commit": "dabbbfb598d73f7f0021cbab96430c0102b851e0",
+  "run_url": "https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/37036265309",
+  "job_id": 110935131956,
+  "conclusion": "success",
+  "host": "agentgateway 1.5.0",
+  "runner": "ubuntu-24.04",
+  "python": "3.11",
+  "text_scenarios": 22,
+  "tool_scenarios": 26,
+  "installed_wheel_sha256": "6e93f2cd67697432adcb7fe151fe4699cca652236c2ee60aab534b3338740a7f",
+  "binary_sha256": "daca5cda76e8c5ab0c1a75912fecf2d6365095403f810db72029c49d14a37e7b",
+  "scope": "Actual Agentgateway process, installed wheel outside checkout, local synthetic model/evaluator; no semantic accuracy or live Jev latency claim. Only Agentgateway job dispatched; other host jobs skipped.",
+  "retained_local_logs": {
+    "artifacts/tool-calls/agentgateway-ci/run.log": "35b29bb9e2a8b88249433f82631de06e6cf022cadd4187b80678a5814856c2ce",
+    "artifacts/tool-calls/agentgateway-ci/run.json": "6ecbbdefd7e2c3a563d685a64b31d4e34b70f4f4af4d6dfcee0169b69c272764"
+  },
+  "wheel_retention": "Hash retained in CI log; remote wheel bytes not downloaded.",
+  "paid_provider_calls": 0
+}
