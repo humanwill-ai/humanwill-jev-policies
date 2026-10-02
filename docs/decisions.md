@@ -730,3 +730,31 @@ and monitoring defaults remain unchanged. No new CI/provider spend, deployment,
 PyPI/container upload or announcements. Main documentation may record publication;
 do not move the published tag or replace its approved assets. Qualification remains
 open and separate from this experimental developer preview.
+
+
+## Next feature sequence saved — 2026-10-01
+
+Owner requested saving the discussed sequence as the next action plan:
+structured tool-call inspection for non-streaming gateway requests/responses,
+then MCP pre-execution enforcement, then streaming with tested buffering and
+blocking. See [the plan](next-action-plan.md) for coverage boundaries and exit
+evidence. Streaming is distinct from tool-call support. No implementation, test,
+paid call, deployment or release was initiated by this planning update.
+
+
+## Non-streaming tool-call implementation — 2026-10-02
+
+Owner authorized step 1 of the saved plan. Add opt-in LiteLLM and Agentgateway
+relay profiles in development version 0.1.0a2.dev0; retain the released text-only
+profiles. Agentgateway v1.5.0 reduces webhook messages to role/text, so parsing
+its webhook cannot establish tool coverage. Use a fixed, authenticated backend
+relay instead, with bounded non-streaming bodies, no client route overrides or
+redirects, and withheld output until response and individual action checks pass.
+The owner was offered this relay versus deferral; absent a preference during the
+independent LiteLLM work, proceeded with the stated recommended relay approach.
+
+Definitions/history stay model-request context; each new call gets independent
+trusted evidence resolution. Existing policies, semantic gates and follow-up
+logic remain unchanged. No new API calls, host CI, push or release. See
+[setup and verification](structured-tool-calls.md). Local real LiteLLM and relay
+checks pass; actual Agentgateway relay acceptance remains an open Linux host gate.

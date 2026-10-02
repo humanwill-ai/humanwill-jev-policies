@@ -13,8 +13,8 @@ from .serialization import canonical, digest, parse_yaml
 
 # Contract targets, not implemented connector capabilities.
 ASSESS_STAGES = {
-    "litellm": {"model_request", "response"},
-    "agentgateway": {"model_request", "response"},
+    "litellm": {"model_request", "response", "tool_action"},
+    "agentgateway": {"model_request", "response", "tool_action"},
     "copilot_local": {"prompt", "tool_action"},
     "copilot_cli": {"prompt", "tool_action"},
 }

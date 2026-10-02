@@ -1,0 +1,19 @@
+# Unreleased; replace the fixed backend URL/model. Never accept a caller route override.
+format: humanwill.service/1
+allow_external_evaluation: false
+request_timeout_ms: 60000
+max_in_flight: 8
+principals:
+  agentgateway:
+    token_env: HUMANWILL_AGENTGATEWAY_TOKEN
+    connector: agentgateway
+    stages:
+    - model_request
+    - response
+    - tool_action
+    inspect_tool_calls: true
+    on_protocol_error: block
+    model_backend:
+      url: https://YOUR_APPROVED_PROVIDER/v1/chat/completions
+      model: your-approved-model
+      api_key_env: MODEL_PROVIDER_API_KEY

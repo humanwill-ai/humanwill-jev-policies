@@ -1,9 +1,22 @@
+# Unreleased structured-call work — 2026-10-02
+
+Development `0.1.0a2.dev0` adds opt-in non-streaming function-call inspection.
+See [implementation, setup and evidence](structured-tool-calls.md). Existing public
+`v0.1.0a1` assets and text profiles are unchanged. Real LiteLLM checks pass; the
+Agentgateway relay needs Linux host validation before a support/release claim.
+No MCP connector, streaming support, paid API campaign or CI dispatch was added.
+
 # Current developer preview status
 
 Updated 2026-10-01. **[v0.1.0a1 is public](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.1.0a1)**
 as an experimental developer preview. See the [publication record](publication-v0.1.0a1.md).
 This page supersedes older milestone/count summaries; dated experiment reports
 and decision history remain preserved.
+
+**Next implementation sequence:** structured tool-call inspection without
+streaming → MCP pre-execution enforcement → streaming with tested buffering and
+blocking. See the [saved next action plan](next-action-plan.md). These capabilities
+are planned and are not part of the published connector coverage.
 
 ## Release-preparation steps requested by the owner
 

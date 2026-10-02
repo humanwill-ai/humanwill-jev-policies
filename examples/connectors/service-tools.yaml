@@ -1,0 +1,15 @@
+# Unreleased opt-in LiteLLM tool-call service profile.
+format: humanwill.service/1
+allow_external_evaluation: false
+request_timeout_ms: 7000
+max_in_flight: 8
+principals:
+  litellm:
+    token_env: HUMANWILL_LITELLM_TOKEN
+    connector: litellm
+    stages:
+    - model_request
+    - response
+    - tool_action
+    inspect_tool_calls: true
+    on_protocol_error: block

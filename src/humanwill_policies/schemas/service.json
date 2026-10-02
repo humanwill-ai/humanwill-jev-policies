@@ -68,11 +68,39 @@
               ]
             }
           },
+          "inspect_tool_calls": {
+            "type": "boolean",
+            "default": false
+          },
           "on_protocol_error": {
             "enum": [
               "block",
               "allow_monitor"
             ]
+          },
+          "model_backend": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "url",
+              "model"
+            ],
+            "properties": {
+              "url": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              },
+              "model": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+              },
+              "api_key_env": {
+                "type": "string",
+                "pattern": "^[A-Z][A-Z0-9_]{0,127}$"
+              }
+            }
           }
         }
       }

@@ -19,6 +19,7 @@ from starlette.routing import Route
 from humanwill_policies import load_bundle, load_configuration
 from humanwill_policies.evaluation import Evaluator
 from humanwill_policies.providers import JevBackend
+from humanwill_policies.runtime import EvidenceContext, utc_now
 from humanwill_policies.service import create_app
 
 TOKEN = "synthetic-host-test-token-000000000000"
@@ -52,7 +53,16 @@ def server(app):
         assert not thread.is_alive()
 
 
-def policy_app(root, connector, mode="enforce", captures=None, faults=None):
+def policy_app(
+    root,
+    connector,
+    mode="enforce",
+    captures=None,
+    faults=None,
+    *,
+    tool_profile=False,
+    model_backend=None,
+):
     root.mkdir(parents=True, exist_ok=True)
     (root / "policies.md").write_text(
         '---\nkind: collection\nid: tests\nversion: "1"\nincludes: [rule.md]\n'
@@ -60,8 +70,12 @@ def policy_app(root, connector, mode="enforce", captures=None, faults=None):
     )
     (root / "rule.md").write_text(
         '---\nkind: policy\nid: TEST\nversion: "1"\ntitle: Synthetic fixture\n'
-        "stages: [prompt, model_request, response, tool_action]\n---\n"
-        "Block the synthetic HW_DENY marker."
+        + (
+            "stages: [tool_action]\n---\n"
+            if tool_profile
+            else "stages: [prompt, model_request, response, tool_action]\n---\n"
+        )
+        + "Block the synthetic HW_DENY marker."
         " This is not a calibrated real policy.\n"
     )
     provider = {
@@ -91,6 +105,46 @@ def policy_app(root, connector, mode="enforce", captures=None, faults=None):
     }
     if mode == "monitor":
         config["policies"]["TEST"].pop("evaluation_profile")
+
+    resolver = None
+    if tool_profile:
+        (root / "policies.md").write_text(
+            '---\nkind: collection\nid: tests\nversion: "1"\n'
+            "includes: [rule.md, authorization.md]\n---\nSynthetic tool tests.\n"
+        )
+        (root / "authorization.md").write_text(
+            '---\nkind: policy\nid: AUTH\nversion: "1"\ntitle: Synthetic authority\n'
+            "stages: [tool_action]\n---\nA synthetic fixture approval is required.\n"
+        )
+        config["metadata"] = {
+            "enabled": True,
+            "sources": {"destination": {"enabled": True, "source": "fixture-authority"}},
+        }
+        config["policies"]["AUTH"] = {
+            "enabled": True,
+            "mode": mode,
+            "strategy": "predicates",
+            "requires_metadata": ["destination.approved"],
+            "predicates": [{"field": "destination.approved", "op": "equals", "value": True}],
+        }
+
+        async def resolver(principal, request):
+            facts = []
+            if request["stage"] == "tool_action":
+                destination = request["content"][0]["arguments"].get("destination")
+                # Explicit synthetic authority, never a production approval resolver.
+                if destination != "MISSING_FACTS":
+                    facts = [
+                        {
+                            "field": "destination.approved",
+                            "value": True,
+                            "source": "fixture-authority",
+                            "complete": True,
+                            "subject_ref": "synthetic-target",
+                            "observed_at": utc_now().isoformat(),
+                        }
+                    ]
+            return EvidenceContext.from_verified(request, facts)
 
     async def judge(request):
         payload = json.loads(request.content)
@@ -142,7 +196,13 @@ def policy_app(root, connector, mode="enforce", captures=None, faults=None):
             }
         },
     }
-    app = create_app(engine, settings)
+    if tool_profile:
+        settings["principals"]["fixture"].update(
+            inspect_tool_calls=True, stages=["model_request", "response", "tool_action"]
+        )
+    if model_backend:
+        settings["principals"]["fixture"]["model_backend"] = model_backend
+    app = create_app(engine, settings, evidence_resolver=resolver)
     if faults is not None:
 
         async def faulty_service(scope, receive, send):

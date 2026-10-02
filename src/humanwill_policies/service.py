@@ -13,7 +13,8 @@ from starlette.requests import ClientDisconnect
 from starlette.responses import JSONResponse
 from starlette.routing import Route
 
-from .connectors import events
+from .connectors import events, relay
+from .connectors.chat import litellm_events, response_events, validate_response
 from .contracts import MAX_REQUEST_BYTES, schema, validate_contract
 from .errors import PolicyError
 from .providers import decode_json
@@ -41,7 +42,7 @@ def read_settings(path):
     return settings
 
 
-def create_app(evaluator, settings, *, evidence_resolver=None):
+def create_app(evaluator, settings, *, evidence_resolver=None, upstream_transport=None):
     """Resolver is trusted deployment code; called only when metadata is enabled.
 
     It receives (principal ID, normalized event) and returns EvidenceContext, not
@@ -56,6 +57,7 @@ def create_app(evaluator, settings, *, evidence_resolver=None):
     slots = asyncio.Semaphore(settings.get("max_in_flight", 8))
     settings_sha256 = digest(settings)
     credentials = []
+    backend_headers = {}
     for name, principal in settings["principals"].items():
         token = os.environ.get(principal["token_env"], "")
         if len(token) < 32 or not token.isascii() or any(c.isspace() for c in token):
@@ -67,9 +69,32 @@ def create_app(evaluator, settings, *, evidence_resolver=None):
                 "duplicate_credentials", "Each service principal needs a unique token"
             )
         connector = principal["connector"]
+        tool_inspection = principal.get("inspect_tool_calls", False)
+        if tool_inspection and (
+            connector not in ("litellm", "agentgateway")
+            or not {"model_request", "response", "tool_action"} <= set(principal["stages"])
+        ):
+            raise PolicyError("invalid_tool_profile", "Tool inspection requires all gateway stages")
+        backend = principal.get("model_backend")
+        if backend:
+            if (
+                connector != "agentgateway"
+                or not tool_inspection
+                or principal["on_protocol_error"] != "block"
+            ):
+                raise PolicyError(
+                    "invalid_backend", "Relay requires the enforcing protocol profile"
+                )
+            backend_headers[name] = relay.credentials(backend)
+        elif connector == "agentgateway" and tool_inspection:
+            raise PolicyError(
+                "invalid_backend", "Agentgateway tool inspection requires a relay backend"
+            )
         allowed = (
             {"prompt", "tool_action", "model_request", "response"}
             if connector == "native"
+            else {"model_request", "response", "tool_action"}
+            if tool_inspection
             else {"model_request", "response"}
             if connector in ("litellm", "agentgateway")
             else {"prompt", "tool_action"}
@@ -119,12 +144,61 @@ def create_app(evaluator, settings, *, evidence_resolver=None):
     async def health(request):
         return JSONResponse({"status": "ready"}, headers={"Cache-Control": "no-store"})
 
+    async def assess_batch(name, principal, batch):
+        connector = principal["connector"]
+        if any(item["stage"] not in principal["stages"] for item in batch):
+            raise PolicyError("forbidden_stage", "Principal cannot assess all required stages")
+        for assessment_index, normalized in enumerate(batch):
+            evidence = None
+            if evaluator.config["metadata"]["enabled"] and evidence_resolver is not None:
+                evidence = await evidence_resolver(name, normalized)
+            permit = (
+                EgressPermit(
+                    digest(normalized), evaluator.bundle.sha256, evaluator.backend.transport
+                )
+                if settings.get("allow_external_evaluation", False)
+                else None
+            )
+            result = await evaluator.evaluate(normalized, evidence=evidence, egress=permit)
+            # CLI prompt is always assessment-only regardless of another principal's mode.
+            if connector == "copilot_cli" and normalized["stage"] == "prompt":
+                result["enforcement"] = {"requested": "none", "actual": "not_requested"}
+            audit(
+                assessment_group=batch[0]["request_id"],
+                assessment_index=assessment_index,
+                principal=name,
+                connector=connector,
+                stage=normalized["stage"],
+                request_id=result["request_id"],
+                request_sha256=result["request_sha256"],
+                bundle_sha256=result["bundle_sha256"],
+                configuration_sha256=result["configuration_sha256"],
+                decision=result["decision"],
+                enforcement=result["enforcement"],
+                duration_ms=result["duration_ms"],
+                coverage=result["coverage"],
+                policies=[
+                    {
+                        "id": p["policy_id"],
+                        "version": p["policy_version"],
+                        "judgment": p["judgment"],
+                        "mode": p["mode"],
+                        "reasons": p["reasons"],
+                    }
+                    for p in result["policies"]
+                ],
+                errors=[e["code"] for e in result["errors"]],
+            )
+            if result["enforcement"]["requested"] == "block":
+                return True, result
+        return False, result
+
     async def endpoint(request):
         connector = request.path_params.get("connector")
         path = request.url.path
         if path == "/beta/litellm_basic_guardrail_api":
             connector = "litellm"
-        elif path in ("/request", "/response"):
+        elif path in ("/request", "/response", "/v1/chat/completions"):
             connector = "agentgateway"
         elif path == "/v1/evaluate":
             connector = "native"
@@ -150,6 +224,9 @@ def create_app(evaluator, settings, *, evidence_resolver=None):
         if principal["connector"] != connector:
             return JSONResponse({"error": "forbidden_connector"}, status_code=403)
         result = None
+        is_relay = path == "/v1/chat/completions"
+        if is_relay and name not in backend_headers:
+            return JSONResponse({"error": "relay_not_configured"}, status_code=403)
         try:
             if slots.locked():
                 raise PolicyError("service_overloaded", "Service at capacity")
@@ -164,12 +241,34 @@ def create_app(evaluator, settings, *, evidence_resolver=None):
                     if len(data) > MAX_REQUEST_BYTES:
                         raise PolicyError("payload_limit", "Request too large")
                 payload = decode_json(bytes(data))
+                if is_relay:
+                    backend = principal["model_backend"]
+                    normalized = relay.request_event(payload, backend)
+                    blocked, result = await assess_batch(name, principal, [normalized])
+                    if not blocked:
+                        output = await relay.forward(
+                            payload, backend, backend_headers[name], transport=upstream_transport
+                        )
+                        texts, calls = validate_response(output)
+                        blocked, result = await assess_batch(
+                            name, principal, response_events(texts, calls)
+                        )
+                        if not blocked:
+                            return JSONResponse(output, headers={"Cache-Control": "no-store"})
+                    return JSONResponse({"error": "HumanWill policy check denied"}, status_code=403)
                 if connector == "native":
                     normalized = payload
                     validate_contract("request", normalized)
                 elif connector == "litellm":
-                    normalized = events.litellm(payload)
+                    normalized = None
+                    batch = (
+                        litellm_events(payload)
+                        if principal.get("inspect_tool_calls", False)
+                        else [events.litellm(payload)]
+                    )
                 elif connector == "agentgateway":
+                    if principal.get("inspect_tool_calls", False):
+                        events.unsupported()
                     if request.headers.getlist("x-humanwill-text-profile") != ["v1"]:
                         events.unsupported()
                     normalized = events.agentgateway(
@@ -177,47 +276,12 @@ def create_app(evaluator, settings, *, evidence_resolver=None):
                     )
                 else:
                     normalized = events.hook(payload, connector, request.path_params["event"])
-                if normalized["stage"] not in principal["stages"]:
+                if connector != "litellm":
+                    batch = [normalized]
+                if any(item["stage"] not in principal["stages"] for item in batch):
                     return JSONResponse({"error": "forbidden_stage"}, status_code=403)
-                evidence = None
-                if evaluator.config["metadata"]["enabled"] and evidence_resolver is not None:
-                    evidence = await evidence_resolver(name, normalized)
-                permit = (
-                    EgressPermit(
-                        digest(normalized), evaluator.bundle.sha256, evaluator.backend.transport
-                    )
-                    if settings.get("allow_external_evaluation", False)
-                    else None
-                )
-                result = await evaluator.evaluate(normalized, evidence=evidence, egress=permit)
-                # CLI prompt is always assessment-only regardless of another principal's mode.
-                if connector == "copilot_cli" and normalized["stage"] == "prompt":
-                    result["enforcement"] = {"requested": "none", "actual": "not_requested"}
-                audit(
-                    principal=name,
-                    connector=connector,
-                    stage=normalized["stage"],
-                    request_id=result["request_id"],
-                    request_sha256=result["request_sha256"],
-                    bundle_sha256=result["bundle_sha256"],
-                    configuration_sha256=result["configuration_sha256"],
-                    decision=result["decision"],
-                    enforcement=result["enforcement"],
-                    duration_ms=result["duration_ms"],
-                    coverage=result["coverage"],
-                    policies=[
-                        {
-                            "id": p["policy_id"],
-                            "version": p["policy_version"],
-                            "judgment": p["judgment"],
-                            "mode": p["mode"],
-                            "reasons": p["reasons"],
-                        }
-                        for p in result["policies"]
-                    ],
-                    errors=[e["code"] for e in result["errors"]],
-                )
-                return reply(connector, result["enforcement"]["requested"] == "block", result)
+                blocked, result = await assess_batch(name, principal, batch)
+                return reply(connector, blocked, result)
         except (PolicyError, TimeoutError, ClientDisconnect) as exc:
             code = exc.code if isinstance(exc, PolicyError) else "service_timeout_or_disconnect"
         except Exception:
@@ -230,6 +294,8 @@ def create_app(evaluator, settings, *, evidence_resolver=None):
             requested="block" if block else "none",
             actual="unconfirmed",
         )
+        if is_relay:
+            return JSONResponse({"error": code}, status_code=502)
         return reply(connector, block, error=code)
 
     return Starlette(
@@ -237,6 +303,7 @@ def create_app(evaluator, settings, *, evidence_resolver=None):
             Route("/healthz", health),
             Route("/readyz", health),
             Route("/v1/evaluate", endpoint, methods=["POST"]),
+            Route("/v1/chat/completions", endpoint, methods=["POST"]),
             Route("/beta/litellm_basic_guardrail_api", endpoint, methods=["POST"]),
             Route("/request", endpoint, methods=["POST"]),
             Route("/response", endpoint, methods=["POST"]),

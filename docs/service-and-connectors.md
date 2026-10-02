@@ -6,6 +6,10 @@ policy files and service configuration. See [runtime evidence](integration-repor
 before making enforcement claims. Linux/macOS only; use the pinned host
 versions/configurations. No hooks are automatically installed.
 
+For the unreleased `0.1.0a2.dev0` tool-call profiles, use the separate
+[structured-call setup guide](structured-tool-calls.md). The text-only webhook
+configuration on this page remains the published `v0.1.0a1` path.
+
 ## Run the service
 
 Install the package following the README. Supply your validated policy folder and matching supported configuration (config/2 through config/5). The demo remains monitoring-only. Add this provider configuration to its `config.yaml` for hosted evaluation:

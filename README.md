@@ -22,6 +22,11 @@ control. Examples default to monitoring; enforcement and error fallback are expl
 operator choices. See [current release status](docs/preview-status.md) and
 [final development-pack evidence](docs/preview-final-v1-report.md).
 
+**Unreleased development:** opt-in [non-streaming tool-call inspection](docs/structured-tool-calls.md)
+is implemented for LiteLLM and an Agentgateway backend relay. LiteLLM has new
+real-host evidence; the Agentgateway relay still needs Linux host validation.
+The released installation instructions and text-only profiles below remain unchanged.
+
 This is a companion to [HumanWill Benchmark](https://github.com/humanwill-ai/humanwill-benchmark):
 the benchmark studies model behavior; this project lets companies supply their own
 policies. Allowing a request here cannot force a downstream model to answer.

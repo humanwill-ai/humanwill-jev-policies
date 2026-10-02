@@ -1,0 +1,15 @@
+# Unreleased relay profile, not the text-only promptGuard webhook.
+# Protect the listener with your normal client authentication/network boundary.
+binds:
+- port: 3000
+  listeners:
+  - routes:
+    - matches:
+      - path:
+          exact: /v1/chat/completions
+      backends:
+      - host: 127.0.0.1:8088
+        policies:
+          backendAuth:
+            key:
+              file: /PROTECTED/PATH/agentgateway-token
