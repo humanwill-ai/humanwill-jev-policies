@@ -1,6 +1,10 @@
-# Install and run the preview candidate
+# Install and run the public preview
 
-The current experimental developer preview candidate is `0.1.0a1`; no public release or registry package is published. Use Python 3.11–3.14 on Linux/macOS. This guide needs only the source distribution, wheel and locked runtime requirements from the same candidate. Installation downloads dependencies; the demo and contract checks make no evaluator calls.
+The public experimental developer preview is [v0.1.0a1](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.1.0a1). Download its wheel, source distribution and `SHA256SUMS` from that release; no PyPI package or container image is published. Use Python 3.11–3.14 on Linux/macOS. This guide needs only the source distribution, wheel and locked runtime requirements from the same release. Installation downloads dependencies; the demo and contract checks make no evaluator calls.
+
+To connect your own policies to a gateway or coding agent, start with the
+[installation-to-integration walkthrough](../README.md#use-with-your-ai-tools).
+The offline demo below is optional; it is not the live integration setup.
 
 ## Install an exact artifact
 

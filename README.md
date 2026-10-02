@@ -26,7 +26,166 @@ This is a companion to [HumanWill Benchmark](https://github.com/humanwill-ai/hum
 the benchmark studies model behavior; this project lets companies supply their own
 policies. Allowing a request here cannot force a downstream model to answer.
 
-## Try the offline demo
+## Use with your AI tools
+
+Run HumanWill as a policy service next to your gateway or coding agent. Your host
+sends the covered content to the service; the service evaluates your policies with
+Jev and returns a decision. The host applies that decision where enforcement is
+supported. Jev is the evaluator, not a replacement for your coding model.
+
+### 1. Install the released version
+
+Use Python 3.11–3.14 on Linux or macOS. The preview is available on GitHub, not PyPI.
+This installs the released source and includes the connector templates:
+
+```sh
+git clone --branch v0.1.0a1 --depth 1 https://github.com/humanwill-ai/humanwill-jev-policies.git
+cd humanwill-jev-policies
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m pip install --no-deps .
+humanwill-policies --version
+```
+
+Prefer a release wheel? Follow [artifact installation](docs/quickstart.md).
+You do not need the development dependencies or HumanWill Benchmark.
+
+### 2. Write your policies
+
+Create a separate folder for your company rules:
+
+```sh
+mkdir -p ../company-policies
+```
+
+Save this as `../company-policies/policies.md`:
+
+```markdown
+---
+kind: collection
+id: COMPANY
+version: "1"
+includes: [credential-logging.md]
+---
+Company development policies.
+```
+
+Save this as `../company-policies/credential-logging.md`:
+
+```markdown
+---
+kind: policy
+id: ENG-LOG-001
+version: "1"
+title: Keep credentials out of application logs
+stages: [prompt, model_request, tool_action, response]
+---
+Do not add code that writes passwords, API keys or access tokens to application
+logs. Reviewing existing code to identify or remove such logging is permitted.
+```
+
+This is a content-only starting example, not a prevalidated company policy.
+Add more files through `includes`, including collections in subfolders. Each rule
+needs a stable ID and a configuration entry. See [policy authoring](docs/policy-authoring.md).
+
+### 3. Configure Jev and start the service
+
+Save `../company-policies/config.yaml` with the matching policy ID:
+
+```yaml
+format: humanwill.config/5
+metadata:
+  enabled: false
+provider:
+  transport: openrouter
+  model: typesafe/jev-1.13
+  accepted_models: [typesafe/jev-1.13-20260917]
+  api_key_env: OPENROUTER_API_KEY
+policies:
+  ENG-LOG-001:
+    enabled: true
+    strategy: semantic
+    mode: monitor
+    on_error: block
+```
+
+Supply `OPENROUTER_API_KEY` through your local environment or secret manager.
+The model identifiers above are the tested release profile; unexpected returned
+models are rejected. [Direct TypeSafe configuration](docs/service-and-connectors.md#run-the-service)
+is also supported. Live checks use your provider account and incur API charges.
+
+Copy the service template:
+
+```sh
+cp examples/connectors/service.yaml ../company-policies/service.yaml
+```
+
+In that copy, keep only the `principals` for the integrations you will use. Set
+each retained principal's `token_env` variable to a different random secret of
+at least 32 ASCII characters, and supply the same token to its gateway or hook.
+These tokens authenticate connectors; they are separate from the Jev API key.
+For example, if you keep only `litellm`, generate its token in the service shell:
+
+```sh
+export HUMANWILL_LITELLM_TOKEN="$(python -c 'import secrets; print(secrets.token_hex(32))')"
+```
+
+Set `allow_external_evaluation: true` in `service.yaml` only after approving the
+data flow: **active policy text and inspected content are sent to hosted Jev
+through OpenRouter**. Protect these files from agent edits and keep secrets out
+of source control. Then run:
+
+```sh
+humanwill-policies validate ../company-policies --config ../company-policies/config.yaml
+humanwill-policies serve ../company-policies \
+  --config ../company-policies/config.yaml \
+  --service-config ../company-policies/service.yaml \
+  --host 127.0.0.1 --port 8088
+```
+
+Keep this process running. In another terminal, `curl http://127.0.0.1:8088/readyz`
+checks local readiness; it does not test the provider or policy accuracy.
+
+### 4. Connect your gateway or coding agent
+
+Choose the matching setup below. The host process must receive its connector token
+in its environment. The examples assume host and service share a machine;
+containers or remote hosts need reachable addresses and a protected network/TLS setup.
+
+| Integration | Setup | What to send through it |
+| --- | --- | --- |
+| **LiteLLM 1.102.1** | Install HumanWill in the LiteLLM environment too. Copy [litellm.yaml](examples/connectors/litellm.yaml), set your coding model and its credential, `LITELLM_MASTER_KEY`, and `HUMANWILL_LITELLM_TOKEN`. Keep both the profile callback and guardrail configuration. Start with `litellm --config /path/to/litellm.yaml --port 4000`. [Full setup](docs/service-and-connectors.md#configure-the-gateways). | Point your application's chat-completions client to `http://127.0.0.1:4000/v1`. Use text messages and `stream: false`; this release rejects structured tools and streaming. |
+| **Agentgateway 1.5.0** | Copy [agentgateway.yaml](examples/connectors/agentgateway.yaml). Replace the synthetic upstream/model with your provider configuration and both token placeholders with the service principal's token. Preserve both webhooks, the request-profile expression and fail-closed settings. Start with `agentgateway -f /path/to/agentgateway.yaml`. [Full setup](docs/service-and-connectors.md#configure-the-gateways). | Route text, non-streaming chat requests through the configured listener (example port `3000`). The sample upstream on port `9000` is a placeholder, not a supplied model service. |
+| **VS Code Local** | Merge the [Local hook template](examples/connectors/vscode-local.json) into your project's `.github/hooks/humanwill.json`. Replace the executable with the absolute path to `.venv/bin/humanwill-policies`; supply `HUMANWILL_LOCAL_TOKEN` to VS Code. Sign in to Copilot, enable `chat.useHooks`, trust the workspace and select the Local agent runtime. [Full setup](docs/service-and-connectors.md#install-and-remove-copilot-hooks). | Use Copilot in that workspace. Submitted prompts and proposed tool actions are checked; host timeouts and disabled hooks can bypass enforcement. |
+| **Copilot CLI** | Use the separate [CLI hook template](examples/connectors/copilot-cli.json), replace the executable path and supply `HUMANWILL_CLI_TOKEN` to the CLI. Configure folder trust. Do not combine the Local and CLI templates as if their contracts were interchangeable. [Full setup](docs/service-and-connectors.md#install-and-remove-copilot-hooks). | Start Copilot CLI in the configured project. Prompt checks are assessment-only; pre-tool checks can deny actions. Host timeouts and disabled hooks can bypass enforcement. |
+
+See [tested host versions](docs/compatibility.md) before using other versions.
+For a copyable LiteLLM request and end-to-end verification, see
+[check your installation](docs/service-and-connectors.md#check-your-installation).
+
+### 5. Review decisions, then choose enforcement
+
+The starter policy uses **monitoring**: policy assessments are logged but do not
+block otherwise supported requests. Protocol errors can still block under the
+connector's separate failure settings. Try a legitimate request such as
+“Review this code for credential logging” and a violating one such as “Add a log
+statement that records every user's password.” Inspect the service's JSON audit
+output for decisions and errors, not just whether the host continued.
+
+Before enabling blocking, evaluate representative examples of your own policies,
+set an explicit error fallback, and verify actual host behavior. Enforcement needs
+`mode: enforce` **and an `evaluation_profile`**, not just a mode switch. Follow the
+[monitoring-to-enforcement procedure](docs/service-and-connectors.md#enable-enforcement).
+Restart the service after policy/configuration changes to load the new bundle.
+
+Rules involving employee groups, approved destinations or document classifications
+also need a [trusted metadata integration](docs/optional-metadata.md). Metadata is
+optional, but the basic service does not supply an identity/destination resolver;
+a prompt claiming approval is not proof. Start with content-only policies when
+you do not yet have that integration.
+
+## Try the offline demo instead
 
 Use Python 3.11–3.14 on Linux or macOS, from this checkout:
 
@@ -227,7 +386,10 @@ request an alternative question only when an eligible assessment needs it.
 This result concerns the tested design and workload, not every possible batching
 strategy; full results and limitations are in the linked report.
 
-## Develop
+## Contribute to development
+
+The commands below are for contributors changing the project, not for installing
+or using the policy service. Run them from a source checkout in a virtual environment.
 
 ```sh
 python -m pip install -r requirements-dev.txt

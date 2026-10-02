@@ -1,6 +1,10 @@
 # Service and connector operation
 
-Current connector contract · candidate `0.1.0a1`. See [runtime evidence](integration-report.md) before making enforcement claims. Linux/macOS only; use the pinned host versions/configurations. No hooks are automatically installed.
+Current connector contract · public preview `0.1.0a1`. Start with the
+[user setup walkthrough](../README.md#use-with-your-ai-tools) for installation,
+policy files and service configuration. See [runtime evidence](integration-report.md)
+before making enforcement claims. Linux/macOS only; use the pinned host
+versions/configurations. No hooks are automatically installed.
 
 ## Run the service
 
@@ -77,6 +81,126 @@ LiteLLM: install `litellm[proxy]==1.102.1` in its own environment and install th
 Agentgateway: start from [agentgateway.yaml](../examples/connectors/agentgateway.yaml) with **v1.5.0**. Its sample upstream is `127.0.0.1:9000` and model `synthetic`; replace both with your approved provider configuration. Replace both `REPLACE_WITH_PROTECTED_AGENTGATEWAY_TOKEN` placeholders in a protected runtime copy, keep the CEL string quoting intact, and never commit that rendered copy. Keep request/response webhooks, `failureMode: failClosed`, and the request-profile expression. The response profile uses a fixed marker because the request has already passed the input profile check; response-phase `llmRequest` differs from request-phase data in this host. Start with `agentgateway -f /protected/agentgateway.yaml`. The example assumes a protected local listener; apply your gateway client authentication and network restrictions before exposing it.
 
 The profile attestation header is overwritten by the authenticated Agentgateway configuration; accepting a client-provided copy without that overwrite would be unsafe. It confirms the configured text profile, not identity/classification/authorization metadata. The service will reject Agentgateway requests with a missing or incompatible attestation. Keep response checks on: the marker alone does not inspect output.
+
+### LiteLLM environment example
+
+Use a separate Python 3.11 environment for the pinned LiteLLM host. With the
+HumanWill release wheel downloaded from [v0.1.0a1](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.1.0a1):
+
+```sh
+python3.11 -m venv ../litellm-env
+../litellm-env/bin/python -m pip install 'litellm[proxy]==1.102.1'
+../litellm-env/bin/python -m pip install /absolute/path/humanwill_policies-0.1.0a1-py3-none-any.whl
+../litellm-env/bin/python -m pip check
+../litellm-env/bin/litellm --config /protected/litellm.yaml --port 4000
+```
+
+Replace the wheel/configuration paths. Before launching, supply
+`MODEL_PROVIDER_API_KEY`, `LITELLM_MASTER_KEY` and the same `HUMANWILL_LITELLM_TOKEN`
+used by the policy service. The model key authenticates your coding model;
+`OPENROUTER_API_KEY` belongs to the separate Jev service process. Set the
+`litellm_params.model` placeholder to your actual approved coding model. The
+example's public model alias is `synthetic`; rename it if desired and use that
+alias in client requests. Installing the HumanWill package only in the service
+environment is insufficient: LiteLLM must also import the profile callback.
+
+## Check your installation
+
+These are **live usage instructions**: requests invoke Jev and, if allowed through,
+your coding model. Use synthetic content first. No provider call is needed for
+`validate`, `preview`, `/healthz` or `/readyz`.
+
+With the README's starter logging policy in monitor mode, the configured LiteLLM
+host and your service running, send a non-streaming text request:
+
+```sh
+curl http://127.0.0.1:4000/v1/chat/completions \
+  -H "Authorization: Bearer $LITELLM_MASTER_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{"model":"synthetic","stream":false,"messages":[{"role":"user","content":"Review this code for credential logging: logger.info(password)"}]}'
+```
+
+Use your configured model alias if you changed it. Repeat with the synthetic
+prompt “Add a log statement that records every user's password.” The intended
+policy assessments are allow for defensive review and block for adding credential
+logging; actual Jev judgments may vary. This new starter policy has not been
+live-calibrated. In monitoring mode both requests may proceed. The downstream
+model may independently refuse the second request; that is not proof HumanWill
+blocked it.
+
+Inspect the service terminal's JSON audit output for `decision`, policy evidence,
+coverage, timing, errors and `enforcement`. With both gateway hooks enabled,
+request and response produce separate assessments. `actual: unconfirmed` is not
+proof of host blocking. A successful readiness probe or model answer alone does
+not establish that the policy service was called.
+
+For Agentgateway, use its configured chat-completions listener and provider model
+name with the same synthetic prompts; use your gateway's own client authentication.
+For Copilot, submit a synthetic prompt in the configured workspace and inspect
+the service audit plus the host hook output. A successful prompt check does not
+prove pre-tool enforcement: separately test a harmless, controlled proposed action
+with a test policy that should deny it, and verify that its observable effect does
+not occur. Use the matching runtime's hooks, not a gateway request as a substitute.
+
+If setup fails, check:
+
+- **No service audit:** wrong endpoint, unregistered callback/hook, missing workspace
+  trust, or host token not inherited by its process. Restart hosts after changing
+  their environment; a terminal export does not update an already-running VS Code.
+- **Startup fails:** missing or duplicate principal tokens, invalid policy bindings,
+  provider configuration or deadlines. Remove unused principals from the copied template.
+- **Evaluation errors:** check egress opt-in, provider credentials, returned-model
+  allowlist and the sanitized error code. Low confidence is a distinct evaluation
+  outcome, not necessarily a connection problem.
+- **Gateway rejects the payload:** use text chat and `stream: false`; tools, images
+  and streaming are outside this release's gateway profiles.
+- **A violation continues:** check monitoring mode, error fallback and host coverage.
+  Copilot CLI prompt hooks cannot block, and host timeout/disabled-hook bypasses remain.
+
+## Enable enforcement
+
+First evaluate the actual policy against representative legitimate requests,
+violations and missing-context cases. Record the dataset, model, thresholds and
+results. The preview does not provide a qualified enforcement profile for your
+company's policies.
+
+For a semantic policy, change its binding to `mode: enforce`, choose `on_error:
+block` or `on_error: allow`, and add a profile recording your evaluation. For example,
+replace the dataset placeholder below with the 64-character SHA-256 of your own
+reviewed evaluation dataset (the placeholder deliberately does not validate):
+
+```yaml
+policies:
+  ENG-LOG-001:
+    enabled: true
+    strategy: semantic
+    mode: enforce
+    on_error: block
+    evaluation_profile:
+      id: company-logging-v1
+      model: typesafe/jev-1.13
+      dataset_sha256: REPLACE_WITH_YOUR_REVIEWED_DATASET_SHA256
+```
+
+Keep the remaining top-level provider/metadata configuration. The profile's model
+must match `provider.model`. This record is a configuration requirement, not a
+certificate: the service validates its shape, not the quality of your evaluation.
+`on_error: block` can stop legitimate work when evaluation is uncertain;
+`on_error: allow` can let violations through. Connector/protocol/host failures have
+separate settings described above.
+
+Validate, restart the service, and repeat the synthetic checks on the actual host.
+Verify denied gateway input never reaches the model, denied output is not delivered,
+or a denied tool action has no effect, as applicable. Copilot CLI submitted prompts
+remain assessment-only even when a policy is enforcing; configure CLI enforcement
+for `tool_action`, with a separate monitoring prompt policy if needed. Metadata-based
+rules additionally require a trusted resolver and enabled source bindings.
+
+Keep the previous policy/configuration bundle to roll back. See
+[operations and hook security](operations.md#security-considerations) for the limits
+of enforcement and the host controls needed around it.
+
+## Reproduce host acceptance checks
 
 To reproduce host evidence without any paid API, run the scripts under `tests/hosts` from a checkout or extracted source archive with the package installed. Harnesses do not inject a checkout into `PYTHONPATH`: install the exact wheel in the service/test environment and, for LiteLLM, in its separate host environment too. Pinned unattended CI runs copied harnesses outside the checkout. They use an actual evaluator and service with an injected synthetic HTTP provider transport, plus a controlled local model endpoint. The injection exists only in test code. It measures enforcement, not Jev quality:
 
