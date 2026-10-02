@@ -1,8 +1,20 @@
 # HumanWill Jev Policies
 
-Apply company-authored Markdown policies to AI requests, responses and proposed
-tool actions through a shared service. Jev supplies semantic judgments; the adapter
-combines them with deterministic rules and, when enabled, trusted metadata.
+**Turn company policies into runtime checks.**
+
+**“Help me review this code. Don’t upload it to an unapproved destination.”**
+
+Your AI provider’s safeguards don’t know your company’s rules. HumanWill Jev
+Policies lets you write those rules in Markdown and check AI activity against them
+through LiteLLM, Agentgateway, and supported GitHub Copilot hooks.
+
+Powered by Jev’s semantic evaluation, it adds a company-controlled security layer
+to your **software development lifecycle (SDLC)**—with **378 ms median added
+latency for prompt checks in our controlled tests**. Start by monitoring, then
+enable blocking where supported.
+
+*Experimental developer preview. Coverage and blocking capabilities vary by
+connector. Use alongside other security controls.*
 
 **First public release: [v0.1.0a1 — experimental developer preview](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.1.0a1).**
 Published 2026-10-01. It is not an enterprise-qualified policy
