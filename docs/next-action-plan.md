@@ -12,9 +12,11 @@ Owner added a pre-streaming concern on 2026-10-03: avoid treating abandoned
 requests in conversation history as fresh instructions. The config/5
 [conversation clarification](conversation-inspection.md) is implemented locally.
 Its [live comparison](conversation-v1-report.md) shows partial improvement, with
-six legitimate case types still failing closed through uncertainty. Review the
-proposed structural-context experiment before claiming this is solved. Do not
-ignore history or trust an inline “already blocked” marker.
+six legitimate case types still failing closed through uncertainty. The subsequent
+[structural-context experiment](conversation-structure-v1-report.md) improves
+legitimate passes to 24/27 but makes the historical-secret check indeterminate.
+It remains research-only. Review full-payload content-policy handling and absent-role
+fallback before runtime adoption; do not ignore history or trust inline block notices.
 This is the next feature sequence after the public `v0.1.0a1` preview. Saving this
 plan does not start implementation, paid evaluations, deployment or another release.
 

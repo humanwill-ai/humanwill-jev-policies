@@ -1,5 +1,25 @@
 # Decisions and open requirements
 
+## Structural conversation experiment complete — 2026-10-03
+
+At frozen `9040a7e`, the original 24 cases plus six boundary controls ran three
+times per arm: 180 assessments / 221 paid calls. Only state.content representation
+changes; questions, policy text, full content, gates and trusted facts remain
+identical. Original cohort: legitimate passes 9→24/27, errors 18→3; violation
+blocks 39→36/39 plus three new low-confidence historical-secret errors; no
+definitive violation/unknown allows and all six expected unknowns retained.
+Six masked disclosure misattributions remain in each arm. Extra controls retain
+all 12 violation blocks and three unknowns, but flat legitimate work errors
+2→3/3. See [full results](conversation-structure-v1-report.md).
+
+Grouping remains research-only. Test full-payload content-policy handling and
+flat fallback when roles are absent before adopting; no threshold relaxation or
+automatic further campaign. All 180 results / 221 exact payloads replay; 90 pairs
+reconstruct unchanged content and questions. Seven new offline tests pass.
+New cost $0.027091554; known cumulative $0.471780128 plus the old $0.01 reserve,
+remaining $4.518219872. Ledger 6,661 attempts / 6,660 settled, only historical
+index 1830 unresolved. No runtime change, CI, push, deployment, release or streaming.
+
 ## Multi-turn live comparison complete — 2026-10-03
 
 At frozen `a0a3980`, 24 synthetic provisional-label conversations × three repeats

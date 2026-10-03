@@ -6,6 +6,10 @@
 > and a [partial live improvement](conversation-v1-report.md): most legitimate
 > cancellations still abstain. Streaming remains planned.
 
+> A [research-only structured-context comparison](conversation-structure-v1-report.md)
+> now improves legitimate passes to 24/27, with three historical-secret checks
+> regressing to uncertainty. Runtime adoption is deferred pending that tradeoff.
+
 > Development update 2026-10-03: the published v0.1.0a1 remains unchanged.
 > Non-streaming proposal inspection passes actual LiteLLM/Agentgateway tests;
 > MCP pre-execution passes actual-host tests for [LiteLLM](mcp-pre-execution.md)

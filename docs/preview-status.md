@@ -5,6 +5,9 @@ config/5 model-request questions for abandoned versus active instructions.
 All 294 implementation tests plus three experiment tests pass. The
 [live comparison](conversation-v1-report.md) shows partial improvement, with
 18/27 legitimate observations still indeterminate. No new release qualification.
+The subsequent [structural experiment](conversation-structure-v1-report.md) improves
+legitimate passes to 24/27 but adds three historical-secret errors. Seven additional
+offline experiment tests pass; grouping remains research-only, with no runtime change.
 
 Development `0.1.0a2.dev0` adds opt-in non-streaming function-call inspection.
 See [implementation, setup and evidence](structured-tool-calls.md). Existing public

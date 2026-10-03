@@ -5,6 +5,10 @@
 > with substantial remaining abstention. Published assets and historical quality
 > claims do not cover this new wording.
 
+> The [structured-context experiment](conversation-structure-v1-report.md) improves
+> cancellations but adds historical-secret abstentions. No runtime promotion,
+> release change or deployment follows from this experiment.
+
 > Development update 2026-10-03: the published v0.1.0a1 remains unchanged.
 > Non-streaming proposal inspection passes actual LiteLLM/Agentgateway tests;
 > MCP pre-execution passes actual-host tests for [LiteLLM](mcp-pre-execution.md)

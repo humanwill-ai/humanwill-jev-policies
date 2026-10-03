@@ -5,6 +5,11 @@ is complete: explicit false violations on legitimate conversations fell to zero,
 but 18/27 legitimate observations still returned errors. This remains a partial
 improvement, not a solved history problem. Published v0.1.0a1 assets are unchanged.
 
+The subsequent [research-only structural comparison](conversation-structure-v1-report.md)
+improves legitimate passes from 9/27 to 24/27 on the same 24-case cohort, but turns
+three historical-secret blocks into uncertainty. Grouping has not been adopted
+into runtime; whole-payload content checks and absent-role fallback need further work.
+
 ## Problem and intended behavior
 
 A gateway may receive the same earlier conversation with each model request.

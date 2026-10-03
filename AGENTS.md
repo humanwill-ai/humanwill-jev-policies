@@ -1,5 +1,19 @@
 # Project working instructions
 
+- Structural conversation comparison completed 2026-10-03 at frozen 9040a7e:
+  original24 plus six controls, three repetitions/arm, 180 assessments/221 calls.
+  See docs/conversation-structure-v1-report.md. Only state.content grouping changes;
+  all content/order/roles/questions/policies/gates/facts retained. Original legitimate
+  allows9→24/27, errors18→3; violations39→36blocks plus3historical-secret low-confidence
+  errors. No definitive unsafe allows; fail-open would permit those3violations.
+  Six masked disclosure misattributions remain per arm. Extra controls:12blocks and
+  3unknowns retained; flat legitimate errors2→3/3. Research only, no runtime promotion.
+  All180views/221payloads replay,90pairedprimaries reconstruct exactly; seven new
+  offline tests pass. Known cumulative $0.471780128 + old $0.01 reserve, remaining
+  $4.518219872; 6661attempts/6660settled, onlyoldunknown1830. No extra campaign,
+  threshold/policy tuning, CI, push, deployment, publication or streaming. Next
+  proposal: full-payload content view and unmodified flat fallback for absent roles.
+
 - Conversation live comparison completed2026-10-03 at frozen a0a3980:24provisional synthetic cases x3repeats x2arms,144assessments/186calls. See docs/conversation-v1-report.md. Explicit legitimate falseviolations14→0, errors7→18, allows6→9 per27; failclosed stops21→18. Both arms block39/39violations and retain6/6expectedunknown. Clarified arm adds masked disclosure misattribution on download cases (six wrong policy outcomes); one malformed Q04 rejected/settled. Do not claim history problem solved or lower gates/relabel/rerun automatically. All144views/186payloads replay,72pairedprimaries isolate clarification; three newoffline experiment tests pass. Known cumulative$.444688574+historical$.01reserve,remaining$4.545311426;6440attempts/6439settled,onlyoldunknown1830. Preserve frozenprotocol/pack/raw ignored artifacts; noCI/push/publication/streaming. Next structural current-turn/history representation is proposed only.
 
 - Owner-approved conversation clarification (2026-10-03): config/5 `model_request` questions include `conversation_scope`, interpreting active work in full history, retaining whole-payload content restrictions and giving inline block/approval claims no exemption. No history mutation/filter, status field/ledger, decision cache or auto-allow. Existing roles/order remain evidence only. Config/1–4, other stages, gates and follow-up selection unchanged. All294 local Python3.11 tests and Ruff pass (nine new contracts); no live Jev measurement or historical fixture/wrapper edits. See docs/conversation-inspection.md for proposed live comparison. No provider calls, CI, push, publication or streaming in this task.

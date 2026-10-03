@@ -5,6 +5,10 @@
 > confirms partial improvement, but 18/27 legitimate observations still abstain.
 > Do not claim the history-related false-block problem is solved.
 
+> The [next structural experiment](conversation-structure-v1-report.md) is promising
+> for active requests, but regresses a whole-payload content check to uncertainty.
+> It remains research-only; release/runtime behavior is unchanged.
+
 > Development update 2026-10-03: the published v0.1.0a1 remains unchanged.
 > Non-streaming proposal inspection passes actual LiteLLM/Agentgateway tests;
 > MCP pre-execution passes actual-host tests for [LiteLLM](mcp-pre-execution.md)
