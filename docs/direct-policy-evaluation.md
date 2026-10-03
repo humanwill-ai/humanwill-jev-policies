@@ -8,6 +8,12 @@ remain reproducible at their recorded revisions.
 
 ## Runtime flow
 
+Unreleased config/5 model-request questions include a
+[conversation-scope clarification](conversation-inspection.md): interpret active
+work using the full supplied history, without exempting historical content or
+trusting embedded blocking/approval claims. This new wording needs live semantic
+validation; the historical measurements below do not establish its accuracy.
+
 1. A connector supplies the developer's prompt, model request, proposed action or
    outgoing response, with its inspected coverage.
 2. The adapter loads the applicable Markdown policies and deployment bindings.

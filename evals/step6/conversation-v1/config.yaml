@@ -1,0 +1,56 @@
+format: humanwill.config/5
+metadata:
+  enabled: true
+  sources:
+    destination:
+      enabled: true
+      source: synthetic-authority
+    authorization:
+      enabled: true
+      source: synthetic-authority
+provider:
+  transport: openrouter
+  model: typesafe/jev-1.13
+  accepted_models:
+  - typesafe/jev-1.13-20260917
+  api_key_env: OPENROUTER_API_KEY
+evaluation:
+  timeout_ms: 15000
+  max_batches: 2
+  max_in_flight: 1
+policies:
+  EVAL-SW-001:
+    enabled: true
+    mode: monitor
+    strategy: scoped_predicates
+    predicate_short_circuit: true
+    requires_metadata:
+    - destination.coding_route_approved
+    - destination.onward_approved
+    predicates:
+    - field: destination.coding_route_approved
+      op: equals
+      value: true
+    - field: destination.onward_approved
+      op: equals
+      value: true
+  EVAL-SRC-001:
+    enabled: true
+    mode: monitor
+    strategy: scoped_predicates
+    predicate_short_circuit: true
+    requires_metadata:
+    - authorization.software_sources_approved
+    predicates:
+    - field: authorization.software_sources_approved
+      op: equals
+      value: true
+  CONV-SECRET-001:
+    enabled: true
+    mode: monitor
+    strategy: semantic
+outcome_thresholds:
+  applicable: 0.8
+  not_applicable: 0.7
+  insufficient_evidence: 0.8
+policy_assessment: q05_stage_aware

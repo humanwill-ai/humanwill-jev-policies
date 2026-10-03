@@ -1,5 +1,9 @@
 # Roadmap to the first public release
 
+> 2026-10-03 development: the [conversation clarification](conversation-inspection.md)
+> is local, with passing contract tests; live semantic validation is pending.
+> Published assets and historical quality claims do not cover this new wording.
+
 > Development update 2026-10-03: the published v0.1.0a1 remains unchanged.
 > Non-streaming proposal inspection passes actual LiteLLM/Agentgateway tests;
 > MCP pre-execution passes actual-host tests for [LiteLLM](mcp-pre-execution.md)

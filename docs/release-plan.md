@@ -1,5 +1,10 @@
 # First-release plan: company-owned policy enforcement
 
+> 2026-10-03 development: [conversation inspection](conversation-inspection.md)
+> adds a config/5 question clarification; local contracts pass, live Jev behavior
+> remains unmeasured. Complete the multi-turn comparison before claiming the
+> history-related false-block problem is solved.
+
 > Development update 2026-10-03: the published v0.1.0a1 remains unchanged.
 > Non-streaming proposal inspection passes actual LiteLLM/Agentgateway tests;
 > MCP pre-execution passes actual-host tests for [LiteLLM](mcp-pre-execution.md)

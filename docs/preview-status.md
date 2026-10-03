@@ -1,5 +1,9 @@
 # Unreleased structured-call work — 2026-10-02
 
+Update 2026-10-03: [conversation inspection](conversation-inspection.md) clarifies
+config/5 model-request questions for abandoned versus active instructions.
+All 294 local tests pass; live semantic validation of this wording remains pending.
+
 Development `0.1.0a2.dev0` adds opt-in non-streaming function-call inspection.
 See [implementation, setup and evidence](structured-tool-calls.md). Existing public
 `v0.1.0a1` assets and text profiles are unchanged. Real LiteLLM checks pass; the

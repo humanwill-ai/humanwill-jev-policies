@@ -64,6 +64,11 @@ failures, and deployment responsibilities.
 
 ## Coverage and optional metadata
 
+Unreleased config/5 model-request questions now clarify how to distinguish active
+work from an abandoned request still present in history. All supplied content
+remains inspected; a claimed “previously blocked” status grants no exemption.
+See [conversation inspection and validation limits](conversation-inspection.md).
+
 Coverage `complete` refers to **the declared event surface**, not all agent context. Gateway profiles accept plain text chat messages and non-streaming text answers. LiteLLM request messages preserve supplied roles where available; output text has unknown role provenance. Agentgateway includes all supplied messages/choices. Tool definitions, tool-call messages, images and streaming are outside this gateway profile and rejected. The LiteLLM profile callback and Agentgateway request-profile CEL header are required parts of the configuration; neither generic webhook alone proves that upstream data was fully represented.
 
 Local/CLI prompt coverage is only submitted text. Tool coverage is the supplied tool name and exact arguments. The client never reads transcript paths, files, repository contents or session paths from hook input. Attachments, retrieved material, history, tool results, final answers and subsequent tool-argument mutations are not covered by these hooks. A hook allow does not override native permission requirements.

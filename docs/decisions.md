@@ -1,5 +1,17 @@
 # Decisions and open requirements
 
+## Conversation inspection clarification — 2026-10-03
+
+Owner approved addressing abandoned blocked requests retained in gateway history.
+Config/5 model-request questions now distinguish active work from abandoned
+instructions, retain all content and whole-payload restrictions, and grant no
+exemption to inline block/approval claims. The shared clarification survives Q05
+and Q04; existing roles/order are used without new status fields or history
+rewriting. Legacy questions, other stages, thresholds and enforcement remain
+unchanged. All 294 local tests and Ruff pass (nine new contract tests); these use
+scripted judgments, not live Jev. See [design and proposed semantic comparison](conversation-inspection.md).
+No provider calls, hosted CI, push, publication or streaming implementation.
+
 > Current candidate status and the guide index are in [preview status](preview-status.md).
 > The dated sections below retain planning and decision history; older counts,
 > profiles and milestone status are superseded by that current summary.

@@ -2,6 +2,11 @@
 
 ## Unreleased — 0.1.0a2.dev0
 
+- Config/5 model-request question clarification for abandoned versus active
+  conversation instructions, preserving full history and content restrictions.
+  Inline block/approval claims grant no exemption. Local contract validation only;
+  live semantic comparison pending. See [conversation inspection](docs/conversation-inspection.md).
+
 - Optional non-streaming function-call inspection through LiteLLM and an
   Agentgateway fixed-backend relay; real-host synthetic enforcement tests pass.
 - LiteLLM MCP pre-execution checks with full arguments, bounded authenticated
@@ -10,7 +15,8 @@
 - Native Agentgateway ExtMCP pre-execution connector, authenticated loopback gRPC
   and optional install extra; 22 actual MCP-server scenarios pass in Linux CI.
   [Agentgateway scope and setup](docs/agentgateway-mcp.md).
-- Published v0.1.0a1 assets, existing text profiles and evaluator defaults unchanged.
+- Published v0.1.0a1 assets, existing text profile payload contracts, evaluation
+  thresholds and follow-up selection unchanged.
 
 ## 0.1.0a1 — 2026-10-01, experimental developer preview
 

@@ -8,6 +8,11 @@ the relay's real Agentgateway/Linux acceptance now passes. Step 2 is implemented
 for both gateways with actual MCP servers:
 [LiteLLM](mcp-pre-execution.md) and [Agentgateway](agentgateway-mcp.md).
 Step 3 remains planned; no streaming implementation is included.
+Owner added a pre-streaming concern on 2026-10-03: avoid treating abandoned
+requests in conversation history as fresh instructions. The config/5
+[conversation clarification](conversation-inspection.md) is implemented locally;
+its live Jev comparison remains pending. Do not solve this by ignoring history
+or trusting an inline “already blocked” marker.
 This is the next feature sequence after the public `v0.1.0a1` preview. Saving this
 plan does not start implementation, paid evaluations, deployment or another release.
 

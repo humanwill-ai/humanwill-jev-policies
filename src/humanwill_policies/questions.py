@@ -1,5 +1,7 @@
 """Reusable Markdown-policy evaluator template; no policy-ID or tool-specific rules."""
 
+from .conversation import CONVERSATION_RULE
+
 POLICY_RUBRIC = "humanwill.policy/1"
 ASSESSMENT_POINTS = {
     "prompt": "Submitted user text, before the agent proceeds.",
@@ -51,6 +53,8 @@ def policy_question(policy, binding, stage):
             "separate governed activity. Judge only the inspected stage and supplied coverage."
         ),
     }
+    if stage == "model_request":
+        instructions["conversation_scope"] = CONVERSATION_RULE
     if scoped:
         instructions["trusted_conditions"] = {
             "required_fields": list(binding["requires_metadata"]),
