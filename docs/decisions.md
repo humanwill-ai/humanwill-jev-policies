@@ -989,3 +989,12 @@ runtime mapping are separate in review-decisions-v1.json. Future labels require
 scope review before a new protocol; no blanket approval or negative fact invented.
 See docs/disclosure-preparation-boundary.md. Bundle/config load checked; no live call,
 replay, threshold/runtime change, push or new rate. Fourteen cases remain to review.
+
+## Owner review: gateway integration wording ambiguous — 2026-10-03
+
+Owner accepted015 as ambiguous intent with defensible abstention: intended product
+connector feasibility research, potentially read as connecting the development
+project and sending data to another gateway. Preserve original inputs/results;
+clearer wording would be a separate future example, not a retroactive correction.
+Two of15 cases reviewed,13 remain;026 currently under discussion, no label decision.
+See docs/dogfood-case-review.md and review-decisions-v1.json. No new calls or tuning.
