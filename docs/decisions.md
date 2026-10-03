@@ -797,3 +797,14 @@ Agentgateway configuration passes the v1.5.0 schema. Actual Linux host validatio
 is the next gate; use one targeted existing-workflow dispatch and retain its wheel
 and reports. No new provider calls, streaming or release. Setup and scope are in
 [the Agentgateway MCP guide](agentgateway-mcp.md).
+
+### Agentgateway MCP runtime acceptance
+
+The single targeted run [37107052703](https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/37107052703)
+passes at `9ab0862`: 22 new MCP scenarios, all 48 existing Agentgateway scenarios,
+and six gRPC wire checks. Other jobs skipped. Exact installed CI wheel and reports
+were retained and downloaded; runtime files match the reviewed source.
+[Evidence](evidence/agentgateway-mcp-v1.json) records hashes and every MCP result.
+Local wheel/source installation checks also pass. No paid provider calls,
+representative MCP latency benchmark, new main merge or release. The guide's
+previous pending gate is now closed for this pinned native HTTP MCP profile.

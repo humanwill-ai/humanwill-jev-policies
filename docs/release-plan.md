@@ -1,9 +1,10 @@
 # First-release plan: company-owned policy enforcement
 
-> Development update 2026-10-02: the published v0.1.0a1 remains unchanged.
+> Development update 2026-10-03: the published v0.1.0a1 remains unchanged.
 > Non-streaming proposal inspection passes actual LiteLLM/Agentgateway tests;
-> [LiteLLM MCP pre-execution](mcp-pre-execution.md) now passes local installed-host
-> tests. These are unreleased additions; streaming and broader MCP bindings remain planned.
+> MCP pre-execution passes actual-host tests for [LiteLLM](mcp-pre-execution.md)
+> and [Agentgateway](agentgateway-mcp.md). These are unreleased additions;
+> streaming and broader MCP bindings remain planned.
 
 > Current candidate status and the guide index are in [preview status](preview-status.md).
 > The dated sections below retain planning and decision history; older counts,

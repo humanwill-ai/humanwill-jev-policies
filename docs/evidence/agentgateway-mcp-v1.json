@@ -1,0 +1,274 @@
+{
+  "format": "humanwill.agentgateway-mcp-verification/1",
+  "reviewed_on": "2026-10-03",
+  "version": "0.1.0a2.dev0",
+  "source_commit": "9ab0862a2d293453217c3afd941a1f9e6e5a73c7",
+  "run_url": "https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/37107052703",
+  "conclusion": "success",
+  "job_id": 111157528450,
+  "runner": "ubuntu-24.04",
+  "python": "3.11",
+  "agentgateway_version": "1.5.0",
+  "agentgateway_source": "fe6732474a96a0363dfb9822859af4e9bab360fa",
+  "agentgateway_binary_sha256": "daca5cda76e8c5ab0c1a75912fecf2d6365095403f810db72029c49d14a37e7b",
+  "optional_dependencies": {
+    "grpcio": "1.84.0",
+    "protobuf": "7.36.2"
+  },
+  "test_mcp_sdk": "1.30.0",
+  "ci_wheel_sha256": "29666795d77d35f7176dcbdff3b4d0acf117cf0619bb87056d5274b588b65956",
+  "ci_wheel_runtime_matches_source": true,
+  "ci_artifact_name": "agentgateway-installed-host-evidence",
+  "retained_local_artifacts": {
+    "artifacts/agentgateway-mcp/ci-artifacts/_temp/artifacts/hosts/agentgateway-mcp-enforce.log": "62b4d1e0b5cdece87e6c516300d38ff9df21326f4537b4f5386cb181c4426650",
+    "artifacts/agentgateway-mcp/ci-artifacts/_temp/artifacts/hosts/agentgateway-mcp-monitor.log": "614931fc7eff1222f8cd368b994fba0b87f19f377047dfee200029d973fe1875",
+    "artifacts/agentgateway-mcp/ci-artifacts/_temp/artifacts/hosts/agentgateway-mcp-report.json": "5e7b892ed7e14ecc1b0fc4e21b85bce4aa63540def0156faab7f7333e01a9056",
+    "artifacts/agentgateway-mcp/ci-artifacts/_temp/artifacts/hosts/agentgateway-tool-calls-report.json": "0981ba34083e90392334b5b1f96d333a283789da72629ff12ef0acb4de97bff5",
+    "artifacts/agentgateway-mcp/ci-artifacts/_temp/artifacts/hosts/agentgateway.json": "d9c8370354f79658c774eee143b0522e599da36721eda7ea229380e2d3c7dfa9",
+    "artifacts/agentgateway-mcp/ci-artifacts/_temp/artifacts/hosts/extmcp-enforce.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/agentgateway-mcp/ci-artifacts/_temp/artifacts/hosts/extmcp-monitor.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "artifacts/agentgateway-mcp/ci-artifacts/humanwill-jev-policies/humanwill-jev-policies/dist/humanwill_policies-0.1.0a2.dev0-py3-none-any.whl": "29666795d77d35f7176dcbdff3b4d0acf117cf0619bb87056d5274b588b65956"
+  },
+  "runtime_sha256": {
+    "src/humanwill_policies/__init__.py": "b38398351130373f63e640f872685050eddee1cedf5b202c32d11c127c9a33fd",
+    "src/humanwill_policies/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/humanwill_policies/bundle.py": "a7ba362d28672376a052e313163c8d09a508428b3b471f4ad35dd815d5571524",
+    "src/humanwill_policies/cli.py": "f0edb66500c9e1559fbd17452d948375a13f4dcf074a2a5ebf4b7200b5b7377b",
+    "src/humanwill_policies/config.py": "e7c72b1b54592d424891ce3a38dde7b9ed6d37cde99bab85164a1ac042b2ce76",
+    "src/humanwill_policies/connectors/__init__.py": "b01982502270f7c0781c36d041380446929bb059a124deeed5a9c9496a0bc385",
+    "src/humanwill_policies/connectors/agentgateway_mcp.py": "71394d6383388c33de8fd6190a0fd4c8a685524d02e34994e7ccbc10c4038e4c",
+    "src/humanwill_policies/connectors/chat.py": "bf3aee858d04662e415afc3407dccc619026361f69372ff7fc8e49155e58606d",
+    "src/humanwill_policies/connectors/events.py": "4272bc8465e92defcf744cc51d0fb89900a10c03fc4aafdd4b518eea419725e9",
+    "src/humanwill_policies/connectors/ext_mcp/__init__.py": "a6098ccb95a27c7b22bef632d347e25bf5a90d0f3633671d1b87f15599f1ebb9",
+    "src/humanwill_policies/connectors/ext_mcp/ext_mcp.proto": "4ba750cca44e9ba68de2ad04e6d507b67f44b1728f09840b78d9e32f3f563584",
+    "src/humanwill_policies/connectors/ext_mcp/ext_mcp_pb2.py": "350023c81c1ba38a25c9a22fc031745998a2a5b9c87572b89953f0c8d73ab375",
+    "src/humanwill_policies/connectors/litellm_mcp.py": "b7f537a7f2fbb53a0c062ed3fa234f69c344fc914711c8eec4e081bbe38b4a61",
+    "src/humanwill_policies/connectors/litellm_profile.py": "1e48155c53d6946b1486964524f4d64fc5058e25bb999835b3d54d29bb7895f4",
+    "src/humanwill_policies/connectors/mcp.py": "dd46c8c2d472f92065b99715d575b92edddaece2e92da241212679634872728f",
+    "src/humanwill_policies/connectors/relay.py": "508dfb3ac0551b66d130883264c03f266da5ca2078be0446cd57b0bbcf46cc19",
+    "src/humanwill_policies/contracts.py": "595dc48927c4069552e28e668637b7653f3075fbcaff321b0644b49a51c6aa79",
+    "src/humanwill_policies/demo/config-outcomes.yaml": "8e6f08635153295be8edd9e3a07a36295d3042ab2f5704ea8a25251f410e3c3c",
+    "src/humanwill_policies/demo/config-policy-followup.yaml": "44626d0a5d1dca4c037b48c143e320ff586255749ce503734f7026df67a61932",
+    "src/humanwill_policies/demo/config-policy-text.yaml": "392efda680b8edc33f1b317a5ba6a83bcaea4da68d01b263a043f2fc0be9c138",
+    "src/humanwill_policies/demo/config-stage-aware-followup.yaml": "18aabd2572e19e77033bd0788785d408abf64600bea2a60440059100c6b2aa45",
+    "src/humanwill_policies/demo/config.yaml": "c2a83b35812da4939ccded45f2746f9cc3f4582afcc5f71a77f3313b585e5290",
+    "src/humanwill_policies/demo/mock-answers.json": "e85dd3115395521b992e4932fdb71f03c71457ed58811010600a026883392b35",
+    "src/humanwill_policies/demo/policies.md": "cb00833fd3cb121662273d2af1601d58e9b2cdf381abf4744d6d34f16e0cd9d3",
+    "src/humanwill_policies/demo/request.json": "467dbc823c258e44f2bdeca7789686497e69c7384464706f46051f4d37e9680c",
+    "src/humanwill_policies/demo/rules/content.md": "137d87b0239627f85bd12cf168321eaa14d9c9460d9213bdc935e3342e2e0575",
+    "src/humanwill_policies/demo/rules/documents.md": "02c7a799c4cd8dc999d080a4be4ff263bc73173ed0ca4bb51859765d00fd976b",
+    "src/humanwill_policies/demo/rules/finance.md": "1c3f6bc4c09df09ba21e53a63b7b1773998ed8463389cf5b3481c813dec52061",
+    "src/humanwill_policies/errors.py": "a3431f65ff2636cb67968c2c263c3dba25c32a12fc2aa331a1ed10cfd5e3c954",
+    "src/humanwill_policies/evaluation.py": "9dfcd4b033ab1ad03708366675166daddc7d24e786796b3ffd8d23eb3fa9adcc",
+    "src/humanwill_policies/followup.py": "11dc37f3b90635587bafd2089d6a76157f5be763ba1378b06f74083a5051bf09",
+    "src/humanwill_policies/hooks.py": "5ebb800aa727495db80f549fc0adefc189b6700f25bd0b1ab453b2ec905c5fe8",
+    "src/humanwill_policies/metadata.py": "4fb95d9fa614812674c3d902d44a50e5b9d7c5375aa175d82a3a450cd387d906",
+    "src/humanwill_policies/providers.py": "d64240e8864653d39134b4048df66f4c14698c1475282e7e354e5b6723f3d8eb",
+    "src/humanwill_policies/questions.py": "b0a3c2585305f8e7964ac35fb046f2a690ecb80b0dfa2fce91158fa60d31f3d4",
+    "src/humanwill_policies/runtime.py": "8be99ee7cc70a86fdf3dbcc907c569d02ecee7db41d19d8e0f9b29368b2d45c5",
+    "src/humanwill_policies/schemas/collection.json": "c174dfd3394498273e7c42977cde5b7956b37d4f7d364432e77ad122404f2d6e",
+    "src/humanwill_policies/schemas/config-v2.json": "92d514a195be5f7e775937bb7c9012e273f49b1a7900b33cdf4c0fcef9e327b9",
+    "src/humanwill_policies/schemas/config-v3.json": "61e96f550acd3ca68d7647eb0725a16dcbc818600ddd89f853aba8bd91a4353b",
+    "src/humanwill_policies/schemas/config-v4.json": "23d3c4b069e849ec3813af790a385e73f0cc62108dfd4b97c4ab63444cad778e",
+    "src/humanwill_policies/schemas/config-v5.json": "a87e49f5ab12a9ce58185e30b2e7a68d953f69b5a92615c8f4b4a615168280b3",
+    "src/humanwill_policies/schemas/config.json": "83145f5d7517ffe6e14372fb792dcb5e43c759cb6f97ea623866f2800a1ca835",
+    "src/humanwill_policies/schemas/policy.json": "9a3ca126cf8f0b0e8bffaeb25407c15596dc2758dcda9efa1839f8a75d00eb5d",
+    "src/humanwill_policies/schemas/request.json": "edb60444ee6a8e3e2438a3904a92a03f0ffdd16f2d7f036be3862b0636c4e03f",
+    "src/humanwill_policies/schemas/result-v2.json": "805d59fd771a52c37657994fd329a7f28c4ef5480d8a7ae46b37852e3412e5c7",
+    "src/humanwill_policies/schemas/result-v3.json": "dcd0585429d49803195e2a22b4d7a0ddb6e984a974347af792a3f22276411177",
+    "src/humanwill_policies/schemas/result-v4.json": "185c14c365e2a17292f04e1e754be590c95b9b8b070fada1dec03a311f3a8104",
+    "src/humanwill_policies/schemas/result.json": "07331de7d9b3235ca423be1d305a65c7bd24d374a8eb45cb4c54602dbbdd4c26",
+    "src/humanwill_policies/schemas/service.json": "3deda1343824fe738b26e9e0f4a8465ead90b169c380c9a81d4253aeb8454f14",
+    "src/humanwill_policies/serialization.py": "09b76e17d56fa7ed75f8aedb48cdccffed05d963e9153258de6dcccd1f09f297",
+    "src/humanwill_policies/service.py": "e84a710d054fcde6df3989b8b0d799e3e8399dd8df69ef829324e10c108e795e"
+  },
+  "upstream_sha256": {
+    "LICENSE": "3b1ee5b1e14fda40515c18ec2f0796d632e65a20b2aca8f017c654bc26ca77bd",
+    "crates__agentgateway__src__mcp__guardrails__mod.rs": "7afbb6d1292d5515d21ff5ecd553cf49abbe57e218aa58b1d32e46358348f1c9",
+    "crates__agentgateway__src__mcp__handler.rs": "0826686359425e37bc54b7717db905fb84b8934df018fd517e6f547de108ce32",
+    "crates__agentgateway__src__mcp__mod.rs": "69e2f3a71731ffae24a9b931d90e008bf9c57d1fc63afcad86228a95726d94fa",
+    "crates__agentgateway__src__mcp__router.rs": "514be23d5f859ca3061baf8d716e105b97baca5fc9545decbe0049a4eee75062",
+    "crates__agentgateway__src__mcp__session.rs": "5f14d8df0e7a67cdb86c698067629e13551798500254f3df45b85d4c21077c7d",
+    "crates__agentgateway__src__mcp__streamablehttp.rs": "70b0550417839bde644ba6e4357fd95408112246b56ad84757ea255e05057425",
+    "crates__agentgateway__src__mcp__upstream__client.rs": "54e0fbc0ca3fe4205d7881ddf16e15d914647e419c84115fdbdc90ae4d1dca3c",
+    "crates__agentgateway__src__mcp__upstream__mod.rs": "19c233e46b49848cf0ff508642814e2c1bc96286b6b89ae422351167edecb980",
+    "crates__protos__proto__ext_mcp.proto": "4ba750cca44e9ba68de2ad04e6d507b67f44b1728f09840b78d9e32f3f563584"
+  },
+  "mcp_scenarios": [
+    {
+      "mode": "enforce",
+      "case": "discovery",
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "allow",
+      "executed": true,
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "HW_DENY",
+      "executed": false,
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "HW_ERROR",
+      "executed": false,
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "HW_TIMEOUT",
+      "executed": false,
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "MISSING_FACTS",
+      "executed": false,
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "outage",
+      "executed": false,
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "other_target",
+      "executed": true,
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "unconfigured_target",
+      "executed": false,
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "concurrent_calls",
+      "passed": true
+    },
+    {
+      "mode": "enforce",
+      "case": "processor_unavailable",
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "discovery",
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "allow",
+      "executed": true,
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "HW_DENY",
+      "executed": true,
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "HW_ERROR",
+      "executed": true,
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "HW_TIMEOUT",
+      "executed": true,
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "MISSING_FACTS",
+      "executed": true,
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "outage",
+      "executed": false,
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "other_target",
+      "executed": true,
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "unconfigured_target",
+      "executed": false,
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "concurrent_calls",
+      "passed": true
+    },
+    {
+      "mode": "monitor",
+      "case": "processor_unavailable",
+      "passed": true
+    }
+  ],
+  "existing_text_scenarios": 22,
+  "existing_tool_scenarios": 26,
+  "grpc_wire_tests": 6,
+  "local_full_suite_tests": 285,
+  "local_packaging": {
+    "python": "3.14.0 (main, Oct  7 2025, 09:34:52) [Clang 17.0.0 (clang-1700.0.13.3)]",
+    "artifacts": {
+      "humanwill_policies-0.1.0a2.dev0-py3-none-any.whl": "c8d787e0a32d3357df59d8b650ce66c8c5427d0e775f687dd4cd21027fa83dc9",
+      "humanwill_policies-0.1.0a2.dev0.tar.gz": "419fc3e918fd080e9d715f661a74a923f33812957454429e5842691c38745c76"
+    },
+    "checks": {
+      "wheel": {
+        "installed_version": "0.1.0a2.dev0",
+        "offline_demo": "pass",
+        "service_and_hook_contracts": "pass",
+        "stage_aware_profile_and_connectors": "pass",
+        "service_process": {
+          "startup": "pass",
+          "authentication": "pass",
+          "external_egress_disabled": "pass",
+          "invalid_configuration_rejected": "pass",
+          "restart_previous_configuration": "pass"
+        }
+      },
+      "sdist": {
+        "installed_version": "0.1.0a2.dev0",
+        "offline_demo": "pass",
+        "service_and_hook_contracts": "pass",
+        "stage_aware_profile_and_connectors": "pass",
+        "service_process": {
+          "startup": "pass",
+          "authentication": "pass",
+          "external_egress_disabled": "pass",
+          "invalid_configuration_rejected": "pass",
+          "restart_previous_configuration": "pass"
+        }
+      }
+    }
+  },
+  "local_reports_sha256": {
+    "artifacts/agentgateway-mcp/full-tests.log": "561af76412200b69a3bbaf996b6e8c91da8764d64959893d25968e99f845d10b",
+    "artifacts/agentgateway-mcp/installed-tests.log": "aee6d8c5eabf08258789f765d41ac962b75a76271c46c1c0ed37e08a68819151",
+    "artifacts/agentgateway-mcp/packaging.json": "1e2f834958699e219252937ebaa4b0576e64bfa7eed6ea3327d45b7a75b49189",
+    "artifacts/agentgateway-mcp/ci-run.log": "b13a2da41d6a8e262c7893bd6db166757638a287fa7cc67086300bd90098648a"
+  },
+  "paid_provider_calls": 0,
+  "hosted_run_count": 1,
+  "other_host_jobs": "skipped",
+  "scope": "Actual Agentgateway + installed ExtMCP connector + policy HTTP service + real MCP servers with observable side effects; synthetic evaluator only. No new semantic accuracy, representative latency or enterprise qualification claim."
+}

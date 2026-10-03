@@ -7,8 +7,11 @@ Agentgateway relay passes 26 new plus 22 existing scenarios in the single target
 [Linux CI run](evidence/agentgateway-tool-calls-ci.json). The new
 [LiteLLM MCP execution binding](mcp-pre-execution.md) passes 18 local runtime
 scenarios with an actual tool server, plus four installed callback checks and
-279 offline tests. No streaming, paid API calls or new publication. MCP hosted
-CI and representative latency are not newly measured.
+279 offline tests at that revision. The native [Agentgateway MCP connector](agentgateway-mcp.md)
+now passes 22 actual-server Linux CI scenarios and six gRPC wire tests; the current
+local suite passes 285 tests. One targeted run also rechecks the 48 existing
+Agentgateway cases. No streaming, paid API calls or new publication. Representative
+MCP latency and LiteLLM MCP hosted CI have not been newly measured.
 
 # Current developer preview status
 

@@ -4,7 +4,7 @@ Unreleased development `0.1.0a2.dev0`, reviewed 2026-10-02. This is separate fro
 the published `v0.1.0a1` text-only connectors and from optional model-proposal
 inspection. The first supported execution binding is **LiteLLM 1.102.1 `/mcp/`**
 with Streamable HTTP. [Agentgateway's separate native MCP binding](agentgateway-mcp.md)
-is being qualified independently. Prisma AIRS, REST MCP endpoints and
+now also has actual-host acceptance evidence. Prisma AIRS, REST MCP endpoints and
 Responses API automatic execution have not been runtime-qualified here.
 
 ## Flow

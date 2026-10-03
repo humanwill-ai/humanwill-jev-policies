@@ -7,6 +7,9 @@
 - LiteLLM MCP pre-execution checks with full arguments, bounded authenticated
   service calls and explicit monitoring/error behavior. Actual MCP server tests
   verify denied calls have no side effects. See [scope and setup](docs/mcp-pre-execution.md).
+- Native Agentgateway ExtMCP pre-execution connector, authenticated loopback gRPC
+  and optional install extra; 22 actual MCP-server scenarios pass in Linux CI.
+  [Agentgateway scope and setup](docs/agentgateway-mcp.md).
 - Published v0.1.0a1 assets, existing text profiles and evaluator defaults unchanged.
 
 ## 0.1.0a1 — 2026-10-01, experimental developer preview

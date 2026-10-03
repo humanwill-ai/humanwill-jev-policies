@@ -123,10 +123,28 @@ describes ExtMCP. The implementation is pinned to the v1.5.0 source at
 request guardrail → MCP authorization → upstream forwarding. Current documentation
 may describe newer versions; it does not replace pinned runtime verification.
 
-Six local gRPC wire tests pass. The actual Agentgateway/MCP-server harness is
-prepared for a single targeted Linux host-workflow run; its result is pending.
-It checks allowed/denied invocations, errors/timeouts, missing trusted facts,
+**All 22 actual Agentgateway/MCP-server scenarios pass** in the single targeted
+[Linux host run](https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/37107052703)
+at `9ab0862`, with an installed wheel outside the checkout. The 22 original text
+and 26 model-tool proposal scenarios also pass, as do six gRPC wire tests. The
+local full suite passes 285 tests; exact wheel/source installation and service
+contract checks pass. Other host jobs were skipped; no duplicate dispatch.
+
+The MCP harness checks allowed/denied invocations, errors/timeouts, missing trusted facts,
 both service and connector outages, resolved target separation, unknown targets,
 concurrent calls, and discovery. Each permitted call must execute with identical
 arguments, and each denied call must produce no tool-side effect. The evaluator
 is synthetic: these are enforcement plumbing tests, not live Jev accuracy tests.
+
+[Machine-readable evidence](evidence/agentgateway-mcp-v1.json) records the source,
+binary/wheel hashes, all 22 outcomes and local checks. The exact CI wheel and
+reports were downloaded and retained under `artifacts/agentgateway-mcp/`.
+No paid evaluator calls, new MCP latency benchmark or release publication.
+
+To rerun after installing the development wheel and its `agentgateway-mcp` extra,
+install `mcp==1.30.0` in the test environment and run:
+
+```sh
+python -m unittest discover -s tests -p test_agentgateway_mcp.py
+python tests/hosts/agentgateway_mcp_calls.py --binary /absolute/path/to/agentgateway
+```

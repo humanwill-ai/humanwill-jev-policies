@@ -24,8 +24,9 @@ operator choices. See [current release status](docs/preview-status.md) and
 
 **Unreleased development:** opt-in [non-streaming tool-call inspection](docs/structured-tool-calls.md)
 is implemented and tested through actual LiteLLM and Agentgateway processes.
-[MCP pre-execution checks](docs/mcp-pre-execution.md) also pass local runtime tests
-through LiteLLM's MCP gateway, with denied calls prevented from reaching the tool.
+MCP pre-execution checks also pass actual-host tests through
+[LiteLLM](docs/mcp-pre-execution.md) and [Agentgateway](docs/agentgateway-mcp.md),
+with denied calls prevented from reaching the tool server.
 The released installation instructions and text-only profiles below remain unchanged.
 
 This is a companion to [HumanWill Benchmark](https://github.com/humanwill-ai/humanwill-benchmark):
