@@ -63,9 +63,9 @@ async def assess_arm(case, bundle, config, backend, cohort, arm):
     raise ValueError("Unknown cohort")
 
 
-def summarize(rows):
+def summarize(rows, arms=ARMS):
     summary = {}
-    for arm in ARMS:
+    for arm in arms:
         selected = [r for r in rows if r["arm"] == arm]
         workflow = [r for r in selected if r["cohort"] == "workflow"]
         controls = [r for r in selected if r["cohort"] == "controls"]
@@ -103,7 +103,7 @@ def summarize(rows):
     return summary
 
 
-async def measure(output, ledger, receipt, inputs):
+async def measure(output, ledger, receipt, inputs, *, arms=ARMS, assessor=assess_arm):
     cases, bundle, config, controls, cb, cc = inputs
     before = ledger_total(ledger)
     ceiling = min(ledger.data["cap_usd"], before + receipt["additional_cap_usd"])
@@ -126,9 +126,9 @@ async def measure(output, ledger, receipt, inputs):
             order = [("workflow", c) for c in cases] + [("controls", c) for c in controls]
             rng.shuffle(order)
             for cohort, case in order:
-                arms = list(ARMS)
-                rng.shuffle(arms)
-                for arm in arms:
+                arm_order = list(arms)
+                rng.shuffle(arm_order)
+                for arm in arm_order:
                     if len(backend.calls) >= receipt["max_physical_calls"]:
                         raise ValueError("Physical call ceiling reached")
                     run_id = f"{rep}/{cohort}/{case['id']}/{arm}"
@@ -137,7 +137,7 @@ async def measure(output, ledger, receipt, inputs):
                     )
                     start = len(ledger.data["calls"])
                     b, c = (bundle, config) if cohort == "workflow" else (cb, cc)
-                    result = await assess_arm(case, b, c, caller, cohort, arm)
+                    result = await assessor(case, b, c, caller, cohort, arm)
                     row = {
                         "id": case["id"],
                         "run_id": run_id,
@@ -182,9 +182,10 @@ async def measure(output, ledger, receipt, inputs):
         save(
             output / "summary.json",
             {
-                "complete": len(rows) == 320,
+                "complete": len(rows)
+                == (len(cases) + len(controls)) * receipt["repeats"] * len(arms),
                 "observations": len(rows),
-                "arms": summarize(rows),
+                "arms": summarize(rows, arms),
                 "physical_calls": len(backend.calls),
                 "accounted_before_usd": before,
                 "accounted_after_usd": ledger_total(ledger),
