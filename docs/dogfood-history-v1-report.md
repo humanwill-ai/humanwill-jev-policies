@@ -1,5 +1,11 @@
 # First real-workflow replay — 2026-10-03
 
+> Owner review, 2026-10-03: preparation for onward publication is governed by
+> the disclosure policy. Case008's provisional expected allow was too narrow;
+> its applicability judgment is consistent with the clarified intent. See the
+> [review decision and version-4 policy](disclosure-preparation-boundary.md).
+> Historical inputs, results and rates below remain unchanged.
+
 **30/50 allowed; 20/50 abstained; no explicit blocks.** This is substantially more
 friction than the synthetic cases suggested. Nothing was blocked in the actual
 workflow: the run was retrospective and monitor-only. The 50 expected allows are

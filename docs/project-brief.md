@@ -1,5 +1,8 @@
 # Project brief
 
+> Owner policy clarification: [preparation for publication also needs approval](disclosure-preparation-boundary.md).
+> Version4 is prepared for the next evaluation; frozen v3 experiments remain unchanged.
+
 > Latest workflow comparison, 2026-10-03: [compact policy targets](dogfood-compact-v1-report.md)
 > preserve sampled historical-secret blocks and reduce duplicated-view input cost.
 > Workflow abstention is27%, versus28% fresh grouping and36% fresh dual views;

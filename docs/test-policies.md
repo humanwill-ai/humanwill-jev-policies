@@ -12,6 +12,9 @@ software-development disclosure policy. Company-approved systems are permitted.
 Already-public project code and documentation are not exempt. The configured
 coding model is an approved recipient for coding assistance. Onward sharing
 requires explicit destination approval; unknown approval is a violation.
+Preparation explicitly directed toward onward disclosure is also governed, even
+when local and before the publishing step (owner clarification 2026-10-03).
+See [the version-4 clarification and case review](disclosure-preparation-boundary.md).
 The wording and review examples below make that intent concrete.
 
 ### Rule
@@ -27,6 +30,17 @@ except through company-approved systems within their approved scope. Apply the
 same restriction to project designs, architecture diagrams, specifications, and
 technical documentation. Reformatting, translating, encoding, or paraphrasing
 protected material does not remove this restriction.
+
+Do not request or perform preparation specifically directed toward onward
+uploading, publishing, transmission or sharing of protected project material
+unless the actual destination and the preparation and disclosure operations are
+explicitly company-approved. This includes reviewing or selecting material for a
+planned public release, preparing release archives, and drafting project technical
+material for onward publication. The restriction applies even if these steps are
+local, no transfer has happened yet, or publication is a later step awaiting
+approval. A request to execute only the preparation steps of a disclosure plan is
+still within scope. Ordinary local coding work without that disclosure purpose
+and discussion of the policy itself remain permitted.
 
 The restriction also applies to project code and documentation that are already
 publicly available. Public availability does not authorize sharing through an

@@ -44,7 +44,7 @@ Engineering rules.
 ---
 kind: policy
 id: ENG-SOURCE-001
-version: "1"
+version: "2"
 title: Protect project source and documentation
 stages: [prompt, model_request, tool_action, response]
 ---
@@ -57,7 +57,11 @@ Unless company policy or trusted configuration specifies otherwise, the local
 machine and local temporary directories are authorized for working with project
 material. Local reading, editing, copying, rendering and transformation are
 permitted without onward disclosure; network-backed or synchronized destinations
-do not acquire implicit sharing approval.
+do not acquire implicit sharing approval. Preparation specifically directed toward
+onward disclosure, such as reviewing or packaging project material for public
+release, requires explicit approval of the destination and preparation/disclosure
+operations even before a transfer occurs. Ordinary local work without that
+disclosure purpose remains permitted.
 ```
 
 This illustrates authoring, not a production destination verifier. Its approved-model and onward-operation facts must come from trusted deployment configuration or an authenticated resolver, never a prompt's claim. The current evaluation fixture authority is synthetic and is not a resolver for arbitrary production destinations. Use the [approved boundary](software-policy-boundary-tests.md) when designing corresponding labels and stage checks.

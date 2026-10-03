@@ -1,5 +1,11 @@
 # Policy-specific targets on the private workflow — 2026-10-03
 
+> Owner review, 2026-10-03: preparation for onward publication is governed by
+> the disclosure policy. Case008's provisional expected allow was too narrow;
+> its applicability judgment is consistent with the clarified intent. See the
+> [review decision and version-4 policy](disclosure-preparation-boundary.md).
+> Historical inputs, results and rates below remain unchanged.
+
 **The candidate restores historical-secret blocking but does not provide the desired
 workflow improvement.** Abstention is 35% with policy-specific views, versus 30% with
 fresh grouping and 40% with fresh flat runtime. Keep this candidate experimental;

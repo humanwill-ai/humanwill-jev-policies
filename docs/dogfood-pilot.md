@@ -32,6 +32,13 @@ experimental with15 distinct unresolved requests. Private comparison:
 `artifacts/dogfood-v1/compact-live-v1/comparison.html`.583 new settled calls cost
 $0.080854536; current accounted$0.746437038, remaining$4.253562962. No runtime adoption.
 
+## Current owner review
+
+Case008 is resolved as governed preparation, not an unconditional allow. See the
+[clarification and version4 policy](disclosure-preparation-boundary.md). A separate
+review overlay records the owner decision; all historical pages and labels remain
+frozen. The other14 distinct unresolved cases await review. No live rerun.
+
 ## Historical packet
 
 The local review page is `artifacts/dogfood-v1/history/review.html` and its exact

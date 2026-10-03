@@ -1,5 +1,11 @@
 # Private workflow grouping comparison — 2026-10-03
 
+> Owner review, 2026-10-03: preparation for onward publication is governed by
+> the disclosure policy. Case008's provisional expected allow was too narrow;
+> its applicability judgment is consistent with the clarified intent. See the
+> [review decision and version-4 policy](disclosure-preparation-boundary.md).
+> Historical inputs, results and rates below remain unchanged.
+
 **Grouping helps, but is not sufficient for adoption: workflow abstention falls
 42%→28%, while a known historical-secret control regresses from block to error.**
 No runtime default, policy, threshold or permission change follows from this result.

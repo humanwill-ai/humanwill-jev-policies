@@ -1,5 +1,11 @@
 # Compact policy-target comparison — 2026-10-03
 
+> Owner review, 2026-10-03: preparation for onward publication is governed by
+> the disclosure policy. Case008's provisional expected allow was too narrow;
+> its applicability judgment is consistent with the clarified intent. See the
+> [review decision and version-4 policy](disclosure-preparation-boundary.md).
+> Historical inputs, results and rates below remain unchanged.
+
 **A better candidate than duplicated views, but not a breakthrough in abstention.**
 Compact grouping with explicit policy targets returns 27% workflow abstention,
 versus 28% with grouping alone and 36% with the previous dual-view candidate.

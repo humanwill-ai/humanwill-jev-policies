@@ -973,3 +973,19 @@ lower,no compactsizeerrors. Report docs/dogfood-compact-v1-report.md;480results5
 replayaudited,318transformpairs+2dual sizerejections verified;25focusedtests pass.
 Cost$0.080854536;known$0.736437038+old$0.01reserve=accounted$0.746437038,
 remaining$4.253562962;8654attempted8653settled,onlyold1830unknown. No push/CI/release.
+
+## Owner review: preparation for publication is governed — 2026-10-03
+
+Owner confirmed preparation itself can introduce risk and must not proceed without
+approval, even when publishing is a later step. Existing approved-system exceptions
+remain scoped to the actual destination and preparation/disclosure operations.
+Case008's previous provisional allow was too narrow; Jev's applicable0.82/0.84 is
+consistent with the clarified scope. Recorded missing facts still imply evaluation_error,
+not an explicit block; require fail-closed to prevent work. Monitor did not block it.
+
+New EVAL-SW-001v4 bundle evals/dogfood/policies-preparation-v1, collectionv2; original
+v3 and all frozen inputs/results remain unchanged. Owner scope review and assistant
+runtime mapping are separate in review-decisions-v1.json. Future labels require
+scope review before a new protocol; no blanket approval or negative fact invented.
+See docs/disclosure-preparation-boundary.md. Bundle/config load checked; no live call,
+replay, threshold/runtime change, push or new rate. Fourteen cases remain to review.
