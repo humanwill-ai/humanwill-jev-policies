@@ -907,3 +907,21 @@ and trust remain unverified; no trust bypass. This is collection setup, not
 active continuous Jev assessment. Seven offline tests/Ruff/JS syntax pass; active
 packet secret scan zero matches, no visual browser check available. See
 [setup, pending steps and coverage](dogfood-pilot.md). No API spend/push/CI/release.
+
+## First private workflow replay completed — 2026-10-03
+
+Owner's “yes, proceed” authorizes the exact real-data historical 50-case packet,
+OpenRouter→TypeSafe, at most $0.10 additional. With no owner review export, preserve
+pending labels and freeze separate assistant-provisional expectations before answers.
+Do not imply human approval or authorize future automatic real-data egress.
+
+At source7950bd7, unchanged runtime/policies/gates:30allow/20error/0block;18lowconfidence,
+1missingmetadata,1malformed primary. Q04 ran19times and resolved1wholeevent;69calls
+settled, exact50results/69payloads replay-audited. Median438ms,p95 858ms;cost$.008785896.
+See [report](dogfood-history-v1-report.md). This is a friction signal, not a malicious
+request detection measurement. All50 provisional expectations allow; no causal or
+independent accuracy claim. No post-result tuning, extra live campaign or publication.
+
+Known total$.520618484 plus unchanged historical$.01 reserve;remaining$4.469381516;
+7047attempted/7046settled, onlyold1830unknown. Private full results HTML and raw
+artifacts remain ignored. Future hook still unobserved; source catalog answer pending.

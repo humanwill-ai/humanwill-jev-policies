@@ -1,9 +1,10 @@
 # Roadmap to the first public release
 
-> Owner update 2026-10-03: streaming is deferred to a future release. The
-> [real-workflow pilot](dogfood-pilot.md) has a private 50-case review packet and
-> a local-only next-100-prompt collector. Live evaluation and actual hook
-> invocation remain pending; no real-data accuracy or enforcement claim.
+> Owner update 2026-10-03: streaming is deferred. The first authorized
+> [real-workflow replay](dogfood-history-v1-report.md) completed: 30/50 allow,
+> 20/50 abstain, no explicit blocks; labels are assistant-provisional. This
+> friction result needs review before claiming workflow readiness. Future
+> collection is installed but actual hook invocation remains unobserved.
 
 > Latest conversation experiment, 2026-10-03: [explicit policy subjects and dual views](conversation-views-v1-report.md)
 > restore historical-secret blocks and reduce unexpected combined errors to 7/81,

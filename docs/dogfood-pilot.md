@@ -1,8 +1,10 @@
 # HumanWill real-workflow pilot
 
-Prepared 2026-10-03 after owner approval of retrospective replay plus prospective
-monitoring. **No real-data API evaluation has run.** This is local preparation,
-not a new accuracy claim, active enforcement, or a released Codex connector.
+Updated 2026-10-03: the owner authorized the exact historical real-data replay.
+**Completed: 30/50 allow, 20/50 evaluation_error, no blocks**, using premeasurement
+assistant-provisional expectations. See the [full report](dogfood-history-v1-report.md)
+and private `artifacts/dogfood-v1/history-live-v1/results.html`. This is retrospective
+monitoring, not active enforcement or a released Codex connector.
 Streaming is postponed to a future release by owner instruction.
 
 ## Historical packet
@@ -34,8 +36,9 @@ Active packet canonical SHA-256:
 `47359eb36f453a3961dbd6ec654eab3fa387fc2530d8bcfb75fef8c231c568f2`.
 
 Open the local HTML page, choose allow/block/evaluation_error, mark each case
-approved or exclude it, and export `humanwill-dogfood-reviewed.json`. Labels are
-currently pending; no Jev answers have been shown. Exporting reviews makes no
+approved or exclude it, and export `humanwill-dogfood-reviewed.json`. Owner labels remain pending. A separate frozen assistant-provisional review was
+used for the authorized run; it does not change this original pending packet.
+Jev answers are now available, so further label review is postmeasurement. Exporting reviews makes no
 network request and does not authorize sending the data externally.
 
 ## Policy configuration and authority
@@ -53,9 +56,10 @@ sources remain a pending owner decision; never assume all GitHub/PyPI resources
 are approved merely because a developer can access them.
 
 The pilot does not implement automatic destination/package/dependency resolution.
-For historical cases, a human reviewer may supply event-bound onward/source
-approval facts based on company configuration and the actual operation, with an
-evidence note. Unknown remains null. These facts are separate from expected labels
+For historical cases, event-bound onward/source approval facts must come from
+operator configuration and the actual operation, with an evidence note. In this run
+the assistant mapped six project-publication operations to the existing owner-approved
+repository; this did not infer approval from prompt claims or provisional labels. Unknown remains null. These facts are separate from expected labels
 and never extracted from prompt claims or Jev answers. A correctly recognized
 restricted operation with unavailable facts can produce missing_trusted_metadata;
 report that separately from semantic low-confidence errors.
@@ -92,11 +96,19 @@ reloaded its configuration. Retain or delete the private artifacts separately.
 
 ## Real-data egress gate and budget
 
+The owner subsequently authorized one exact historical pass, capped at $0.10. The
+active receipt binds the assistant-provisional review and all frozen inputs; it has
+been consumed once. Total new cost was $0.008785896 for 69 settled calls. Current
+accounted total is $0.530618484, including the unchanged $0.01 historical reserve;
+$4.469381516 remains. Future captures are not authorized for automatic egress by
+this historical receipt. The paragraphs below describe the original preparation.
+
+
 The prior spending permission was for synthetic evaluations. The agreed pilot
 plan calls for reviewing the actual data scope before hosted real-data evaluation.
 The inactive local `egress-receipt.template.json` proposes at most **$0.10 additional**
 for one historical pass within the existing $5 total ceiling. It binds the exact
-original packet, exported human review, operator scope, policy/configuration hashes
+original packet, exported review with explicit label provenance, operator scope, policy/configuration hashes
 and executable source fingerprint. It needs explicit owner real-data authorization
 before activation; changing input or configuration invalidates that receipt.
 
@@ -111,12 +123,13 @@ work. No retries have been added to the runtime.
 
 Accounting uses the existing `artifacts/quality/spending.json` lock, reserves each
 call, preserves historical unresolved index1830's $0.01 and stops on any new unknown
-charge. Current known spend remains $0.511832588; accounted $0.521832588; remaining
-$4.478167412. No real-data calls, new charges, CI, push or publication in preparation.
+charge. At preparation, known spend was $0.511832588; accounted $0.521832588; remaining
+$4.478167412. The completed run and current accounting are recorded above. No CI,
+push or publication was performed.
 
 ## Verification and limits
 
-Seven focused offline tests pass: transcript provenance/future-context exclusion,
+Eight focused offline tests pass (including provisional-label provenance): transcript provenance/future-context exclusion,
 review immutability, exact egress gating, unavailable trusted facts, capture
 scope/deduplication/limits, non-blocking command behavior and HTML text escaping.
 Ruff and JavaScript syntax checks pass. The local Gitleaks scan finds no matches
