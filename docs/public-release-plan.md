@@ -1,5 +1,10 @@
 # Roadmap to the first public release
 
+> Owner update 2026-10-03: streaming is deferred to a future release. The
+> [real-workflow pilot](dogfood-pilot.md) has a private 50-case review packet and
+> a local-only next-100-prompt collector. Live evaluation and actual hook
+> invocation remain pending; no real-data accuracy or enforcement claim.
+
 > Latest conversation experiment, 2026-10-03: [explicit policy subjects and dual views](conversation-views-v1-report.md)
 > restore historical-secret blocks and reduce unexpected combined errors to 7/81,
 > versus 9/81 grouped and 19/81 flat. Individual-policy matches regress versus

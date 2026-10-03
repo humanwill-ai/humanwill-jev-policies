@@ -883,3 +883,27 @@ Run cost$0.040052460; known$0.511832588 +old$0.01 reservation =accounted$0.52183
 remaining$4.478167412.6978attempted/6977settled,only historical1830 unknown.
 No runtime adoption, threshold change, push, Actions, deployment, release,
 streaming or automatic next campaign.
+
+
+## Real-workflow pilot prepared — 2026-10-03
+
+Owner postponed streaming and approved preparing a 50-request historical replay
+plus monitoring the next100 prompts. Extract only this project's native user text
+and earlier final assistant replies, maximum5messages/10kcontentbytes, excluding
+internal instructions/tools/attachments and all future text. Active private packet
+hash47359eb36f453a3961dbd6ec654eab3fa387fc2530d8bcfb75fef8c231c568f2;
+all50 labels pending human review before Jev results. No live calls.
+
+Use existing SW/SRC policies and gates, actual current evaluator, monitor only;
+explicit partial coverage, no research dual-view adoption. Operator-owned source
+list awaits owner decision. Reviewed per-event authorization stays separate from
+labels; unknown facts remain unavailable, no synthetic fixture permissions reused.
+A one-run, input/source-bound real-data egress receipt is prepared inactive, with
+proposed additional$.10 within existing$5; no authorization inferred from exports.
+
+Project-local async capture hook installed, current-session only, maximum100,
+private files, no network/blocking/context injection. Actual editor invocation
+and trust remain unverified; no trust bypass. This is collection setup, not
+active continuous Jev assessment. Seven offline tests/Ruff/JS syntax pass; active
+packet secret scan zero matches, no visual browser check available. See
+[setup, pending steps and coverage](dogfood-pilot.md). No API spend/push/CI/release.

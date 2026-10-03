@@ -1,0 +1,17 @@
+{
+  "format": "humanwill.dogfood-scope/1",
+  "coding_route_approved": true,
+  "approved_onward_targets": [
+    {
+      "url": "https://github.com/humanwill-ai/humanwill-jev-policies",
+      "operations": [
+        "git_push",
+        "publish_project_release"
+      ]
+    }
+  ],
+  "software_sources": [],
+  "software_sources_status": "awaiting_owner_answer",
+  "automatic_source_resolver": false,
+  "note": "Operator catalog only. No verified per-event fact is inferred from prose or resolved by Jev."
+}
