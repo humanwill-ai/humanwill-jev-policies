@@ -3,7 +3,8 @@
 Unreleased development `0.1.0a2.dev0`, reviewed 2026-10-02. This is separate from
 the published `v0.1.0a1` text-only connectors and from optional model-proposal
 inspection. The first supported execution binding is **LiteLLM 1.102.1 `/mcp/`**
-with Streamable HTTP. Agentgateway MCP, Prisma AIRS, REST MCP endpoints and
+with Streamable HTTP. [Agentgateway's separate native MCP binding](agentgateway-mcp.md)
+is being qualified independently. Prisma AIRS, REST MCP endpoints and
 Responses API automatic execution have not been runtime-qualified here.
 
 ## Flow
@@ -67,7 +68,7 @@ covered tool arguments then leave your environment through the selected provider
 The example keeps this opt-in disabled.
 
 ```sh
-humanwill-policies serve --policies /absolute/company-policies \
+humanwill-policies serve /absolute/company-policies \
   --config /absolute/configuration/config.yaml \
   --service-config /absolute/configuration/service-mcp.yaml \
   --host 127.0.0.1 --port 8088

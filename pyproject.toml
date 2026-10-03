@@ -12,6 +12,9 @@ license-files = ["LICENSE", "NOTICE", "LICENSING.md", "THIRD_PARTY_NOTICES.md", 
 requires-python = ">=3.11,<3.15"
 dependencies = ["PyYAML==6.0.3", "jsonschema==4.26.0", "httpx==0.28.1", "starlette==1.7.0", "uvicorn==0.54.0"]
 
+[project.optional-dependencies]
+agentgateway-mcp = ["grpcio==1.84.0", "protobuf==7.36.2"]
+
 [project.scripts]
 humanwill-policies = "humanwill_policies.cli:main"
 
@@ -22,7 +25,7 @@ Repository = "https://github.com/humanwill-ai/humanwill-jev-policies"
 where = ["src"]
 
 [tool.setuptools.package-data]
-humanwill_policies = ["schemas/*.json", "demo/*.md", "demo/*.yaml", "demo/*.json", "demo/rules/*.md"]
+humanwill_policies = ["schemas/*.json", "demo/*.md", "demo/*.yaml", "demo/*.json", "demo/rules/*.md", "connectors/ext_mcp/*.proto"]
 
 [tool.ruff]
 target-version = "py311"
@@ -30,3 +33,9 @@ line-length = 100
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/humanwill_policies/connectors/ext_mcp/ext_mcp_pb2.py" = ["ALL"]
+
+[tool.ruff.format]
+exclude = ["src/humanwill_policies/connectors/ext_mcp/ext_mcp_pb2.py"]

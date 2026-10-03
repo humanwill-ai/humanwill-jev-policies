@@ -780,3 +780,20 @@ and missing credentials. This does not protect a deployment where the guardrail
 is removed entirely or a later hook mutates arguments. Full setup, precise failure
 behavior and exclusions are in [the MCP guide](mcp-pre-execution.md). No streaming,
 new release, hosted MCP CI or live semantic/latency campaign.
+
+## Agentgateway native MCP connector — 2026-10-03
+
+Owner authorized implementation after LiteLLM MCP acceptance. Agentgateway 1.5.0
+has a native ExtMCP request-phase interface exposing the resolved target and full
+arguments before forwarding. Use a small authenticated loopback gRPC processor
+that reuses the native HTTP policy service; do not introduce another traffic relay.
+Only tools/call request checks, explicit target allowlist, fail-closed transport,
+no mutations/retries, optional independently trusted metadata and existing policy
+monitor/error decisions. Generated upstream protocol bindings and two optional
+runtime dependencies are documented with preserved licenses.
+
+285 local tests pass on Python 3.11, including six real gRPC wire tests. The exact
+Agentgateway configuration passes the v1.5.0 schema. Actual Linux host validation
+is the next gate; use one targeted existing-workflow dispatch and retain its wheel
+and reports. No new provider calls, streaming or release. Setup and scope are in
+[the Agentgateway MCP guide](agentgateway-mcp.md).

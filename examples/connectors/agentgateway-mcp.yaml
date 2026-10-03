@@ -1,0 +1,29 @@
+# Agentgateway 1.5.0; run the ExtMCP connector in the same network namespace.
+binds:
+  - port: 3000
+    listeners:
+      - routes:
+          - matches:
+              - path:
+                  exact: /mcp
+            policies:
+              mcpGuardrails:
+                processors:
+                  - kind: remote
+                    host: 127.0.0.1:9001
+                    failureMode: failClosed
+                    methods:
+                      tools/call: request
+                    # A nonempty allowlist is needed: [] means forward ALL headers.
+                    requestHeaders:
+                      allowed: [":method"]
+                    policies:
+                      backendAuth:
+                        key:
+                          file: /protected/agentgateway-mcp-token
+            backends:
+              - mcp:
+                  targets:
+                    - name: company_tools
+                      mcp:
+                        host: http://127.0.0.1:9000/mcp

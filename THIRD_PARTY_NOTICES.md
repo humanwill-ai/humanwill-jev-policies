@@ -2,7 +2,8 @@
 
 The project does not relicense its dependencies. The following Python runtime
 packages are pinned in requirements.txt; their unmodified installed license
-texts are retained under third_party/licenses. No implementation is vendored.
+texts are retained under third_party/licenses. The optional Agentgateway protocol
+files described below are the only vendored/generated protocol code.
 
 | Dependency | Version | License | Preserved notice |
 | --- | --- | --- | --- |
@@ -27,6 +28,31 @@ texts are retained under third_party/licenses. No implementation is vendored.
 [license-file hashes](docs/evidence/runtime-licenses.json) are reproducible with
 `python scripts/runtime_inventory.py` in the locked runtime environment.
 This flattened inventory does not claim an audited transitive relationship graph.
+
+## Optional Agentgateway MCP connector
+
+The `agentgateway-mcp` extra adds grpcio 1.84.0 (Apache-2.0) and protobuf 7.36.2
+(BSD-3-Clause). Their preserved notices are in
+[grpcio](third_party/licenses/grpcio/LICENSE) and
+[protobuf](third_party/licenses/protobuf/LICENSE). They are not part of the
+historical base-runtime inventory above.
+
+`src/humanwill_policies/connectors/ext_mcp/ext_mcp.proto` is an unmodified copy
+from Agentgateway v1.5.0, commit `fe6732474a96a0363dfb9822859af4e9bab360fa`,
+`crates/protos/proto/ext_mcp.proto`, under Apache-2.0. Its generated Python
+binding is included alongside it. The upstream license is preserved in
+[agentgateway](third_party/licenses/agentgateway/LICENSE).
+Regenerate with grpcio-tools 1.84.0:
+
+```sh
+python -m grpc_tools.protoc \
+  -Isrc/humanwill_policies/connectors/ext_mcp \
+  --python_out=src/humanwill_policies/connectors/ext_mcp \
+  src/humanwill_policies/connectors/ext_mcp/ext_mcp.proto
+```
+
+The compiler is a development tool, not a runtime dependency. The MCP Python SDK
+is used only by the host test harness; production does not depend on it.
 
 Certifi includes Mozilla CA certificate material under MPL-2.0; retaining this
 license does not turn HumanWill code into MPL-licensed software. Preserve the

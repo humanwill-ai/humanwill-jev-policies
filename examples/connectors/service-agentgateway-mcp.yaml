@@ -1,0 +1,10 @@
+format: humanwill.service/1
+allow_external_evaluation: false
+request_timeout_ms: 5000
+max_in_flight: 8
+principals:
+  agentgateway-mcp:
+    token_env: HUMANWILL_MCP_TOKEN
+    connector: native
+    stages: [tool_action]
+    on_protocol_error: block

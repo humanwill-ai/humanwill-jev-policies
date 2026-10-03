@@ -64,6 +64,14 @@ def _parser() -> argparse.ArgumentParser:
         "--timeout-ms", type=int, choices=range(100, 60001), default=6000, metavar="100..60000"
     )
     hook.add_argument("--on-error", choices=("block", "allow_monitor"), default="block")
+    mcp = commands.add_parser("agentgateway-mcp", help="Run the loopback ExtMCP policy connector")
+    mcp.add_argument("--url", default="http://127.0.0.1:8088")
+    mcp.add_argument("--token-env", default="HUMANWILL_MCP_TOKEN")
+    mcp.add_argument("--gateway-token-env", default="HUMANWILL_AGENTGATEWAY_MCP_TOKEN")
+    mcp.add_argument("--target", action="append", required=True)
+    mcp.add_argument("--port", type=int, choices=range(1, 65536), default=9001, metavar="1..65535")
+    mcp.add_argument("--timeout-ms", type=int, default=6000)
+    mcp.add_argument("--max-in-flight", type=int, default=8)
     return parser
 
 
@@ -146,6 +154,14 @@ def _init_demo(destination: Path) -> None:
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        if args.command == "agentgateway-mcp":
+            try:
+                from .connectors.agentgateway_mcp import run
+            except ImportError:
+                raise PolicyError(
+                    "missing_extra", "Install humanwill-policies[agentgateway-mcp]"
+                ) from None
+            return run(args)
         if args.command == "hook":
             from .hooks import run
 
