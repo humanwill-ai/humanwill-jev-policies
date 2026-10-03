@@ -1008,3 +1008,12 @@ despite true permission predicates. Record this as decision-flow friction, not a
 new model violation finding. A scoped permission shortcut remains an improvement
 to consider; no setting was enabled and no threshold changed. Frozen evidence and
 rates remain unchanged. Three of15 cases reviewed,12 remain; no calls or push.
+
+## Owner review: public README preparation — 2026-10-03
+
+Owner agreed027 is publication preparation requiring approval in its context,
+rather than unconditional local-work allow. Its event has no onward-approval fact.
+Recorded v3 result was low-confidence not_applicable/evaluation_error, not a correct
+applicable finding; do not claim v4 performance from it. With v4 scope established,
+missing metadata still prevents an allow under fail-closed. Frozen evidence unchanged.
+Four cases reviewed,11 remain;029 under discussion. No new calls/settings or push.

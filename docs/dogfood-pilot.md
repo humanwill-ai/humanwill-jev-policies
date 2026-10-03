@@ -38,8 +38,9 @@ Case008 is resolved as governed preparation, not an unconditional allow. See the
 [clarification and version4 policy](disclosure-preparation-boundary.md). A separate
 review overlay records the owner decision; all historical pages and labels remain
 frozen. Case015 is reviewed as ambiguous intent with defensible abstention;026 is
-owner-confirmed allow under its complete trusted operation approval. Twelve other
-distinct cases remain. Runtime settings are unchanged. See the
+owner-confirmed allow under its complete trusted operation approval. Case027 is
+governed README publication preparation with unavailable approval. Eleven other
+distinct cases remain, with029 under discussion. Runtime settings are unchanged. See the
 [review progress](dogfood-case-review.md). No live rerun.
 
 ## Historical packet
