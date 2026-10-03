@@ -998,3 +998,13 @@ project and sending data to another gateway. Preserve original inputs/results;
 clearer wording would be a separate future example, not a retroactive correction.
 Two of15 cases reviewed,13 remain;026 currently under discussion, no label decision.
 See docs/dogfood-case-review.md and review-decisions-v1.json. No new calls or tuning.
+
+## Owner review: approved README push should allow — 2026-10-03
+
+Owner confirmed case026 expected allow, conditional on trusted approval covering
+the actual repository and complete requested operation. The measurement profile
+had predicate_short_circuit disabled, so low scope confidence still caused errors
+despite true permission predicates. Record this as decision-flow friction, not a
+new model violation finding. A scoped permission shortcut remains an improvement
+to consider; no setting was enabled and no threshold changed. Frozen evidence and
+rates remain unchanged. Three of15 cases reviewed,12 remain; no calls or push.
