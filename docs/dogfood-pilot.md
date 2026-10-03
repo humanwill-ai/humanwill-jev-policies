@@ -16,6 +16,14 @@ Grouping remains experimental. Private comparison page:
 current accounted spend$0.582856656, remaining$4.417143344. No new unknown charges.
 Earlier single-pass evidence and its consumed receipt are preserved below.
 
+
+Latest policy-target comparison: [report](dogfood-views-v1-report.md). Fresh flat /
+grouped / explicit-target arms yield 40% /30% /35% workflow abstention across two
+passes; the candidate restores historical-secret blocks but remains experimental.
+Private `artifacts/dogfood-v1/views-live-v1/comparison.html` contains the full results.
+609 new settled calls cost $0.082725846; accounted total $0.665582502, remaining
+$4.334417498 including the preserved historical reserve. No runtime adoption.
+
 ## Historical packet
 
 The local review page is `artifacts/dogfood-v1/history/review.html` and its exact

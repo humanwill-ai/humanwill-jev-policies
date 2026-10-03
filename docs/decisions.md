@@ -940,3 +940,19 @@ See docs/dogfood-grouping-v1-report.md. All320results415payloads replayaudited,
 160primarypairs differonlylosslessrepresentation.15focusedtests pass.
 Cost$.052238172, allsettled;known$.572856656+old$.01reserve=accounted$.582856656,
 remaining$4.417143344;7462attempted7461settled,onlyold1830unknown. No push/CI/release.
+
+## Policy-target workflow comparison — 2026-10-03
+
+Owner authorized existing explicit policy subjects plus full content. At69689b3,
+50 unchanged private cases +30 safety controls, two passes of three fresh arms:
+480 assessments,609 paid calls. Workflow errors: flat40/100, grouped30/100,
+candidate35/100 (17/50 and18/50). Candidate improves flat slightly but regresses
+against grouping; two errors are predeclared size-limit rejections of025, no calls.
+Historical-secret confidence recovers0.99/0.99, restoring both lost blocks; all34
+known violations block in candidate/flat, grouped32block2error. Candidate policy
+matches150/180 versus grouped152, including masked source uncertainty. No definitive
+violation/unknown allows. Keep experimental; no automatic next campaign/adoption.
+All480results609payloads replay-audited,318 primary transform comparisons plus two
+limit rejections verified.22focused tests pass. See docs/dogfood-views-v1-report.md.
+Cost$0.082725846;known$0.655582502+old$0.01reserve=accounted$0.665582502,
+remaining$4.334417498;8071attempted8070settled,onlyold1830unknown. No push/CI/release.
