@@ -7,6 +7,15 @@ and private `artifacts/dogfood-v1/history-live-v1/results.html`. This is retrosp
 monitoring, not active enforcement or a released Codex connector.
 Streaming is postponed to a future release by owner instruction.
 
+
+Latest follow-up: [grouping-only comparison](dogfood-grouping-v1-report.md) is complete.
+Two fresh passes per arm on the unchanged packet:42% flat versus28% grouped
+abstention, with a repeated synthetic historical-secret block→error regression.
+Grouping remains experimental. Private comparison page:
+`artifacts/dogfood-v1/grouping-live-v1/comparison.html`. New415calls cost$0.052238172;
+current accounted spend$0.582856656, remaining$4.417143344. No new unknown charges.
+Earlier single-pass evidence and its consumed receipt are preserved below.
+
 ## Historical packet
 
 The local review page is `artifacts/dogfood-v1/history/review.html` and its exact

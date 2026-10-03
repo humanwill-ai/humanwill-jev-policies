@@ -1,10 +1,10 @@
 # Next action plan: tool-call and MCP enforcement
 
-> Owner update 2026-10-03: streaming is deferred. The first authorized
-> [real-workflow replay](dogfood-history-v1-report.md) completed: 30/50 allow,
-> 20/50 abstain, no explicit blocks; labels are assistant-provisional. This
-> friction result needs review before claiming workflow readiness. Future
-> collection is installed but actual hook invocation remains unobserved.
+> Latest workflow comparison, 2026-10-03: [grouping-only results](dogfood-grouping-v1-report.md)
+> reduce abstention from42% to28% across two passes of the same50requests, but
+> historical-secret controls regress from block to error in both passes. Keep
+> grouping experimental; no runtime adoption. Labels remain provisional.
+> Streaming is deferred; future capture invocation remains unobserved.
 
 > Latest conversation experiment, 2026-10-03: [explicit policy subjects and dual views](conversation-views-v1-report.md)
 > restore historical-secret blocks and reduce unexpected combined errors to 7/81,

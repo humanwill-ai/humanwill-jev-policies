@@ -925,3 +925,18 @@ independent accuracy claim. No post-result tuning, extra live campaign or public
 Known total$.520618484 plus unchanged historical$.01 reserve;remaining$4.469381516;
 7047attempted/7046settled, onlyold1830unknown. Private full results HTML and raw
 artifacts remain ignored. Future hook still unobserved; source catalog answer pending.
+
+## Grouping-only real-workflow comparison — 2026-10-03
+
+Owner explicitly authorized step1, comparing existing grouping to runtime, not
+implementing it again or adopting policy-subject changes. At815d46f, same50private
+cases+30existingcontrols,2freshpasses/arm,320assessments/415calls, no semantic input
+or gate changes. Workflow42/100abstentions flat→28/100grouped; grouped36allow14error
+on each50-casepass.15pairedfixes/1regression; reductionone-third misseshalvingtarget.
+Synthetic34violations:flat34block,grouped32block2error; historicalsecretconfidence
+0.89/0.91→0.64/0.73 causesbothregressions. Noexplicitviolation/unknownallows, but
+fail-openwouldpermitthesecontrols. Keep research-only; no automaticnextcampaign.
+See docs/dogfood-grouping-v1-report.md. All320results415payloads replayaudited,
+160primarypairs differonlylosslessrepresentation.15focusedtests pass.
+Cost$.052238172, allsettled;known$.572856656+old$.01reserve=accounted$.582856656,
+remaining$4.417143344;7462attempted7461settled,onlyold1830unknown. No push/CI/release.
