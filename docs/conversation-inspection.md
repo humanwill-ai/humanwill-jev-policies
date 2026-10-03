@@ -1,5 +1,10 @@
 # Gateway conversation inspection
 
+> Latest conversation experiment, 2026-10-03: [explicit policy subjects and dual views](conversation-views-v1-report.md)
+> restore historical-secret blocks and reduce unexpected combined errors to 7/81,
+> versus 9/81 grouped and 19/81 flat. Individual-policy matches regress versus
+> grouping (224/270 versus 232/270). Research-only; no runtime adoption or new release.
+
 Development change, 2026-10-03. The [live comparison](conversation-v1-report.md)
 is complete: explicit false violations on legitimate conversations fell to zero,
 but 18/27 legitimate observations still returned errors. This remains a partial

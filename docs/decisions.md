@@ -858,3 +858,28 @@ were retained and downloaded; runtime files match the reviewed source.
 Local wheel/source installation checks also pass. No paid provider calls,
 representative MCP latency benchmark, new main merge or release. The guide's
 previous pending gate is now closed for this pinned native HTTP MCP profile.
+
+
+## Explicit policy subjects experiment — 2026-10-03
+
+Owner authorized the proposed dual-view experiment. Completed at frozen cd8f5a8:
+30 unchanged synthetic conversations × three repetitions × three fresh arms,
+270 assessments / 317 calls. Operator-owned research configuration assigns
+current_operation or whole_payload explicitly; candidate retains flat content
+and adds lossless groups with per-question subject instructions. No-role inputs
+remain identical to flat. No classifier, label routing or runtime schema change.
+
+Unexpected combined errors among81 decidable observations per arm: flat19,
+grouped9, candidate7. Historical-secret block restored3/3 at confidence0.99;
+all51 known violations blocked and9 expected unknowns retained. Legitimate passes
+11/30→24/30→23/30: candidate has six low-confidence errors in two cases plus one
+malformed local-build reply. No new definitive wrong outcomes, but policy matches
+232→224/270 versus grouping: masked source uncertainty and the malformed batch.
+Keep research-only; combined gains do not establish independent qualification or
+a consistent5% target. See [complete report](conversation-views-v1-report.md).
+
+Seven focused tests/Ruff pass; all270 results/317 payloads and charges audited.
+Run cost$0.040052460; known$0.511832588 +old$0.01 reservation =accounted$0.521832588,
+remaining$4.478167412.6978attempted/6977settled,only historical1830 unknown.
+No runtime adoption, threshold change, push, Actions, deployment, release,
+streaming or automatic next campaign.

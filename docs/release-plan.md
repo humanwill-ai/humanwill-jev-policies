@@ -1,5 +1,10 @@
 # First-release plan: company-owned policy enforcement
 
+> Latest conversation experiment, 2026-10-03: [explicit policy subjects and dual views](conversation-views-v1-report.md)
+> restore historical-secret blocks and reduce unexpected combined errors to 7/81,
+> versus 9/81 grouped and 19/81 flat. Individual-policy matches regress versus
+> grouping (224/270 versus 232/270). Research-only; no runtime adoption or new release.
+
 > 2026-10-03 development: [conversation inspection](conversation-inspection.md)
 > adds a config/5 question clarification. The [live comparison](conversation-v1-report.md)
 > confirms partial improvement, but 18/27 legitimate observations still abstain.

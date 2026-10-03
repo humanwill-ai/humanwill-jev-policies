@@ -1,5 +1,10 @@
 # Next action plan: tool-call and MCP enforcement
 
+> Latest conversation experiment, 2026-10-03: [explicit policy subjects and dual views](conversation-views-v1-report.md)
+> restore historical-secret blocks and reduce unexpected combined errors to 7/81,
+> versus 9/81 grouped and 19/81 flat. Individual-policy matches regress versus
+> grouping (224/270 versus 232/270). Research-only; no runtime adoption or new release.
+
 Owner-approved sequence, 2026-10-01. **Steps 1–2 authorized 2026-10-02.**
 The opt-in development implementation and local evidence are in
 [structured tool calls](structured-tool-calls.md). LiteLLM real-host checks pass;

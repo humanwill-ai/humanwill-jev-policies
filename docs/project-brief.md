@@ -1,5 +1,10 @@
 # Project brief
 
+> Latest conversation experiment, 2026-10-03: [explicit policy subjects and dual views](conversation-views-v1-report.md)
+> restore historical-secret blocks and reduce unexpected combined errors to 7/81,
+> versus 9/81 grouped and 19/81 flat. Individual-policy matches regress versus
+> grouping (224/270 versus 232/270). Research-only; no runtime adoption or new release.
+
 > 2026-10-03: config/5 gateway questions now clarify abandoned versus active
 > conversation requests without dropping history or trusting inline block notices.
 > [Conversation inspection](conversation-inspection.md) records passing local tests
