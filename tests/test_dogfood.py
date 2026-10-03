@@ -136,6 +136,19 @@ class DogfoodTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 verify_receipt(original, reviewed, changed, scope, bundle, config)
 
+    def test_provisional_labels_are_never_human_approval(self):
+        original = packet_fixture()
+        reviewed = copy.deepcopy(original)
+        r = reviewed["cases"][0]["review"]
+        r.update(status="provisional", expected_decision="allow", reason="Local code review")
+        with self.assertRaises(ValueError):
+            review_packet(original, reviewed)
+        r.update(reviewer="assistant", human_approved=False)
+        self.assertEqual(review_packet(original, reviewed)[0]["review"]["status"], "provisional")
+        r["human_approved"] = True
+        with self.assertRaises(ValueError):
+            review_packet(original, reviewed)
+
     def test_scope_does_not_invent_permission_when_metadata_missing(self):
         bundle, config = load_profile()
         case = packet_fixture()["cases"][0]

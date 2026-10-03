@@ -64,10 +64,16 @@ def review_packet(original, reviewed):
         a.pop("review")
         if a != b or fingerprint(a["request"]) != a["request_sha256"]:
             raise ValueError("Original request, context or provenance changed")
-        if r.get("status") not in ("approved", "exclude"):
+        if r.get("status") not in ("approved", "provisional", "exclude"):
             raise ValueError("Finish every review or explicitly exclude the case")
         if r["status"] == "exclude":
             continue
+        if r["status"] == "provisional" and (
+            r.get("reviewer") != "assistant"
+            or r.get("human_approved") is not False
+            or not r.get("reason", "").strip()
+        ):
+            raise ValueError("Provisional labels require explicit assistant provenance and reason")
         if r.get("expected_decision") not in ("allow", "block", "evaluation_error"):
             raise ValueError("Missing expected outcome")
         if set(r.get("facts", {})) != FACT_FIELDS:
@@ -107,7 +113,7 @@ def verify_receipt(original, reviewed, receipt, scope, bundle, config):
 
 
 async def assess(case, bundle, config, backend):
-    # Human-reviewed operation facts, bound to this exact event. Never model-inferred.
+    # Operator-authorized facts mapped to this event before evaluation, not Jev-inferred.
     request = case["request"]
     values = {"destination.coding_route_approved": True, **case["review"]["facts"]}
     facts = [
@@ -148,6 +154,7 @@ async def measure(cases, bundle, config, ledger, receipt, output):
             row = {
                 "id": case["id"],
                 "expected_decision": case["review"]["expected_decision"],
+                "label_status": case["review"]["status"],
                 "request_sha256": case["request_sha256"],
                 "result": result,
                 "ledger_indices": list(range(start, len(ledger.data["calls"]))),
@@ -162,6 +169,7 @@ async def measure(cases, bundle, config, ledger, receipt, output):
             {
                 "complete": len(results) == len(cases),
                 "assessments": len(results),
+                "label_status_counts": dict(Counter(r["label_status"] for r in results)),
                 "known_matches": sum(
                     x["result"]["decision"] == x["expected_decision"] for x in results
                 ),
