@@ -1,5 +1,23 @@
 # Decisions and open requirements
 
+## Multi-turn live comparison complete — 2026-10-03
+
+At frozen `a0a3980`, 24 synthetic provisional-label conversations × three repeats
+per arm produced 144 assessments and 186 paid calls. Only conversation_scope
+changed. Legitimate explicit false blocks14→0, errors7→18, allowed6→9 per27;
+fail-closed stops21→18. Both arms block39/39 violations and retain6/6 expected
+uncertain. Clarified disclosure misattribution on two download cases causes six
+wrong policy decisions masked by correct source blocks. One malformed follow-up
+was rejected and its charge settled. Keep this as partial development improvement,
+not a solved conversation boundary or an enforcement qualification. No tuning or
+extra campaign. See [full results](conversation-v1-report.md).
+
+All144 normalized views and186 exact payloads replay;72 primary pairs differ only
+by clarification. New cost$0.020388564, known cumulative$0.444688574 plus unchanged
+old$0.01 reserve, remaining$4.545311426. Ledger6440attempts/6439settled; only historical
+index1830 unresolved. Three experiment tests pass in addition to the294 prior
+implementation tests. No hosted CI, push, deployment, publication or streaming.
+
 ## Conversation inspection clarification — 2026-10-03
 
 Owner approved addressing abandoned blocked requests retained in gateway history.

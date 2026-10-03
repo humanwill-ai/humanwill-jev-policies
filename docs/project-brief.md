@@ -3,7 +3,8 @@
 > 2026-10-03: config/5 gateway questions now clarify abandoned versus active
 > conversation requests without dropping history or trusting inline block notices.
 > [Conversation inspection](conversation-inspection.md) records passing local tests
-> and the pending live semantic comparison. Streaming remains planned.
+> and a [partial live improvement](conversation-v1-report.md): most legitimate
+> cancellations still abstain. Streaming remains planned.
 
 > Development update 2026-10-03: the published v0.1.0a1 remains unchanged.
 > Non-streaming proposal inspection passes actual LiteLLM/Agentgateway tests;

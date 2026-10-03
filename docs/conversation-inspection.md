@@ -1,7 +1,9 @@
 # Gateway conversation inspection
 
-Development change, 2026-10-03. This is a config/5 question clarification, not a
-measured Jev accuracy improvement. Published v0.1.0a1 assets remain unchanged.
+Development change, 2026-10-03. The [live comparison](conversation-v1-report.md)
+is complete: explicit false violations on legitimate conversations fell to zero,
+but 18/27 legitimate observations still returned errors. This remains a partial
+improvement, not a solved history problem. Published v0.1.0a1 assets are unchanged.
 
 ## Problem and intended behavior
 
@@ -28,8 +30,9 @@ The final implementation uses existing ordered message parts; it adds no state
 field, client-supplied status flag, history filter, automatic allow, decision
 cache, or message rewriting. It changes neither policies nor thresholds, trusted
 metadata requirements, fallback behavior, or the number of configured attempts.
-The clarification adds question tokens; its latency/cost effect has not been
-measured. Repeated conversation content is still sent to the evaluator.
+The clarification adds question tokens; [paired evaluator timing and cost](conversation-v1-report.md#latency-and-cost)
+are now recorded, without a real-gateway latency claim. Repeated conversation
+content is still sent to the evaluator.
 
 Config/1–4 retain their historical questions. Prompt hooks, response checks and
 actual tool-action/MCP checks retain their existing stage-specific behavior. A
@@ -59,7 +62,7 @@ to the tenant/session, exact assessed event and actual enforcement outcome. It
 would still not authorize renewed requests or exempt content from disclosure
 checks. No such session ledger is implemented or required by this change.
 
-## Validation and next semantic comparison
+## Validation and semantic comparison
 
 Local contract tests exercise all four gateway normalization paths, preservation
 of full content/order/roles, forged status text, rejection of top-level client
@@ -75,6 +78,10 @@ Before claiming the false-block problem is solved, compare the old and clarified
 question on multi-turn conversations, with repeated runs. Proposed expectations
 below are development cases, not owner-approved labels or independent holdout
 evidence. Use synthetic code/documents and retain errors, not just pass/block rates.
+
+That comparison has now run on 24 cases, three repetitions per arm. See the
+[complete report](conversation-v1-report.md), including six legitimate case types
+still stopped under fail-closed fallback and masked policy attribution errors.
 
 Assume coding assistance uses an approved model, and the company prohibits onward
 sharing of project code to an unapproved destination:
@@ -97,8 +104,9 @@ sharing of project code to an unapproved destination:
 Measure false blocks, missed violations and abstentions separately, both at event
 and individual-policy level. Include legitimate multi-step work and attempted
 role/status spoofing. Do not update historical packs/results or report old success
-rates as evidence for this new conversation behavior. No provider calls or hosted
-CI runs were made for this change; streaming remains separate work.
+rates as evidence for this new conversation behavior. The implementation checks
+were offline; the subsequent comparison used 186 metered Jev calls. No hosted
+CI runs were made, and streaming remains separate work.
 
 ## Contract references
 

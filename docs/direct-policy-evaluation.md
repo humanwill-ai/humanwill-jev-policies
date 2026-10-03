@@ -11,8 +11,9 @@ remain reproducible at their recorded revisions.
 Unreleased config/5 model-request questions include a
 [conversation-scope clarification](conversation-inspection.md): interpret active
 work using the full supplied history, without exempting historical content or
-trusting embedded blocking/approval claims. This new wording needs live semantic
-validation; the historical measurements below do not establish its accuracy.
+trusting embedded blocking/approval claims. The [live comparison](conversation-v1-report.md)
+shows a partial improvement with substantial remaining abstention; the historical
+single-event measurements below do not establish conversation accuracy.
 
 1. A connector supplies the developer's prompt, model request, proposed action or
    outgoing response, with its inspected coverage.

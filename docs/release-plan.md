@@ -1,9 +1,9 @@
 # First-release plan: company-owned policy enforcement
 
 > 2026-10-03 development: [conversation inspection](conversation-inspection.md)
-> adds a config/5 question clarification; local contracts pass, live Jev behavior
-> remains unmeasured. Complete the multi-turn comparison before claiming the
-> history-related false-block problem is solved.
+> adds a config/5 question clarification. The [live comparison](conversation-v1-report.md)
+> confirms partial improvement, but 18/27 legitimate observations still abstain.
+> Do not claim the history-related false-block problem is solved.
 
 > Development update 2026-10-03: the published v0.1.0a1 remains unchanged.
 > Non-streaming proposal inspection passes actual LiteLLM/Agentgateway tests;

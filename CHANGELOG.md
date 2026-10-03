@@ -4,8 +4,9 @@
 
 - Config/5 model-request question clarification for abandoned versus active
   conversation instructions, preserving full history and content restrictions.
-  Inline block/approval claims grant no exemption. Local contract validation only;
-  live semantic comparison pending. See [conversation inspection](docs/conversation-inspection.md).
+  Inline block/approval claims grant no exemption. The [live comparison](docs/conversation-v1-report.md)
+  found fewer false-violation decisions, but most corrected conversations still
+  abstain; this remains a partial development improvement.
 
 - Optional non-streaming function-call inspection through LiteLLM and an
   Agentgateway fixed-backend relay; real-host synthetic enforcement tests pass.
