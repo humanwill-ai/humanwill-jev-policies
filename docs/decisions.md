@@ -956,3 +956,20 @@ All480results609payloads replay-audited,318 primary transform comparisons plus t
 limit rejections verified.22focused tests pass. See docs/dogfood-views-v1-report.md.
 Cost$0.082725846;known$0.655582502+old$0.01reserve=accounted$0.665582502,
 remaining$4.334417498;8071attempted8070settled,onlyold1830unknown. No push/CI/release.
+
+## Compact policy-target comparison — 2026-10-03
+
+Owner authorized grouping+explicit targets without duplicated content. At6035354,
+50sameprivate+30controls,2passes/3fresharms=480assessments583calls. Compact places
+complete grouped history once in state.content; both target kinds refer to it,
+meanings/permissions/policies/gates unchanged, previous no-role flat fallback retained.
+Workflow:compact27/100errors (12/50,15/50),grouped28,dual36; no explicit false blocks.
+Compact fixes3/regresses2 versusgrouping,fixes10/regresses1 versusdual. All34violations
+blockcompact/dual,grouped32block2error;historicalsecretconfidence.99bothcompactpasses.
+Individual-policy matches151/180compact anddual versus153grouped; maskederrorsremain.
+Keep compact as researchcandidate, not default:15distinctunresolved workflowrequests,
+frictiontarget unmet. Matched primary inputtokens21.6%lowerthan dual,workflowcost22.5%
+lower,no compactsizeerrors. Report docs/dogfood-compact-v1-report.md;480results583payloads
+replayaudited,318transformpairs+2dual sizerejections verified;25focusedtests pass.
+Cost$0.080854536;known$0.736437038+old$0.01reserve=accounted$0.746437038,
+remaining$4.253562962;8654attempted8653settled,onlyold1830unknown. No push/CI/release.

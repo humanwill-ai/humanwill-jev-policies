@@ -1,10 +1,10 @@
 # First-release plan: company-owned policy enforcement
 
-> Latest workflow comparison, 2026-10-03: [policy-specific targets](dogfood-views-v1-report.md)
-> restore historical-secret blocking, but workflow abstention is 35% versus 30%
-> with fresh grouping and 40% with fresh flat runtime. No candidate adoption:
-> the friction target remains unmet. Labels are provisional; streaming is deferred
-> and future capture invocation remains unobserved.
+> Latest workflow comparison, 2026-10-03: [compact policy targets](dogfood-compact-v1-report.md)
+> preserve sampled historical-secret blocks and reduce duplicated-view input cost.
+> Workflow abstention is27%, versus28% fresh grouping and36% fresh dual views;
+> this does not meet the friction target. Keep experimental, with provisional labels.
+> Streaming is deferred; future capture invocation remains unobserved.
 
 > Latest conversation experiment, 2026-10-03: [explicit policy subjects and dual views](conversation-views-v1-report.md)
 > restore historical-secret blocks and reduce unexpected combined errors to 7/81,

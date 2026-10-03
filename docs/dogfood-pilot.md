@@ -24,6 +24,14 @@ Private `artifacts/dogfood-v1/views-live-v1/comparison.html` contains the full r
 609 new settled calls cost $0.082725846; accounted total $0.665582502, remaining
 $4.334417498 including the preserved historical reserve. No runtime adoption.
 
+
+Latest compact-target comparison: [report](dogfood-compact-v1-report.md). Compact /
+grouping / dual-view workflow abstention is27% /28% /36% across two fresh passes.
+Compact keeps all34 known-violation blocks and avoids the dual size rejection; still
+experimental with15 distinct unresolved requests. Private comparison:
+`artifacts/dogfood-v1/compact-live-v1/comparison.html`.583 new settled calls cost
+$0.080854536; current accounted$0.746437038, remaining$4.253562962. No runtime adoption.
+
 ## Historical packet
 
 The local review page is `artifacts/dogfood-v1/history/review.html` and its exact
