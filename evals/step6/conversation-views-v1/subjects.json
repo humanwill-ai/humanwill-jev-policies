@@ -1,0 +1,8 @@
+{
+  "format": "humanwill.experiment.policy-subjects/1",
+  "policies": {
+    "EVAL-SW-001": "current_operation",
+    "EVAL-SRC-001": "current_operation",
+    "CONV-SECRET-001": "whole_payload"
+  }
+}
