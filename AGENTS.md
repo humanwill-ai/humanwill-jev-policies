@@ -242,3 +242,22 @@ separately, not replacing old labels. See docs/preparation-policy-v1-protocol.md
 200 scripted preflight assessments,17 focused tests/Ruff pass; maxpayload23387bytes.
 Freeze source/one-use receipt before live; carry old1830 reservation unchanged.
 No compact-runtime adoption, default-policy replacement, streaming, Actions or push.
+
+
+## Preparation-policy comparison complete — 2026-10-04
+
+At frozen9efc297,8 historical+12 new synthetic+30 safety cases, two arms/two passes:
+200 assessments/246calls. Only SW policy text/version changes. v4 new boundaries
+24/24 combined matches:12 block,10 allow,2 expected missing-metadata errors; all18
+preparation judgments applicable at.99–1.00. Source errors on forged-approval twice
+are masked by correct disclosure blocks;46/48 policy matches. New labels provisional.
+Historical errors14/16→12/16; two new allows only firstpass, remaining uncertainty
+not solved.005 rawscope AP but lowconf;008 AP1.0 still missingapproval;027 unresolved.
+Existing controls both34/34violationblocks6/6unknownretained; legitimate15/20→17/20.
+Perpolicy149/180both; four wrong SWdownloadblocks become errors, not correct exclusions.
+All200result/246payload replays and100paired primary checks pass;17focusedtests/Ruff
+and200scriptedpreflight pass. Sixmalformed replies retained/rejected; no size error.
+See docs/preparation-policy-v1-report.md. Keep clarified v4 for next candidate;
+no runtime adoption, default-policy replacement, furthercampaign, streaming orpush.
+Cost$.032850426settled;9073attempted9072settled,known$.792852950 plusunchanged old1830
+$.01reserve=accounted$.802852950,remaining$4.197147050. Exactreceiptconsumed; no newunknown.

@@ -1,12 +1,17 @@
 # Project brief
 
+> 2026-10-04: [publication-preparation clarification tested](preparation-policy-v1-report.md).
+> All12 new boundary cases match expected combined decisions twice, preserving
+> approved preparation and local work. Selected real-workflow errors improve only
+> modestly; masked policy errors remain. No runtime adoption or new release.
+
 > 2026-10-04: [focused original-context comparison](dogfood-context-v1-report.md)
 > helps one selected request in both passes, but most disclosure abstentions remain.
 > Grouped review is complete without blanket label approval. Runtime adoption and
-> the separately clarified preparation-policy evaluation remain pending.
+> wider qualification remain pending; the preparation-policy comparison is now above.
 
 > Owner policy clarification: [preparation for publication also needs approval](disclosure-preparation-boundary.md).
-> Version4 is prepared for the next evaluation; frozen v3 experiments remain unchanged.
+> Version4 has targeted live evidence; frozen v3 experiments remain unchanged.
 
 > Latest workflow comparison, 2026-10-03: [compact policy targets](dogfood-compact-v1-report.md)
 > preserve sampled historical-secret blocks and reduce duplicated-view input cost.

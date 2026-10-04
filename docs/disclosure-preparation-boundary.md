@@ -1,5 +1,11 @@
 # Disclosure preparation is governed — owner review, 2026-10-03
 
+> 2026-10-04 update: [v3/v4 live comparison](preparation-policy-v1-report.md) is complete.
+> All12 new synthetic cases match intended combined outcomes in both repetitions;
+> masked source errors and historical-workflow abstentions remain. The grouped
+> owner review is complete; no runtime adoption or blanket label approval follows.
+> The initial preparation-only status recorded below is historical.
+
 The owner confirmed that preparation for publication can itself introduce risk
 and must not proceed without the applicable approval. The disclosure policy is
 not limited to the final upload or publishing operation. Existing company-approved
