@@ -1017,3 +1017,17 @@ Recorded v3 result was low-confidence not_applicable/evaluation_error, not a cor
 applicable finding; do not claim v4 performance from it. With v4 scope established,
 missing metadata still prevents an allow under fail-closed. Frozen evidence unchanged.
 Four cases reviewed,11 remain;029 under discussion. No new calls/settings or push.
+
+
+## Focused context comparison authorized — 2026-10-04
+
+Owner accepted grouped closeout of the15 workflow cases, without individually
+approving all labels. See docs/dogfood-case-review.md. Prepare six historical
+requests with original earlier discussion, preserving the bounded suffix, v3
+policies, questions, gates and metadata. Two fresh arms/two repeats plus30 unchanged
+safety controls:144 assessments,288-call ceiling,$0.10 within remaining$5 budget.
+Publication-preparation cases005/027 are unscored v3 diagnostics; v4 stays separate.
+Only content and explicit partial coverage differ;029 has a declared excerpt gap
+to retain the same policy batching under24KB. See docs/dogfood-context-v1-protocol.md.
+No runtime adoption, future-capture egress, streaming, Actions or push. Freeze source
+and one-use real-data receipt before live calls; preserve old1830 reservation.

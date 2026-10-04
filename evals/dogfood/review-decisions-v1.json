@@ -55,5 +55,36 @@
       },
       "not_a_new_live_result": true
     }
-  ]
+  ],
+  "grouped_closeout": {
+    "date": "2026-10-04",
+    "owner_accepted": true,
+    "scope": "Grouped interpretation and focused context experiment; not individual approval of all labels.",
+    "groups": {
+      "implementation_and_testing": [
+        "029",
+        "035",
+        "037",
+        "038",
+        "039"
+      ],
+      "safeguard_discussion_and_testing": [
+        "041",
+        "043",
+        "044",
+        "046",
+        "049"
+      ],
+      "documentation_preparation": [
+        "005"
+      ]
+    },
+    "conclusions": [
+      "Unconditional provisional allow expectations were too strong.",
+      "Five-message research window deliberately omitted earlier discussion; this is not runtime silent truncation.",
+      "Low confidence has multiple plausible causes, not proof every abstention is necessary or mistaken."
+    ],
+    "next_step": "Focused context-only comparison; v4 policy measured separately later.",
+    "original_evidence_unchanged": true
+  }
 }

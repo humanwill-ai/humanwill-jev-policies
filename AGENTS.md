@@ -194,3 +194,17 @@
 - Owner confirmed case026 expectedallow2026-10-03, provided trusted approval covers actualrepository andcompleteoperation. review-decisions-v1.json updated; threecases008/015/026reviewed,12remain. This is measurement-profile decision-flow friction (predicate_short_circuit disabled), not authorization to enable blanketapproval/lowergates. No runtimechange,tests,calls,push or historicalrate rewrite. See docs/dogfood-case-review.md.
 
 - Owner agreed027 publicREADME instructions are governed publication preparation with missingapproval2026-10-03; oldprovisionalallow superseded in reviewoverlay only. Recordedv3 answer was low-confidenceNA, not correctAP or measuredv4behavior. Fourcases008/015/026/027reviewed,11remain;029underdiscussion, nodecisionyet. No calls/settings/push or historicalrates rewritten.
+
+
+- Focused context comparison authorized — 2026-10-04
+
+Owner accepted grouped closeout of the15 workflow cases, without individually
+approving all labels. See docs/dogfood-case-review.md. Prepare six historical
+requests with original earlier discussion, preserving the bounded suffix, v3
+policies, questions, gates and metadata. Two fresh arms/two repeats plus30 unchanged
+safety controls:144 assessments,288-call ceiling,$0.10 within remaining$5 budget.
+Publication-preparation cases005/027 are unscored v3 diagnostics; v4 stays separate.
+Only content and explicit partial coverage differ;029 has a declared excerpt gap
+to retain the same policy batching under24KB. See docs/dogfood-context-v1-protocol.md.
+No runtime adoption, future-capture egress, streaming, Actions or push. Freeze source
+and one-use real-data receipt before live calls; preserve old1830 reservation.
