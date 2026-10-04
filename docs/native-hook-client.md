@@ -1,6 +1,8 @@
 # Native C hook client and latency comparison
 
-Status: local, unreleased implementation; measured on Intel macOS on 2026-10-04.
+Status: unreleased implementation; original measurements on Intel macOS on 2026-10-04.
+The [four bundled builds](native-bundled-builds.md) now have target-runtime evidence;
+the measurements below remain those of the earlier system-library development build.
 The published beta and installed Copilot configurations remain unchanged.
 
 The owner selected this client for the next public release, keeping Python as an

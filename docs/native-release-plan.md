@@ -17,16 +17,16 @@ Python policy service, policies, authentication and host-event contracts.
 
 | Target | Planned archive suffix | Executable | Current evidence |
 |---|---|---|---|
-| macOS Intel, x86_64 | `macos-x86_64.tar.gz` | `humanwill-hook-c` | Local native contract, sanitizer, service and latency checks pass |
-| macOS Apple Silicon, arm64 | `macos-arm64.tar.gz` | `humanwill-hook-c` | Build and runtime qualification pending |
-| Windows Intel/AMD, x86_64 | `windows-x86_64.zip` | `humanwill-hook-c.exe` | Port, build and runtime qualification pending |
-| Linux Intel/AMD, x86_64 | `linux-x86_64.tar.gz` | `humanwill-hook-c` | Build, dependency packaging and runtime qualification pending |
+| macOS Intel, x86_64 | `macos-x86_64.tar.gz` | `humanwill-hook-c` | Bundled native build: 108 contract + eight service checks pass |
+| macOS Apple Silicon, arm64 | `macos-arm64.tar.gz` | `humanwill-hook-c` | Bundled native build: 108 contract + eight service checks pass |
+| Windows Intel/AMD, x86_64 | `windows-x86_64.zip` | `humanwill-hook-c.exe` | Bundled native build: 108 contract checks pass on Windows Server 2025 |
+| Linux Intel/AMD, x86_64 | `linux-x86_64.tar.gz` | `humanwill-hook-c` | Static musl build: 108 contract + eight service checks pass on Alpine and Ubuntu |
 
 Archive names include `humanwill-hook-c-{version}-` before these suffixes. x86_64
 means 64-bit Intel/AMD; no 32-bit x86 target. Linux ARM, Windows ARM and a universal
 macOS archive are outside this initial matrix. Publish minimum OS versions and
-tested host versions per target. Linux x86_64 is not a promise of all distributions,
-glibc releases, or Alpine/musl support. Do not label an untested platform supported.
+tested host versions per target. Linux x86_64 has been tested on Alpine/musl and Ubuntu; that does not promise all
+distributions or kernels. See [bundled build evidence](native-bundled-builds.md).
 Python availability likewise does not establish untested Windows service support.
 
 ## Preparation sequence
@@ -75,12 +75,14 @@ on the other architectures. The approximately 0.5-second overall C estimate must
 not be published as an observed median. A paired live comparison may establish
 that later using the existing accounting rules and synthetic content only.
 
-## Open preparation details
+## Remaining release work
 
 - Minimum macOS/Windows versions and Linux ABI/distribution baseline.
 - Available macOS Developer ID/notarization and Windows signing credentials.
-- Exact dependency linkage and native package version. Keep native build versions
-  and supported service/result schemas traceable in the compatibility table.
+- Final public package version and interactive VS Code/CLI acceptance on these
+  exact binaries. The current build identifier is `0.1.0.dev2-native`; it is not
+  a new public release version.
+- Complete the final release review and obtain owner confirmation to publish.
 
 These details do not block local portability/build work. They must be settled
 before advertising frictionless signed installation or broad OS support.

@@ -1,0 +1,115 @@
+{
+  "date": "2026-10-04",
+  "public_release_created": false,
+  "provider_calls": 0,
+  "private_prompts_uploaded": false,
+  "runs": {
+    "macos": "https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/37214678727",
+    "linux": "https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/37215118126",
+    "windows": "https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/37215293319"
+  },
+  "targets": [
+    {
+      "target": "macos-x86_64",
+      "archive": "humanwill-hook-c-0.1.0.dev2-native-macos-x86_64.tar.gz",
+      "archive_sha256": "028dc66f93ef8fb03b080374a9f6e75e8c176a21c4ada042a64fc41b69993281",
+      "binary_sha256": "d39bc4db2aaf5d1e68a758dee8a32ef75aabd8e26c5908fd88e06f2888e31889",
+      "binary_bytes": 6751912,
+      "archive_bytes": 2654856,
+      "system": "macOS-15.7.9-x86_64-i386-64bit",
+      "source_commit": "221ecf492dd0811a274155493441323eb96d3c1a",
+      "contract_checks": 108,
+      "linkage": [
+        "/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration",
+        "/System/Library/Frameworks/Security.framework/Versions/A/Security",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "packaging": {
+        "original_ci_archive_sha256": "1019d4e534d882aaa4c077b98a9758c53414bde403430b9ca88a55bfdc786249",
+        "binary_sha256_unchanged": "d39bc4db2aaf5d1e68a758dee8a32ef75aabd8e26c5908fd88e06f2888e31889",
+        "binary_source_commit": "221ecf492dd0811a274155493441323eb96d3c1a",
+        "packaging_source_commit": "93212989fbf78dbf20eee290296b47b650e2de95",
+        "changes": "Accompanying README, notices and verification evidence only"
+      }
+    },
+    {
+      "target": "macos-arm64",
+      "archive": "humanwill-hook-c-0.1.0.dev2-native-macos-arm64.tar.gz",
+      "archive_sha256": "397409f07545563ff105dd44c1f44adb88d681e88ee584b02de4442401ceee14",
+      "binary_sha256": "9fc3c0b7ae91425e761a3915351a5eb42ee2d30eaff31641088a03ff72bb5cd9",
+      "binary_bytes": 6159904,
+      "archive_bytes": 2916920,
+      "system": "macOS-15.7.9-arm64-arm-64bit",
+      "source_commit": "221ecf492dd0811a274155493441323eb96d3c1a",
+      "contract_checks": 108,
+      "linkage": [
+        "/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration",
+        "/System/Library/Frameworks/Security.framework/Versions/A/Security",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "packaging": {
+        "original_ci_archive_sha256": "d849525e6bb0a6088f5c3d2e1204c3b7552b037cafd0ac924ccbc9d1f5c1a2df",
+        "binary_sha256_unchanged": "9fc3c0b7ae91425e761a3915351a5eb42ee2d30eaff31641088a03ff72bb5cd9",
+        "binary_source_commit": "221ecf492dd0811a274155493441323eb96d3c1a",
+        "packaging_source_commit": "93212989fbf78dbf20eee290296b47b650e2de95",
+        "changes": "Accompanying README, notices and verification evidence only"
+      }
+    },
+    {
+      "target": "windows-x86_64",
+      "archive": "humanwill-hook-c-0.1.0.dev2-native-windows-x86_64.zip",
+      "archive_sha256": "d57c3956981c39266559ddf679414de7d6d159af1f2e33fbdbcb252c0fa0f040",
+      "binary_sha256": "7f0116b916f65257db09783cd5bf576e96e701384d2de41800e7a84fda4edc3e",
+      "binary_bytes": 904704,
+      "archive_bytes": 460772,
+      "system": "Windows-10-10.0.26100-SP0",
+      "source_commit": "0bedb2fb403562456c8fc2fea8bce00a5b08320a",
+      "contract_checks": 108,
+      "linkage": [
+        "bcrypt.dll",
+        "ADVAPI32.dll",
+        "CRYPT32.dll",
+        "Secur32.dll",
+        "WS2_32.dll",
+        "IPHLPAPI.DLL",
+        "KERNEL32.dll"
+      ],
+      "packaging": {
+        "original_ci_archive_sha256": "fcb39aa49f10e3dd0ccafe46f163f97cbcfe78cad0fc1d62e3b92c4c14087ea9",
+        "binary_sha256_unchanged": "7f0116b916f65257db09783cd5bf576e96e701384d2de41800e7a84fda4edc3e",
+        "binary_source_commit": "0bedb2fb403562456c8fc2fea8bce00a5b08320a",
+        "packaging_source_commit": "93212989fbf78dbf20eee290296b47b650e2de95",
+        "changes": "Accompanying README, notices and verification evidence only"
+      }
+    },
+    {
+      "target": "linux-x86_64",
+      "archive": "humanwill-hook-c-0.1.0.dev2-native-linux-x86_64.tar.gz",
+      "archive_sha256": "755f677f05c1b47377a73f2fda7f5d058ee7ccbfdab757321e627389c9c3ec9f",
+      "binary_sha256": "a024b68ab5e324ae30b2ba7facca76b0bcdf8121771ec85f5a0b773bae1f3394",
+      "binary_bytes": 8747008,
+      "archive_bytes": 3432099,
+      "system": "Linux-6.17.0-1022-azure-x86_64-with",
+      "source_commit": "73e3b96193f18ffc0cc0e62189803072a4239d43",
+      "contract_checks": 108,
+      "linkage": [],
+      "packaging": {
+        "original_ci_archive_sha256": "cca43b9035831e916636a5b1d51926e586d06d130af16577f888aeb356ec8381",
+        "binary_sha256_unchanged": "a024b68ab5e324ae30b2ba7facca76b0bcdf8121771ec85f5a0b773bae1f3394",
+        "binary_source_commit": "73e3b96193f18ffc0cc0e62189803072a4239d43",
+        "packaging_source_commit": "93212989fbf78dbf20eee290296b47b650e2de95",
+        "changes": "Accompanying README, notices and verification evidence only"
+      }
+    }
+  ],
+  "limits": [
+    "No Developer ID notarization or Authenticode signing",
+    "No interactive Copilot acceptance on these exact binaries",
+    "Windows checks exercise client wire contracts, not Windows policy service",
+    "No new live Jev latency measurement"
+  ]
+}

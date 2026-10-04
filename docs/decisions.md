@@ -1191,3 +1191,19 @@ and Schannel/BCrypt on Windows. Linux uses static musl; macOS/Windows retain OS
 system libraries and trust services. A portable bounded pattern matcher replaces
 POSIX regex; one small platform layer handles streams and hashes. Add an explicit
 CA-file option with certificate verification retained. See native-bundled-builds.md.
+
+## 2026-10-04 — Four bundled native candidates completed
+
+All four requested binaries now exist under ignored `dist/native/`. One shared C
+implementation with a small OS layer passed 108 contract checks on macOS Intel,
+macOS ARM, Windows x86_64, and Linux x86_64. Mac/Linux also passed eight actual
+service checks with a scripted backend; Linux repeated both suites on Ubuntu after
+Alpine. No paid provider calls or private prompt uploads. Build evidence and exact
+hashes: `docs/native-bundled-builds.md` and its JSON inventory.
+
+Source/build repairs are on `work/native-bundled-binaries`; successful platform
+jobs were not repeated. Accompanying notices/docs were completed locally while
+retaining exact tested binary hashes and original CI archives. Python remains
+available. No main merge, public release/tag, hook installation, or signing
+purchase occurred. Signing and interactive host acceptance of these exact binaries
+remain separate next-release preparation, not claims made by these contract tests.
