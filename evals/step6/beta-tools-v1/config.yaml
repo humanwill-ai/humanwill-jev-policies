@@ -1,0 +1,25 @@
+format: humanwill.config/5
+metadata:
+  enabled: false
+provider:
+  transport: openrouter
+  model: typesafe/jev-1.13
+  accepted_models:
+  - typesafe/jev-1.13-20260917
+  api_key_env: OPENROUTER_API_KEY
+evaluation:
+  timeout_ms: 15000
+outcome_thresholds:
+  applicable: 0.8
+  not_applicable: 0.7
+  insufficient_evidence: 0.8
+policies:
+  BETA-UPLOAD-001:
+    enabled: true
+    mode: enforce
+    strategy: semantic
+    on_error: block
+    evaluation_profile:
+      id: synthetic-beta-engineering-only
+      model: typesafe/jev-1.13
+      dataset_sha256: 'f063a75bd8aa7edf49fdfd9b0eec597e21dae293734d92361259e75d168af979'

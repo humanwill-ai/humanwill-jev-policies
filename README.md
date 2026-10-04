@@ -13,21 +13,19 @@ to your **software development lifecycle (SDLC)**—with **378 ms median added
 latency for prompt checks in our controlled tests**. Start by monitoring, then
 enable blocking where supported.
 
-*Experimental developer preview. Coverage and blocking capabilities vary by
-connector. Use alongside other security controls.*
+**Preparing 0.2 Public Beta (`0.2.0b1`) for controlled company pilots.**
+The beta candidate adds optional non-streaming tool-proposal inspection and MCP
+pre-execution enforcement through LiteLLM and Agentgateway. It keeps monitoring
+defaults and explicit failure handling; it is not an enterprise-qualified control.
+See [beta scope, upgrade and validation](docs/public-beta-v020.md).
 
-**First public release: [v0.1.0a1 — experimental developer preview](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.1.0a1).**
-Published 2026-10-01. It is not an enterprise-qualified policy
-control. Examples default to monitoring; enforcement and error fallback are explicit
-operator choices. See [current release status](docs/preview-status.md) and
-[final development-pack evidence](docs/preview-final-v1-report.md).
-
-**Unreleased development:** opt-in [non-streaming tool-call inspection](docs/structured-tool-calls.md)
-is implemented and tested through actual LiteLLM and Agentgateway processes.
-MCP pre-execution checks also pass actual-host tests through
-[LiteLLM](docs/mcp-pre-execution.md) and [Agentgateway](docs/agentgateway-mcp.md),
-with denied calls prevented from reaching the tool server.
-The released installation instructions and text-only profiles below remain unchanged.
+The latest published release remains
+[v0.1.0a1](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.1.0a1),
+an experimental developer preview. The installation below selects that release.
+For the beta candidate, use its [artifact installation instructions](docs/public-beta-v020.md#install-or-upgrade).
+Coverage varies by connector; use alongside other security controls. The quoted
+latency and [170-case results](docs/preview-final-v1-report.md) belong to the earlier
+text-policy workload, not a fresh beta/tool/MCP qualification.
 
 This is a companion to [HumanWill Benchmark](https://github.com/humanwill-ai/humanwill-benchmark):
 the benchmark studies model behavior; this project lets companies supply their own
@@ -162,8 +160,8 @@ containers or remote hosts need reachable addresses and a protected network/TLS 
 
 | Integration | Setup | What to send through it |
 | --- | --- | --- |
-| **LiteLLM 1.102.1** | Install HumanWill in the LiteLLM environment too. Copy [litellm.yaml](examples/connectors/litellm.yaml), set your coding model and its credential, `LITELLM_MASTER_KEY`, and `HUMANWILL_LITELLM_TOKEN`. Keep both the profile callback and guardrail configuration. Start with `litellm --config /path/to/litellm.yaml --port 4000`. [Full setup](docs/service-and-connectors.md#configure-the-gateways). | Point your application's chat-completions client to `http://127.0.0.1:4000/v1`. Use text messages and `stream: false`; this release rejects structured tools and streaming. |
-| **Agentgateway 1.5.0** | Copy [agentgateway.yaml](examples/connectors/agentgateway.yaml). Replace the synthetic upstream/model with your provider configuration and both token placeholders with the service principal's token. Preserve both webhooks, the request-profile expression and fail-closed settings. Start with `agentgateway -f /path/to/agentgateway.yaml`. [Full setup](docs/service-and-connectors.md#configure-the-gateways). | Route text, non-streaming chat requests through the configured listener (example port `3000`). The sample upstream on port `9000` is a placeholder, not a supplied model service. |
+| **LiteLLM 1.102.1** | Install HumanWill in the LiteLLM environment too. Copy [litellm.yaml](examples/connectors/litellm.yaml), set your coding model and its credential, `LITELLM_MASTER_KEY`, and `HUMANWILL_LITELLM_TOKEN`. Keep both the profile callback and guardrail configuration. Start with `litellm --config /path/to/litellm.yaml --port 4000`. [Full setup](docs/service-and-connectors.md#configure-the-gateways). | Point your application's chat-completions client to `http://127.0.0.1:4000/v1`. Use text messages and `stream: false`; the text profile rejects structured tools and streaming. The beta offers a separate [tool profile](docs/structured-tool-calls.md) and [MCP binding](docs/mcp-pre-execution.md). |
+| **Agentgateway 1.5.0** | Copy [agentgateway.yaml](examples/connectors/agentgateway.yaml). Replace the synthetic upstream/model with your provider configuration and both token placeholders with the service principal's token. Preserve both webhooks, the request-profile expression and fail-closed settings. Start with `agentgateway -f /path/to/agentgateway.yaml`. [Full setup](docs/service-and-connectors.md#configure-the-gateways). | Route text, non-streaming chat requests through the configured listener (example port `3000`). The sample upstream on port `9000` is a placeholder, not a supplied model service. The beta adds a [tool relay](docs/structured-tool-calls.md) and [MCP execution binding](docs/agentgateway-mcp.md). |
 | **VS Code Local** | Merge the [Local hook template](examples/connectors/vscode-local.json) into your project's `.github/hooks/humanwill.json`. Replace the executable with the absolute path to `.venv/bin/humanwill-policies`; supply `HUMANWILL_LOCAL_TOKEN` to VS Code. Sign in to Copilot, enable `chat.useHooks`, trust the workspace and select the Local agent runtime. [Full setup](docs/service-and-connectors.md#install-and-remove-copilot-hooks). | Use Copilot in that workspace. Submitted prompts and proposed tool actions are checked; host timeouts and disabled hooks can bypass enforcement. |
 | **Copilot CLI** | Use the separate [CLI hook template](examples/connectors/copilot-cli.json), replace the executable path and supply `HUMANWILL_CLI_TOKEN` to the CLI. Configure folder trust. Do not combine the Local and CLI templates as if their contracts were interchangeable. [Full setup](docs/service-and-connectors.md#install-and-remove-copilot-hooks). | Start Copilot CLI in the configured project. Prompt checks are assessment-only; pre-tool checks can deny actions. Host timeouts and disabled hooks can bypass enforcement. |
 

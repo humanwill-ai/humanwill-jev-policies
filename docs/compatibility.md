@@ -1,5 +1,7 @@
 # Compatibility and reuse review
 
+For the `0.2.0b1` candidate, use the [beta verification record](public-beta-v020.md#validation) for exact artifact and host evidence. The table below retains previously completed checks until the candidate rerun is recorded.
+
 Host targets originally reviewed 2026-09-27. See [current candidate verification](preview-verification.md) for refreshed checks versus retained historical host evidence. **Do not infer that every host was rerun on the current artifact.** Support is bounded to the configurations in the [connector guide](service-and-connectors.md) and the [integration evidence](integration-report.md). Local evidence uses macOS x86_64 and a signed-in isolated profile.
 
 | Surface | Version / environment | Status |

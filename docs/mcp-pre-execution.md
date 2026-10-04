@@ -1,6 +1,8 @@
 # MCP pre-execution through LiteLLM
 
-Unreleased development `0.1.0a2.dev0`, reviewed 2026-10-02. This is separate from
+See [beta installation and exact validation](public-beta-v020.md) for this candidate.
+
+Public Beta candidate `0.2.0b1`, reviewed 2026-10-02. This is separate from
 the published `v0.1.0a1` text-only connectors and from optional model-proposal
 inspection. The first supported execution binding is **LiteLLM 1.102.1 `/mcp/`**
 with Streamable HTTP. [Agentgateway's separate native MCP binding](agentgateway-mcp.md)
@@ -30,7 +32,7 @@ the full conversation, or the implementation/effects of arbitrary tools.
 
 ## Configure a dedicated MCP gateway
 
-Install the development checkout in your policy-service environment and in the
+Install the beta candidate in your policy-service environment and in the
 same environment as `litellm[proxy]==1.102.1`. The public preview wheel does not
 contain this connector. Keep the existing LLM gateway and its response policy
 checks separate for this initial deployment: its text/tool chat callbacks reject
@@ -139,7 +141,7 @@ accuracy measurement, hosted MCP CI run or release publication were performed.
 The existing host workflow includes these checks for its next required run.
 
 ```sh
-# Run after installing the development wheel in the pinned LiteLLM environment:
+# Run after installing the beta candidate wheel in the pinned LiteLLM environment:
 python tests/hosts/mcp_guardrail.py
 python tests/hosts/mcp_calls.py --binary /absolute/litellm-env/bin/litellm
 ```

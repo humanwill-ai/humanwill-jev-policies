@@ -1,8 +1,10 @@
 # Non-streaming structured tool-call inspection
 
-Development version **0.1.0a2.dev0**, reviewed 2026-10-02. This feature is not in
+See [beta installation and exact validation](public-beta-v020.md) for this candidate.
+
+Development version **0.2.0b1**, reviewed 2026-10-02. This feature is not in
 the published `v0.1.0a1` assets. Existing text-only profiles retain their behavior;
-enable the new profiles explicitly and install the matching development build in
+enable the new profiles explicitly and install the matching beta candidate build in
 both the service and LiteLLM host. No new Jev accuracy or latency claim is made.
 
 ## What is checked
@@ -46,7 +48,7 @@ an atomic guarantee about what a separate agent eventually executes.
 
 ## LiteLLM
 
-Use pinned LiteLLM **1.102.1** and install the development HumanWill wheel in its
+Use pinned LiteLLM **1.102.1** and install the beta candidate HumanWill wheel in its
 environment as well as in the service environment.
 
 - Start from [service-tools.yaml](../examples/connectors/service-tools.yaml).

@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased — 0.1.0a2.dev0
+## 0.2.0b1 — Public Beta candidate (not yet published)
 
 - Config/5 model-request question clarification for abandoned versus active
   conversation instructions, preserving full history and content restrictions.
@@ -16,6 +16,10 @@
 - Native Agentgateway ExtMCP pre-execution connector, authenticated loopback gRPC
   and optional install extra; 22 actual MCP-server scenarios pass in Linux CI.
   [Agentgateway scope and setup](docs/agentgateway-mcp.md).
+- Versioned disclosure-preparation policy example, including approved-operation
+  exceptions and explicit missing-authorization handling; no approval UI or
+  production authorization resolver.
+- Compact context/target experiments remain research-only; streaming is deferred.
 - Published v0.1.0a1 assets, existing text profile payload contracts, evaluation
   thresholds and follow-up selection unchanged.
 

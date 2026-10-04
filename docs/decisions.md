@@ -1084,3 +1084,19 @@ See docs/preparation-policy-v1-report.md. Keep clarified v4 for next candidate;
 no runtime adoption, default-policy replacement, furthercampaign, streaming orpush.
 Cost$.032850426settled;9073attempted9072settled,known$.792852950 plusunchanged old1830
 $.01reserve=accounted$.802852950,remaining$4.197147050. Exactreceiptconsumed; no newunknown.
+
+
+## Public Beta preparation — 2026-10-04
+
+Owner approved preparing `0.2.0b1` for controlled pilots: freeze scope, validate
+exact artifacts/upgrade/hosts, measure synthetic live tool/MCP paths, refresh docs
+and stage a concrete release. Publication/tag/assets remain a separate final step.
+Streaming deferred; compact/grouped targets remain research-only. Include active
+conversation clarification and a versioned preparation-policy authoring example,
+not an automatic global policy. See docs/public-beta-v020-plan.md.
+
+One core workflow and one all-host workflow may run for the consolidated candidate;
+no duplicate dispatches or billing changes. Repository is public; standard runner
+minutes are free, storage quota remains separate. Existing $5 live budget and
+unknown ledger entry1830 reservation remain unchanged. New beta-tools-v1 protocol
+uses synthetic inputs only and a $0.15 sub-ceiling; stop on new unknown charges.

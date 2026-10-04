@@ -5,7 +5,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=1
 WORKDIR /app
 COPY requirements.txt /app/requirements.txt
 # Install the exact prebuilt wheel selected by the operator; never an editable checkout.
-ARG WHEEL=dist/humanwill_policies-0.1.0a1-py3-none-any.whl
+ARG WHEEL=dist/humanwill_policies-0.2.0b1-py3-none-any.whl
 COPY ${WHEEL} /app/wheels/
 RUN python -m pip install --no-cache-dir -r /app/requirements.txt \
     && python -m pip install --no-cache-dir --no-deps /app/wheels/*.whl \

@@ -1,4 +1,6 @@
-# Install and run the public preview
+# Install and run the published preview
+
+For the new `0.2.0b1` Public Beta candidate, follow [beta installation and upgrade](public-beta-v020.md#install-or-upgrade). This guide retains the published `v0.1.0a1` commands until the beta is released.
 
 The public experimental developer preview is [v0.1.0a1](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.1.0a1). Download its wheel, source distribution and `SHA256SUMS` from that release; no PyPI package or container image is published. Use Python 3.11–3.14 on Linux/macOS. This guide needs only the source distribution, wheel and locked runtime requirements from the same release. Installation downloads dependencies; the demo and contract checks make no evaluator calls.
 

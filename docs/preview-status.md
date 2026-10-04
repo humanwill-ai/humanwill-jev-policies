@@ -1,3 +1,19 @@
+# Current release status — 2026-10-04
+
+**0.2 Public Beta candidate (`0.2.0b1`) is being prepared.**
+See [current scope, installation and validation](public-beta-v020.md) and
+[the owner-approved preparation plan](public-beta-v020-plan.md).
+The latest published release remains `v0.1.0a1`; no beta tag/assets are published yet.
+
+The candidate includes structured tool proposals, LiteLLM/Agentgateway MCP,
+active-conversation clarification and an optional preparation-policy authoring
+example. Streaming is deferred; compact/grouped policy-target experiments remain
+research-only. Independent quality qualification and pilot experience remain open.
+
+The entries below are dated historical evidence, not beta acceptance results.
+
+---
+
 # Unreleased structured-call work — 2026-10-02
 
 > Latest workflow comparison, 2026-10-03: [compact policy targets](dogfood-compact-v1-report.md)

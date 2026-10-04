@@ -1,6 +1,8 @@
 # Agentgateway MCP pre-execution
 
-Development `0.1.0a2.dev0`, reviewed 2026-10-03. This uses Agentgateway **1.5.0**'s
+See [beta installation and exact validation](public-beta-v020.md) for this candidate.
+
+Public Beta candidate `0.2.0b1`, reviewed 2026-10-03. This uses Agentgateway **1.5.0**'s
 native **ExtMCP gRPC interface**, not the text-only guardrail webhook or the LLM
 backend relay. The public `v0.1.0a1` artifacts remain unchanged.
 
@@ -22,7 +24,7 @@ metadata resolver must supply any identity, approval or classification facts.
 
 ## Setup
 
-Use a development checkout and install the optional gRPC dependencies:
+Use the beta candidate source archive or checkout and install the optional gRPC dependencies:
 
 ```sh
 python -m pip install '.[agentgateway-mcp]'
@@ -141,7 +143,7 @@ binary/wheel hashes, all 22 outcomes and local checks. The exact CI wheel and
 reports were downloaded and retained under `artifacts/agentgateway-mcp/`.
 No paid evaluator calls, new MCP latency benchmark or release publication.
 
-To rerun after installing the development wheel and its `agentgateway-mcp` extra,
+To rerun after installing the beta candidate wheel and its `agentgateway-mcp` extra,
 install `mcp==1.30.0` in the test environment and run:
 
 ```sh
