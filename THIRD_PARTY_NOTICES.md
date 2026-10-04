@@ -3,7 +3,8 @@
 The project does not relicense its dependencies. The following Python runtime
 packages are pinned in requirements.txt; their unmodified installed license
 texts are retained under third_party/licenses. The optional Agentgateway protocol
-files described below are the only vendored/generated protocol code.
+files described below are vendored/generated protocol code. The native client
+also vendors yyjson and bundles the libraries listed in its section below.
 
 | Dependency | Version | License | Preserved notice |
 | --- | --- | --- | --- |
@@ -70,7 +71,19 @@ benchmark question pack is vendored by this project.
 The optional `clients/hook-c` source includes yyjson 0.12.0 under the MIT license,
 revision `8b4a38dc994a110abaec8a400615567bd996105f`. Its complete license and file
 hashes are retained in `clients/hook-c/vendor/yyjson/LICENSE` and `PROVENANCE.json`.
-The macOS executable dynamically links system libcurl and system cryptography;
-the Linux build recipe uses libcurl/OpenSSL. Those platform libraries retain their
-own terms and are not included as vendored binaries. This source inventory does
-not constitute a reviewed cross-platform native release/SBOM.
+The bundled native build statically links curl 8.22.0 (curl license) on all four
+targets and OpenSSL 3.5.9 (Apache-2.0) on macOS/Linux. Windows uses system
+Schannel/BCrypt and a static Microsoft C runtime. The exact upstream curl/OpenSSL
+license texts accompany every applicable archive under `licenses/`.
+
+Linux additionally links musl 1.2.5 and compiler runtime support from GCC 14.2.0.
+Its archive preserves musl's complete copyright/license notices and GCC's GPLv3
+text with the GCC Runtime Library Exception 3.1, also available under
+`clients/hook-c/vendor/runtime-licenses/`. The pinned Alpine base and installed
+package inventory are retained with build evidence. OS libraries and compiler
+redistributables retain their own terms. The older Makefile is a separate
+development recipe using system libraries.
+
+Dependency sources/hashes are in `clients/hook-c/dependencies.json`; each binary
+archive contains a build manifest and an audited dynamic-library list. This is a
+build inventory, not an independent security or license audit.

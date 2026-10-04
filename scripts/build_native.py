@@ -119,6 +119,9 @@ def main():
     if openssl_source:
         shutil.copy2(openssl_source / "LICENSE.txt", licenses / "openssl-LICENSE.txt")
     shutil.copy2(SOURCE / "vendor/yyjson/LICENSE", licenses / "yyjson-LICENSE.txt")
+    if system == "Linux":
+        for notice in (SOURCE / "vendor/runtime-licenses").iterdir():
+            shutil.copy2(notice, licenses / notice.name)
     (work / "build-manifest.json").write_text(
         json.dumps(
             {

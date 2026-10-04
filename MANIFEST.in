@@ -13,3 +13,4 @@ recursive-include third_party/licenses *
 recursive-include clients/hook-c *.c *.h *.py *.md *.json
 include clients/hook-c/Makefile clients/hook-c/vendor/yyjson/LICENSE
 include clients/hook-c/CMakeLists.txt
+recursive-include clients/hook-c/vendor/runtime-licenses *
