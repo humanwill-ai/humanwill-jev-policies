@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "humanwill-hook-client"
-version = "0.1.0.dev1"
+version = "0.2.0b2"
 description = "Lightweight Copilot hooks for a remote HumanWill policy service"
 readme = "README.md"
 license = "Apache-2.0"

@@ -3,6 +3,8 @@
 Status: unreleased implementation; original measurements on Intel macOS on 2026-10-04.
 The [four bundled builds](native-bundled-builds.md) now have target-runtime evidence;
 the measurements below remain those of the earlier system-library development build.
+[Fresh bundled-binary latency and host acceptance](native-hook-validation.md) and
+the [platform installation guide](native-hook-installation.md) are now available.
 The published beta and installed Copilot configurations remain unchanged.
 
 The owner selected this client for the next public release, keeping Python as an

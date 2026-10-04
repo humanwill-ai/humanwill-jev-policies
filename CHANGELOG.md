@@ -1,6 +1,14 @@
 # Changelog
 
-## Unreleased
+## 0.2.0b2 — 2026-10-04, Public Beta
+
+- Four precompiled native hook packages: macOS x86_64/arm64, Windows x86_64 and
+  Linux x86_64, with bundled non-system dependencies and the Python clients retained.
+  All targets pass native protocol checks; the packaged Intel macOS binary also
+  passes 14 VS Code Local and six Copilot CLI scenarios. Its measured local median
+  overhead is ~19 ms versus 324–328 ms for legacy Python, excluding network/Jev.
+  [Installation guide](docs/native-hook-installation.md) and
+  [validation and limits](docs/native-hook-validation.md).
 
 - Native C remote hook client with embedded request/result validation and Python
   request-hash compatibility. Local macOS contract/sanitizer tests and comparative

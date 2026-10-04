@@ -1,0 +1,230 @@
+{
+  "scope": "Fresh installed console process to validated hook output; synthetic loopback replies, no Jev/IDE/TLS",
+  "platform": {
+    "system": "Darwin",
+    "release": "24.6.0",
+    "machine": "x86_64"
+  },
+  "python": "Python 3.11.5",
+  "versions": {
+    "released": "0.2.0b1",
+    "client": "0.1.0.dev1",
+    "native": "0.1.0.dev2-native"
+  },
+  "wheel_sha256": {
+    "released": "7d54c772bd85628c9addde9828d86eb05e4e3a76f5ce9f67986f036a2e4c8bab",
+    "client": "7f67f3eac5d4c728ec327811d72d139b472318968d22ceff43d4e720f4a9de14"
+  },
+  "method": "Seeded randomized order within paired rounds; one excluded warmup per case/client; warm filesystem cache; sequential processes",
+  "samples_per_cell": 30,
+  "http_calls": 372,
+  "provider_calls": 0,
+  "native_sha256": "d39bc4db2aaf5d1e68a758dee8a32ef75aabd8e26c5908fd88e06f2888e31889",
+  "summary": {
+    "version": {
+      "released": {
+        "n": 30,
+        "median_ms": 215.992,
+        "p95_ms": 264.277,
+        "min_ms": 212.266,
+        "max_ms": 275.493
+      },
+      "client": {
+        "n": 30,
+        "median_ms": 50.353,
+        "p95_ms": 53.849,
+        "min_ms": 49.237,
+        "max_ms": 54.114
+      },
+      "native": {
+        "n": 30,
+        "median_ms": 9.842,
+        "p95_ms": 10.212,
+        "min_ms": 9.495,
+        "max_ms": 10.233
+      },
+      "paired_saving_ms": {
+        "n": 30,
+        "median_ms": 165.604,
+        "p95_ms": 212.74,
+        "min_ms": 162.352,
+        "max_ms": 225.693
+      },
+      "native_vs_client_saving_ms": {
+        "n": 30,
+        "median_ms": 40.383,
+        "p95_ms": 44.026,
+        "min_ms": 39.323,
+        "max_ms": 44.294
+      },
+      "native_vs_legacy_paired_median_saving_ms": 206.221
+    },
+    "local_prompt_allow": {
+      "released": {
+        "n": 30,
+        "median_ms": 327.376,
+        "p95_ms": 371.282,
+        "min_ms": 322.307,
+        "max_ms": 385.306
+      },
+      "client": {
+        "n": 30,
+        "median_ms": 292.97,
+        "p95_ms": 323.37,
+        "min_ms": 286.787,
+        "max_ms": 347.867
+      },
+      "native": {
+        "n": 30,
+        "median_ms": 18.829,
+        "p95_ms": 19.434,
+        "min_ms": 18.21,
+        "max_ms": 19.847
+      },
+      "paired_saving_ms": {
+        "n": 30,
+        "median_ms": 35.019,
+        "p95_ms": 60.343,
+        "min_ms": 13.094,
+        "max_ms": 61.936
+      },
+      "native_vs_client_saving_ms": {
+        "n": 30,
+        "median_ms": 274.261,
+        "p95_ms": 303.96,
+        "min_ms": 268.405,
+        "max_ms": 328.696
+      },
+      "native_vs_legacy_paired_median_saving_ms": 308.589
+    },
+    "local_prompt_block": {
+      "released": {
+        "n": 30,
+        "median_ms": 326.793,
+        "p95_ms": 347.071,
+        "min_ms": 321.989,
+        "max_ms": 369.461
+      },
+      "client": {
+        "n": 30,
+        "median_ms": 291.03,
+        "p95_ms": 322.672,
+        "min_ms": 287.236,
+        "max_ms": 394.326
+      },
+      "native": {
+        "n": 30,
+        "median_ms": 18.829,
+        "p95_ms": 20.807,
+        "min_ms": 18.297,
+        "max_ms": 21.081
+      },
+      "paired_saving_ms": {
+        "n": 30,
+        "median_ms": 33.82,
+        "p95_ms": 47.045,
+        "min_ms": -24.865,
+        "max_ms": 49.763
+      },
+      "native_vs_client_saving_ms": {
+        "n": 30,
+        "median_ms": 272.319,
+        "p95_ms": 304.156,
+        "min_ms": 268.422,
+        "max_ms": 373.245
+      },
+      "native_vs_legacy_paired_median_saving_ms": 308.004
+    },
+    "cli_tool_allow": {
+      "released": {
+        "n": 30,
+        "median_ms": 328.481,
+        "p95_ms": 355.613,
+        "min_ms": 323.107,
+        "max_ms": 375.618
+      },
+      "client": {
+        "n": 30,
+        "median_ms": 293.097,
+        "p95_ms": 354.217,
+        "min_ms": 289.12,
+        "max_ms": 365.229
+      },
+      "native": {
+        "n": 30,
+        "median_ms": 19.01,
+        "p95_ms": 19.559,
+        "min_ms": 18.434,
+        "max_ms": 20.427
+      },
+      "paired_saving_ms": {
+        "n": 30,
+        "median_ms": 35.021,
+        "p95_ms": 48.898,
+        "min_ms": -25.671,
+        "max_ms": 84.087
+      },
+      "native_vs_client_saving_ms": {
+        "n": 30,
+        "median_ms": 274.342,
+        "p95_ms": 335.237,
+        "min_ms": 269.92,
+        "max_ms": 345.764
+      },
+      "native_vs_legacy_paired_median_saving_ms": 309.636
+    },
+    "cli_tool_block": {
+      "released": {
+        "n": 30,
+        "median_ms": 324.451,
+        "p95_ms": 335.453,
+        "min_ms": 320.878,
+        "max_ms": 337.051
+      },
+      "client": {
+        "n": 30,
+        "median_ms": 289.772,
+        "p95_ms": 300.563,
+        "min_ms": 284.525,
+        "max_ms": 305.945
+      },
+      "native": {
+        "n": 30,
+        "median_ms": 18.929,
+        "p95_ms": 19.256,
+        "min_ms": 18.406,
+        "max_ms": 19.62
+      },
+      "paired_saving_ms": {
+        "n": 30,
+        "median_ms": 35.733,
+        "p95_ms": 40.803,
+        "min_ms": 16.069,
+        "max_ms": 42.154
+      },
+      "native_vs_client_saving_ms": {
+        "n": 30,
+        "median_ms": 270.913,
+        "p95_ms": 281.328,
+        "min_ms": 265.499,
+        "max_ms": 287.098
+      },
+      "native_vs_legacy_paired_median_saving_ms": 305.569
+    }
+  },
+  "installed_wheel_audit": {
+    "released": {
+      "wheel_sha256": "7d54c772bd85628c9addde9828d86eb05e4e3a76f5ce9f67986f036a2e4c8bab",
+      "installed_files_matched": 52
+    },
+    "client": {
+      "wheel_sha256": "7f67f3eac5d4c728ec327811d72d139b472318968d22ceff43d4e720f4a9de14",
+      "installed_files_matched": 13
+    }
+  },
+  "report_provenance": {
+    "raw_report_sha256": "2dcf3a11e112f826d7310188ef8290679081c4e2458a052258ce887c6b6dfadb",
+    "correction": "Raw runner was given a rebuilt wheel path for metadata; the installed baseline was the published wheel. All installed package files have been compared with the published wheel; corrected wheel hash here. Timings unchanged.",
+    "initial_attempt": "Stopped incomplete overlapping run before measuring final run; final run after host tests completed."
+  }
+}

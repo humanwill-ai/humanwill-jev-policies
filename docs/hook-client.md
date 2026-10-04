@@ -1,8 +1,8 @@
 # Lightweight remote hook client
 
-Status: implemented locally, unreleased. The published `0.2.0b1` release remains
-unchanged. This client is for machines running VS Code Local or Copilot CLI against
-an existing authenticated HumanWill service.
+Status: prepared for Public Beta `0.2.0b2`. Python remains an alternative to the
+[native binaries](native-hook-installation.md); the measurements below retain
+their original development-package and released-baseline versions.
 
 ## Installation and migration
 

@@ -1,7 +1,5 @@
 name: Native hook binaries
 on:
-  push:
-    branches: [work/native-bundled-binaries]
   workflow_dispatch:
     inputs:
       target:

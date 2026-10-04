@@ -66,10 +66,14 @@ def model_app(marker, requests):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--binary", required=True)
+    parser.add_argument(
+        "--hook-binary", type=Path, help="Test this native client instead of Python"
+    )
+    parser.add_argument("--outdir", type=Path, default=Path("artifacts/hosts"))
     args = parser.parse_args()
     binary = str(Path(args.binary).resolve())
     assert "1.0.88" in subprocess.check_output([binary, "--version"], text=True)
-    out = Path("artifacts/hosts")
+    out = args.outdir
     out.mkdir(parents=True, exist_ok=True)
     report = []
     for case in ["allow", "deny", "prompt_assessment", "service_down", "host_timeout", "disabled"]:
@@ -97,10 +101,11 @@ def main():
                 def command(event, case=case, policyport=policyport):
                     return shlex.join(
                         [
-                            sys.executable,
-                            "-m",
-                            "humanwill_policies",
-                            "hook",
+                            *(
+                                [str(args.hook_binary.resolve())]
+                                if args.hook_binary
+                                else [sys.executable, "-m", "humanwill_policies", "hook"]
+                            ),
                             "--runtime",
                             "copilot_cli",
                             "--event",

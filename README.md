@@ -13,14 +13,14 @@ to your **software development lifecycle (SDLC)**—with **378 ms median added
 latency for prompt checks in our controlled tests**. Start by monitoring, then
 enable blocking where supported.
 
-**0.2 Public Beta (`0.2.0b1`) — for controlled company pilots.**
+**0.2 Public Beta (`0.2.0b2`) — for controlled company pilots.**
 The beta adds optional non-streaming tool-proposal inspection and MCP
 pre-execution enforcement through LiteLLM and Agentgateway. It keeps monitoring
 defaults and explicit failure handling; it is not an enterprise-qualified control.
-See [beta scope, upgrade and validation](docs/public-beta-v020.md).
+See [beta scope, upgrade and validation](docs/public-beta-v020b2.md).
 
-Install [v0.2.0b1](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.2.0b1)
-using the walkthrough below or the [release artifacts](docs/public-beta-v020.md#install-or-upgrade).
+Install [v0.2.0b2](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.2.0b2)
+using the walkthrough below or the [release artifacts](docs/public-beta-v020b2.md#install-or-upgrade).
 Coverage varies by connector; use alongside other security controls. The quoted
 latency and [170-case results](docs/preview-final-v1-report.md) belong to the earlier
 text-policy workload, not a fresh beta/tool/MCP qualification.
@@ -38,8 +38,15 @@ policies. Allowing a request here cannot force a downstream model to answer.
   tool invocations before forwarding them to the MCP server. See
   [LiteLLM setup](docs/mcp-pre-execution.md) and
   [Agentgateway setup](docs/agentgateway-mcp.md).
+- **Native hook client packages:** precompiled
+  C clients for macOS Intel and Apple Silicon, Windows x64, and Linux x64, with
+  non-system dependencies bundled and Python retained as an option. The packaged
+  Intel macOS client measured **~19 ms median local hook overhead**, versus
+  **324–328 ms for legacy Python**, saving **306–310 ms per hook** in synthetic
+  loopback tests; network and Jev latency are additional.
+  [Platform installation and configuration](docs/native-hook-installation.md).
 
-Both features require explicit configuration. See the [full changelog](CHANGELOG.md)
+The tool-inspection and MCP features require explicit configuration. See the [full changelog](CHANGELOG.md)
 for the other beta changes.
 
 ### TODO: streaming support
@@ -68,7 +75,7 @@ Use Python 3.11–3.14 on Linux or macOS. The preview is available on GitHub, no
 This installs the released source and includes the connector templates:
 
 ```sh
-git clone --branch v0.2.0b1 --depth 1 https://github.com/humanwill-ai/humanwill-jev-policies.git
+git clone --branch v0.2.0b2 --depth 1 https://github.com/humanwill-ai/humanwill-jev-policies.git
 cd humanwill-jev-policies
 python3 -m venv .venv
 source .venv/bin/activate
@@ -188,6 +195,10 @@ containers or remote hosts need reachable addresses and a protected network/TLS 
 | **Agentgateway 1.5.0** | Copy [agentgateway.yaml](examples/connectors/agentgateway.yaml). Replace the synthetic upstream/model with your provider configuration and both token placeholders with the service principal's token. Preserve both webhooks, the request-profile expression and fail-closed settings. Start with `agentgateway -f /path/to/agentgateway.yaml`. [Full setup](docs/service-and-connectors.md#configure-the-gateways). | Route text, non-streaming chat requests through the configured listener (example port `3000`). The sample upstream on port `9000` is a placeholder, not a supplied model service. The beta adds a [tool relay](docs/structured-tool-calls.md) and [MCP execution binding](docs/agentgateway-mcp.md). |
 | **VS Code Local** | Merge the [Local hook template](examples/connectors/vscode-local.json) into your project's `.github/hooks/humanwill.json`. Replace the executable with the absolute path to `.venv/bin/humanwill-policies`; supply `HUMANWILL_LOCAL_TOKEN` to VS Code. Sign in to Copilot, enable `chat.useHooks`, trust the workspace and select the Local agent runtime. [Full setup](docs/service-and-connectors.md#install-and-remove-copilot-hooks). | Use Copilot in that workspace. Submitted prompts and proposed tool actions are checked; host timeouts and disabled hooks can bypass enforcement. |
 | **Copilot CLI** | Use the separate [CLI hook template](examples/connectors/copilot-cli.json), replace the executable path and supply `HUMANWILL_CLI_TOKEN` to the CLI. Configure folder trust. Do not combine the Local and CLI templates as if their contracts were interchangeable. [Full setup](docs/service-and-connectors.md#install-and-remove-copilot-hooks). | Start Copilot CLI in the configured project. Prompt checks are assessment-only; pre-tool checks can deny actions. Host timeouts and disabled hooks can bypass enforcement. |
+
+Precompiled C candidates are available for macOS Intel/Apple Silicon, Windows x64
+and Linux x64. See [native installation and configuration](docs/native-hook-installation.md)
+for platform setup, host validation and measured latency savings versus Python.
 
 See [tested host versions](docs/compatibility.md) before using other versions.
 For a copyable LiteLLM request and end-to-end verification, see
@@ -417,11 +428,9 @@ strategy; full results and limitations are in the linked report.
 
 ## Contribute to development
 
-An unreleased [lightweight hook client](docs/hook-client.md) separates the endpoint
+A [lightweight hook client](docs/hook-client.md) separates the endpoint
 installation from the policy service. It preserves the existing hook contracts;
 the released beta installation instructions above remain unchanged.
-A [native C counterpart](docs/native-hook-client.md) is also available for local
-evaluation, with comparative latency and contract checks.
 
 The commands below are for contributors changing the project, not for installing
 or using the policy service. Run them from a source checkout in a virtual environment.

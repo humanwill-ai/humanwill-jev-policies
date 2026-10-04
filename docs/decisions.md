@@ -1207,3 +1207,35 @@ retaining exact tested binary hashes and original CI archives. Python remains
 available. No main merge, public release/tag, hook installation, or signing
 purchase occurred. Signing and interactive host acceptance of these exact binaries
 remain separate next-release preparation, not claims made by these contract tests.
+
+## 2026-10-04 — Native host acceptance and installation guide
+
+Owner requested validation and a separate platform guide linked from the README.
+The unchanged packaged Intel macOS binary passed all 14 actual VS Code Local
+and six Copilot CLI scenarios using the installed published beta service and
+synthetic model/evaluator transports. Other desktops remain outside this local
+acceptance claim; previous native Actions evidence is retained without reruns.
+Private profile/session logs stay ignored; no private prompts or evaluator calls.
+No normal user hook configuration was changed.
+
+A fresh loopback benchmark after host work measured native median18.8–19.0ms
+versus legacy324–328ms, saving306–310ms per hook. See native-hook-validation.md
+for scope and corrected wheel-metadata provenance. native-hook-installation.md
+provides all four platform installs, Local/CLI contracts, tokens/TLS, security
+limits and Python rollback. No binary/archive changes, signing, release or push
+are part of this validation/documentation update.
+
+## 2026-10-04 — Prepare Public Beta v0.2.0b2 for final approval
+
+Owner explicitly deferred signing and requested all release preparation, with
+confirmation immediately before pushing/publishing. Prepare locally; do not push,
+create a remote tag/release or upload assets yet. Retain this morning's features.
+Service and standalone Python-client versions are 0.2.0b2. Native components keep
+their exact tested 0.1.0.dev2-native binaries, filenames, build IDs and hashes;
+the release manifest maps those components to v0.2.0b2 transparently.
+
+Unsigned status and untested desktop/OS combinations remain documented limitations,
+not claims of broader support. Native rebuild workflow becomes manual-only to
+avoid repeating already verified artifacts on a publication push. Core and pinned
+host workflows still run on main; after approval, wait for required checks before
+creating the public prerelease. No paid API calls or private-content uploads.

@@ -139,6 +139,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--binary", required=True, type=Path)
     parser.add_argument("--copilot-extension", required=True, type=Path)
+    parser.add_argument(
+        "--hook-binary", type=Path, help="Test this native client instead of Python"
+    )
+    parser.add_argument("--signed-in", action="store_true", help="Reuse a signed-in test profile")
     parser.add_argument("--state-dir", type=Path, help="Dedicated short test-profile path")
     args = parser.parse_args()
     root = (
@@ -185,10 +189,11 @@ def main():
                             "timeout": 15,
                             "command": shlex.join(
                                 [
-                                    sys.executable,
-                                    "-m",
-                                    "humanwill_policies",
-                                    "hook",
+                                    *(
+                                        [str(args.hook_binary.resolve())]
+                                        if args.hook_binary
+                                        else [sys.executable, "-m", "humanwill_policies", "hook"]
+                                    ),
                                     "--runtime",
                                     "copilot_local",
                                     "--event",
@@ -235,9 +240,11 @@ def main():
                     stderr=log,
                 )
                 try:
-                    input(
-                        "Complete Copilot sign-in in the separate test window, then press Enter: "
-                    )
+                    if not args.signed_in:
+                        input(
+                            "Complete Copilot sign-in in the separate test window, "
+                            "then press Enter: "
+                        )
                     run_cases(root, base, port, monitor_port, captures, monitor_captures)
                 finally:
                     process.terminate()

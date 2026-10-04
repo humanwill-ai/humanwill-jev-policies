@@ -17,7 +17,7 @@ Python policy service, policies, authentication and host-event contracts.
 
 | Target | Planned archive suffix | Executable | Current evidence |
 |---|---|---|---|
-| macOS Intel, x86_64 | `macos-x86_64.tar.gz` | `humanwill-hook-c` | Bundled native build: 108 contract + eight service checks pass |
+| macOS Intel, x86_64 | `macos-x86_64.tar.gz` | `humanwill-hook-c` | 108 contract + eight service checks pass; Intel additionally passes 14 Local + six CLI host scenarios |
 | macOS Apple Silicon, arm64 | `macos-arm64.tar.gz` | `humanwill-hook-c` | Bundled native build: 108 contract + eight service checks pass |
 | Windows Intel/AMD, x86_64 | `windows-x86_64.zip` | `humanwill-hook-c.exe` | Bundled native build: 108 contract checks pass on Windows Server 2025 |
 | Linux Intel/AMD, x86_64 | `linux-x86_64.tar.gz` | `humanwill-hook-c` | Static musl build: 108 contract + eight service checks pass on Alpine and Ubuntu |
@@ -79,9 +79,10 @@ that later using the existing accounting rules and synthetic content only.
 
 - Minimum macOS/Windows versions and Linux ABI/distribution baseline.
 - Available macOS Developer ID/notarization and Windows signing credentials.
-- Final public package version and interactive VS Code/CLI acceptance on these
-  exact binaries. The current build identifier is `0.1.0.dev2-native`; it is not
-  a new public release version.
+- Final public package version. The current build identifier is
+  `0.1.0.dev2-native`; it is not a new public release version.
+- Interactive VS Code/CLI acceptance on Apple Silicon, Windows and Linux. The
+  [exact Intel macOS binary now passes](native-hook-validation.md) both hosts.
 - Complete the final release review and obtain owner confirmation to publish.
 
 These details do not block local portability/build work. They must be settled

@@ -1,4 +1,4 @@
-# HumanWill hook client (unreleased)
+# HumanWill hook client (0.2 Public Beta)
 
 A small Python client for VS Code Local and Copilot CLI hooks. It sends only the
 supported prompt or tool fields to an authenticated HumanWill policy service and
@@ -22,7 +22,7 @@ archive to obtain `requirements.txt`, then install into a fresh environment:
 ```sh
 python3 -m venv .venv-hook
 .venv-hook/bin/python -m pip install -r /path/to/extracted/requirements.txt
-.venv-hook/bin/python -m pip install --no-deps /path/to/humanwill_hook_client-0.1.0.dev1-py3-none-any.whl
+.venv-hook/bin/python -m pip install --no-deps /path/to/humanwill_hook_client-0.2.0b2-py3-none-any.whl
 .venv-hook/bin/python -m pip check
 .venv-hook/bin/humanwill-hook --version
 ```

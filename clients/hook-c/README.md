@@ -1,5 +1,10 @@
 # Native C hook client (unreleased)
 
+For precompiled downloads, use the repository
+[platform installation guide](../../docs/native-hook-installation.md).
+[Fresh host acceptance and bundled-binary timings](../../docs/native-hook-validation.md)
+are separate from the earlier prototype measurements below.
+
 Selected for the next public release alongside the Python clients. Bundled
 candidates target macOS x86_64/arm64, Windows x86_64 and Linux x86_64. See
 `docs/native-bundled-builds.md` for the exact per-target verification record.

@@ -40,7 +40,7 @@ jobs:
         run: python -m build --no-isolation
       - name: Verify exact artifacts outside checkout
         run: |
-          python scripts/verify_artifacts.py --wheel dist/humanwill_policies-0.2.0b1-py3-none-any.whl --sdist dist/humanwill_policies-0.2.0b1.tar.gz --report artifacts/packaging/verification.json
+          python scripts/verify_artifacts.py --wheel dist/humanwill_policies-0.2.0b2-py3-none-any.whl --sdist dist/humanwill_policies-0.2.0b2.tar.gz --report artifacts/packaging/verification.json
       - name: Exercise service load and failure recovery offline
         run: python tests/hosts/service_operations.py
       - name: Build and exercise local container recipe

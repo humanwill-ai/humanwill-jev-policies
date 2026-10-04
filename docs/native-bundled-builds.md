@@ -75,10 +75,13 @@ Server image and does not replace a Windows desktop/Copilot acceptance run.
 No Developer ID notarization or Authenticode signing has been performed. The
 binaries are suitable for release review and target-runtime testing; downloading
 and launching them may invoke OS trust controls. Do not disable those controls
-as part of an installer. Actual signed-in VS Code/CLI acceptance on these exact
-binaries remains separate from protocol tests. No paid provider calls are made.
+as part of an installer. Fresh [actual VS Code Local and CLI acceptance](native-hook-validation.md) now
+passes on the exact Intel macOS archive binary (14 Local + six CLI scenarios).
+Other platforms retain their native contract/service evidence; desktop host
+acceptance there remains open. No paid provider calls were made.
 
-The earlier 20–21 ms measurement covers the development binary using system
-libcurl. Bundled builds have not yet been timed against live Jev; do not present
-an estimated overall median as a measurement of these four builds. The Python
-client remains an option and rollback path.
+The [fresh bundled-binary comparison](native-hook-validation.md#latency) measures
+18.8–19.0 ms local median on Intel macOS versus 324–328 ms legacy Python. This is
+synthetic loopback overhead, not live Jev end-to-end latency or other-platform
+timing. The Python client remains an option and rollback path. See the
+[platform installation guide](native-hook-installation.md).

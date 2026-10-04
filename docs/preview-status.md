@@ -1,6 +1,12 @@
 # Current release status — 2026-10-04
 
-**0.2 Public Beta (`0.2.0b1`) — controlled company pilots.**
+**0.2 Public Beta (`0.2.0b2`) — controlled company pilots.**
+Adds native packages and a standalone Python hook client. See
+[release scope and validation](public-beta-v020b2.md) and
+[release packages](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.2.0b2).
+Signing is explicitly deferred.
+
+**Previous beta: `0.2.0b1` — historical validation below.**
 All seven consolidated CI jobs passed; [exact artifacts and evidence](beta-final-ci-report.md) are retained.
 See [current scope, installation and validation](public-beta-v020.md) and
 [the owner-approved preparation plan](public-beta-v020-plan.md).
