@@ -1,8 +1,8 @@
 # Native C hook client (unreleased)
 
-Selected for the next public release alongside the Python clients. Planned native
-downloads: macOS x86_64/arm64, Windows x86_64 and Linux x86_64, subject to each
-target's build/runtime qualification. See `docs/native-release-plan.md`.
+Selected for the next public release alongside the Python clients. Bundled
+candidates target macOS x86_64/arm64, Windows x86_64 and Linux x86_64. See
+`docs/native-bundled-builds.md` for the exact per-target verification record.
 
 `humanwill-hook-c` is a native counterpart to the Python remote hook client. It
 sends the same supported prompt/tool fields to an existing authenticated HumanWill
@@ -30,13 +30,24 @@ macOS also needs Perl/Make for the static OpenSSL build. Windows uses Visual Stu
 `dependencies.json`; no unpinned system libcurl/OpenSSL is used in these builds.
 The older Makefile remains a development-only system-library build.
 
-Four platform artifacts are being prepared and tested; actual per-target evidence
-is recorded in `docs/native-bundled-builds.md`. They remain release candidates,
+Per-target build and test evidence is recorded in `docs/native-bundled-builds.md`.
+These archives remain release candidates,
 not replacements for published beta assets. macOS artifacts are not Developer ID
 signed/notarized, and Windows artifacts are not Authenticode signed. No paid
 signing account or certificate is required merely to compile/test them.
 
-Replace the existing `/path/humanwill-policies hook` or `/path/humanwill-hook`
+## Install a precompiled archive
+
+Extract the archive for your OS/CPU into a stable directory; no package manager
+or Python environment is needed for the executable. Preserve the accompanying
+license notices. Check the archive SHA-256 against its `.sha256` file, and check
+`SHA256SUMS` inside for the executable hash. The service URL and token are still
+required: this archive does not include the central Python policy service.
+
+Run `humanwill-hook-c --version` (`humanwill-hook-c.exe --version` on Windows)
+from the extracted directory. For a path containing spaces, quote the executable
+path in the host hook command; escape backslashes if editing JSON on Windows.
+Then replace the existing `/path/humanwill-policies hook` or `/path/humanwill-hook`
 command with an absolute path to `humanwill-hook-c`, preserving its arguments:
 
 ```sh
