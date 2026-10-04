@@ -49,3 +49,7 @@ strong to treat every abstention as a model error. Preserve the original27/100 r
 The next authorized work is a [focused context-only comparison](dogfood-context-v1-protocol.md).
 This does not approve new labels as human-reviewed, lower gates, change runtime,
 adopt compact targets or resume streaming.
+
+The [context comparison is now complete](dogfood-context-v1-report.md): one selected
+request passes both repetitions with added history; most disclosure uncertainty
+remains. No frozen labels or earlier rates were replaced.

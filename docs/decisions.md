@@ -1031,3 +1031,23 @@ Only content and explicit partial coverage differ;029 has a declared excerpt gap
 to retain the same policy batching under24KB. See docs/dogfood-context-v1-protocol.md.
 No runtime adoption, future-capture egress, streaming, Actions or push. Freeze source
 and one-use real-data receipt before live calls; preserve old1830 reservation.
+
+
+## Focused original-context comparison complete — 2026-10-04
+
+At frozen21fbdbb, six selected real requests +30 unchanged controls, two arms/two
+passes:144 assessments,173 calls. Added actual earlier native discussion only;
+original suffixes, questions, policies v3, facts, gates and batching unchanged.
+Workflow errors11/12→10/12; four provisional ordinary-work cases8/8→6/8, with041
+passing both extended repetitions. First bounded041 error was malformed, so do
+not attribute both transitions purely to semantic confidence.029 source confidence
+improves to.96 twice but disclosure still abstains.005/027 remain unscored preparation
+diagnostics, not v4 evidence. Most errors remain; no automatic adoption/tuning.
+Controls in both arms34/34 violations blocked,6/6unknown retained,17/20 legitimate
+allowed; unchanged inputs do not establish expanded-history attack resistance.
+Per-policy155/180 versus152/180; masked wrong disclosure blocks remain. Three
+malformed replies rejected.144 exact result/173 payload replays,72 paired-primary
+checks,15 focused tests and Ruff pass. See docs/dogfood-context-v1-report.md.
+Cost$.023565486 all settled;8827attempted8826settled,known$.760002524 plus unchanged
+old1830$.01reservation=accounted$.770002524,remaining$4.229997476. Receipt consumed.
+No runtime changes, future-capture egress, extra campaign, streaming, Actions or push.

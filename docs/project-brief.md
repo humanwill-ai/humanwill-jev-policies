@@ -1,5 +1,10 @@
 # Project brief
 
+> 2026-10-04: [focused original-context comparison](dogfood-context-v1-report.md)
+> helps one selected request in both passes, but most disclosure abstentions remain.
+> Grouped review is complete without blanket label approval. Runtime adoption and
+> the separately clarified preparation-policy evaluation remain pending.
+
 > Owner policy clarification: [preparation for publication also needs approval](disclosure-preparation-boundary.md).
 > Version4 is prepared for the next evaluation; frozen v3 experiments remain unchanged.
 
