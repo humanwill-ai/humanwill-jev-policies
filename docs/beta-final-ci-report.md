@@ -57,7 +57,7 @@ lock. Optional hosts and OS packages have separate scope; the container inventor
 retains its installed package/license data. Release prose is staged in
 `artifacts/beta-v020/RELEASE_NOTES.md`.
 
-## Publication boundary
+## Publication boundary at CI preparation
 
 The tested candidate is ready to present as **0.2 Public Beta for controlled
 company pilots**, with a GitHub prerelease flag and monitoring defaults. Independent
@@ -69,3 +69,16 @@ existing `v0.1.0a1` release and assets are unchanged. Final publication should u
 the manifest's tested source and exact assets; if publication changes package
 contents, build and verify the new artifacts and record that distinction. No merge,
 tag, release creation or asset publication is performed by this preparation step.
+
+## Final publication package
+
+The final publication package is rebuilt to include the architecture Markdown/PNG
+guide and beta installation documentation. It has new archive hashes; the original
+CI packages and container inventory remain preserved under their original hashes.
+The local release manifest identifies both the final source revision and the CI
+revision. Exact final wheel/source installation is rechecked on Python 3.11/3.14,
+and executable wheel contents must match the tested CI wheel. No new model calls
+or duplicate hosted workflow dispatches are needed for these documentation changes.
+
+See [privacy review](release-privacy-review.md). Final pushing, tagging and release
+publication require owner confirmation; preparation does not perform those actions.

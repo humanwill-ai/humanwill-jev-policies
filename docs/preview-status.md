@@ -1,12 +1,12 @@
 # Current release status — 2026-10-04
 
-**0.2 Public Beta candidate (`0.2.0b1`) is prepared and validated.**
+**0.2 Public Beta (`0.2.0b1`) — controlled company pilots.**
 All seven consolidated CI jobs passed; [exact artifacts and evidence](beta-final-ci-report.md) are retained.
 See [current scope, installation and validation](public-beta-v020.md) and
 [the owner-approved preparation plan](public-beta-v020-plan.md).
-The latest published release remains `v0.1.0a1`; no beta tag/assets are published yet.
+Release and packages: [v0.2.0b1](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.2.0b1).
 
-The candidate includes structured tool proposals, LiteLLM/Agentgateway MCP,
+The beta includes structured tool proposals, LiteLLM/Agentgateway MCP,
 active-conversation clarification and an optional preparation-policy authoring
 example. Streaming is deferred; compact/grouped policy-target experiments remain
 research-only. Independent quality qualification and pilot experience remain open.

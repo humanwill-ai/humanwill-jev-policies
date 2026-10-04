@@ -1,14 +1,19 @@
-# HumanWill Jev Policies 0.2 Public Beta candidate
+# HumanWill Jev Policies 0.2 Public Beta
 
 `0.2.0b1` is intended for controlled company pilots. It expands inspected coverage
 while retaining monitoring defaults, optional metadata and explicit failure
 handling. Beta describes the packaging/integration milestone; it does not certify
 policy accuracy, production reliability or enterprise readiness.
 
-**Not yet published.** The public release remains `v0.1.0a1`. Candidate validation is complete and release assets are staged under the
-[approved plan](public-beta-v020-plan.md). See the [final record](beta-final-ci-report.md).
+Release: [v0.2.0b1](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.2.0b1).
+See the [scope and preparation plan](public-beta-v020-plan.md) and
+[validation record](beta-final-ci-report.md).
 
-## What changes
+For numbered integration diagrams and explanations, see
+[Architecture and request flows](architecture.md), with PNG diagrams displayed
+directly in the Markdown guide.
+
+## What's new
 
 - Optional [structured function-call inspection](structured-tool-calls.md) checks
   complete non-streaming proposals before release to the client. Agentgateway uses
@@ -32,13 +37,18 @@ Compact/grouped policy targets and the latest preparation-policy comparison rema
 research evidence. They are not silently added to the runtime. The beta introduces
 no approval UI and no production identity, classification or destination resolver.
 
+### TODO: streaming support
+
+- [ ] Support streamed tool calls and policy-governed responses in a future
+  release, with tested buffering, cancellation and latency behavior. Streaming
+  remains unsupported in this beta. See the [streaming plan](next-action-plan.md#3-streaming-with-tested-buffering-and-blocking).
+
 ## Install or upgrade
 
-Use the wheel, source archive, locked requirements and hashes from the **same
-candidate**. Until publication these are build/CI artifacts, not a PyPI package or
-an available `v0.2.0b1` release download. Build from the reviewed candidate checkout
-with `python -m build --no-isolation` after installing `requirements-dev.txt`, or
-use its retained CI packages. Verify the source revision and artifact hashes.
+Download the wheel, source archive and `SHA256SUMS` from the **same
+[v0.2.0b1 release](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.2.0b1)**.
+Verify their hashes against the release manifest. No PyPI package or container
+image is published. Use Python 3.11–3.14 on Linux/macOS.
 
 Extract the source archive into a fresh directory, then:
 
@@ -64,7 +74,7 @@ with the pinned dependency versions in that connector guide. Update absolute hoo
 executable paths when changing environments. Existing text profiles need no opt-in
 changes; tool/MCP setup is explicit and must follow its separate guide.
 
-Rollback means stopping the candidate, restoring the previous environment and
+Rollback means stopping the beta, restoring the previous environment and
 matching policy/service/host configuration, and restarting. Remove new tool/MCP
 configuration before reverting to a package that does not implement it. Recheck
 readiness, an allowed request and a deliberate synthetic denial after either switch.
@@ -105,10 +115,11 @@ sample/tail and coverage limits are recorded alongside the results.
 
 All seven consolidated GitHub jobs passed at `90cf4629e8b9cd10bd1a9db6155204a6b8d1ec5f`.
 Exact packages, hashes, host evidence and the container inventory are retained;
-see the [final CI/release packet](beta-final-ci-report.md). Seven attachments and
-release prose are staged locally. Publication remains a separate final step.
+see the [final CI/release packet](beta-final-ci-report.md). Final packages include the architecture guide and publication documentation;
+runtime bytes are checked against the CI wheel. The container inventory retains
+its original tested image and source provenance.
 
-## Draft release description
+## Release overview
 
 HumanWill Jev Policies 0.2 Public Beta lets teams apply their own Markdown policies
 at AI gateway and MCP tool-execution boundaries. This release adds optional

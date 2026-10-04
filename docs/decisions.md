@@ -1117,3 +1117,13 @@ docs/evidence/beta-final-ci.json identify the tested source/hashes. New evidence
 documentation does not change that artifact source. No main merge, tag, beta release
 or deployment authorized/performed by this preparation step. Existing publicalpha
 unchanged. Independent qualification remains open; describe beta as controlledpilots.
+
+## 2026-10-04 — Final beta publication preparation
+
+Owner requested completion of local main-line preparation, with confirmation
+immediately before pushing/publishing the new public release. Prepare the final
+README/install instructions, Markdown architecture guide with PNGs, source/wheel
+packages and privacy review. Do not push, tag remotely or publish assets before
+that confirmation. Private real-workflow packets/raw exchanges stay ignored;
+public research summaries are distinct from raw prompts. Preserve original CI
+packages/container evidence and record rebuilt documentation-package hashes.

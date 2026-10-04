@@ -1,8 +1,11 @@
-# Install and run the published preview
+# Install and run the Public Beta
 
-For the new `0.2.0b1` Public Beta candidate, follow [beta installation and upgrade](public-beta-v020.md#install-or-upgrade). This guide retains the published `v0.1.0a1` commands until the beta is released.
-
-The public experimental developer preview is [v0.1.0a1](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.1.0a1). Download its wheel, source distribution and `SHA256SUMS` from that release; no PyPI package or container image is published. Use Python 3.11–3.14 on Linux/macOS. This guide needs only the source distribution, wheel and locked runtime requirements from the same release. Installation downloads dependencies; the demo and contract checks make no evaluator calls.
+The [v0.2.0b1 Public Beta](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.2.0b1)
+is for controlled company pilots. Download its wheel, source archive and
+`SHA256SUMS`; no PyPI package or container image is published. Use Python 3.11–3.14
+on Linux/macOS. Keep the wheel, archive and locked requirements from the same release.
+Installation downloads dependencies; the offline demo makes no evaluator calls.
+See [beta upgrade and rollback](public-beta-v020.md#install-or-upgrade).
 
 To connect your own policies to a gateway or coding agent, start with the
 [installation-to-integration walkthrough](../README.md#use-with-your-ai-tools).
@@ -10,17 +13,17 @@ The offline demo below is optional; it is not the live integration setup.
 
 ## Install an exact artifact
 
-Extract `humanwill_policies-0.1.0a1.tar.gz` into a new directory. From that extracted directory, install into a fresh environment, using the wheel supplied alongside the archive:
+Extract `humanwill_policies-0.2.0b1.tar.gz` into a new directory. From that extracted directory, install into a fresh environment, using the wheel supplied alongside the archive:
 
 ```sh
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt
-.venv/bin/python -m pip install --no-deps /absolute/path/humanwill_policies-0.1.0a1-py3-none-any.whl
+.venv/bin/python -m pip install --no-deps /absolute/path/humanwill_policies-0.2.0b1-py3-none-any.whl
 .venv/bin/python -m pip check
 .venv/bin/humanwill-policies --version
 ```
 
-Alternatively, replace the wheel path with the exact `.tar.gz` path. Pip builds that source archive with the pinned build backend. No editable checkout or HumanWill Benchmark installation is required. Check the artifact SHA-256 against the candidate evidence before installing; an adjacent untrusted checksum alone is not authentication.
+Alternatively, replace the wheel path with the exact `.tar.gz` path. Pip builds that source archive with the pinned build backend. No editable checkout or HumanWill Benchmark installation is required. Check the artifact SHA-256 against the release manifest before installing; an adjacent untrusted checksum alone is not authentication.
 
 ## Complete the offline demo
 
@@ -44,8 +47,8 @@ From an extracted source artifact with its wheel available:
 
 ```sh
 python3 scripts/verify_artifacts.py \
-  --wheel /absolute/path/humanwill_policies-0.1.0a1-py3-none-any.whl \
-  --sdist /absolute/path/humanwill_policies-0.1.0a1.tar.gz \
+  --wheel /absolute/path/humanwill_policies-0.2.0b1-py3-none-any.whl \
+  --sdist /absolute/path/humanwill_policies-0.2.0b1.tar.gz \
   --report artifacts/packaging/verification.json
 ```
 
@@ -56,9 +59,9 @@ The script creates temporary environments outside the checkout, installs each ex
 Docker is an optional local packaging route. Build from the source directory with the selected wheel in `dist/`:
 
 ```sh
-docker build --build-arg WHEEL=dist/humanwill_policies-0.1.0a1-py3-none-any.whl \
-  -t humanwill-policies:0.1.0a1 .
-docker run --rm --network none humanwill-policies:0.1.0a1 --version
+docker build --build-arg WHEEL=dist/humanwill_policies-0.2.0b1-py3-none-any.whl \
+  -t humanwill-policies:0.2.0b1 .
+docker run --rm --network none humanwill-policies:0.2.0b1 --version
 ```
 
 The recipe installs the selected wheel and locked dependencies, runs as numeric UID/GID 65532, and includes no policy folder or credentials. Its context is allowlisted to the recipe, runtime lock and wheels. The default Python image is a mutable development tag; for release evidence set `--build-arg PYTHON_IMAGE=python@sha256:YOUR_APPROVED_DIGEST` and record the image ID/base digest. Do not treat a recipe as a published or verified image.
@@ -71,7 +74,7 @@ docker run --rm --read-only --cap-drop ALL --security-opt no-new-privileges \
   --mount type=bind,src=/absolute/policies,dst=/policies,readonly \
   --mount type=bind,src=/absolute/configuration,dst=/configuration,readonly \
   --env OPENROUTER_API_KEY --env HUMANWILL_LOCAL_TOKEN \
-  humanwill-policies:0.1.0a1 serve /policies \
+  humanwill-policies:0.2.0b1 serve /policies \
   --config /configuration/policies.yaml --service-config /configuration/service.yaml \
   --host 0.0.0.0 --port 8088
 ```
@@ -83,4 +86,4 @@ To preview/evaluate the new full-policy template, use `demo/config-policy-text.y
 For the optional stage-aware profile use `demo/config-stage-aware-followup.yaml`.
 It retains monitoring and metadata-off defaults. Content-only rules keep their
 semantic question; scoped-predicate follow-ups require trusted metadata bindings.
-See [profile limits](bounded-policy-followup.md) and [candidate evidence](preview-status.md).
+See [profile limits](bounded-policy-followup.md) and [release manifest](preview-status.md).

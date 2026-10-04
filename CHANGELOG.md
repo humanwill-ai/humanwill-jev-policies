@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0b1 — Public Beta candidate (not yet published)
+## 0.2.0b1 — 2026-10-04, Public Beta
 
 - Config/5 model-request question clarification for abandoned versus active
   conversation instructions, preserving full history and content restrictions.
@@ -8,7 +8,7 @@
   found fewer false-violation decisions, but most corrected conversations still
   abstain; this remains a partial development improvement.
 
-- Optional non-streaming function-call inspection through LiteLLM and an
+- Optional non-streaming structured tool-call inspection through LiteLLM and an
   Agentgateway fixed-backend relay; real-host synthetic enforcement tests pass.
 - LiteLLM MCP pre-execution checks with full arguments, bounded authenticated
   service calls and explicit monitoring/error behavior. Actual MCP server tests
@@ -19,6 +19,8 @@
 - Versioned disclosure-preparation policy example, including approved-operation
   exceptions and explicit missing-authorization handling; no approval UI or
   production authorization resolver.
+- Numbered architecture diagrams and integration flows, rendered as PNGs in the
+  Markdown guide; updated beta installation and upgrade instructions.
 - Compact context/target experiments remain research-only; streaming is deferred.
 - Published v0.1.0a1 assets, existing text profile payload contracts, evaluation
   thresholds and follow-up selection unchanged.

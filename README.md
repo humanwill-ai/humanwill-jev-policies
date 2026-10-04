@@ -13,16 +13,14 @@ to your **software development lifecycle (SDLC)**—with **378 ms median added
 latency for prompt checks in our controlled tests**. Start by monitoring, then
 enable blocking where supported.
 
-**0.2 Public Beta candidate (`0.2.0b1`) is ready for release review.**
-The beta candidate adds optional non-streaming tool-proposal inspection and MCP
+**0.2 Public Beta (`0.2.0b1`) — for controlled company pilots.**
+The beta adds optional non-streaming tool-proposal inspection and MCP
 pre-execution enforcement through LiteLLM and Agentgateway. It keeps monitoring
 defaults and explicit failure handling; it is not an enterprise-qualified control.
 See [beta scope, upgrade and validation](docs/public-beta-v020.md).
 
-The latest published release remains
-[v0.1.0a1](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.1.0a1),
-an experimental developer preview. The installation below selects that release.
-For the beta candidate, use its [artifact installation instructions](docs/public-beta-v020.md#install-or-upgrade).
+Install [v0.2.0b1](https://github.com/humanwill-ai/humanwill-jev-policies/releases/tag/v0.2.0b1)
+using the walkthrough below or the [release artifacts](docs/public-beta-v020.md#install-or-upgrade).
 Coverage varies by connector; use alongside other security controls. The quoted
 latency and [170-case results](docs/preview-final-v1-report.md) belong to the earlier
 text-policy workload, not a fresh beta/tool/MCP qualification.
@@ -31,6 +29,26 @@ This is a companion to [HumanWill Benchmark](https://github.com/humanwill-ai/hum
 the benchmark studies model behavior; this project lets companies supply their own
 policies. Allowing a request here cannot force a downstream model to answer.
 
+## What's new in 0.2 Public Beta
+
+- **Non-streaming structured tool-call inspection:** check proposed tool names
+  and arguments before returning them to the agent, through
+  [LiteLLM or the Agentgateway relay](docs/structured-tool-calls.md).
+- **MCP pre-execution enforcement for LiteLLM and Agentgateway:** check actual
+  tool invocations before forwarding them to the MCP server. See
+  [LiteLLM setup](docs/mcp-pre-execution.md) and
+  [Agentgateway setup](docs/agentgateway-mcp.md).
+
+Both features require explicit configuration. See the [full changelog](CHANGELOG.md)
+for the other beta changes.
+
+### TODO: streaming support
+
+- [ ] Add streaming support in a future release, with inspection of streamed
+  tool calls and policy-governed responses before releasing restricted content.
+  Validate buffering, cancellation and latency trade-offs. Streaming is **not
+  supported in this beta**; see the [planned work](docs/next-action-plan.md#3-streaming-with-tested-buffering-and-blocking).
+
 ## Use with your AI tools
 
 Run HumanWill as a policy service next to your gateway or coding agent. Your host
@@ -38,13 +56,19 @@ sends the covered content to the service; the service evaluates your policies wi
 Jev and returns a decision. The host applies that decision where enforcement is
 supported. Jev is the evaluator, not a replacement for your coding model.
 
+See **[Architecture and request flows](docs/architecture.md)** for numbered diagrams
+of LiteLLM, Agentgateway and Copilot, including model requests/responses, MCP
+execution and the policy checks at each boundary.
+The guide displays PNG diagrams directly on GitHub, with editable Mermaid source
+in expandable sections.
+
 ### 1. Install the released version
 
 Use Python 3.11–3.14 on Linux or macOS. The preview is available on GitHub, not PyPI.
 This installs the released source and includes the connector templates:
 
 ```sh
-git clone --branch v0.1.0a1 --depth 1 https://github.com/humanwill-ai/humanwill-jev-policies.git
+git clone --branch v0.2.0b1 --depth 1 https://github.com/humanwill-ai/humanwill-jev-policies.git
 cd humanwill-jev-policies
 python3 -m venv .venv
 source .venv/bin/activate
