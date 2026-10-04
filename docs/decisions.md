@@ -1100,3 +1100,11 @@ no duplicate dispatches or billing changes. Repository is public; standard runne
 minutes are free, storage quota remains separate. Existing $5 live budget and
 unknown ledger entry1830 reservation remain unchanged. New beta-tools-v1 protocol
 uses synthetic inputs only and a $0.15 sub-ceiling; stop on new unknown charges.
+
+Beta live tool/MCP campaign completed at81f0629:48 guarded +48 baseline observations,
+all expected;24 real Jev allows/24blocks, no abstentions, blocked MCP calls unexecuted.
+One synthetic tool_action-only policy; not whole-workflow accuracy. Cost$0.001688400,
+known total$0.794541350 plus$0.01 historical reserve, accounted$0.804541350,
+remaining$4.195458650;9121attempted/9120settled/only1830unknown. See beta report.
+Local artifact installs3.11/3.14,328tests(Ruff;6optionalgrpcskips),same-config
+upgrade/rollback and fresh14-scenario VS Code Local all pass. Consolidated CI next.

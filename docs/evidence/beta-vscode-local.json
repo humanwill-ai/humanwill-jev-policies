@@ -1,0 +1,154 @@
+{
+  "date": "2026-10-04",
+  "runtime_source": "81f0629282ba64a951ace59fcb305363dde38e98",
+  "package_version": "0.2.0b1",
+  "wheel_sha256": "856c9889089ced75aabb5264717859b0b1ad5a84c2c027e40828911da1575e11",
+  "vscode_version": "1.139.1",
+  "vscode_commit": "04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1",
+  "copilot_chat_version": "0.67.0",
+  "platform": "macOS x86_64",
+  "scope": "Actual Local runtime, installed wheel, copied harness outside checkout, isolated signed-in test profile. Synthetic model/evaluator; no provider calls.",
+  "scenarios": [
+    {
+      "case": "allow",
+      "marker": true,
+      "model_calls": 2,
+      "agent": "github.copilot.editsAgent",
+      "stages": [
+        "prompt",
+        "tool_action"
+      ],
+      "passed": true
+    },
+    {
+      "case": "prompt-deny",
+      "marker": false,
+      "model_calls": 0,
+      "agent": "github.copilot.editsAgent",
+      "stages": [
+        "prompt"
+      ],
+      "passed": true
+    },
+    {
+      "case": "tool-deny",
+      "marker": false,
+      "model_calls": 2,
+      "agent": "github.copilot.editsAgent",
+      "stages": [
+        "prompt",
+        "tool_action"
+      ],
+      "passed": true
+    },
+    {
+      "case": "provider-error",
+      "marker": false,
+      "model_calls": 2,
+      "agent": "github.copilot.editsAgent",
+      "stages": [
+        "prompt",
+        "tool_action"
+      ],
+      "passed": true
+    },
+    {
+      "case": "provider-timeout",
+      "marker": false,
+      "model_calls": 2,
+      "agent": "github.copilot.editsAgent",
+      "stages": [
+        "prompt",
+        "tool_action"
+      ],
+      "passed": true
+    },
+    {
+      "case": "service-down-tool",
+      "marker": false,
+      "model_calls": 2,
+      "agent": "github.copilot.editsAgent",
+      "stages": [
+        "prompt"
+      ],
+      "passed": true
+    },
+    {
+      "case": "service-down-prompt",
+      "marker": false,
+      "model_calls": 0,
+      "agent": "github.copilot.editsAgent",
+      "stages": [],
+      "passed": true
+    },
+    {
+      "case": "malformed-tool",
+      "marker": false,
+      "model_calls": 2,
+      "agent": "github.copilot.editsAgent",
+      "stages": [
+        "prompt"
+      ],
+      "passed": true
+    },
+    {
+      "case": "malformed-prompt",
+      "marker": false,
+      "model_calls": 0,
+      "agent": "github.copilot.editsAgent",
+      "stages": [],
+      "passed": true
+    },
+    {
+      "case": "monitor",
+      "marker": true,
+      "model_calls": 2,
+      "agent": "github.copilot.editsAgent",
+      "stages": [
+        "prompt",
+        "tool_action"
+      ],
+      "passed": true
+    },
+    {
+      "case": "host-timeout-tool",
+      "marker": true,
+      "model_calls": 2,
+      "agent": "github.copilot.editsAgent",
+      "stages": [
+        "prompt"
+      ],
+      "passed": true
+    },
+    {
+      "case": "host-timeout-prompt",
+      "marker": true,
+      "model_calls": 2,
+      "agent": "github.copilot.editsAgent",
+      "stages": [
+        "tool_action"
+      ],
+      "passed": true
+    },
+    {
+      "case": "disabled",
+      "marker": true,
+      "model_calls": 2,
+      "agent": "github.copilot.editsAgent",
+      "stages": [],
+      "passed": true
+    },
+    {
+      "case": "restored-deny",
+      "marker": false,
+      "model_calls": 2,
+      "agent": "github.copilot.editsAgent",
+      "stages": [
+        "prompt",
+        "tool_action"
+      ],
+      "passed": true
+    }
+  ],
+  "initial_attempt": "Wrong native executable basename; editor not launched. Corrected Code executable and reran all scenarios."
+}

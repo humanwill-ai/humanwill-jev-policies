@@ -1,0 +1,102 @@
+{
+  "source_commit": "81f0629282ba64a951ace59fcb305363dde38e98",
+  "date": "2026-10-04",
+  "litellm": "1.102.1",
+  "model": "typesafe/jev-1.13",
+  "platform": "macOS x86_64, Python 3.11 service and LiteLLM",
+  "policy_scope": "One synthetic content-only upload policy, tool_action stage only. Prompt/response normalization runs, with no applicable policies at those stages.",
+  "physical_calls": 48,
+  "guarded_observations": 48,
+  "allowed": 24,
+  "blocked": 24,
+  "abstentions": 0,
+  "unexpected_allows": 0,
+  "unexpected_blocks": 0,
+  "cost_usd": 0.0016884,
+  "cost_accounted_total_usd": 0.80454135,
+  "historical_unknown_reserve_usd": 0.01,
+  "known_total_usd": 0.79454135,
+  "timings": {
+    "proposal/baseline/allow": {
+      "n": 12,
+      "p50_ms": 12.009269092231989,
+      "p95_ms": 991.5091707371175,
+      "p99_ms": 991.5091707371175
+    },
+    "proposal/baseline/block": {
+      "n": 12,
+      "p50_ms": 12.082919012755156,
+      "p95_ms": 17.801825888454914,
+      "p99_ms": 17.801825888454914
+    },
+    "proposal/guarded/allow": {
+      "n": 12,
+      "p50_ms": 449.79149801656604,
+      "p95_ms": 1559.9938109517097,
+      "p99_ms": 1559.9938109517097
+    },
+    "proposal/guarded/block": {
+      "n": 12,
+      "p50_ms": 457.92951295152307,
+      "p95_ms": 475.8189213462174,
+      "p99_ms": 475.8189213462174
+    },
+    "mcp/baseline/allow": {
+      "n": 12,
+      "p50_ms": 32.195616979151964,
+      "p95_ms": 35.566436126828194,
+      "p99_ms": 35.566436126828194
+    },
+    "mcp/baseline/block": {
+      "n": 12,
+      "p50_ms": 31.821561977267265,
+      "p95_ms": 37.074843887239695,
+      "p99_ms": 37.074843887239695
+    },
+    "mcp/guarded/allow": {
+      "n": 12,
+      "p50_ms": 506.89977314323187,
+      "p95_ms": 578.356709331274,
+      "p99_ms": 578.356709331274
+    },
+    "mcp/guarded/block": {
+      "n": 12,
+      "p50_ms": 477.43315482512116,
+      "p95_ms": 506.30910508334637,
+      "p99_ms": 506.30910508334637
+    }
+  },
+  "paired_added": {
+    "proposal/allow": {
+      "n": 12,
+      "median_ms": 437.5357236713171,
+      "p95_ms": 850.5504690110683
+    },
+    "proposal/block": {
+      "n": 12,
+      "median_ms": 446.0830735042691,
+      "p95_ms": 463.73600233346224
+    },
+    "mcp/allow": {
+      "n": 12,
+      "median_ms": 473.14659552648664,
+      "p95_ms": 545.2821012586355
+    },
+    "mcp/block": {
+      "n": 12,
+      "median_ms": 445.72969852015376,
+      "p95_ms": 474.4875431060791
+    }
+  },
+  "artifact_sha256": {
+    "report.json": "5e8db9bcdbce07dd9df2e18605c459c0a72a4d80f2c23ddc2121fd1c34f9a41a",
+    "exchanges.json": "784927372c80c178ad7a3260ce81cb9579f262b8a3867ea27b16bc0b52a1b464"
+  },
+  "limitations": [
+    "12 repeats per label/path/arm; simple repeated examples, not independent accuracy evidence.",
+    "Arms run sequentially; paired by input/index, not randomized contemporaneous production traffic.",
+    "First request retained; p95 of 12 observations is the maximum with the recorded percentile method.",
+    "Synthetic model generation and local MCP side effect; no external upload or real coding-model generation.",
+    "No Agentgateway live-Jev latency claim; Linux actual host checks use synthetic judgments."
+  ]
+}

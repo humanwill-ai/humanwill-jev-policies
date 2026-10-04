@@ -91,9 +91,20 @@ statistical acceptance gates remain open; pilot feedback is needed.
 
 ## Validation
 
-Preparation in progress. Exact wheel/source installation, upgrade/rollback, local
-host evidence, one consolidated core/host Actions pair, retained image inventory
-and synthetic live tool/MCP latency will be recorded here before publication.
+Local preparation passed: 328 offline tests (six optional gRPC skips), Ruff,
+Python 3.11/3.14 wheel/source installation outside checkout, and upgrade/rollback
+from the released wheel with unchanged config/5 demo data. A fresh actual VS Code
+Local run passed all 14 scenarios, including observed timeout/disabled-hook bypass.
+See [local artifact evidence](evidence/beta-local-verification.json) and
+[VS Code evidence](evidence/beta-vscode-local.json).
+
+[Live tool/MCP measurement](beta-tools-live-v1-report.md): 48/48 guarded observations
+matched expected outcomes, including no execution of denied MCP calls. Paired added
+median delay was 438–473 ms for this one-policy, serial synthetic workload. Small
+sample/tail and coverage limits are recorded alongside the results.
+
+The consolidated core/host GitHub checks and final image inventory are pending.
+Exact retained CI packages and source revision will be recorded before publication.
 
 ## Draft release description
 

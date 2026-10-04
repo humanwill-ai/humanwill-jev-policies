@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-04",
+  "package_version": "0.2.0b1",
+  "offline_tests": {
+    "total": 328,
+    "skipped_optional_grpc": 6,
+    "result": "pass"
+  },
+  "ruff": "pass",
+  "artifact_checks": {
+    "314": {
+      "python": "3.14.0 (main, Oct  7 2025, 09:34:52) [Clang 17.0.0 (clang-1700.0.13.3)]",
+      "artifacts": {
+        "humanwill_policies-0.2.0b1-py3-none-any.whl": "09af4b3448f5f50470d11e810c149214fbfedf6c0c38511171d5a61516b4a9e9",
+        "humanwill_policies-0.2.0b1.tar.gz": "c0a980ea2f07c06ddce2b486113c33439d6ff313e5c688fedafa20d0b67663b8"
+      },
+      "checks": {
+        "wheel": {
+          "installed_version": "0.2.0b1",
+          "offline_demo": "pass",
+          "service_and_hook_contracts": "pass",
+          "stage_aware_profile_and_connectors": "pass",
+          "service_process": {
+            "startup": "pass",
+            "authentication": "pass",
+            "external_egress_disabled": "pass",
+            "invalid_configuration_rejected": "pass",
+            "restart_previous_configuration": "pass"
+          }
+        },
+        "sdist": {
+          "installed_version": "0.2.0b1",
+          "offline_demo": "pass",
+          "service_and_hook_contracts": "pass",
+          "stage_aware_profile_and_connectors": "pass",
+          "service_process": {
+            "startup": "pass",
+            "authentication": "pass",
+            "external_egress_disabled": "pass",
+            "invalid_configuration_rejected": "pass",
+            "restart_previous_configuration": "pass"
+          }
+        }
+      }
+    },
+    "311": {
+      "python": "3.11.5 (main, Aug 24 2023, 15:18:16) [Clang 14.0.3 (clang-1403.0.22.14.1)]",
+      "artifacts": {
+        "humanwill_policies-0.2.0b1-py3-none-any.whl": "09af4b3448f5f50470d11e810c149214fbfedf6c0c38511171d5a61516b4a9e9",
+        "humanwill_policies-0.2.0b1.tar.gz": "c0a980ea2f07c06ddce2b486113c33439d6ff313e5c688fedafa20d0b67663b8"
+      },
+      "checks": {
+        "wheel": {
+          "installed_version": "0.2.0b1",
+          "offline_demo": "pass",
+          "service_and_hook_contracts": "pass",
+          "stage_aware_profile_and_connectors": "pass",
+          "service_process": {
+            "startup": "pass",
+            "authentication": "pass",
+            "external_egress_disabled": "pass",
+            "invalid_configuration_rejected": "pass",
+            "restart_previous_configuration": "pass"
+          }
+        },
+        "sdist": {
+          "installed_version": "0.2.0b1",
+          "offline_demo": "pass",
+          "service_and_hook_contracts": "pass",
+          "stage_aware_profile_and_connectors": "pass",
+          "service_process": {
+            "startup": "pass",
+            "authentication": "pass",
+            "external_egress_disabled": "pass",
+            "invalid_configuration_rejected": "pass",
+            "restart_previous_configuration": "pass"
+          }
+        }
+      }
+    }
+  },
+  "upgrade": {
+    "sequence": [
+      "0.1.0a1",
+      "0.2.0b1",
+      "0.1.0a1"
+    ],
+    "same_config_and_demo": "config/5 validates and evaluates allow after each installation; pip check passes",
+    "report_sha256": "fe956df87ac0dfa335ce4166c2266e8807d307868949c26fc5b9671c300b35b3"
+  },
+  "public_review": {
+    "tracked_snapshot_findings": 3,
+    "unpublished_history_findings": 3,
+    "disposition": "All three are the verified SHA256 of synthetic policies/secret.md in frozen protocols, not credentials. No credential findings. Broad working-directory scan includes ignored local dependencies/artifacts and is not a publication manifest.",
+    "private_artifact_paths_in_source_archive": 0
+  }
+}
