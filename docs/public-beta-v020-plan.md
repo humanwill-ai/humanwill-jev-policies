@@ -42,8 +42,8 @@ never Actions secrets or public artifacts. Direct TypeSafe live smoke remains op
 The repository is public and the existing workflows use standard hosted runners.
 GitHub documents these runner minutes as free for public repositories
 ([billing reference](https://docs.github.com/en/billing/concepts/product-billing/github-actions),
-checked2026-10-04). The old billing API returned410 and requires an unavailable
+checked 2026-10-04). The old billing API returned 410 and requires an unavailable
 admin scope; no credential escalation or billing changes were made. Keep artifact
 retention bounded and download the exact evidence. No paid runners/overages authorized.
 
-Status: preparation underway; no release/tag published or deployment performed.
+Status: all four preparation steps complete; see [final evidence](beta-final-ci-report.md). Seven jobs passed, exact assets/release notes staged. No release/tag published or deployment performed.

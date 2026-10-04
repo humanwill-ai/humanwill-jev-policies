@@ -5,8 +5,8 @@ while retaining monitoring defaults, optional metadata and explicit failure
 handling. Beta describes the packaging/integration milestone; it does not certify
 policy accuracy, production reliability or enterprise readiness.
 
-**Not yet published.** The public release remains `v0.1.0a1`. Candidate validation
-and release assets are being prepared under the [approved plan](public-beta-v020-plan.md).
+**Not yet published.** The public release remains `v0.1.0a1`. Candidate validation is complete and release assets are staged under the
+[approved plan](public-beta-v020-plan.md). See the [final record](beta-final-ci-report.md).
 
 ## What changes
 
@@ -103,8 +103,10 @@ matched expected outcomes, including no execution of denied MCP calls. Paired ad
 median delay was 438–473 ms for this one-policy, serial synthetic workload. Small
 sample/tail and coverage limits are recorded alongside the results.
 
-The consolidated core/host GitHub checks and final image inventory are pending.
-Exact retained CI packages and source revision will be recorded before publication.
+All seven consolidated GitHub jobs passed at `90cf4629e8b9cd10bd1a9db6155204a6b8d1ec5f`.
+Exact packages, hashes, host evidence and the container inventory are retained;
+see the [final CI/release packet](beta-final-ci-report.md). Seven attachments and
+release prose are staged locally. Publication remains a separate final step.
 
 ## Draft release description
 

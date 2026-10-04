@@ -1,6 +1,7 @@
 # Current release status — 2026-10-04
 
-**0.2 Public Beta candidate (`0.2.0b1`) is being prepared.**
+**0.2 Public Beta candidate (`0.2.0b1`) is prepared and validated.**
+All seven consolidated CI jobs passed; [exact artifacts and evidence](beta-final-ci-report.md) are retained.
 See [current scope, installation and validation](public-beta-v020.md) and
 [the owner-approved preparation plan](public-beta-v020-plan.md).
 The latest published release remains `v0.1.0a1`; no beta tag/assets are published yet.

@@ -458,3 +458,13 @@ policies-sources-v4 bundle. Remaining requests and labels are unchanged. Histori
 datasets, failures and measured rates remain intact; removing known failures is
 a scope/selection change, not improved accuracy. The review UI hides them from
 active review and retains them under Removed. No tests or API calls were run.
+
+
+## 0.2 Public Beta candidate — preparation complete, 2026-10-04
+
+The owner-approved beta preparation passed all seven consolidated CI jobs at
+90cf4629, fresh VS Code Local acceptance, wheel/source install and upgrade/rollback
+checks, plus the small synthetic live Jev tool/MCP measurement. See
+[final evidence and concrete release packet](beta-final-ci-report.md). Exact assets
+and release prose are staged; publication/tag/merge remains a separate final step.
+Independent quality qualification and pilot experience remain open.

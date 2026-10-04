@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-04",
+  "candidate_version": "0.2.0b1",
+  "source_commit": "90cf4629e8b9cd10bd1a9db6155204a6b8d1ec5f",
+  "core": {
+    "url": "https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/37184031519",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "test (ubuntu-24.04, 3.14)",
+        "conclusion": "success"
+      },
+      {
+        "name": "test (macos-15, 3.14)",
+        "conclusion": "success"
+      },
+      {
+        "name": "test (macos-15, 3.11)",
+        "conclusion": "success"
+      },
+      {
+        "name": "test (ubuntu-24.04, 3.11)",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "hosts": {
+    "url": "https://github.com/humanwill-ai/humanwill-jev-policies/actions/runs/37184032861",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "copilot-cli",
+        "conclusion": "success"
+      },
+      {
+        "name": "litellm",
+        "conclusion": "success"
+      },
+      {
+        "name": "agentgateway",
+        "conclusion": "success"
+      }
+    ],
+    "scenarios": {
+      "agentgateway-tool-calls-report.json": 26,
+      "agentgateway.json": 22,
+      "agentgateway-mcp-report.json": 22,
+      "copilot-cli.json": 6,
+      "litellm.json": 22,
+      "litellm-mcp-report.json": 18,
+      "litellm-tool-calls-report.json": 26
+    },
+    "additional_installed_tests": {
+      "litellm_mcp_callbacks": 4,
+      "agentgateway_grpc_wire": 6
+    }
+  },
+  "container": {
+    "base_image": "python@sha256:2333bd330d12de02514770b3585cad313644316047cdee24a7acfdece6de6efb",
+    "image_id": "sha256:06d10a72a50832cc18e1fe591cfe0f78bdd372a901aa81cc51930cb35427d71e",
+    "inventory_sha256": "65358aedde4d014045c2ab08a5a0ec40d9e7d1ad10b7f3a0008ba0cc67a82a45"
+  },
+  "runtime_dependency_audit": "pip-audit: no known vulnerabilities found in pinned requirements at run time; not an OS/optional-host vulnerability guarantee",
+  "artifact_sha256": {
+    "runtime-sbom.cdx.json": "5494f02d09f422d3959f96e7a39b47011a028c681fc774b0342002f008566509",
+    "container-inventory.json": "65358aedde4d014045c2ab08a5a0ec40d9e7d1ad10b7f3a0008ba0cc67a82a45",
+    "humanwill_policies-0.2.0b1-py3-none-any.whl": "d6f887d1cefea57309d0f5bf70b69dc43032fda07f1310b8dbac5dbace45eb01",
+    "humanwill_policies-0.2.0b1.tar.gz": "9e5e59c7b535a767a2082b47ae38b19c6a28a60c96cb7ba7fba01a3c91d14f99",
+    "verification.json": "d57b6541ad6460452b01713341de30ae71b6c71ee0213343a624fc5ebf3024f5"
+  },
+  "local_wheel_equivalence": "CI wheel contents equal locally verified candidate wheel. Live Jev and VS Code wheel differ only in METADATA README description and RECORD; package runtime bytes match.",
+  "publication_review": {
+    "ci_logs_secret_findings": 0,
+    "host_artifacts_secret_findings": 0,
+    "source_archive_findings": 3,
+    "source_disposition": "Verified SHA256 hashes of the synthetic secret policy in frozen protocols; not secrets. No private/artifacts paths in archive.",
+    "versioned_runtime_sbom": "New 0.2.0b1 asset regenerated from unchanged 16-package pinned lock; earlier docs/evidence inventory in the source archive remains historical."
+  },
+  "provider_calls_in_ci": 0,
+  "duplicate_dispatches": 0,
+  "release_published": false
+}

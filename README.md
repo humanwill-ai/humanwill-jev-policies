@@ -13,7 +13,7 @@ to your **software development lifecycle (SDLC)**—with **378 ms median added
 latency for prompt checks in our controlled tests**. Start by monitoring, then
 enable blocking where supported.
 
-**Preparing 0.2 Public Beta (`0.2.0b1`) for controlled company pilots.**
+**0.2 Public Beta candidate (`0.2.0b1`) is ready for release review.**
 The beta candidate adds optional non-streaming tool-proposal inspection and MCP
 pre-execution enforcement through LiteLLM and Agentgateway. It keeps monitoring
 defaults and explicit failure handling; it is not an enterprise-qualified control.

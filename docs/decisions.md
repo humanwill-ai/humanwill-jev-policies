@@ -1108,3 +1108,12 @@ known total$0.794541350 plus$0.01 historical reserve, accounted$0.804541350,
 remaining$4.195458650;9121attempted/9120settled/only1830unknown. See beta report.
 Local artifact installs3.11/3.14,328tests(Ruff;6optionalgrpcskips),same-config
 upgrade/rollback and fresh14-scenario VS Code Local all pass. Consolidated CI next.
+
+Beta preparation complete: core37184031519 and hosts37184032861 both passed, all7jobs
+at90cf4629 on first dispatch, no duplicate runs/provider calls in CI. Exact packages,
+logs, host wheels and container inventory retained under artifacts/beta-v020.
+Seven attachments plus release prose are staged; docs/beta-final-ci-report.md and
+docs/evidence/beta-final-ci.json identify the tested source/hashes. New evidence-only
+documentation does not change that artifact source. No main merge, tag, beta release
+or deployment authorized/performed by this preparation step. Existing publicalpha
+unchanged. Independent qualification remains open; describe beta as controlledpilots.
