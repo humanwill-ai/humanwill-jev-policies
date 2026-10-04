@@ -228,3 +228,17 @@ checks,15 focused tests and Ruff pass. See docs/dogfood-context-v1-report.md.
 Cost$.023565486 all settled;8827attempted8826settled,known$.760002524 plus unchanged
 old1830$.01reservation=accounted$.770002524,remaining$4.229997476. Receipt consumed.
 No runtime changes, future-capture egress, extra campaign, streaming, Actions or push.
+
+
+## Preparation-policy comparison authorized — 2026-10-04
+
+Owner requested validating the approved v4 preparation rule separately. Frozen
+v3/v4 comparison uses8 prior real requests,12 new synthetic boundary cases and30
+existing safety controls, two passes/arm=200 assessments,400-call ceiling,$0.10
+additional within original$5. Only SW text/version changes in model payload;
+context, questions, facts, gates, profiles and policy batching unchanged. New
+synthetic labels are assistant-provisional; historical expected outcomes recorded
+separately, not replacing old labels. See docs/preparation-policy-v1-protocol.md.
+200 scripted preflight assessments,17 focused tests/Ruff pass; maxpayload23387bytes.
+Freeze source/one-use receipt before live; carry old1830 reservation unchanged.
+No compact-runtime adoption, default-policy replacement, streaming, Actions or push.
