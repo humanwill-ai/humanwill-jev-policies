@@ -3,10 +3,13 @@
 #include "platform.h"
 #include <stdio.h>
 #if defined(_WIN32)
+/* bcrypt.h requires the Windows types first. */
+// clang-format off
+#include <windows.h>
 #include <bcrypt.h>
+// clang-format on
 #include <fcntl.h>
 #include <io.h>
-#include <windows.h>
 #elif defined(__APPLE__)
 #include <CommonCrypto/CommonDigest.h>
 #else

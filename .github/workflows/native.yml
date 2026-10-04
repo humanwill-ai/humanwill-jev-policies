@@ -3,6 +3,12 @@ on:
   push:
     branches: [work/native-bundled-binaries]
   workflow_dispatch:
+    inputs:
+      target:
+        description: Build all targets or repeat one failed target
+        type: choice
+        default: all
+        options: [all, macos-x86_64, macos-arm64, windows-x86_64, linux-x86_64]
 permissions:
   contents: read
 jobs:
@@ -10,15 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - os: macos-15-intel
-            target: macos-x86_64
-          - os: macos-15
-            target: macos-arm64
-          - os: windows-2025
-            target: windows-x86_64
-          - os: ubuntu-24.04
-            target: linux-x86_64
+        include: ${{ fromJSON(inputs.target == 'windows-x86_64' && '[{"os":"windows-2025","target":"windows-x86_64"}]' || inputs.target == 'linux-x86_64' && '[{"os":"ubuntu-24.04","target":"linux-x86_64"}]' || inputs.target == 'macos-arm64' && '[{"os":"macos-15","target":"macos-arm64"}]' || inputs.target == 'macos-x86_64' && '[{"os":"macos-15-intel","target":"macos-x86_64"}]' || '[{"os":"macos-15-intel","target":"macos-x86_64"},{"os":"macos-15","target":"macos-arm64"},{"os":"windows-2025","target":"windows-x86_64"},{"os":"ubuntu-24.04","target":"linux-x86_64"}]') }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 35
     steps:
@@ -56,6 +54,7 @@ jobs:
             apk info -vv > artifacts/native/alpine-inventory.txt
             /tmp/native-test-python/bin/python scripts/package_native.py --workdir artifacts/native --outdir artifacts/native-downloads
           '
+          sudo chown -R "$(id -u):$(id -g)" artifacts/native artifacts/native-downloads
       - name: Test the same static Linux binary on the Ubuntu host
         if: runner.os == 'Linux'
         run: |
