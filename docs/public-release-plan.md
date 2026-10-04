@@ -1,5 +1,10 @@
 # Roadmap to the first public release
 
+> 2026-10-04 next-release decision: include the native C hook client, retain
+> Python options, and target macOS x86_64/arm64, Windows x86_64 and Linux x86_64
+> downloads. Follow the [native release plan](native-release-plan.md); the dated
+> first-release history below is preserved. No new release is published by this plan.
+
 > Latest workflow comparison, 2026-10-03: [compact policy targets](dogfood-compact-v1-report.md)
 > preserve sampled historical-secret blocks and reduce duplicated-view input cost.
 > Workflow abstention is27%, versus28% fresh grouping and36% fresh dual views;

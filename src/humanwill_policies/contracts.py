@@ -4,10 +4,8 @@ import json
 from datetime import datetime
 from importlib.resources import files
 
-from jsonschema import Draft202012Validator
-
 from .errors import PolicyError
-from .serialization import canonical, json_value
+from .json_codec import canonical, json_value
 
 SCHEMAS = (
     "policy",
@@ -31,7 +29,7 @@ MAX_REQUEST_BYTES = 262_144
 def schema(name: str) -> dict:
     if name not in SCHEMAS:
         raise PolicyError("unknown_schema", "Unknown schema name", name)
-    return json.loads(files("humanwill_policies").joinpath(f"schemas/{name}.json").read_text())
+    return json.loads(files(__package__).joinpath(f"schemas/{name}.json").read_text())
 
 
 def validate_contract(name: str, value: object, location: str = "") -> None:
@@ -44,6 +42,8 @@ def validate_contract(name: str, value: object, location: str = "") -> None:
     kind = name.split("-v", 1)[0]
     if kind in ("request", "result") and len(canonical(value).encode()) > MAX_REQUEST_BYTES:
         raise PolicyError("payload_limit", "Payload exceeds 262144 canonical JSON bytes", location)
+    from jsonschema import Draft202012Validator
+
     validator = Draft202012Validator(schema(name))
     error = next(validator.iter_errors(value), None)
     if error:

@@ -1,0 +1,26 @@
+# Build with scripts/build_hook_client.py: shared modules are staged from src/.
+[build-system]
+requires = ["setuptools==84.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "humanwill-hook-client"
+version = "0.1.0.dev1"
+description = "Lightweight Copilot hooks for a remote HumanWill policy service"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE", "third_party/licenses/*/*"]
+requires-python = ">=3.11,<3.15"
+dependencies = ["httpx==0.28.1", "jsonschema==4.26.0"]
+
+[project.scripts]
+humanwill-hook = "humanwill_hook_client.hook_cli:main"
+
+[project.urls]
+Repository = "https://github.com/humanwill-ai/humanwill-jev-policies"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+humanwill_hook_client = ["schemas/*.json"]

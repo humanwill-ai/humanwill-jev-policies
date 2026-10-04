@@ -1,0 +1,58 @@
+{
+  "format": "humanwill.result/2",
+  "request_id": "event-bfb6d53e8e7d4638a0cf480cca0afdd7",
+  "request_sha256": "f629799e717285047625a68aaa57165317ed0625961deda297aae4a966b40f94",
+  "rubric": "humanwill.choice/1",
+  "simulated": false,
+  "decision": "allow",
+  "bundle_sha256": "1c185ac495c02bcb9918f4dbdefef6811f05eba324c5c626bfaae3a565de0494",
+  "configuration_sha256": "dfe98228ece4f2f1db4cd6224a48cd11e386728bddbee1b1266d024392f8c2f9",
+  "policies": [
+    {
+      "policy_id": "RULE",
+      "policy_version": "1",
+      "policy_sha256": "16ff60819cce469c765ab016563d4ae20e2327019403eab734de64d20d772260",
+      "mode": "enforce",
+      "status": "evaluated",
+      "judgment": "compliant",
+      "reasons": [
+        "semantic_judgment"
+      ],
+      "evidence": {
+        "choice": "compliant",
+        "confidence": 1.0,
+        "probabilities": {
+          "compliant": 1.0,
+          "insufficient_evidence": 0.0,
+          "violation": 0.0
+        }
+      }
+    }
+  ],
+  "coverage": {
+    "complete": true,
+    "inspected": [
+      "part-0"
+    ],
+    "omitted": []
+  },
+  "evaluation": {
+    "transport": "openrouter",
+    "requested_model": "test-model",
+    "returned_model": "test-model",
+    "batches": [
+      {
+        "returned_model": "test-model",
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cost_usd": 0
+      }
+    ]
+  },
+  "duration_ms": 0,
+  "enforcement": {
+    "requested": "allow",
+    "actual": "unconfirmed"
+  },
+  "errors": []
+}

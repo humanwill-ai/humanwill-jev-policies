@@ -1,0 +1,354 @@
+{
+  "date": "2026-10-04",
+  "status": "local unreleased working tree",
+  "base_commit": "96c19476a1d3e365207b0195e7be7ed1ab0bead4",
+  "source_sha256": {
+    "src/humanwill_policies/__init__.py": "2c35d9cda1b16196b404d31fc4421326962c13e8c6c72bc79b4358e9a5693681",
+    "src/humanwill_policies/cli.py": "bec0efcb3e077eeaa3b2f1809c717b694fbbbd19fb798e76c4636a82eeb18f25",
+    "src/humanwill_policies/contracts.py": "0e5d99ebd825af63216c1c126119ff4f1f9f2a2bcc3cb380f9e3f447d82d0ca6",
+    "src/humanwill_policies/errors.py": "a3431f65ff2636cb67968c2c263c3dba25c32a12fc2aa331a1ed10cfd5e3c954",
+    "src/humanwill_policies/hook_cli.py": "ef0bc2d4d561275685a7b6691683581e10f66599d644db3815d9783ff5437c47",
+    "src/humanwill_policies/hook_events.py": "a2c769b10f0c474e414023bb8728f64e0c39634373ef2286169ac8091fe12125",
+    "src/humanwill_policies/hooks.py": "1034865fa69e755c04bfd9c0cabfd776212f44b2ed34a9399f37ccc792372e55",
+    "src/humanwill_policies/json_codec.py": "49b34cd738ac35f9cbb2f7811dacc76042d0871ce0464aea2a2364a6083f3263",
+    "scripts/benchmark_hook_client.py": "e65b4e52625edfa245fa8f6335ff92b6847d142df7779f5f653f7e41d14c16ec",
+    "scripts/build_hook_client.py": "f2b4554c36716c9a9553a77281dd64cec1524b9dcffdbfdbea4af1545f739168",
+    "scripts/verify_hook_client.py": "e4c51fefbdbf95c02cd0f998f6ef79eed348de8846ce11c63e1319e71c64ada3"
+  },
+  "full_suite": {
+    "tests": 337,
+    "skipped_optional_grpc": 6,
+    "result": "pass"
+  },
+  "standalone_installs": {
+    "python": [
+      "3.11.5",
+      "3.14.0"
+    ],
+    "artifacts": [
+      "wheel",
+      "sdist"
+    ],
+    "contract_tests_per_install": 8,
+    "result": "pass"
+  },
+  "measurements": [
+    {
+      "scope": "Fresh installed console process to validated hook output; synthetic loopback replies, no Jev/IDE/TLS",
+      "platform": {
+        "system": "Darwin",
+        "release": "24.6.0",
+        "machine": "x86_64"
+      },
+      "python": "Python 3.11.5",
+      "versions": {
+        "released": "0.2.0b1",
+        "client": "0.1.0.dev1"
+      },
+      "wheel_sha256": {
+        "released": "7d54c772bd85628c9addde9828d86eb05e4e3a76f5ce9f67986f036a2e4c8bab",
+        "client": "7f67f3eac5d4c728ec327811d72d139b472318968d22ceff43d4e720f4a9de14"
+      },
+      "method": "Seeded randomized order within paired rounds; one excluded warmup per case/client; warm filesystem cache; sequential processes",
+      "samples_per_cell": 30,
+      "http_calls": 248,
+      "provider_calls": 0,
+      "summary": {
+        "version": {
+          "released": {
+            "n": 30,
+            "median_ms": 220.859,
+            "p95_ms": 237.158,
+            "min_ms": 210.008,
+            "max_ms": 240.921
+          },
+          "client": {
+            "n": 30,
+            "median_ms": 51.329,
+            "p95_ms": 58.381,
+            "min_ms": 49.012,
+            "max_ms": 60.674
+          },
+          "paired_saving_ms": {
+            "n": 30,
+            "median_ms": 167.867,
+            "p95_ms": 185.741,
+            "min_ms": 159.35,
+            "max_ms": 189.189
+          }
+        },
+        "local_prompt_allow": {
+          "released": {
+            "n": 30,
+            "median_ms": 324.447,
+            "p95_ms": 336.145,
+            "min_ms": 318.461,
+            "max_ms": 340.433
+          },
+          "client": {
+            "n": 30,
+            "median_ms": 289.006,
+            "p95_ms": 296.369,
+            "min_ms": 285.837,
+            "max_ms": 308.703
+          },
+          "paired_saving_ms": {
+            "n": 30,
+            "median_ms": 35.005,
+            "p95_ms": 49.15,
+            "min_ms": 23.285,
+            "max_ms": 49.708
+          }
+        },
+        "local_prompt_block": {
+          "released": {
+            "n": 30,
+            "median_ms": 323.65,
+            "p95_ms": 342.131,
+            "min_ms": 317.201,
+            "max_ms": 403.981
+          },
+          "client": {
+            "n": 30,
+            "median_ms": 289.491,
+            "p95_ms": 306.235,
+            "min_ms": 284.679,
+            "max_ms": 314.317
+          },
+          "paired_saving_ms": {
+            "n": 30,
+            "median_ms": 34.401,
+            "p95_ms": 43.506,
+            "min_ms": 26.963,
+            "max_ms": 89.665
+          }
+        },
+        "cli_tool_allow": {
+          "released": {
+            "n": 30,
+            "median_ms": 325.635,
+            "p95_ms": 338.837,
+            "min_ms": 317.366,
+            "max_ms": 402.927
+          },
+          "client": {
+            "n": 30,
+            "median_ms": 290.116,
+            "p95_ms": 306.066,
+            "min_ms": 284.713,
+            "max_ms": 306.072
+          },
+          "paired_saving_ms": {
+            "n": 30,
+            "median_ms": 35.275,
+            "p95_ms": 41.205,
+            "min_ms": 20.176,
+            "max_ms": 108.039
+          }
+        },
+        "cli_tool_block": {
+          "released": {
+            "n": 30,
+            "median_ms": 321.523,
+            "p95_ms": 354.23,
+            "min_ms": 315.693,
+            "max_ms": 383.448
+          },
+          "client": {
+            "n": 30,
+            "median_ms": 288.044,
+            "p95_ms": 323.14,
+            "min_ms": 280.268,
+            "max_ms": 333.069
+          },
+          "paired_saving_ms": {
+            "n": 30,
+            "median_ms": 34.104,
+            "p95_ms": 46.067,
+            "min_ms": 6.747,
+            "max_ms": 80.21
+          }
+        }
+      }
+    },
+    {
+      "scope": "Fresh installed console process to validated hook output; synthetic loopback replies, no Jev/IDE/TLS",
+      "platform": {
+        "system": "Darwin",
+        "release": "24.6.0",
+        "machine": "x86_64"
+      },
+      "python": "Python 3.14.0",
+      "versions": {
+        "released": "0.2.0b1",
+        "client": "0.1.0.dev1"
+      },
+      "wheel_sha256": {
+        "released": "7d54c772bd85628c9addde9828d86eb05e4e3a76f5ce9f67986f036a2e4c8bab",
+        "client": "7f67f3eac5d4c728ec327811d72d139b472318968d22ceff43d4e720f4a9de14"
+      },
+      "method": "Seeded randomized order within paired rounds; one excluded warmup per case/client; warm filesystem cache; sequential processes",
+      "samples_per_cell": 30,
+      "http_calls": 248,
+      "provider_calls": 0,
+      "summary": {
+        "version": {
+          "released": {
+            "n": 30,
+            "median_ms": 233.891,
+            "p95_ms": 241.28,
+            "min_ms": 228.162,
+            "max_ms": 243.083
+          },
+          "client": {
+            "n": 30,
+            "median_ms": 73.899,
+            "p95_ms": 74.874,
+            "min_ms": 72.192,
+            "max_ms": 74.97
+          },
+          "paired_saving_ms": {
+            "n": 30,
+            "median_ms": 159.911,
+            "p95_ms": 166.406,
+            "min_ms": 154.838,
+            "max_ms": 170.533
+          }
+        },
+        "local_prompt_allow": {
+          "released": {
+            "n": 30,
+            "median_ms": 365.297,
+            "p95_ms": 370.849,
+            "min_ms": 358.641,
+            "max_ms": 377.057
+          },
+          "client": {
+            "n": 30,
+            "median_ms": 325.408,
+            "p95_ms": 331.842,
+            "min_ms": 319.243,
+            "max_ms": 332.788
+          },
+          "paired_saving_ms": {
+            "n": 30,
+            "median_ms": 40.126,
+            "p95_ms": 48.305,
+            "min_ms": 30.487,
+            "max_ms": 53.542
+          }
+        },
+        "local_prompt_block": {
+          "released": {
+            "n": 30,
+            "median_ms": 364.02,
+            "p95_ms": 370.8,
+            "min_ms": 358.747,
+            "max_ms": 372.158
+          },
+          "client": {
+            "n": 30,
+            "median_ms": 326.919,
+            "p95_ms": 331.262,
+            "min_ms": 320.181,
+            "max_ms": 332.04
+          },
+          "paired_saving_ms": {
+            "n": 30,
+            "median_ms": 38.057,
+            "p95_ms": 44.665,
+            "min_ms": 33.038,
+            "max_ms": 48.303
+          }
+        },
+        "cli_tool_allow": {
+          "released": {
+            "n": 30,
+            "median_ms": 363.62,
+            "p95_ms": 368.563,
+            "min_ms": 355.645,
+            "max_ms": 374.079
+          },
+          "client": {
+            "n": 30,
+            "median_ms": 325.823,
+            "p95_ms": 333.234,
+            "min_ms": 320.52,
+            "max_ms": 354.246
+          },
+          "paired_saving_ms": {
+            "n": 30,
+            "median_ms": 37.997,
+            "p95_ms": 45.671,
+            "min_ms": 8.074,
+            "max_ms": 51.244
+          }
+        },
+        "cli_tool_block": {
+          "released": {
+            "n": 30,
+            "median_ms": 369.604,
+            "p95_ms": 381.325,
+            "min_ms": 358.079,
+            "max_ms": 441.434
+          },
+          "client": {
+            "n": 30,
+            "median_ms": 331.465,
+            "p95_ms": 343.277,
+            "min_ms": 320.749,
+            "max_ms": 350.777
+          },
+          "paired_saving_ms": {
+            "n": 30,
+            "median_ms": 39.657,
+            "p95_ms": 44.574,
+            "min_ms": 22.594,
+            "max_ms": 90.657
+          }
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Synthetic service verdicts; no model inference, remote TLS/network, or IDE scheduling.",
+    "Intel macOS only; 30 samples per cell, warm filesystem cache, fresh processes.",
+    "No new live host acceptance or Windows/ARM qualification.",
+    "Published beta artifact and API spending unchanged."
+  ],
+  "full_artifact_verification": {
+    "result": "pass",
+    "artifacts": {
+      "humanwill_policies-0.2.0b1-py3-none-any.whl": "adb6dea39560bafc43ed98b13031561b9d656c55ec3960288eb217f1a30c0c24",
+      "humanwill_policies-0.2.0b1.tar.gz": "b160ac53efe7c6a72f4d6ba30fee538b7a986f23e035cedbfc705c3f4ef78626"
+    },
+    "checks": {
+      "wheel": {
+        "installed_version": "0.2.0b1",
+        "offline_demo": "pass",
+        "service_and_hook_contracts": "pass",
+        "stage_aware_profile_and_connectors": "pass",
+        "service_process": {
+          "startup": "pass",
+          "authentication": "pass",
+          "external_egress_disabled": "pass",
+          "invalid_configuration_rejected": "pass",
+          "restart_previous_configuration": "pass"
+        }
+      },
+      "sdist": {
+        "installed_version": "0.2.0b1",
+        "offline_demo": "pass",
+        "service_and_hook_contracts": "pass",
+        "stage_aware_profile_and_connectors": "pass",
+        "service_process": {
+          "startup": "pass",
+          "authentication": "pass",
+          "external_egress_disabled": "pass",
+          "invalid_configuration_rejected": "pass",
+          "restart_previous_configuration": "pass"
+        }
+      }
+    }
+  }
+}

@@ -8,11 +8,10 @@ from urllib.parse import urlsplit
 
 import httpx
 
-from .connectors.events import HOOKS, hook, hook_output
 from .contracts import MAX_REQUEST_BYTES, validate_contract
 from .errors import PolicyError
-from .providers import decode_json
-from .serialization import digest
+from .hook_events import HOOKS, hook, hook_output
+from .json_codec import decode_json, digest
 
 
 def check_url(url):

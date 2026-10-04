@@ -2,10 +2,6 @@
 
 __version__ = "0.2.0b1"
 
-from .bundle import Bundle, Limits, load_bundle
-from .config import Configuration, load_configuration, preview
-from .errors import PolicyError
-
 __all__ = [
     "Bundle",
     "Configuration",
@@ -15,3 +11,23 @@ __all__ = [
     "load_configuration",
     "preview",
 ]
+
+
+def __getattr__(name):
+    # Preserve the public Python API without loading the policy engine for hooks.
+    from importlib import import_module
+
+    modules = {
+        "Bundle": "bundle",
+        "Limits": "bundle",
+        "load_bundle": "bundle",
+        "Configuration": "config",
+        "load_configuration": "config",
+        "preview": "config",
+        "PolicyError": "errors",
+    }
+    if name not in modules:
+        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+    value = getattr(import_module(f".{modules[name]}", __name__), name)
+    globals()[name] = value
+    return value

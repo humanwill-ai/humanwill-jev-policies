@@ -417,6 +417,12 @@ strategy; full results and limitations are in the linked report.
 
 ## Contribute to development
 
+An unreleased [lightweight hook client](docs/hook-client.md) separates the endpoint
+installation from the policy service. It preserves the existing hook contracts;
+the released beta installation instructions above remain unchanged.
+A [native C counterpart](docs/native-hook-client.md) is also available for local
+evaluation, with comparative latency and contract checks.
+
 The commands below are for contributors changing the project, not for installing
 or using the policy service. Run them from a source checkout in a virtual environment.
 

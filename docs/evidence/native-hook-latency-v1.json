@@ -1,0 +1,530 @@
+{
+  "date": "2026-10-04",
+  "status": "local unreleased working tree",
+  "base_commit": "96c19476a1d3e365207b0195e7be7ed1ab0bead4",
+  "source_sha256": {
+    "clients/hook-c/Makefile": "4bae2a3e91e68839c5ff6576a46bfd2f68170554d3923902f2ee7ca19b053ee6",
+    "clients/hook-c/README.md": "fa0538596c16cf3e0b938ab052516e4ab0543e149e8aa4beb5c4cab2917b0d2e",
+    "clients/hook-c/canonical_probe.c": "280440e86c2bad0c8a2133920331398671e2aeffc2aa9e96c7691e1702577d9d",
+    "clients/hook-c/generate_schemas.py": "01cb3c1a0f40098bb7ebc0270e16abcd45d88d3af8de512afd533498086e5cbf",
+    "clients/hook-c/json.c": "648f0ae0a7984c896e308e7cd66e140e2900636338976e9b888e6d9fe1cb929d",
+    "clients/hook-c/main.c": "c62040a69b8f2a286a09908e780ca61ddc748665b365f6bd6ab1ee32e3b91dbd",
+    "clients/hook-c/native.h": "732e54f7ff7e9060f241fc00e60badf3ef3ffd6b86dfaf833eecfa24385890fd",
+    "clients/hook-c/schema.c": "2c2ccefa289bbb2210af9d89631b9b8e121c3546a09133dec5d5336c3eb4b6b7",
+    "clients/hook-c/vendor/yyjson/LICENSE": "45e384d3d52c73cba3a64d6e6c25d47cd738cd8a55c30629e3201046eda62947",
+    "clients/hook-c/vendor/yyjson/PROVENANCE.json": "c5709e9a49a14bc3581c916427d6ea198d9e105b3b94ec359ad5cbedc1746b2c",
+    "clients/hook-c/vendor/yyjson/yyjson.c": "ac2e9bbb2e2d9149d90878d40506a1d624fa0b33c979a11b61075c54782c6d6a",
+    "clients/hook-c/vendor/yyjson/yyjson.h": "175867c5493a5df648cec566717fa1c29aa2f6096f5f0cf1efad0b65e1f6d7b3",
+    "scripts/verify_native_hook.py": "642094e36afa25c689f255095a399c7c36343f41e37cb0d6830685e98f491379",
+    "scripts/verify_native_service.py": "86ce395230fdb151c9ac0657f3f9eb19800ed42bb05e4778166b34118c09a811",
+    "scripts/benchmark_hook_client.py": "a45797277c6541d8df032f49d6157fafa0bb6f70da7447105bb0b449ed5f1016"
+  },
+  "compile_flags": "-O2 -std=c11 -Wall -Wextra -Werror -Wno-deprecated-declarations",
+  "compiler": "Apple clang version 17.0.0 (clang-1700.6.3.2)",
+  "linked_libraries": [
+    "/usr/lib/libcurl.4.dylib",
+    "/usr/lib/libSystem.B.dylib"
+  ],
+  "binary_bytes": 320824,
+  "contracts": {
+    "binary_sha256": "2143585fbca745dc5fcc4aaf5c99a9744b91158086a96a111bba690bda90e4a5",
+    "checks": [
+      "copilot_local/UserPromptSubmit/v2/False",
+      "copilot_local/UserPromptSubmit/v2/True",
+      "copilot_local/UserPromptSubmit/v3/False",
+      "copilot_local/UserPromptSubmit/v3/True",
+      "copilot_local/UserPromptSubmit/v4/False",
+      "copilot_local/UserPromptSubmit/v4/True",
+      "minimize-UserPromptSubmit",
+      "copilot_local/PreToolUse/v2/False",
+      "copilot_local/PreToolUse/v2/True",
+      "copilot_local/PreToolUse/v3/False",
+      "copilot_local/PreToolUse/v3/True",
+      "copilot_local/PreToolUse/v4/False",
+      "copilot_local/PreToolUse/v4/True",
+      "minimize-PreToolUse",
+      "copilot_cli/userPromptSubmitted/v2/False",
+      "copilot_cli/userPromptSubmitted/v2/True",
+      "copilot_cli/userPromptSubmitted/v3/False",
+      "copilot_cli/userPromptSubmitted/v3/True",
+      "copilot_cli/userPromptSubmitted/v4/False",
+      "copilot_cli/userPromptSubmitted/v4/True",
+      "minimize-userPromptSubmitted",
+      "copilot_cli/preToolUse/v2/False",
+      "copilot_cli/preToolUse/v2/True",
+      "copilot_cli/preToolUse/v3/False",
+      "copilot_cli/preToolUse/v3/True",
+      "copilot_cli/preToolUse/v4/False",
+      "copilot_cli/preToolUse/v4/True",
+      "minimize-preToolUse",
+      "unicode/numeric-binding",
+      "cli-string-binding",
+      "unicode/numeric-binding",
+      "cli-string-binding",
+      "unicode/numeric-binding",
+      "cli-string-binding",
+      "wrong_digest",
+      "wrong_digest/monitor",
+      "wrong_coverage",
+      "wrong_coverage/monitor",
+      "omitted",
+      "omitted/monitor",
+      "simulated",
+      "simulated/monitor",
+      "unknown_format",
+      "unknown_format/monitor",
+      "unknown_action",
+      "unknown_action/monitor",
+      "extra_field",
+      "extra_field/monitor",
+      "extra_nested",
+      "extra_nested/monitor",
+      "duplicate_policy",
+      "duplicate_policy/monitor",
+      "missing_field",
+      "missing_field/monitor",
+      "bad_confidence",
+      "bad_confidence/monitor",
+      "bad_number_type",
+      "bad_number_type/monitor",
+      "bad_identifier",
+      "bad_identifier/monitor",
+      "wrong_rubric",
+      "wrong_rubric/monitor",
+      "policy_array_bound",
+      "policy_array_bound/monitor",
+      "bad_batch",
+      "bad_batch/monitor",
+      "bad_enforcement_type",
+      "bad_enforcement_type/monitor",
+      "invalid_followup",
+      "invalid_followup/monitor",
+      "invalid_reply",
+      "invalid_reply",
+      "invalid_reply",
+      "invalid_reply",
+      "invalid_reply",
+      "invalid_reply",
+      "invalid_reply",
+      "invalid_input",
+      "invalid_input",
+      "invalid_input",
+      "invalid_input",
+      "invalid_input",
+      "invalid_input",
+      "invalid_input",
+      "invalid_input",
+      "unsafe_url",
+      "unsafe_url",
+      "unsafe_url",
+      "unsafe_url",
+      "unsafe_url",
+      "unsafe_url",
+      "http-302",
+      "http-401",
+      "http-503",
+      "compression",
+      "timeout-UserPromptSubmit",
+      "timeout-PreToolUse",
+      "timeout-userPromptSubmitted",
+      "timeout-preToolUse",
+      "missing-token",
+      "unavailable",
+      "untrusted-tls",
+      "valid-result4-followup",
+      "simulated-monitor",
+      "evaluation-error-monitor",
+      "200-malformed-input-mutations-no-crashes",
+      "10000-finite-double-canonicalization"
+    ],
+    "passed": 107,
+    "http_calls": 93,
+    "provider_calls": 0
+  },
+  "sanitizers": {
+    "binary_sha256": "0f173f8d36f4824a0f8b88a83faa09e19be6d8f72e64311f6625d474fd9dd7db",
+    "checks": [
+      "copilot_local/UserPromptSubmit/v2/False",
+      "copilot_local/UserPromptSubmit/v2/True",
+      "copilot_local/UserPromptSubmit/v3/False",
+      "copilot_local/UserPromptSubmit/v3/True",
+      "copilot_local/UserPromptSubmit/v4/False",
+      "copilot_local/UserPromptSubmit/v4/True",
+      "minimize-UserPromptSubmit",
+      "copilot_local/PreToolUse/v2/False",
+      "copilot_local/PreToolUse/v2/True",
+      "copilot_local/PreToolUse/v3/False",
+      "copilot_local/PreToolUse/v3/True",
+      "copilot_local/PreToolUse/v4/False",
+      "copilot_local/PreToolUse/v4/True",
+      "minimize-PreToolUse",
+      "copilot_cli/userPromptSubmitted/v2/False",
+      "copilot_cli/userPromptSubmitted/v2/True",
+      "copilot_cli/userPromptSubmitted/v3/False",
+      "copilot_cli/userPromptSubmitted/v3/True",
+      "copilot_cli/userPromptSubmitted/v4/False",
+      "copilot_cli/userPromptSubmitted/v4/True",
+      "minimize-userPromptSubmitted",
+      "copilot_cli/preToolUse/v2/False",
+      "copilot_cli/preToolUse/v2/True",
+      "copilot_cli/preToolUse/v3/False",
+      "copilot_cli/preToolUse/v3/True",
+      "copilot_cli/preToolUse/v4/False",
+      "copilot_cli/preToolUse/v4/True",
+      "minimize-preToolUse",
+      "unicode/numeric-binding",
+      "cli-string-binding",
+      "unicode/numeric-binding",
+      "cli-string-binding",
+      "unicode/numeric-binding",
+      "cli-string-binding",
+      "wrong_digest",
+      "wrong_digest/monitor",
+      "wrong_coverage",
+      "wrong_coverage/monitor",
+      "omitted",
+      "omitted/monitor",
+      "simulated",
+      "simulated/monitor",
+      "unknown_format",
+      "unknown_format/monitor",
+      "unknown_action",
+      "unknown_action/monitor",
+      "extra_field",
+      "extra_field/monitor",
+      "extra_nested",
+      "extra_nested/monitor",
+      "duplicate_policy",
+      "duplicate_policy/monitor",
+      "missing_field",
+      "missing_field/monitor",
+      "bad_confidence",
+      "bad_confidence/monitor",
+      "bad_number_type",
+      "bad_number_type/monitor",
+      "bad_identifier",
+      "bad_identifier/monitor",
+      "wrong_rubric",
+      "wrong_rubric/monitor",
+      "policy_array_bound",
+      "policy_array_bound/monitor",
+      "bad_batch",
+      "bad_batch/monitor",
+      "bad_enforcement_type",
+      "bad_enforcement_type/monitor",
+      "invalid_followup",
+      "invalid_followup/monitor",
+      "invalid_reply",
+      "invalid_reply",
+      "invalid_reply",
+      "invalid_reply",
+      "invalid_reply",
+      "invalid_reply",
+      "invalid_reply",
+      "invalid_input",
+      "invalid_input",
+      "invalid_input",
+      "invalid_input",
+      "invalid_input",
+      "invalid_input",
+      "invalid_input",
+      "invalid_input",
+      "unsafe_url",
+      "unsafe_url",
+      "unsafe_url",
+      "unsafe_url",
+      "unsafe_url",
+      "unsafe_url",
+      "http-302",
+      "http-401",
+      "http-503",
+      "compression",
+      "timeout-UserPromptSubmit",
+      "timeout-PreToolUse",
+      "timeout-userPromptSubmitted",
+      "timeout-preToolUse",
+      "missing-token",
+      "unavailable",
+      "untrusted-tls",
+      "valid-result4-followup",
+      "simulated-monitor",
+      "evaluation-error-monitor",
+      "200-malformed-input-mutations-no-crashes",
+      "10000-finite-double-canonicalization"
+    ],
+    "passed": 107,
+    "http_calls": 93,
+    "provider_calls": 0
+  },
+  "actual_service": {
+    "actual_service": true,
+    "scripted_backend": true,
+    "provider_calls": 0,
+    "results": [
+      {
+        "runtime": "copilot_local",
+        "event": "UserPromptSubmit",
+        "block": false,
+        "pass": true
+      },
+      {
+        "runtime": "copilot_local",
+        "event": "UserPromptSubmit",
+        "block": true,
+        "pass": true
+      },
+      {
+        "runtime": "copilot_local",
+        "event": "PreToolUse",
+        "block": false,
+        "pass": true
+      },
+      {
+        "runtime": "copilot_local",
+        "event": "PreToolUse",
+        "block": true,
+        "pass": true
+      },
+      {
+        "runtime": "copilot_cli",
+        "event": "userPromptSubmitted",
+        "block": false,
+        "pass": true
+      },
+      {
+        "runtime": "copilot_cli",
+        "event": "userPromptSubmitted",
+        "block": true,
+        "pass": true
+      },
+      {
+        "runtime": "copilot_cli",
+        "event": "preToolUse",
+        "block": false,
+        "pass": true
+      },
+      {
+        "runtime": "copilot_cli",
+        "event": "preToolUse",
+        "block": true,
+        "pass": true
+      }
+    ]
+  },
+  "measurement": {
+    "scope": "Fresh installed console process to validated hook output; synthetic loopback replies, no Jev/IDE/TLS",
+    "platform": {
+      "system": "Darwin",
+      "release": "24.6.0",
+      "machine": "x86_64"
+    },
+    "python": "Python 3.11.5",
+    "versions": {
+      "released": "0.2.0b1",
+      "client": "0.1.0.dev1",
+      "native": "0.1.0.dev1-native"
+    },
+    "wheel_sha256": {
+      "released": "7d54c772bd85628c9addde9828d86eb05e4e3a76f5ce9f67986f036a2e4c8bab",
+      "client": "7f67f3eac5d4c728ec327811d72d139b472318968d22ceff43d4e720f4a9de14"
+    },
+    "method": "Seeded randomized order within paired rounds; one excluded warmup per case/client; warm filesystem cache; sequential processes",
+    "samples_per_cell": 30,
+    "http_calls": 372,
+    "provider_calls": 0,
+    "native_sha256": "2143585fbca745dc5fcc4aaf5c99a9744b91158086a96a111bba690bda90e4a5",
+    "summary": {
+      "version": {
+        "released": {
+          "n": 30,
+          "median_ms": 214.121,
+          "p95_ms": 215.79,
+          "min_ms": 210.7,
+          "max_ms": 215.857
+        },
+        "client": {
+          "n": 30,
+          "median_ms": 50.084,
+          "p95_ms": 51.082,
+          "min_ms": 48.484,
+          "max_ms": 51.276
+        },
+        "native": {
+          "n": 30,
+          "median_ms": 8.049,
+          "p95_ms": 8.388,
+          "min_ms": 7.328,
+          "max_ms": 8.393
+        },
+        "paired_saving_ms": {
+          "n": 30,
+          "median_ms": 163.906,
+          "p95_ms": 166.037,
+          "min_ms": 159.661,
+          "max_ms": 166.073
+        },
+        "native_vs_client_saving_ms": {
+          "n": 30,
+          "median_ms": 42.149,
+          "p95_ms": 43.197,
+          "min_ms": 40.481,
+          "max_ms": 43.264
+        }
+      },
+      "local_prompt_allow": {
+        "released": {
+          "n": 30,
+          "median_ms": 323.353,
+          "p95_ms": 330.775,
+          "min_ms": 317.77,
+          "max_ms": 334.662
+        },
+        "client": {
+          "n": 30,
+          "median_ms": 287.505,
+          "p95_ms": 296.501,
+          "min_ms": 281.18,
+          "max_ms": 298.535
+        },
+        "native": {
+          "n": 30,
+          "median_ms": 20.372,
+          "p95_ms": 22.025,
+          "min_ms": 19.402,
+          "max_ms": 23.607
+        },
+        "paired_saving_ms": {
+          "n": 30,
+          "median_ms": 35.611,
+          "p95_ms": 42.396,
+          "min_ms": 31.123,
+          "max_ms": 51.224
+        },
+        "native_vs_client_saving_ms": {
+          "n": 30,
+          "median_ms": 266.691,
+          "p95_ms": 274.927,
+          "min_ms": 261.198,
+          "max_ms": 276.128
+        }
+      },
+      "local_prompt_block": {
+        "released": {
+          "n": 30,
+          "median_ms": 322.894,
+          "p95_ms": 327.679,
+          "min_ms": 317.825,
+          "max_ms": 330.291
+        },
+        "client": {
+          "n": 30,
+          "median_ms": 288.136,
+          "p95_ms": 296.038,
+          "min_ms": 284.453,
+          "max_ms": 302.295
+        },
+        "native": {
+          "n": 30,
+          "median_ms": 20.406,
+          "p95_ms": 21.214,
+          "min_ms": 19.25,
+          "max_ms": 22.159
+        },
+        "paired_saving_ms": {
+          "n": 30,
+          "median_ms": 34.783,
+          "p95_ms": 39.536,
+          "min_ms": 21.787,
+          "max_ms": 43.37
+        },
+        "native_vs_client_saving_ms": {
+          "n": 30,
+          "median_ms": 267.502,
+          "p95_ms": 276.787,
+          "min_ms": 263.973,
+          "max_ms": 281.187
+        }
+      },
+      "cli_tool_allow": {
+        "released": {
+          "n": 30,
+          "median_ms": 322.988,
+          "p95_ms": 337.222,
+          "min_ms": 319.392,
+          "max_ms": 341.393
+        },
+        "client": {
+          "n": 30,
+          "median_ms": 288.746,
+          "p95_ms": 294.625,
+          "min_ms": 282.816,
+          "max_ms": 296.974
+        },
+        "native": {
+          "n": 30,
+          "median_ms": 20.494,
+          "p95_ms": 21.63,
+          "min_ms": 19.293,
+          "max_ms": 22.025
+        },
+        "paired_saving_ms": {
+          "n": 30,
+          "median_ms": 35.302,
+          "p95_ms": 46.879,
+          "min_ms": 26.935,
+          "max_ms": 47.781
+        },
+        "native_vs_client_saving_ms": {
+          "n": 30,
+          "median_ms": 268.309,
+          "p95_ms": 274.784,
+          "min_ms": 263.426,
+          "max_ms": 277.199
+        }
+      },
+      "cli_tool_block": {
+        "released": {
+          "n": 30,
+          "median_ms": 322.608,
+          "p95_ms": 326.413,
+          "min_ms": 317.555,
+          "max_ms": 326.878
+        },
+        "client": {
+          "n": 30,
+          "median_ms": 288.632,
+          "p95_ms": 291.64,
+          "min_ms": 284.125,
+          "max_ms": 292.616
+        },
+        "native": {
+          "n": 30,
+          "median_ms": 20.68,
+          "p95_ms": 22.551,
+          "min_ms": 19.259,
+          "max_ms": 22.619
+        },
+        "paired_saving_ms": {
+          "n": 30,
+          "median_ms": 33.784,
+          "p95_ms": 39.946,
+          "min_ms": 27.977,
+          "max_ms": 40.987
+        },
+        "native_vs_client_saving_ms": {
+          "n": 30,
+          "median_ms": 268.108,
+          "p95_ms": 270.127,
+          "min_ms": 263.496,
+          "max_ms": 271.47
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Synthetic local measurements: no Jev, remote TLS latency or IDE scheduling.",
+    "Intel macOS only; Python baselines 3.11.5.",
+    "Native binary not published or installed into a Copilot hook.",
+    "No independent memory-safety audit or cross-platform release qualification."
+  ]
+}

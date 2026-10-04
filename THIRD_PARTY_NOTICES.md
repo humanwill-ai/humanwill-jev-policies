@@ -64,3 +64,13 @@ the container's Python/OS base are outside this runtime inventory and retain
 their own terms. Generate an image-specific inventory and review those notices
 when the final container is built. No upstream integration implementation or
 benchmark question pack is vendored by this project.
+
+## Unreleased native hook client
+
+The optional `clients/hook-c` source includes yyjson 0.12.0 under the MIT license,
+revision `8b4a38dc994a110abaec8a400615567bd996105f`. Its complete license and file
+hashes are retained in `clients/hook-c/vendor/yyjson/LICENSE` and `PROVENANCE.json`.
+The macOS executable dynamically links system libcurl and system cryptography;
+the Linux build recipe uses libcurl/OpenSSL. Those platform libraries retain their
+own terms and are not included as vendored binaries. This source inventory does
+not constitute a reviewed cross-platform native release/SBOM.

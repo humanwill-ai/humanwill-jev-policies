@@ -10,9 +10,9 @@ from importlib.resources import as_file, files
 from pathlib import Path
 
 from . import __version__
-from .config import load_project, preview
 from .contracts import SCHEMAS, STAGES, schema
 from .errors import PolicyError
+from .hook_cli import add_hook_arguments
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -52,18 +52,7 @@ def _parser() -> argparse.ArgumentParser:
     serve.add_argument("--host", default="127.0.0.1")
     serve.add_argument("--port", type=int, default=8088)
     hook = commands.add_parser("hook", help="Read a Copilot hook event from stdin")
-    hook.add_argument("--runtime", required=True, choices=("copilot_local", "copilot_cli"))
-    hook.add_argument(
-        "--event",
-        required=True,
-        choices=("UserPromptSubmit", "PreToolUse", "userPromptSubmitted", "preToolUse"),
-    )
-    hook.add_argument("--url", default="http://127.0.0.1:8088")
-    hook.add_argument("--token-env", default="HUMANWILL_HOOK_TOKEN")
-    hook.add_argument(
-        "--timeout-ms", type=int, choices=range(100, 60001), default=6000, metavar="100..60000"
-    )
-    hook.add_argument("--on-error", choices=("block", "allow_monitor"), default="block")
+    add_hook_arguments(hook)
     mcp = commands.add_parser("agentgateway-mcp", help="Run the loopback ExtMCP policy connector")
     mcp.add_argument("--url", default="http://127.0.0.1:8088")
     mcp.add_argument("--token-env", default="HUMANWILL_MCP_TOKEN")
@@ -171,6 +160,7 @@ def main(argv: list[str] | None = None) -> int:
 
             import uvicorn
 
+            from .config import load_project
             from .evaluation import Evaluator
             from .providers import JevBackend
             from .service import create_app, read_settings
@@ -200,6 +190,8 @@ def main(argv: list[str] | None = None) -> int:
             _init_demo(args.destination)
             print(f"Created offline demo: {args.destination}")
             return 0
+        from .config import load_project, preview
+
         bundle, configuration = load_project(args.root, args.config, args.entrypoint)
         if args.command == "evaluate":
             return _evaluate(args, bundle, configuration)

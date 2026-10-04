@@ -8,31 +8,13 @@ from typing import Protocol
 import httpx
 
 from .errors import PolicyError
-from .serialization import canonical, json_value
+from .json_codec import canonical, json_value
+from .json_codec import decode_json as decode_json
 
 ENDPOINTS = {
     "openrouter": "https://openrouter.ai/api/alpha/decisions",
     "typesafe": "https://api.typesafe.ai/v1/systemone",
 }
-
-
-def decode_json(data: bytes) -> dict:
-    def pairs(items):
-        result = {}
-        for key, value in items:
-            if key in result:
-                raise ValueError
-            result[key] = value
-        return result
-
-    try:
-        result = json.loads(data, object_pairs_hook=pairs)
-        json_value(result)
-        if not isinstance(result, dict):
-            raise ValueError
-        return result
-    except (ValueError, UnicodeError, RecursionError, PolicyError):
-        raise PolicyError("malformed_json", "Invalid JSON object") from None
 
 
 class Backend(Protocol):

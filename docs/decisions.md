@@ -1127,3 +1127,67 @@ packages and privacy review. Do not push, tag remotely or publish assets before
 that confirmation. Private real-workflow packets/raw exchanges stay ignored;
 public research summaries are distinct from raw prompts. Preserve original CI
 packages/container evidence and record rebuilt documentation-package hashes.
+
+## 2026-10-04 — Lightweight hook client and local latency comparison
+
+Owner requested steps 1–2 of the Python-hook optimization: separate a lightweight
+installable client and measure it before considering a native rewrite. Implement
+an optional `humanwill-hook-client` distribution from an allowlist of shared
+modules/schemas, using its own namespace/command to avoid overlapping pip-owned
+files. Preserve the old executable, validation, request binding, authentication
+and failure semantics. Keep Python, HTTPX and JSON Schema validation; no native
+binary or new host/platform guarantee is implied.
+
+Use the exact released beta wheel as baseline, fresh isolated installs and only
+synthetic loopback replies. No Jev calls, private workflow prompts, hosted CI,
+push or release publication are part of this work. See docs/hook-client.md for
+installation, verification and timing evidence. Provider/network latency is
+outside the local-overhead benchmark; release host evidence remains historical.
+
+## 2026-10-04 — Native C hook implementation and comparison
+
+Owner requested a native C client and timing comparison. Implement the existing
+remote hook flow in C, with embedded canonical schemas, strict bounded JSON,
+Python-compatible request hashing, HTTPS/authentication, sanitized diagnostics and
+unchanged host/fallback semantics. Preserve the Python clients and their previous
+measurements. Do not modify host installations or publish this candidate.
+
+Use pinned MIT-licensed yyjson source and system libcurl/cryptography. Validate
+against the Python protocol, malformed inputs, sanitizers and the actual local
+service with scripted judgments; measure fresh optimized processes against both
+Python variants. No model calls or private workflow data are needed. Intel macOS
+validation does not establish Windows/ARM/Linux or fresh interactive host support.
+See docs/native-hook-client.md for measurements and remaining native release work.
+
+## 2026-10-04 — Native client selected for the next public release
+
+Owner selected the C client for the next public release while retaining Python
+as an option, and proposed precompiled macOS Intel/Apple Silicon, Windows x64 and
+Linux x64 downloads. Adopt these four targets for release preparation; do not
+claim all four are currently supported. Preserve both the standalone Python
+client and the existing full-package hook command. No existing hook configuration
+is migrated automatically. The central policy service remains Python.
+
+docs/native-release-plan.md records the portability/dependency work, per-target
+artifact and host checks, installation/signing considerations and consolidated CI
+plan. Windows needs a real port; Linux needs a declared ABI/runtime baseline.
+The next version and signing credentials remain preparation details. No workflow
+dispatch, certificate purchase, push, asset upload or publication occurs as part
+of recording this scope. Ask for final publication confirmation against concrete
+release assets as previously requested.
+
+## 2026-10-04 — Owner requested four bundled native binaries
+
+Owner requested that non-system dependencies be bundled into each executable,
+with one unified C implementation, and instructed creation of all four targets.
+This authorizes target build/validation work using the discussed GitHub Actions
+infrastructure. Prepare a dedicated build branch, review its source/test-only
+changes for private content, push it to trigger one four-target workflow, and
+retain exact artifacts. Do not merge main, publish a release/tag, install hooks,
+purchase signing certificates, or make paid evaluator calls.
+
+Use static libcurl 8.22.0, vendored yyjson 0.12.0, static OpenSSL 3.5.9 on macOS/Linux,
+and Schannel/BCrypt on Windows. Linux uses static musl; macOS/Windows retain OS
+system libraries and trust services. A portable bounded pattern matcher replaces
+POSIX regex; one small platform layer handles streams and hashes. Add an explicit
+CA-file option with certificate verification retained. See native-bundled-builds.md.

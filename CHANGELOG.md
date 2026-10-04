@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+- Native C remote hook client with embedded request/result validation and Python
+  request-hash compatibility. Local macOS contract/sanitizer tests and comparative
+  latency measurements; see [native client](docs/native-hook-client.md).
+
+- Separate `humanwill-hook-client` package and `humanwill-hook` command for remote
+  Copilot hooks, built from shared protocol/security code. Existing full-package
+  hook commands remain compatible. Remove unnecessary policy/YAML/server imports
+  from the hook startup path; see [verification and latency](docs/hook-client.md).
+
 ## 0.2.0b1 — 2026-10-04, Public Beta
 
 - Config/5 model-request question clarification for abandoned versus active

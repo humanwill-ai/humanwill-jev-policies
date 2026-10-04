@@ -6,6 +6,10 @@ include requirements-dev.in
 recursive-include evals *.py *.json *.md *.yaml
 include Dockerfile .dockerignore CHANGELOG.md
 recursive-include scripts *.py *.html *.css *.js
+recursive-include clients/hook *.toml *.md *.txt
 include LICENSE NOTICE LICENSING.md THIRD_PARTY_NOTICES.md CONTRIBUTING.md SECURITY.md
 
 recursive-include third_party/licenses *
+recursive-include clients/hook-c *.c *.h *.py *.md *.json
+include clients/hook-c/Makefile clients/hook-c/vendor/yyjson/LICENSE
+include clients/hook-c/CMakeLists.txt

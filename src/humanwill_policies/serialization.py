@@ -1,22 +1,11 @@
 """Restricted YAML and deterministic JSON. Never execute YAML constructors."""
 
-import hashlib
-import json
-import math
-
 import yaml
 
 from .errors import PolicyError
-
-
-def canonical(value: object) -> str:
-    return json.dumps(
-        value, ensure_ascii=True, sort_keys=True, separators=(",", ":"), allow_nan=False
-    )
-
-
-def digest(value: object) -> str:
-    return hashlib.sha256(canonical(value).encode("utf-8")).hexdigest()
+from .json_codec import canonical as canonical
+from .json_codec import digest as digest
+from .json_codec import json_value as json_value
 
 
 class RestrictedLoader(yaml.SafeLoader):
@@ -30,24 +19,6 @@ class RestrictedLoader(yaml.SafeLoader):
                 raise PolicyError("duplicate_key", "Duplicate mapping key")
             result[key] = self.construct_object(value_node, deep=deep)
         return result
-
-
-def json_value(value: object, depth: int = 0) -> None:
-    if depth > 24:
-        raise PolicyError("depth_limit", "Structured data exceeds depth 24")
-    if value is None or type(value) in (str, bool, int):
-        return
-    if type(value) is float and math.isfinite(value):
-        return
-    if isinstance(value, list):
-        for item in value:
-            json_value(item, depth + 1)
-        return
-    if isinstance(value, dict) and all(isinstance(key, str) for key in value):
-        for item in value.values():
-            json_value(item, depth + 1)
-        return
-    raise PolicyError("invalid_value", "Only finite JSON-compatible values are supported")
 
 
 def parse_yaml(text: str, location: str = "") -> dict:

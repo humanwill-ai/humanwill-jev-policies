@@ -1,5 +1,9 @@
 # First-release plan: company-owned policy enforcement
 
+> Next public release, owner decision 2026-10-04: ship a native C hook option
+> alongside Python, with four validated platform archives. Current scope and
+> remaining packaging work: [native release plan](native-release-plan.md).
+
 > Latest workflow comparison, 2026-10-03: [compact policy targets](dogfood-compact-v1-report.md)
 > preserve sampled historical-secret blocks and reduce duplicated-view input cost.
 > Workflow abstention is27%, versus28% fresh grouping and36% fresh dual views;
